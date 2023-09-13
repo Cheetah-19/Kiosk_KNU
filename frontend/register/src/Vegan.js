@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./Common.css";
 
-export default function UserName() {
+export default function Vegan() {
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
 
     return (
@@ -11,10 +11,10 @@ export default function UserName() {
           <header>Easy KIOSK</header>
           <body>body 자리</body>
           <footer>
-            <button className = "next-button" onClick={() => navigate("/Vegan")}>사용자명 페이지</button> {/* Button to navigate to the next page */}
+            <button className = "next-button" onClick={() => navigate("/Religion")}>비건여부페이지</button> {/* Button to navigate to the next page */}
           </footer>
-        </set>      
-        {/* User Name Content... */}
+        </set>        
+        {/* Religion content... */}
       </div>
     );
 }
