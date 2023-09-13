@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./Common.css";
+import "./UserName.css";
 
 export default function UserName() {
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
@@ -9,8 +10,11 @@ export default function UserName() {
       <div>
         <set>
           <header>Easy KIOSK</header>
-          <body>body 자리</body>
+          <body>
+            body 자리
+          </body>
           <footer>
+          <div className="blinking-text">나의 정보를 등록하세요 2/5</div>
             <button className = "next-button" onClick={() => navigate("/Vegan")}>사용자명 페이지</button> {/* Button to navigate to the next page */}
           </footer>
         </set>      

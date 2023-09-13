@@ -12,6 +12,7 @@ export default function FaceReco() {
           <header>Easy KIOSK</header>
           <body>body자리</body>
           <footer>
+            <div className="blinking-text">나의 정보를 등록하세요 1/5</div>
             <button className = "next-button" onClick={() => navigate("/username")}>얼굴인식페이지</button> {/* Button to navigate to the next page */}
           </footer>
         </set>

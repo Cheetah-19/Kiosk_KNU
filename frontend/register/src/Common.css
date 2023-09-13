@@ -33,6 +33,19 @@ footer {
     margin-top : .5%
 }
 
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.blinking-text {
+
+    align-items : center;
+    text-align: center;
+    justify-content: center;
+    animation: fade-in 3s forwards;
+}
+
 .next-button {
 
     width : 65%;
@@ -46,6 +59,7 @@ footer {
 }
 
 /*
+수정해야할것.
 .next-button:hover {
     background-color: #FD5A27;
 }

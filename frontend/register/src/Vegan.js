@@ -11,6 +11,7 @@ export default function Vegan() {
           <header>Easy KIOSK</header>
           <body>body 자리</body>
           <footer>
+          <div className="blinking-text">나의 정보를 등록하세요 3/5</div>
             <button className = "next-button" onClick={() => navigate("/Religion")}>비건여부페이지</button> {/* Button to navigate to the next page */}
           </footer>
         </set>        
