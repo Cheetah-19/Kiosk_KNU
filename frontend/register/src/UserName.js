@@ -11,6 +11,16 @@ export default function UserName() {
       setInputValue(event.target.value);
     }
 
+    //vegan페이지로 input된 정보를 넘겨준다.
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      navigate('/vegan', { state: { inputValue } });
+    };
+
+    const handleNext = () => {
+      navigate('/vegan', { state: { inputValue } });
+    };
+
     return (
       <div>
         <set>
@@ -18,11 +28,13 @@ export default function UserName() {
           <body>
               <div className="upper-t">사용자명을 입력해주세요</div>
               <br/>
-              <input className ="input-des" type="text" value={inputValue} onChange={handleChange} />
+              <form onSubmit={handleSubmit}>
+                <input className ="input-des" type="text" value={inputValue} onChange={handleChange} />
+              </form>
           </body>
           <footer>
           <div className="blinking-text">나의 정보를 등록하세요 2/5</div>
-            <button className = "next-button" onClick={() => navigate("/Vegan")}>사용자명 페이지</button> {/* Button to navigate to the next page */}
+            <button className = "next-button" onClick={handleNext}>다음으로</button> {/* Button to navigate to the next page */}
           </footer>
         </set>      
         {/* User Name Content... */}
