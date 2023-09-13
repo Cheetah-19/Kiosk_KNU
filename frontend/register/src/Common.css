@@ -58,6 +58,25 @@ footer {
     font-size: .875rem;
 }
 
+.upper-t {
+    margin-top : 23vh;
+    font-size : 1.5rem;
+    align-items : center;
+    text-align: center;
+    justify-content: center;
+    animation: fade-in 3s forwards;
+}
+
+.input-des {
+    border-radius: 2rem;
+    width: 65%;
+    margin-left:17%;
+    margin-top: 0%;
+    height: 6.5vh;
+    align-items : center;
+    text-align: center;
+    justify-content: center;
+}
 /*
 수정해야할것.
 .next-button:hover {
