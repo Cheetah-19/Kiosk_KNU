@@ -18,6 +18,22 @@ def face_extractor(img):
 
 webcam = cv2.VideoCapture(0)
 count = 0
+
+# 다음 id 찾기
+f_read = open('./id.txt', 'rt')
+try:
+    id = int(f_read.readlines()[-1].split(' ')[0]) + 1
+except:
+    id = 0
+f_read.close()
+
+name = input()
+
+# DB 대신 파일에 id와 이름 기록
+f_write = open('./id.txt', 'at')
+f_write.write(str(id) + ' ' + name + '\n')
+f_write.close()
+
 while True:
     ret, frame = webcam.read()
     frame = cv2.flip(frame, 1)
@@ -28,7 +44,7 @@ while True:
             face = cv2.resize(face_extractor(frame), (200, 200))
             face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
 
-            file_name_path = 'faces/' + str(count) + '.jpg'
+            file_name_path = 'faces/' + str(id) + '_' + name + '_' + str(count) + '.jpg'
             cv2.imwrite(file_name_path, face)
 
             cv2.putText(face, str(count), (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
