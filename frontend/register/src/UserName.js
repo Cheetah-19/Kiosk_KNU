@@ -11,14 +11,14 @@ export default function UserName() {
       setInputValue(event.target.value);
     }
 
-    //vegan페이지로 input된 정보를 넘겨준다.
+    //PhoneNum페이지로 input된 정보를 넘겨준다.
     const handleSubmit = (event) => {
       event.preventDefault();
-      navigate('/vegan', { state: { inputValue } });
+      navigate('/PhoneNum', { state: { inputValue } });
     };
 
     const handleNext = () => {
-      navigate('/vegan', { state: { inputValue } });
+      navigate('/PhoneNum', { state: { inputValue } });
     };
 
     return (
