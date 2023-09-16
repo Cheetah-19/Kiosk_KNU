@@ -8,7 +8,7 @@ import UserName from "./UserName";
 import Vegan from "./Vegan";
 import Religion from "./Religion";
 import Allergy from "./Allergy";
-
+import PhoneNum from "./PhoneNum";
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<FaceReco />} /> {/* Default route */}
         <Route path="/vegan" element= {<Vegan />} />
+        <Route path="/phonenum" element = {<PhoneNum/>} />
         <Route path="/username" element={<UserName />} />
         <Route path="/religion" element={<Religion />} />
         <Route path="/allergy" element={<Allergy />} />

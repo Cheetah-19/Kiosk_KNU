@@ -1,12 +1,11 @@
+/* eslint-disable no-restricted-globals */
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import "./Common.css";
-import "./PhoneNum.css";
 
 export default function PhoneNum() {
   const navigate = useNavigate(); // useNavigate hook to get the navigate function
   const [inputValue, setInputValue] = useState('');
-  
   const handleChange = (event) => {
     setInputValue(event.target.value);
   }
@@ -14,6 +13,11 @@ export default function PhoneNum() {
   const handleSubmit = (event) => {
     event.preventDefault();
     navigate('/Vegan', { state: { name: location.state.name, phoneNum: inputValue } });
+  };
+
+
+  const handleNext = () => {
+    navigate('/PhoneNum', { state: { inputValue } });
   };
 
   return (
