@@ -8,7 +8,15 @@ export default function UserName() {
     const [inputValue, setInputValue] = useState('');
     //inputValue에 사용자의 입력값이 담기게 된다. {inputValue}로 확인가능
     const handleChange = (event) => {
-      setInputValue(event.target.value);
+      //처음에 숫자를 입력할 경우
+      if (/^\d+$/.test(event.target.value)) {
+        alert('숫자는 입력할 수 없습니다.'); 
+      } //입력하는 도중 중간에 공백을 입력할 경우
+      else if (event.target.value.split(' ').join('') !== event.target.value) {
+        alert('공백은 입력할 수 없습니다.');
+      } else {
+        setInputValue(event.target.value);
+      }
     }
 
     //PhoneNum페이지로 input된 정보를 넘겨준다.
@@ -18,7 +26,12 @@ export default function UserName() {
     };
 
     const handleNext = () => {
-      navigate('/PhoneNum', { state: { inputValue } });
+      // Check if the input value is a number or empty
+      if (inputValue.trim().length === 0) {
+        alert('숫자 또는 공백을 입력할 수 없습니다.');
+      } else {
+        navigate('/PhoneNum', { state: { inputValue } });
+      }
     };
 
     return (
