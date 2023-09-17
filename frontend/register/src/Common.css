@@ -11,9 +11,7 @@ set {
 header {
     width : 100%;
     height : 3.75rem;
-    flex-shrink : 0;
     background : #FD5A27;
-
     color: #F0F0F0;
     
     display: flex;
@@ -27,6 +25,7 @@ header {
 body {
     width: 100%;
     height: 68vh;
+    margin:0px;
 }
 
 footer {

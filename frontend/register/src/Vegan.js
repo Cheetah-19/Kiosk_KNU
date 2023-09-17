@@ -12,7 +12,7 @@ export default function Vegan() {
       <div>
         <set>
           <header>Easy KIOSK</header>
-          <body>안녕하세요 {inputValue}님! <br /> 안녕하세요 {PhoneNumber}님!</body>
+          <body>사용자명 : {inputValue} <br /> 전화번호 : {PhoneNumber}</body>
           <footer>
           <div className="blinking-text">나의 정보를 등록하세요 4/6</div>
             <button className = "next-button" onClick={() => navigate("/Religion")}>비건여부페이지</button> {/* Button to navigate to the next page */}
