@@ -9,7 +9,7 @@ function Allergy() {
           <header>Easy KIOSK</header>
           <body>이곳이 마지막 페이지</body>
           <footer>
-          <div className="blinking-text">나의 정보를 등록하세요 5/5</div>
+          <div className="blinking-text">나의 정보를 등록하세요 6/6</div>
           
           </footer>
         </set>

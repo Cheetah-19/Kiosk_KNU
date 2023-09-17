@@ -33,7 +33,7 @@ export default function UserName() {
               </form>
           </body>
           <footer>
-          <div className="blinking-text">나의 정보를 등록하세요 2/5</div>
+          <div className="blinking-text">나의 정보를 등록하세요 2/6</div>
             <button className = "next-button" onClick={handleNext}>다음으로</button> {/* Button to navigate to the next page */}
           </footer>
         </set>      
