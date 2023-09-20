@@ -1,110 +1,68 @@
+from deepface import DeepFace
+from deepface.commons import functions, distance as dst
 import cv2
 import numpy as np
-from os import listdir
-from os.path import isfile, join
+import os
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-model = cv2.face.LBPHFaceRecognizer_create()
-names = []
+name_list = []
+vvl = []
 
-f = open('./id.txt', 'r')
-file = f.readlines()
-for context in file:
-    names.append(context.split(' ')[1].rstrip('\n'))
-
-
-# 모델 생성
-def make_model():
-    data_path = 'faces/'
-    files = [f for f in listdir(data_path) if isfile(join(data_path, f))]
-    Training_Data, Labels = [], []
-
-    for file in files:
-        image_path = data_path + file
-        images = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-
-        if images is None:
-            continue
-
-        Training_Data.append(np.asarray(images, dtype=np.uint8))
-        Labels.append(int(file.split('_')[0]))
-
-    if len(Labels) == 0:
-        print("There is no data to train.")
-        exit()
-
-    Labels = np.asarray(Labels, dtype=np.int32)
-    model.train(np.asarray(Training_Data), np.asarray(Labels))
-    model.save("face_trainner.xml")
-
-    print("Model Training Complete!!!!!")
-
-
-# 얼굴 인식
-if not isfile('./face_trainner.xml'):
-    make_model()
-else:
-    model.read('face_trainner.xml')
-
-
-def face_detector(img, size=0.5):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-
-    if len(faces) == 0:
-        return img, []
-
-    for (x, y, w, h) in faces:
-        cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
-        roi = img[y:y + h, x:x + w]
-        roi = cv2.resize(roi, (200, 200))
-
-    return img, roi
-
+path = './db/'
+file_list = os.listdir(path)
+for file in file_list:
+    name_list.append(file.split('.')[0])
+    vv = np.load(path + file)
+    vvl.append(vv)
 
 webcam = cv2.VideoCapture(0)
+img_list = []
+embedding_img_list = []
+model_name = 'VGG-Face'
+target_size = functions.find_target_size(model_name)
 
-if not webcam.isOpened():
-    print("Could not open webcam")
-    exit()
+while webcam.isOpened() and not (cv2.waitKey(1) & 0xFF == ord('q')):
+    status, frame = webcam.read()
+    frame = cv2.flip(frame, 1)
 
+    if status:
+        try:
+            result = DeepFace.extract_faces(img_path=frame, target_size=target_size, detector_backend='ssd', enforce_detection=False)
+            face = result[0]['facial_area']
+            x, y, w, h = face['x'], face['y'], face['w'], face['h']
 
-def generate_frame():
-    while webcam.isOpened():
-        ret, frame = webcam.read()
-        frame = cv2.flip(frame, 1)
+            if x != 0 or y != 0:
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
-        if ret:
-            # 얼굴 검출 시도
-            image, face = face_detector(frame)
-            try:
-                face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
-                result = model.predict(face)
-                if result[1] < 500:
-                    # 0~100 표시
-                    confidence = int(100 * (1 - (result[1]) / 200))
-                    # 유사도 화면에 표시
-                    display_string = str(confidence) + '%'
-                    cv2.putText(image, display_string, (270, 70), cv2.FONT_HERSHEY_COMPLEX, 1, (250, 120, 255), 2)
-                # 75 보다 크면 동일 인물로 간주하여 UnLocked!
-                if confidence > 75:
-                    cv2.putText(image, names[result[0]], (250, 450), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
-                    cv2.imshow('Face Detector', image)
-                else:
-                    # 75 이하면 타인으로 간주하여 Locked!
-                    cv2.putText(image, "Unknown", (250, 450), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 2)
-                    cv2.imshow('Face Detector', image)
-            except:
-                # 얼굴 검출 안됨
-                cv2.putText(image, "Face Not Found", (200, 450), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2)
-                cv2.imshow('Face Detector', image)
-                pass
+                target_embedding = DeepFace.represent(img_path=frame[y:y + h, x:x + w], detector_backend='skip', enforce_detection=False)
+                target_vector = target_embedding[0]['embedding']
+                who = "Unknown"
+                distance_list = []
 
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+                # 유사도 계산
+                for vv in vvl:
+                    distance = 1
+                    for v in vv:
+                        distance = min(distance, dst.findCosineDistance(target_vector, v))
+                    distance_list.append(distance)
 
-    webcam.release()
-    cv2.destroyAllWindows()
+                # 가장 유사한 사람 선별
+                distance = min(distance_list)
+                if distance < 0.14:
+                    who = name_list[distance_list.index(distance)]
 
+                print(distance)
 
-generate_frame()
+                confidence = 100 - int(distance * 170) if distance < 0.58 else 0
+                cv2.putText(frame, str(confidence) + '%', (270, 70), cv2.FONT_HERSHEY_COMPLEX, 1, (250, 120, 255), 2)
+
+                cv2.putText(frame, who, (240, 450), cv2.FONT_HERSHEY_COMPLEX, 1,
+                            (0, 0, 255) if who == "Unknown" else (0, 255, 0), 2)
+            else:
+                cv2.putText(frame, "Face Not Found", (200, 450), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2)
+        except:
+            cv2.putText(frame, "Face Not Found", (200, 450), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2)
+
+        cv2.imshow('Face Extractor', frame)
+
+webcam.release()
+cv2.destroyAllWindows()
