@@ -44,7 +44,6 @@ class User(models.Model):
     def __str__(self):
         return self.user_phonenum
 
-
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
