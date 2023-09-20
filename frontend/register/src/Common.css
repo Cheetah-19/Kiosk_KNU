@@ -76,6 +76,19 @@ footer {
     text-align: center;
     justify-content: center;
 }
+
+.check-box-out{
+    display: "flex";
+    flex-direction: "column";
+    align-items: "center";
+    justify-content: "center";
+}
+
+.check-box-in{
+    display: "flex";
+    justify-content: "space-between";
+    width:"100%";
+}
 /*
 수정해야할것.
 .next-button:hover {
