@@ -9,5 +9,6 @@ urlpatterns = [
     path('log_in/', views.login, name='login'),
     path('keyosk/', views.keyosk, name = 'keyosk'),
     path('non_member/keyosk/', views.keyosk, name = 'keyosk_nonmem'),
+    path('create_menu/', views.create_menu, name='create_menu'),
 ]
 
