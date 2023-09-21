@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+</head>
+<body>
+
+<h2>Register</h2>
+
+
+<form method="POST" action="user/register/">
+    <!-- CSRF token -->
+    {% csrf_token %}
+
+    <label for="phone_number">Phone number:</label><br>
+    <input type="text" id="phone_number" name="phone_number"><br>
+
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username"><br>
+
+  	<label for='vegan_type'>Type of vegan:</label><br> 
+  	<select id='vegan_type' name='vegan_type'>
+        {% for vegan in vegan_list %}
+            <option value="{{ vegan.name }}">{{ vegan.vegetarian_name }}</option>  
+        {% endfor %}
+  	</select><br> 
+
+  	<label for='religion'>Religion:</label><br> 
+  	<select id=religion name=religion>
+        {% for region in region_list %}
+            <option value="{{ region.name }}">{{ region.region_type }}</option>  
+        {% endfor %}
+  	</select><br>
+
+  	<label>Allergies:</label><br>
+        {% for allergy in allergy_list %}
+            <input type="checkbox" id="allergies" name="allergies" value="{{ allergy.name }}">
+            <label for="{{ allergy.name }}">{{ allergy.allergy_name }}</label><br>
+        {% endfor %}
+
+
+     <!-- 이 부분에 제출 버튼 추가 -->
+     <button type=submit>Submit</button> 
+
+</form>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+</body>
+</html>

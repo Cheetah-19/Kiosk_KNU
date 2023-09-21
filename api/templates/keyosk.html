@@ -10,7 +10,7 @@
         <ui>
             {% for menu in menu_list %}
                 <h2>
-                    <a href="./{{ menu.id }}/option/"> {{ menu.menu_name }}</a>
+                    {{ menu.menu_name }}
                 </h2>
                 <h4>
                     - {{ menu.menu_price }} 원

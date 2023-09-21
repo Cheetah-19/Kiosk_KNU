@@ -1,20 +1,6 @@
 from django.db import models
 
 
-class Cart:
-    userid : str
-    cart = list
-    def __init__(self,userid) -> None:
-        self.userid = userid
-    def addItem(self,menu):
-        self.cart.append(menu)
-    def removeItem(self,index):
-        self.cart.pop(index)
-    def order_cart(self,User):
-        self.cart.clear()
-        #점주에게 전달할 코드 필요
-        
-
 
 class Payment(models.Model):
     payment_name = models.CharField(max_length=50)
@@ -55,7 +41,7 @@ class User(models.Model):
     user_vegetarian = models.ManyToManyField(Vegetarian)
     user_allergy = models.ManyToManyField(Allergy)
     region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True)
-    cart = Cart(user_phonenum)
+
     def __str__(self):
         return self.user_phonenum
 
@@ -79,7 +65,6 @@ class Menu(models.Model):
     menu_introduction = models.TextField(null=True)
     menu_ingredient = models.ManyToManyField(Ingredient)
     menu_option = models.ManyToManyField(Option)
-    
 
     def __str__(self):
         return self.menu_name
@@ -91,5 +76,8 @@ class Ordered_Item(models.Model):
 
     def __str__(self):
         return str(self.ordered_menu_num)
+
+
+
 
 
