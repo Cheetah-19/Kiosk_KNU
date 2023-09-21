@@ -12,17 +12,24 @@ router.register('menus', MenuViewSet)
 
 #django의 URL 라우팅설정
 app_name = 'api'
+<<<<<<< HEAD
+=======
 
+>>>>>>> 403e7478cc108363b160cb975ae595d850399b60
 urlpatterns = [
     # path('', include(router.urls)),
     path('', views.userform, name='userfrom'),
-    path('register/', views.register, name='register'),
-    path('result/', views.result, name='result'),
+    # path('register/', views.register, name='register'),
+    # path('result/', views.result, name='result'),
     # path('', views.index, name='index'),
-    # path('log_in/', views.login, name='login'),
-    # path('keyosk/', views.keyosk, name = 'keyosk'),
-    # path('non_member/keyosk/', views.keyosk, name = 'keyosk_nonmem'),
+    path('index/',views.index,name='index'),
     path('create_menu/', views.create_menu, name='create_menu'),
+    path('kiosk/', views.kiosk, name = 'keyosk'),
+    path('index/non_member/kiosk/', views.kiosk, name = 'keyosk_nonmem'),
+    path('index/non_member/kiosk/<id>/option/',views.show_option,name='option'),
+    path('index/non_member/kiosk/<menu>/option/kiosk',views.choice_complete,name='choice_complete')
+    
+    
 
 ]
 
