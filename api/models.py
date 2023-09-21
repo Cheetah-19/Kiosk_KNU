@@ -37,6 +37,7 @@ class Region(models.Model):
 
 class User(models.Model):
     user_phonenum = models.CharField(max_length=13, null=True)
+    user_name = models.CharField(max_length=50, null=True)
     user_vegetarian = models.ManyToManyField(Vegetarian)
     user_allergy = models.ManyToManyField(Allergy)
     region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True)

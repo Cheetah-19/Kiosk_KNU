@@ -15,7 +15,6 @@ class MenuSerializer(serializers.ModelSerializer):
     )
 
 
-
     class Meta:
         model = Menu
         fields = ['menu_name', 'menu_price', 'menu_introduction', 'menu_ingredient', 'menu_option']
