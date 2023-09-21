@@ -13,7 +13,10 @@ router.register('menus', MenuViewSet)
 #django의 URL 라우팅설정
 
 urlpatterns = [
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
+    path('', views.userform, name='userfrom'),
+    path('register/', views.register, name='register'),
+    path('result/', views.result, name='result'),
     # path('', views.index, name='index'),
     # path('log_in/', views.login, name='login'),
     # path('keyosk/', views.keyosk, name = 'keyosk'),

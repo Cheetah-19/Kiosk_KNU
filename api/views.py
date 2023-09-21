@@ -12,6 +12,24 @@ from rest_framework.response import Response
 
 from rest_framework import viewsets
 
+def userform(request):
+
+    vegan_list = Vegetarian.objects.all()
+    region_list = Region.objects.all()
+    allergy_list = Allergy.objects.all()
+
+    context = {
+        'vegan_list': vegan_list,
+        'region_list': region_list,
+        'allergy_list': allergy_list,
+    }
+
+    return render(request, 'userform.html')
+
+def register(request):
+
+def result(request):
+
 def index(request):
     
     return render(request, 'index.html')
