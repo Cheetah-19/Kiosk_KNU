@@ -12,10 +12,7 @@ router.register('menus', MenuViewSet)
 
 #django의 URL 라우팅설정
 app_name = 'api'
-<<<<<<< HEAD
-=======
 
->>>>>>> 403e7478cc108363b160cb975ae595d850399b60
 urlpatterns = [
     # path('', include(router.urls)),
     path('', views.userform, name='userfrom'),
