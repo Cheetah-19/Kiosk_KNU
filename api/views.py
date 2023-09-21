@@ -12,6 +12,10 @@ from rest_framework.response import Response
 
 from rest_framework import viewsets
 
+user = User()
+user.cart.cart = list()
+user.user_phonenum = "123456789"
+user.cart.userid = user.user_phonenum
 def userform(request):
 
     vegan_list = Vegetarian.objects.all()
@@ -26,9 +30,9 @@ def userform(request):
 
     return render(request, 'userform.html')
 
-def register(request):
+# def register(request):
 
-def result(request):
+# def result(request):
 
 def index(request):
     
@@ -53,13 +57,38 @@ def login(request):
             return redirect('login')
     return render(request, 'login.html')
 
-def keyosk(request):
+
+def kiosk(request):
+    print(user.user_phonenum)
+    print(user.cart.cart)
     menu_list = Menu.objects.all()
     context = { 'menu_list' : menu_list}
+    return render(request, 'kiosk.html', context)
 
+def show_option(request,id):
+    menu = Menu.objects.get(id = id)
+    menu_option = menu.menu_option.all()
+    context = {'options' : menu_option }
+    return render(request, 'option.html', context)
 
-    return render(request, 'keyosk.html', context)
+def choice_complete(request,menu):
+    user.cart.addItem(Menu.objects.get(id = menu))
+    print(user.cart.cart)
+    return redirect('/menu/kiosk')
 
+# class optionView(FormView):
+    
+#     template_name = "option.html"
+#     form_class = optionForm
+#     success_url = 'keyosk.html'
+#     def get_context():
+#         menu_list = Menu.objects.all()
+#         context = {'menu_list' : menu_list, 'cart':user.cart.cart}
+#         return context
+#     def form_valid(self, form: Any) -> HttpResponse:
+#         menu = form.cleaned_data("option1")
+#         return super().form_valid(form)
+    
 
 #menu create 해보는 연습 (Json으로)
 @api_view(['POST']) #POST HTTP Method 에 대한 요청만 처리하도록 지정. 다른 요청이 들어오면 자동으로 405 응답반환.
