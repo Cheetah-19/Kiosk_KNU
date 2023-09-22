@@ -20,10 +20,12 @@ from django.urls import reverse
 
 
 
+
 user = User()
 user.cart.cart = list()
 user.user_phonenum = "123456789"
 user.cart.userid = user.user_phonenum
+
 
 def userform(request):
 
@@ -37,7 +39,7 @@ def userform(request):
         'allergy_list': allergy_list,
     }
 
-    return render(request, 'userform.html')
+    return render(request, 'userform.html', context)
 
 @api_view(['POST'])
 def register(request):
@@ -64,6 +66,7 @@ def register(request):
 
         return HttpResponseRedirect(reverse('result'))
     
+
 
 
         

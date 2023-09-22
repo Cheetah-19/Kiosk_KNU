@@ -11,7 +11,9 @@ router = routers.DefaultRouter()
 router.register('menus', MenuViewSet)
 
 #django의 URL 라우팅설정
+
 # app_name = 'api'
+
 
 urlpatterns = [
     # path('', include(router.urls)),
