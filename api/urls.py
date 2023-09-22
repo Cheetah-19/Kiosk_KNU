@@ -25,13 +25,11 @@ urlpatterns = [
 
     path('index/',views.index,name='index'),
     path('create_menu/', views.create_menu, name='create_menu'),
-    path('kiosk/', views.kiosk, name = 'keyosk'),
-
-
-    path('index/non_member/kiosk/', views.kiosk, name = 'keyosk_nonmem'),
-    path('index/non_member/kiosk/<id>/option/',views.show_option,name='option'),
-    path('index/non_member/kiosk/<menu>/option/kiosk',views.choice_complete,name='choice_complete')
-    
+    path('kiosk/', views.kiosk, name = 'kiosk'),
+    path('index/login/',views.login,name='login'),
+    path('index/kiosk/', views.nonmem_kiosk, name = 'nonmem_kiosk'),
+    path('kiosk/<id>/option/',views.show_option,name='option'),
+    path('kiosk/<menu>/option/kiosk',views.choice_complete,name='choice_complete')
     
 
 ]

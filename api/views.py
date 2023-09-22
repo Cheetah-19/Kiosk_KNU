@@ -16,7 +16,7 @@ from django.http import HttpResponse
 
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
+from django.views.generic.edit import FormView
 
 
 
@@ -91,13 +91,12 @@ def login(request):
         
             if user is not None:
                 # login(request, user)
-                return redirect('keyosk')
+                return redirect('kiosk')
             
         except User.DoesNotExist:
             messages.error(request, '로그인에 실패했습니다.')
             return redirect('login')
     return render(request, 'login.html')
-
 
 def kiosk(request):
     print(user.user_phonenum)
@@ -105,6 +104,8 @@ def kiosk(request):
     menu_list = Menu.objects.all()
     context = { 'menu_list' : menu_list}
     return render(request, 'kiosk.html', context)
+def nonmem_kiosk(request):
+    return redirect('kiosk')
 
 def show_option(request,id):
     menu = Menu.objects.get(id = id)
@@ -115,12 +116,11 @@ def show_option(request,id):
 def choice_complete(request,menu):
     user.cart.addItem(Menu.objects.get(id = menu))
     print(user.cart.cart)
-    return redirect('/menu/kiosk')
+    return redirect('kiosk')
 
 # class optionView(FormView):
-    
 #     template_name = "option.html"
-#     form_class = optionForm
+#     form_class = 
 #     success_url = 'keyosk.html'
 #     def get_context():
 #         menu_list = Menu.objects.all()
