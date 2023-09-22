@@ -22,11 +22,9 @@ from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    path('menu/',include('api.urls')),
     path('user/', include('api.urls')),
     path('admin/', admin.site.urls),
-    path('api/', include('rest_framework.urls')),
-    
+    path('api/', include('rest_framework.urls'))
     # path('api/', include('api.urls')),
     # re_path('.*', TemplateView.as_view(template_name='index.html')),
 

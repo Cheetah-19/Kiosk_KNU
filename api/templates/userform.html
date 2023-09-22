@@ -8,7 +8,7 @@
 <h2>Register</h2>
 
 
-<form method="POST" action="user/register/">
+<form method="POST" action="register/">
     <!-- CSRF token -->
     {% csrf_token %}
 
@@ -27,8 +27,8 @@
 
   	<label for='religion'>Religion:</label><br> 
   	<select id=religion name=religion>
-        {% for region in region_list %}
-            <option value="{{ region.name }}">{{ region.region_type }}</option>  
+        {% for religion in religion_list %}
+            <option value="{{ religion.name }}">{{ religion.religion_type }}</option>  
         {% endfor %}
   	</select><br>
 
