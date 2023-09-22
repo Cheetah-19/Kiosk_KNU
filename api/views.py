@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from django.contrib import messages
 
-from api.models import *
+from api.models import User, Menu, Vegetarian, Religion, Allergy
 # Create your views here.
 from .serializers import MenuSerializer
 
@@ -19,6 +19,12 @@ from django.urls import reverse
 
 
 
+
+user = User()
+user.cart.cart = list()
+user.user_phonenum = "123456789"
+user.cart.userid = user.user_phonenum
+
 def userform(request):
 
     vegan_list = Vegetarian.objects.all()
@@ -31,56 +37,40 @@ def userform(request):
         'allergy_list': allergy_list,
     }
 
-    return render(request, 'userform.html', context)
+    return render(request, 'userform.html')
 
+@api_view(['POST'])
 def register(request):
-    if request.method == 'POST':
-        phone_number = request.POST.get('phone_number')
-        username = request.POST.get('user_name')
+    phone_number = str(request.POST.get('phone_number'))
+    username = str(request.POST.get('user_name'))
 
+
+    print(phone_number)
+    print(username)
+
+    
+    is_phone_number_already_here = User.objects.filter(user_phonenum = phone_number).exists() 
+    is_name_already_here = User.objects.filter(user_name = username).exists()
 
     # 사용자의 userform 에서 받아온 전화번호/이름이 기존의 데이터베이스에 있는지 확인하기
-        if User.objects.filter(user_phonenum == phone_number).exists() or User.objects.filter(user_name == username).exists():
-            return HttpResponse('이미 등록된 사용자.')
-        # 둘 다 기존 데이터베이스와 다른 것이 확인되었다면, 
-        # 모든 정보 Database 에 등록 실시하기
-        # 일단 나머지 정보도 가져오기
-        else:
-        #     print("hello")
-        #     vegan_type_names = request.POST.getlist('vegan_type')  
-        # # religion_names = request.POST.get('Religion')  
-        #     religion_name = request.POST.get('religion') 
-        #     allergy_names = request.POST.getlist('allergy_name')  
-
-
-        #     for name in vegan_type_names:
-        #         vegan_type = Vegetarian.objects.get(vegetarian_name=name) 
-        #         User.user_vegetarian.add(vegan_type) 
-
-        #     # religion = User.objects.get(name=religion_name) 
-        #     # User.religion = religion  # 'religion'는 User 모델에서 ForeignKey로 정의한 속성 이름이어야 함
-
-        #     for name in allergy_names:
-        #         allergy = Allergy.objects.get(allergy_name=name)
-        #         User.user_allergy.add(allergy)  
-
-
-
-            user = User(phone_number=phone_number, username=username)
-            # 유효성 검사 후 저장 
-            user.full_clean()
-            user.save()
-
-            return HttpResponseRedirect(reverse('user/result'))
-
+    if is_phone_number_already_here or is_name_already_here:
+        return HttpResponse('이미 등록된 사용자.')
 
     else:
-	    return HttpResponse('Invalid request method.')
+        user = User(user_phonenum=phone_number, user_name=username)
+        # 유효성 검사 후 저장 
+        user.full_clean()
+        user.save()
+
+        return HttpResponseRedirect(reverse('result'))
+    
+
 
         
 def result(request):
 
     return render(request, 'result.html')
+
 
 def index(request):
     
@@ -105,13 +95,38 @@ def login(request):
             return redirect('login')
     return render(request, 'login.html')
 
-def keyosk(request):
+
+def kiosk(request):
+    print(user.user_phonenum)
+    print(user.cart.cart)
     menu_list = Menu.objects.all()
     context = { 'menu_list' : menu_list}
+    return render(request, 'kiosk.html', context)
 
+def show_option(request,id):
+    menu = Menu.objects.get(id = id)
+    menu_option = menu.menu_option.all()
+    context = {'options' : menu_option }
+    return render(request, 'option.html', context)
 
-    return render(request, 'keyosk.html', context)
+def choice_complete(request,menu):
+    user.cart.addItem(Menu.objects.get(id = menu))
+    print(user.cart.cart)
+    return redirect('/menu/kiosk')
 
+# class optionView(FormView):
+    
+#     template_name = "option.html"
+#     form_class = optionForm
+#     success_url = 'keyosk.html'
+#     def get_context():
+#         menu_list = Menu.objects.all()
+#         context = {'menu_list' : menu_list, 'cart':user.cart.cart}
+#         return context
+#     def form_valid(self, form: Any) -> HttpResponse:
+#         menu = form.cleaned_data("option1")
+#         return super().form_valid(form)
+    
 
 #menu create 해보는 연습 (Json으로)
 @api_view(['POST']) #POST HTTP Method 에 대한 요청만 처리하도록 지정. 다른 요청이 들어오면 자동으로 405 응답반환.
