@@ -14,17 +14,11 @@ from rest_framework import viewsets
 
 from django.http import HttpResponse
 
+
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic.edit import FormView
 
-
-
-
-user = User()
-user.cart.cart = list()
-user.user_phonenum = "123456789"
-user.cart.userid = user.user_phonenum
 
 
 def userform(request):
@@ -99,12 +93,10 @@ def login(request):
     return render(request, 'login.html')
 
 def kiosk(request):
-    print(user.user_phonenum)
-    print(user.cart.cart)
     menu_list = Menu.objects.all()
     context = { 'menu_list' : menu_list}
     return render(request, 'kiosk.html', context)
-def nonmem_kiosk(request):
+def guest_kiosk(request): 
     return redirect('kiosk')
 
 def show_option(request,id):
@@ -114,14 +106,17 @@ def show_option(request,id):
     return render(request, 'option.html', context)
 
 def choice_complete(request,menu):
-    user.cart.addItem(Menu.objects.get(id = menu))
-    print(user.cart.cart)
+    if request.method == 'POST':
+        selected_options = request.POST.getlist('option_checkbox')
+        print(selected_options)
+        
+
     return redirect('kiosk')
 
 # class optionView(FormView):
 #     template_name = "option.html"
-#     form_class = 
-#     success_url = 'keyosk.html'
+#     form_class = OptionForm
+#     success_url = '/kiosk'
 #     def get_context():
 #         menu_list = Menu.objects.all()
 #         context = {'menu_list' : menu_list, 'cart':user.cart.cart}

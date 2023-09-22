@@ -27,7 +27,7 @@ urlpatterns = [
     path('create_menu/', views.create_menu, name='create_menu'),
     path('kiosk/', views.kiosk, name = 'kiosk'),
     path('index/login/',views.login,name='login'),
-    path('index/kiosk/', views.nonmem_kiosk, name = 'nonmem_kiosk'),
+    path('index/kiosk/', views.guest_kiosk, name = 'guest_kiosk'),
     path('kiosk/<id>/option/',views.show_option,name='option'),
     path('kiosk/<menu>/option/kiosk',views.choice_complete,name='choice_complete')
     

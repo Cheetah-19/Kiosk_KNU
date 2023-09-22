@@ -4,7 +4,7 @@
     {% csrf_token %}
     {% for option in options %} 
     <h2> {{option.option_name}}</h2>
-    <input type="checkbox" name={{option.id}}/>
+    <input type="checkbox" name="option_checkbox"/>
     <h3> {{option.option_price}}</h3>
     {% endfor %}
     <input type="submit" value="Put in Cart"/>

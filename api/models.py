@@ -57,22 +57,6 @@ class Menu(models.Model):
     def __str__(self):
         return self.menu_name
 
-class Cart:
-    userid : str
-    cart = list
-    price = 0
-    def __init__(self,userid) -> None:
-        self.userid = userid
-    def addItem(self,menu:Menu):
-        self.cart.append(menu.menu_name)
-        # self.price += int(menu.menu_price)
-        # self.price += int(option.option_price)
-    def removeItem(self,index):
-        self.cart.pop(index)
-    def order_cart(self,User):
-        self.cart.clear()
-        #점주에게 전달할 코드 필요
-
 
 class User(models.Model):
     user_phonenum = models.CharField(max_length=13, null=True)
@@ -81,7 +65,6 @@ class User(models.Model):
     user_allergy = models.ManyToManyField(Allergy)
     religion = models.ForeignKey(Religion, on_delete=models.CASCADE, null=True, blank=True) #종교가 없을 수 있기 때문에, null = true 를 추가했고
     #유효성 검사를 통과하기 위해 blank=True 를 설정함
-    cart = Cart(user_phonenum)
 
 
     def __str__(self):
