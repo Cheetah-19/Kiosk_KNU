@@ -19,6 +19,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic.edit import FormView
 
+from rest_framework import permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 
 def userform(request):
@@ -40,11 +43,6 @@ def register(request):
     phone_number = str(request.POST.get('phone_number'))
     username = str(request.POST.get('user_name'))
 
-
-    print(phone_number)
-    print(username)
-
-    
     is_phone_number_already_here = User.objects.filter(user_phonenum = phone_number).exists() 
     is_name_already_here = User.objects.filter(user_name = username).exists()
 
@@ -143,3 +141,12 @@ def create_menu(request):
 class MenuViewSet(viewsets.ModelViewSet):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+
+
+#swagger 관련 API 코드 작성 Testing
+
+class TestView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        return Response("Swagger 연동 테스트")
