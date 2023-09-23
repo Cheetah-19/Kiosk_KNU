@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-wvkf+=+oyzrhetz(^a9)#l-zpn9!=cg#0gjpy9@5%)1-odzf+_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -54,6 +54,14 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+# script안에서의 리소스 요청을 허용할 도메인 추가
+# ↓↓ 추가
+CORS_ORIGIN_WHITELIST = [
+    'localhost:3000/'
+]
+
+
 
 ROOT_URLCONF = "django_react_project.urls"
 
@@ -147,3 +155,10 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}

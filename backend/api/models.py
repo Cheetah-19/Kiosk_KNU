@@ -61,8 +61,8 @@ class Menu(models.Model):
 class User(models.Model):
     user_phonenum = models.CharField(max_length=13, null=True)
     user_name = models.CharField(max_length=50, null=True)
-    user_vegetarian = models.ManyToManyField(Vegetarian)
-    user_allergy = models.ManyToManyField(Allergy)
+    user_vegetarian = models.ManyToManyField(Vegetarian, blank=True)#빈칸허용
+    user_allergy = models.ManyToManyField(Allergy, blank=True)#빈칸허용
     religion = models.ForeignKey(Religion, on_delete=models.CASCADE, null=True, blank=True) #종교가 없을 수 있기 때문에, null = true 를 추가했고
     #유효성 검사를 통과하기 위해 blank=True 를 설정함
 

@@ -4,13 +4,13 @@ from django.contrib import messages
 
 from api.models import User, Menu, Vegetarian, Religion, Allergy
 # Create your views here.
-from .serializers import MenuSerializer
+from .serializers import MenuSerializer, UserSerializer
 
 from rest_framework.decorators import api_view
 
 from rest_framework.response import Response
 
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 
 from django.http import HttpResponse
 
@@ -142,7 +142,6 @@ class MenuViewSet(viewsets.ModelViewSet):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
 
-
 #swagger 관련 API 코드 작성 Testing
 
 class TestView(APIView):
@@ -150,3 +149,7 @@ class TestView(APIView):
 
     def get(self, request):
         return Response("Swagger 연동 테스트")
+    
+class UserPost(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

@@ -18,10 +18,12 @@ router.register('menus', MenuViewSet)
 
 urlpatterns = [
     # path('', include(router.urls)),
-    path('', views.userform, name='userfrom'),
-    path('register/', views.register, name='register'),
-    path('result/', views.result, name='result'),
+    # path('', views.userform, name='userfrom'),
+    # path('register/', views.register, name='register'),
+    # path('result/', views.result, name='result'),
     # path('', views.index, name='index'),
+
+    path('', views.UserPost.as_view()),
 
     #swagger
     path('v1/test/', TestView.as_view(), name='test'),
