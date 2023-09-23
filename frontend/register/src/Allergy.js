@@ -11,7 +11,7 @@ function Allergy() {
     const inputValue = location.state.inputValue;
     const VegancheckboxValue = [location.state.VegancheckboxValue];
     const ReligioncheckboxValue = location.state.checkedBox;
-    const AllergyInfo = [null];
+    const AllergyInfo = [];
 
     //서버로 사용자의 입력값을 보내준다. 얼굴정보도 별도로 보내줘야할듯.
     const handleButtonClick = () => {
