@@ -12,12 +12,13 @@ export default function Religion() {
 
     // 체크박스 초기화
     const [checkboxes, setCheckboxes] = useState({
-      one: false,
-      two: false,
-      three: false,
-      four: false,
-      five: false,
-      six: false
+      Judaism: false,
+      Islam: false,
+      Hinduism: false,
+      Buddhism: false,
+      Christian: false,
+      Protestant: false,
+      NoReligion: false
   });
 
     // 체크박스 변경사항 있을시
@@ -42,40 +43,37 @@ export default function Religion() {
       <div>
         <set>
           <header>Easy KIOSK</header>
-          <body>사용자명 : {inputValue} <br /> 전화번호 : {PhoneNumber} <br /> 비건 체크박스 : {VegancheckboxValue} 
+          <body> 
           {/* Checkbox inputs */}
+          <div className="upper-t">종교가 있으신가요?</div>
           <div classname = "check-box-out">
                 <div>
-                  <input type="checkbox" id="one" name="number" value="1" onChange={handleCheckboxChange} />
-                  <label htmlFor="one">프루테리언</label>
+                  <input type="checkbox" id="Judaism" name="number" value="1" onChange={handleCheckboxChange} />
+                  <label htmlFor="Judaism">유대교</label>
                 </div>
                 <div>
-                  <input type="checkbox" id="two" name="number" value="2" onChange={handleCheckboxChange} />
-                  <label htmlFor="two">비건</label>
+                  <input type="checkbox" id="Islam" name="number" value="2" onChange={handleCheckboxChange} />
+                  <label htmlFor="two">이슬람교</label>
                 </div>
                 <div>
-                  <input type="checkbox" id ="three"name ="number"value ="3" onChange={handleCheckboxChange} />
-                  <label htmlFor ="three">락토</label>
+                  <input type="checkbox" id ="Hinduism"name ="number"value ="3" onChange={handleCheckboxChange} />
+                  <label htmlFor ="three">힌두교</label>
                 </div>
                 <div>
-                  <input type="checkbox" id="four" name="number" value="4" onChange={handleCheckboxChange} />
-                  <label htmlFor="one">오보</label>
+                  <input type="checkbox" id="Buddhism" name="number" value="4" onChange={handleCheckboxChange} />
+                  <label htmlFor="one">불교</label>
                 </div>
                 <div>
-                  <input type="checkbox" id="five" name="number" value="5" onChange={handleCheckboxChange} />
-                  <label htmlFor="two">락토오보</label>
+                  <input type="checkbox" id="Christian" name="number" value="5" onChange={handleCheckboxChange} />
+                  <label htmlFor="two">기독교</label>
                 </div>
                 <div>
-                  <input type="checkbox" id ="six"name ="number"value ="6" onChange={handleCheckboxChange} />
-                  <label htmlFor ="three">페스코</label>
+                  <input type="checkbox" id ="Protestant"name ="number"value ="6" onChange={handleCheckboxChange} />
+                  <label htmlFor ="three">개신교</label>
                 </div>
                 <div>
-                  <input type="checkbox" id ="seven"name ="number"value ="7" onChange={handleCheckboxChange} />
-                  <label htmlFor ="three">폴로</label>
-                </div>
-                <div>
-                  <input type="checkbox" id ="eight"name ="number"value ="8" onChange={handleCheckboxChange} />
-                  <label htmlFor ="three">해당없음</label>
+                  <input type="checkbox" id ="NoReligion"name ="number"value ="7" onChange={handleCheckboxChange} />
+                  <label htmlFor ="three">무교</label>
                 </div>
             </div>
           </body>

@@ -11,14 +11,14 @@ export default function Vegan() {
 
      // 체크박스 초기화
      const [checkboxes, setCheckboxes] = useState({
-      one: false,
-      two: false,
-      three: false,
-      four: false,
-      five: false,
-      six: false,
-      seven: false,
-      eight: false
+      Fruiterian: false,
+      Vegan: false,
+      Lacto: false,
+      Ovo: false,
+      LoctoOvo: false,
+      Pesco: false,
+      Pollo: false,
+      NoVegan: false
   });
 
   // 체크박스 변경사항 있을시
@@ -43,40 +43,39 @@ export default function Vegan() {
         <set>
           <header>Easy KIOSK</header>
           <body>
-            사용자명 : {inputValue} <br/> 전화번호 : {PhoneNumber}
-
+            <div className="upper-t">비건이신가요?</div>
             {/* Checkbox inputs */}
             <div classname = "check-box-out">
                 <div>
-                  <input type="checkbox" id="one" name="number" value="1" onChange={handleCheckboxChange} />
+                  <input type="checkbox" id="Fruiterian" name="number" value="1" onChange={handleCheckboxChange} />
                   <label htmlFor="one">프루테리언</label>
                 </div>
                 <div>
-                  <input type="checkbox" id="two" name="number" value="2" onChange={handleCheckboxChange} />
+                  <input type="checkbox" id="Vegan" name="number" value="2" onChange={handleCheckboxChange} />
                   <label htmlFor="two">비건</label>
                 </div>
                 <div>
-                  <input type="checkbox" id ="three"name ="number"value ="3" onChange={handleCheckboxChange} />
+                  <input type="checkbox" id ="Lacto"name ="number"value ="3" onChange={handleCheckboxChange} />
                   <label htmlFor ="three">락토</label>
                 </div>
                 <div>
-                  <input type="checkbox" id="four" name="number" value="4" onChange={handleCheckboxChange} />
+                  <input type="checkbox" id="Ovo" name="number" value="4" onChange={handleCheckboxChange} />
                   <label htmlFor="one">오보</label>
                 </div>
                 <div>
-                  <input type="checkbox" id="five" name="number" value="5" onChange={handleCheckboxChange} />
+                  <input type="checkbox" id="LactoOvo" name="number" value="5" onChange={handleCheckboxChange} />
                   <label htmlFor="two">락토오보</label>
                 </div>
                 <div>
-                  <input type="checkbox" id ="six"name ="number"value ="6" onChange={handleCheckboxChange} />
+                  <input type="checkbox" id ="Pesco"name ="number"value ="6" onChange={handleCheckboxChange} />
                   <label htmlFor ="three">페스코</label>
                 </div>
                 <div>
-                  <input type="checkbox" id ="seven"name ="number"value ="7" onChange={handleCheckboxChange} />
+                  <input type="checkbox" id ="Pollo"name ="number"value ="7" onChange={handleCheckboxChange} />
                   <label htmlFor ="three">폴로</label>
                 </div>
                 <div>
-                  <input type="checkbox" id ="eight"name ="number"value ="8" onChange={handleCheckboxChange} />
+                  <input type="checkbox" id ="NoVegan"name ="number"value ="8" onChange={handleCheckboxChange} />
                   <label htmlFor ="three">해당없음</label>
                 </div>
             </div>

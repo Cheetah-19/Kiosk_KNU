@@ -37,11 +37,7 @@ export default function Vegan() {
         <set>
           <header>Easy KIOSK</header>
           <body>
-            <div>안녕하세요 {inputValue}님!</div>
-            <br/>
             <div className="upper-t">휴대폰 번호를 입력해 주세요 ('-'제외)</div>
-            
-          <br/>
               <form onSubmit={handleSubmit}>
                 <input className ="input-des" type="text" value={PhoneNumber} onChange={handleChange} />
               </form>
