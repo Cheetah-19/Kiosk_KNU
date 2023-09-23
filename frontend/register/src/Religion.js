@@ -19,7 +19,7 @@ export default function Religion() {
       Christian: false,
       Protestant: false,
       NoReligion: false
-  });
+    });
 
     // 체크박스 변경사항 있을시
   const handleCheckboxChange = (event) => {

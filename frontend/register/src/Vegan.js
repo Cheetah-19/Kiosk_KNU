@@ -45,7 +45,6 @@ export default function Vegan() {
           <body>
             <div className="upper-t">비건이신가요?</div>
             {/* Checkbox inputs */}
-            <div classname = "check-box-out">
                 <div>
                   <input type="checkbox" id="Fruiterian" name="number" value="1" onChange={handleCheckboxChange} />
                   <label htmlFor="one">프루테리언</label>
@@ -78,7 +77,6 @@ export default function Vegan() {
                   <input type="checkbox" id ="NoVegan"name ="number"value ="8" onChange={handleCheckboxChange} />
                   <label htmlFor ="three">해당없음</label>
                 </div>
-            </div>
           </body>
           <footer>
             
