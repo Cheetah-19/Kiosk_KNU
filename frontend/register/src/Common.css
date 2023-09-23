@@ -82,6 +82,9 @@ footer {
     flex-direction: "column";
     align-items: "center";
     justify-content: "center";
+    width : 65%;
+    height : 6.5vh;
+    margin-left : 18%;
 }
 
 .check-box-in{
@@ -89,6 +92,7 @@ footer {
     justify-content: "space-between";
     width:"100%";
 }
+
 /*
 수정해야할것.
 .next-button:hover {

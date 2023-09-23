@@ -30,7 +30,7 @@ export default function FaceReco() {
           </body>
           <footer>
             <div className="blinking-text">나의 정보를 등록하세요 1/6</div>
-            <button className = "next-button" onClick={() => navigate("/username")}>얼굴인식페이지</button> {/* Button to navigate to the next page */}
+            <button className = "next-button" onClick={() => navigate("/username")}>다음으로</button> {/* Button to navigate to the next page */}
           </footer>
         </set>
         {/* Face recognition content... */}
