@@ -42,40 +42,43 @@ export default function Religion() {
       <div>
         <set>
           <header>Easy KIOSK</header>
-          <body>사용자명 : {inputValue} <br /> 전화번호 : {PhoneNumber} <br /> 비건 체크박스 : {VegancheckboxValue} </body>
+          <body>사용자명 : {inputValue} <br /> 전화번호 : {PhoneNumber} <br /> 비건 체크박스 : {VegancheckboxValue} 
           {/* Checkbox inputs */}
           <div classname = "check-box-out">
-            <div style={{display: "flex", justifyContent: "space-between", width:"100%"}}>
-              <div>
-                <input type="checkbox" id="one" name="number" value="1" onChange={handleCheckboxChange} />
-                <label htmlFor="one">1</label>
-              </div>
-              <div>
-                <input type="checkbox" id="two" name="number" value="2" onChange={handleCheckboxChange} />
-                <label htmlFor="two">2</label>
-               </div>
-              <div>
-                <input type="checkbox" id ="three"name ="number"value ="3" onChange={handleCheckboxChange} />
-                <label htmlFor ="three">3</label>
-              </div>
-              </div>
-              {/* Second row */}
-              <div style={{display: "flex", justifyContent: "space-between", width:"100%"}}>
-                {/* Add your checkboxes here... */}
-              <div>
-                <input type="checkbox" id="four" name="number" value="4" onChange={handleCheckboxChange} />
-                <label htmlFor="one">4</label>
-              </div>
-              <div>
-                <input type="checkbox" id="five" name="number" value="5" onChange={handleCheckboxChange} />
-                <label htmlFor="two">5</label>
-              </div>
-              <div>
-                <input type="checkbox" id ="six"name ="number"value ="6" onChange={handleCheckboxChange} />
-                <label htmlFor ="three">6</label>
-              </div>
-              </div>
-          </div>
+                <div>
+                  <input type="checkbox" id="one" name="number" value="1" onChange={handleCheckboxChange} />
+                  <label htmlFor="one">프루테리언</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="two" name="number" value="2" onChange={handleCheckboxChange} />
+                  <label htmlFor="two">비건</label>
+                </div>
+                <div>
+                  <input type="checkbox" id ="three"name ="number"value ="3" onChange={handleCheckboxChange} />
+                  <label htmlFor ="three">락토</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="four" name="number" value="4" onChange={handleCheckboxChange} />
+                  <label htmlFor="one">오보</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="five" name="number" value="5" onChange={handleCheckboxChange} />
+                  <label htmlFor="two">락토오보</label>
+                </div>
+                <div>
+                  <input type="checkbox" id ="six"name ="number"value ="6" onChange={handleCheckboxChange} />
+                  <label htmlFor ="three">페스코</label>
+                </div>
+                <div>
+                  <input type="checkbox" id ="seven"name ="number"value ="7" onChange={handleCheckboxChange} />
+                  <label htmlFor ="three">폴로</label>
+                </div>
+                <div>
+                  <input type="checkbox" id ="eight"name ="number"value ="8" onChange={handleCheckboxChange} />
+                  <label htmlFor ="three">해당없음</label>
+                </div>
+            </div>
+          </body>
           <footer>
           <div className="blinking-text">나의 정보를 등록하세요 5/6</div>
             <button className = "next-button" onClick={(handleButtonClick)}>종교관련페이지</button> {/* Button to navigate to the next page */}
