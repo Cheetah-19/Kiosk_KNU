@@ -10,6 +10,10 @@ export default function Religion() {
     const inputValue = location.state.inputValue;
     const checkboxValue = location.state.checkedBox;
 
+    const handleNext = () => {
+        navigate('/Allergy', { state: { inputValue, PhoneNumber, checkboxValue } });
+    };
+
     return (
       <div>
         <set>
@@ -17,7 +21,7 @@ export default function Religion() {
           <body>사용자명 : {inputValue} <br /> 전화번호 : {PhoneNumber} <br /> 체크박스 : {checkboxValue} </body>
           <footer>
           <div className="blinking-text">나의 정보를 등록하세요 5/6</div>
-            <button className = "next-button" onClick={() => navigate("/Allergy")}>종교관련페이지</button> {/* Button to navigate to the next page */}
+            <button className = "next-button" onClick={(handleNext)}>종교관련페이지</button> {/* Button to navigate to the next page */}
           </footer>
         </set>        
         {/* Religion content... */}
