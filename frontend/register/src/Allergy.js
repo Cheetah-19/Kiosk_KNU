@@ -35,7 +35,8 @@ function Allergy() {
       Shellfish: false,
       Crab: false,
       Squid: false,
-      food_containing_sulfite: false
+      food_containing_sulfite: false,
+      해당없음: false
     });
 
     const handleCheckboxChange = (event) => {
