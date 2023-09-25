@@ -34,7 +34,17 @@ class Religion(models.Model):
     def __str__(self):
         return self.religion_type
 
+class MenuCategory(models.Model):
+    menucategory_name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.menucategory_name
+
+class OptionCategory(models.Model):
+    optioncategory_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.optioncategory_name
 
 
 class Option(models.Model):
@@ -42,7 +52,8 @@ class Option(models.Model):
     option_price = models.PositiveIntegerField()
     option_pic = models.CharField(max_length=500, null=True)
     option_introduction = models.TextField(null=True)
-    
+    optioncategory = models.ForeignKey(OptionCategory, on_delete=models.CASCADE, null=True, blank=True) 
+
     def __str__(self):
         return self.option_name
 
@@ -53,6 +64,7 @@ class Menu(models.Model):
     menu_introduction = models.TextField(null=True)
     menu_ingredient = models.ManyToManyField(Ingredient)
     menu_option = models.ManyToManyField(Option)
+    menucategory = models.ForeignKey(MenuCategory, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.menu_name
@@ -61,7 +73,7 @@ class Menu(models.Model):
 class User(models.Model):
     user_phonenum = models.CharField(max_length=13, null=True)
     user_name = models.CharField(max_length=50, null=True)
-    user_vegetarian = models.ManyToManyField(Vegetarian, blank=True)#빈칸허용
+    user_vegetarian = models.ForeignKey(Vegetarian, on_delete=models.CASCADE, null=True, blank=True)
     user_allergy = models.ManyToManyField(Allergy, blank=True)#빈칸허용
     religion = models.ForeignKey(Religion, on_delete=models.CASCADE, null=True, blank=True) #종교가 없을 수 있기 때문에, null = true 를 추가했고
     #유효성 검사를 통과하기 위해 blank=True 를 설정함
