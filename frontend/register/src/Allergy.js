@@ -57,7 +57,7 @@ function Allergy() {
       const postData = {
           user_name: inputValue,
           user_phonenum: PhoneNumber,
-          user_vegetarian: [VegancheckboxValue],
+          user_vegetarian: VegancheckboxValue,
           user_allergy: allergyInfo,
           religion: ReligioncheckboxValue
       };

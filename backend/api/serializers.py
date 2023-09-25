@@ -23,7 +23,7 @@ class MenuSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     
     user_vegetarian = serializers.SlugRelatedField(
-        many=True,
+        many=False,
         queryset=Vegetarian.objects.all(),
         slug_field='vegetarian_name',
         allow_null=True  # Allow null value for religion
@@ -54,14 +54,17 @@ class UserSerializer(serializers.ModelSerializer):
             user_phonenum=validated_data.get('user_phonenum'),
         )
 
-        vegetarian_names = validated_data.get('user_vegetarian')
+        vegetarian_name = validated_data.get('user_vegetarian')
+
+        vegetarian =Vegetarian.objects.get(vegetarian_name = vegetarian_name)
+        user.vegetarian_id = vegetarian.id
+
         allergy_names = validated_data.get('user_allergy')
         religion_type = validated_data.get('religion')
 
-        if vegetarian_names is not None:
-            for veg_name in vegetarian_names:
-                vegetarian = Vegetarian.objects.get(vegetarian_name=veg_name)
-                user.user_vegetarian.add(vegetarian)
+        if vegetarian_name is not None:
+            vegetarian =Vegetarian.objects.get(vegetarian_name=vegetarian_name)
+            user.vegetarian_id = vegetarian.id
 
         if allergy_names is not None:
             for allergy_name in allergy_names:
