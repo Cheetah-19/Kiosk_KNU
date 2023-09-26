@@ -3,7 +3,7 @@ from rest_framework import routers
 from . import views
 from .views import MenuViewSet 
 
-from api.views import TestView
+from signup.views import TestView
 #DRF의 DefaultRouter를 활용해 MenuViewSet에 대한
 #URL 패턴을 자동으로 생성
 #라우터는 MenuVIewSet를 'menus'라는 기본 URL에 등록

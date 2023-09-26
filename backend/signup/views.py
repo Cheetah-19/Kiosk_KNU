@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from django.contrib import messages
 
-from api.models import User, Menu, Vegetarian, Religion, Allergy
+from signup.models import User, Menu, Vegetarian, Religion, Allergy
 # Create your views here.
 from .serializers import MenuSerializer, UserSerializer
 
