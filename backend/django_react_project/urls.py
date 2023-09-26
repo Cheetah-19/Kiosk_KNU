@@ -47,6 +47,8 @@ urlpatterns = [
     # path('api/', include('rest_framework.urls')),
     #swagger
     path('api/', include('api.urls')),
+    path('login/', include('login.urls')),
+    path('order/',include('order.urls')),
     # path('api/', include('api.urls')),
     # re_path('.*', TemplateView.as_view(template_name='index.html')),
 
