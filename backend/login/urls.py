@@ -9,7 +9,7 @@ app_name = 'login'
 urlpatterns = [
     path('', views.LoginPost, name='login'),
     #swagger
-    path('v1/test/', TestView.as_view(), name='test'),
+    # path('v1/test/', TestView.as_view(), name='test'),
     # path('', include(router.urls)),
     # path('', views.userform, name='userfrom'),
 ]

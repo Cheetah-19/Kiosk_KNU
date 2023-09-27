@@ -28,12 +28,12 @@ router = routers.DefaultRouter()
 #swagger 관련
 schema_view = get_schema_view(
     openapi.Info(
-        title="Statchung API",
-        default_version='v1',
-        description="Test description",
+        title="KIOSK_KNU",
+        default_version='1.1.1',
+        description="KIOSK_KNU API 문서",
         terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="contact@snippets.local"),
-        license=openapi.License(name="BSD License"),
+        contact=openapi.Contact(email="optimuslove0223@icloud.com"),
+        license=openapi.License(name="Cheetah-19"),
     ),
     public=True,
     permission_classes=[permissions.AllowAny],
@@ -44,6 +44,7 @@ urlpatterns = [
     path('signup/', include('signup.urls')),
     path('login/', include('login.urls')),
     path('order/',include('order.urls')),
+    path('menu/', include('menu.urls')),
     # path('menu/',include('api.urls')),   
     # path('user/', include('signup.urls')),
     # path('api/', include('rest_framework.urls')),
