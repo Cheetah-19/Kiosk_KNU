@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from api.models import *
+from signup.models import *
 # Create your views here.
 
 def hello(request):
