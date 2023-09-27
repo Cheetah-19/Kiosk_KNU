@@ -40,18 +40,16 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    # path('menu/',include('api.urls')),
-    
-    # path('user/', include('signup.urls')),
     path('admin/', admin.site.urls),
-    # path('api/', include('rest_framework.urls')),
-    #swagger
-    path('api/', include('signup.urls')),
+    path('signup/', include('signup.urls')),
     path('login/', include('login.urls')),
     path('order/',include('order.urls')),
+    # path('menu/',include('api.urls')),   
+    # path('user/', include('signup.urls')),
+    # path('api/', include('rest_framework.urls')),
+    #swagger
     # path('api/', include('api.urls')),
     # re_path('.*', TemplateView.as_view(template_name='index.html')),
-
 ]
 
 #swagger 관련
