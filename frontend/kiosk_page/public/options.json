@@ -1,0 +1,40 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "optioncategory_name": "Topping"
+        },
+        {
+            "id": 2,
+            "optioncategory_name": "Beverage"
+        }
+    ],
+    "Topping": [
+        {
+            "id": 1,
+            "option_name": "add Kimchi",
+            "option_price": 500,
+            "option_pic": "naver.com",
+            "option_introduction": "Korean Kimchi",
+            "optioncategory": 1
+        },
+        {
+            "id": 2,
+            "option_name": "add GreenOnion",
+            "option_price": 600,
+            "option_pic": "google.com",
+            "option_introduction": "GreenOnion is Korean Soul.",
+            "optioncategory": 1
+        }
+    ],
+    "Beverage": [
+        {
+            "id": 3,
+            "option_name": "Add Sprite",
+            "option_price": 2000,
+            "option_pic": "naver.com",
+            "option_introduction": "Drink Soda",
+            "optioncategory": 2
+        }
+    ]
+}

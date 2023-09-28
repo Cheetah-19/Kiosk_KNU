@@ -1,0 +1,44 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "menucategory_name": "Ramen"
+        },
+        {
+            "id": 2,
+            "menucategory_name": "Noodle"
+        }
+    ],
+    "Ramen": [
+        {
+            "id": 1,
+            "menu_name": "Ramen bombed by GreenOnion",
+            "menu_price": 5000,
+            "menu_introduction": "Korean soul food",
+            "menucategory": 1,
+            "menu_ingredient": [
+                1
+            ],
+            "menu_option": [
+                1
+            ]
+        },
+        {
+            "id": 2,
+            "menu_name": "Ramen bathing in cheese",
+            "menu_price": 6000,
+            "menu_introduction": "Cheese love JinRamen very much",
+            "menucategory": 1,
+            "menu_ingredient": [
+                1,
+                2
+            ],
+            "menu_option": [
+                1,
+                2,
+                3
+            ]
+        }
+    ],
+    "Noodle": []
+}
