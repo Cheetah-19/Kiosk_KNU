@@ -7,22 +7,24 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 
-@api_view(['POST'])
+
 def LoginPost(request):
-    phone_number = request.POST.get('user_phonenum')
+    if request.method == 'POST':
+        name = request.POST.get('user_name')
+        phone_number = request.POST.get('user_phonenum')
 
-    if phone_number:
-        is_phone_number_already_here = User.objects.filter(user_phonenum=phone_number).exists()
-
-        if is_phone_number_already_here:
-            # 이미 등록된 사용자인 경우
-            return Response({'message': '이미 등록된 사용자입니다. 다시 로그인해주세요.'}, status=400)
+        if phone_number and name:
+            is_phone_number_already_here = User.objects.filter(user_phonenum=phone_number).exists()
+            is_name_already_here = User.objects.filter(user_name=name).exists()
+            if is_phone_number_already_here or is_name_already_here:
+                # 이미 등록된 사용자인 경우
+                return Response({'message': '이미 등록된 사용자입니다. 다시 로그인해주세요.'}, status=400)
+            else:
+                # 새로운 사용자인 경우
+                return Response({'message': '로그인이 승인되었습니다.'})
         else:
-            # 새로운 사용자인 경우
-            return Response({'message': '로그인이 승인되었습니다.'})
-    else:
-        # 전화번호가 입력되지 않은 경우
-        return Response({'message': '전화번호를 입력해주세요.'}, status=400)
+            # 전화번호 또는 이름이 입력되지 않은 경우
+            return Response({'message': '입력을 확인해 주세요.'}, status=400)
 
 
 
