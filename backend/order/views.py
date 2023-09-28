@@ -9,12 +9,13 @@ def test(request):
 
 class MenulistView(APIView) :
     def get(self, request):
-        menulist = Menu.objects.all()
+        menulist={}
         menu_category = MenuCategory.objects.all()
-        menu_serializer = MenuSerializer(menulist,many=True)
-        caterogy_serializer = MenuCaterogySerializer(menu_category,many=True)
-        combined_data = {
-            'menu_category':caterogy_serializer.data,
-            'menulist':menu_serializer.data
-        }
-        return Response(combined_data)
+        category_serializer = MenuCategorySerializer(menu_category,many=True)
+        menulist['categories'] = category_serializer.data
+        for category in menu_category:
+            category_menu = Menu.objects.filter(menucategory = category.id)
+            menu_serializer = MenuSerializer(category_menu,many=True)
+            menulist['{}'.format(category.menucategory_name)] = menu_serializer.data
+        
+        return Response(menulist)

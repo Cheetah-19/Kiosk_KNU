@@ -6,7 +6,7 @@ class MenuSerializer(serializers.ModelSerializer):
         model = Menu
         exclude = ['menu_pic']
         
-class MenuCaterogySerializer(serializers.ModelSerializer):
+class MenuCategorySerializer(serializers.ModelSerializer):
     class Meta : 
         model = MenuCategory
         fields = '__all__'
