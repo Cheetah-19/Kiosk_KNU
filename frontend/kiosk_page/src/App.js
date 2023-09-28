@@ -1,8 +1,18 @@
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+
+import MealOption from "./MealOption";
+import StartMenu from "./StartMenu";
 
 function App() {
   return (
-    <div >메뉴페이지</div>
+    <div >
+      <Routes>
+        <Route path="/" element={<StartMenu />} /> {/* Default route */}
+        <Route path="/MealOption" element={<MealOption />} /> {/* Default route */}
+      </Routes>
+    </div>
   );
 }
 

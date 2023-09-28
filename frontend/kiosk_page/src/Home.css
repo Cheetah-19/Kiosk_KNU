@@ -1,0 +1,30 @@
+#start_img { /*처음 시작 화면*/
+    width: 100%;
+    height: 100vh;
+    background: url(./img/start_img.jpeg) no-repeat center / cover;
+    border-radius: 15px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* viewport height */
+}
+
+.button {
+    width: 200px; /* adjust as needed */
+    height: 250px; /* adjust as needed */
+    margin: 20px;
+    border-radius: 15px;
+    background-color: #838383;
+}
+
+.button img {
+   width: 100%;
+   height: auto;
+}
+
+.button:hover {
+   background-color:#FD5A27 ;
+}

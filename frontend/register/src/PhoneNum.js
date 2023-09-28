@@ -16,7 +16,7 @@ export default function Vegan() {
       } else {
         setInputValue(event.target.value);
       }
-}
+    }
 
     
 
