@@ -17,7 +17,7 @@
     height: 250px; /* adjust as needed */
     margin: 20px;
     border-radius: 15px;
-    background-color: #838383;
+    background-color: #f8f4f4;
 }
 
 .button img {
@@ -27,4 +27,48 @@
 
 .button:hover {
    background-color:#FD5A27 ;
+}
+
+/*상단부분*/
+#top_bar {
+    position: relative; /* Add this line */
+    background: #ef4444;
+    width: 100%;
+
+    /* Remove height property */
+    /* height: 6.67vh; */
+
+    color: white;
+    text-align: center;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+#top_bar_home {
+    position:absolute; /* Add this line */
+    top:15px; /* Adjust as needed */
+    left:10px; /* Adjust as needed */
+    
+    width:30px; /* Set explicit size */
+    height:30px; /* Set explicit size */
+ 
+    background:url(img/top_bar_home.png) no-repeat center / cover;
+}
+
+#menu_bar  {
+    background: #ef4444;
+    color: white;
+    padding-top: 7px;
+    padding-bottom: 5px;
+
+    display: flex;
+    justify-content: space-around;
+    font-size: 11px;
+    font-weight: bold;
+
+}
+
+#order {
+    display: none;
 }
