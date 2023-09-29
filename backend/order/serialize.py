@@ -11,5 +11,14 @@ class MenuCategorySerializer(serializers.ModelSerializer):
         model = MenuCategory
         fields = '__all__'
         
+class OptionSerializer(serializers.ModelSerializer):
+    class Meta :
+        model = Option
+        fields = '__all__'
+        
+class OptionCategorySerializer(serializers.ModelSerializer):
+    class Meta :
+        model = OptionCategory
+        fields = '__all__'
 
         

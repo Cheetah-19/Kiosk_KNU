@@ -19,3 +19,18 @@ class MenulistView(APIView) :
             menulist['{}'.format(category.menucategory_name)] = menu_serializer.data
         
         return Response(menulist)
+
+class OptionView(APIView):
+    def get(self,request,id):
+        optionlist = {}
+        option_category = OptionCategory.objects.all()
+        # category_serializer = OptionCategorySerializer(option_category,many=True)
+        optionlist['categories'] = []
+        for category in option_category:
+            options = Menu.objects.get(id=id).menu_option.filter(optioncategory = category.id)
+            if options.count() != 0 :
+                optionlist['categories'].append(OptionCategorySerializer(category).data)
+                option_serializer = OptionSerializer(options,many=True)
+                optionlist['{}'.format(category.optioncategory_name)] = option_serializer.data
+
+        return Response(optionlist)
