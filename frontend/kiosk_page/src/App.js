@@ -5,6 +5,8 @@ import "./App.css";
 import MealOption from "./MealOption";
 import StartMenu from "./StartMenu";
 import MainMenu from "./MainMenu";
+import DetailMenu from "./DetailMenu";
+
 
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
         <Route path="/" element={<StartMenu />} /> {/* Default route */}
         <Route path="/MealOption" element={<MealOption />} /> {/* Default route */}
         <Route path="/MainMenu" element={<MainMenu />} /> {/* Default route */}
+        <Route path="/DetailMenu" element={<DetailMenu />} /> {/* Default route */}
       </Routes>
     </div>
   );

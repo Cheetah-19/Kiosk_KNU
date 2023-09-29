@@ -56,6 +56,17 @@
     background:url(img/top_bar_home.png) no-repeat center / cover;
 }
 
+#top_bar_back {
+    position:absolute; /* Add this line */
+    top:15px; /* Adjust as needed */
+    left:10px; /* Adjust as needed */
+    
+    width:30px; /* Set explicit size */
+    height:30px; /* Set explicit size */
+ 
+    background:url(img/back.png) no-repeat center / cover;
+}
+
 #menu_bar  {
     background: #ef4444;
     color: white;
@@ -71,4 +82,47 @@
 
 #order {
     display: none;
+}
+
+
+/* 메뉴 표시 css */
+.menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 200px; /* adjust as needed */
+    height: 300px; /* adjust as needed */
+    border: 1px solid black; /* add border to the box */
+    
+    margin: 10px; /* add this line to add space around each menu item */
+    border-radius: 10px; /* add this line to round the corners of each menu item */
+}
+.menu-item img {
+   width: 100%;
+   height: auto;
+}
+
+.menu-item h2 {
+   font-size: 20px; /* adjust as needed */
+}
+
+.menu-item p {
+   color: gray; /* make the text color light gray */
+}
+
+.menu-item .price {
+   color:red; /* make the price text red */
+}
+
+.menu-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
