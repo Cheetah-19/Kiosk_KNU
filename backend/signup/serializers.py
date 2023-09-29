@@ -2,25 +2,6 @@ from rest_framework import serializers
 from .models import *
 from rest_framework.response import Response
 
-# class MenuSerializer(serializers.ModelSerializer):
-#     menu_ingredient = serializers.SlugRelatedField(
-#         many=True,
-#         queryset=Ingredient.objects.all(),
-#         slug_field='ingredient_name'
-#     )
-
-#     menu_option = serializers.SlugRelatedField(
-#         many=True,
-#         queryset=Option.objects.all(),
-#         slug_field='option_name'
-#     )
-
-
-#     class Meta:
-#         model = Menu
-#         fields = ['menu_name', 'menu_price', 'menu_introduction', 'menu_ingredient', 'menu_option']
-
-
 class UserSerializer(serializers.ModelSerializer):
     
     user_vegetarian = serializers.SlugRelatedField(
@@ -59,6 +40,10 @@ class UserSerializer(serializers.ModelSerializer):
         username=validated_data.get('user_name')
         userphonenum=validated_data.get('user_phonenum')
 
+        #username 이나 userphonenum 이 null 인 경우
+        if username == "" or userphonenum == "":
+            raise serializers.ValidationError({'message': '입력값이 없어서 등록이 불가합니다.'})
+
         is_user_name_already_here = User.objects.filter(user_name=username).exists()
         is_user_phonenum_already_here = User.objects.filter(user_phonenum=userphonenum).exists()
 
@@ -71,7 +56,7 @@ class UserSerializer(serializers.ModelSerializer):
             else:
                 error_message = '이미 등록된 사용자 이름입니다.'
             raise serializers.ValidationError({'message': error_message})
-
+        
         else:
             user = User.objects.create(
             user_name=username,
