@@ -35,6 +35,65 @@ export default function MainMenu() {
         navigate('/');
     }
 
+    //메뉴 항목을 렌더링하는 함수
+    function MenuItem({ menu, onClick }) {
+        return (
+            <div key={menu.id} class="menu-item" onClick={onClick}>
+                <img src={menu.menu_pic} alt={menu.menu_name} />
+                <h2>{menu.menu_name}</h2>
+                <p>{menu.menu_price}</p>
+                <p>{menu.menu_introduction}</p>
+            </div>
+        );
+    }
+
+    //카테고리 리스트를 렌더링하는 함수
+    function renderCategories() {
+        return [...Array(itemsPerPage)].map((_, index) => {
+            let categoryIndex = (itemsPerPage * (currentPage - 1)) + index;
+            return (
+                categoryIndex < categories.length ?
+                    (<div key={index}
+                        title={categories[categoryIndex]}
+                        onClick={() => {
+                            setCurrentCategoryIndex(categoryIndex);
+                            setCurrentMenuIndex(null); // 카테고리를 변경했을 때 선택된 메뉴 초기화
+                        }}>
+                        {categories[categoryIndex]}
+                    </div>) :
+                    (<div key={index}></div>)
+            );
+        });
+    }
+
+    //서브메뉴 출력
+    function renderSubMenus() {
+        if (currentMenuIndex === null) {
+            return null;
+        }
+
+        const options = menusByCategory[categories[currentCategoryIndex]][currentMenuIndex].menu_option.map(optionId => {
+            const optionCategory = Object.keys(optionsByCategory).find(category =>
+                optionsByCategory[category].some(option => option.id === optionId)
+            );
+            return optionsByCategory[optionCategory]?.find(option => option.id === optionId);
+        });
+
+        return (
+            <div className="menu-container">
+                {options.map(option =>
+                (<div key={option.id} class="menu-item">
+                    <img src={option.option_pic} alt={option.option_name} />
+                    <h2>{option.option_name}</h2>
+                    <p>{option.option_price}</p>
+                    <p>{option.option_introduction}</p>
+                </div>))
+                }
+            </div>
+        );
+    }
+
+    //DetailMenu에 정보 전송
     function selectMenu(index) {
         setCurrentMenuIndex(index);
         const selectedMenuItem = menusByCategory[categories[currentCategoryIndex]][index];
@@ -44,7 +103,10 @@ export default function MainMenu() {
             const optionCategory = Object.keys(optionsByCategory).find(category =>
                 optionsByCategory[category].some(option => option.id === optionId)
             );
-            return optionsByCategory[optionCategory]?.find(option => option.id === optionId);
+            const option = optionsByCategory[optionCategory]?.find(option => option.id === optionId);
+
+            // Add category to each option
+            return { ...option, category: optionCategory };
         });
 
         // Add the options to the menu item
@@ -52,6 +114,7 @@ export default function MainMenu() {
 
         navigate('/DetailMenu', { state: { selectedMenu } });
     }
+
 
 
     useEffect(() => {
@@ -103,64 +166,51 @@ export default function MainMenu() {
         fetchMenusAndOptions();
     }, []);
 
+    // 페이지 바꿀 때마다 페이지 자동 업데이트
+    useEffect(() => {
+        setCurrentCategoryIndex((currentPage - 1) * itemsPerPage);
+    }, [currentPage]);
+
     return (
         <div>
-            <div id="top_bar">{/* 홈 버튼 + 맨 위 로고 */}
-                <div id="top_bar_home" onClick={herf_home}></div>
-                <header>Easy KIOSK</header>
-            </div>
-            <div id="menu_bar">
-                {/* 왼쪽으로 카테고리 이동 */}
-                <div id="menu_bar_left" onClick={slideLeft}>&#60;</div>
-                {/* 3개의 카테고리씩 불러옴 */}
-                {[...Array(itemsPerPage)].map((_, index) => {
-                    let categoryIndex = (itemsPerPage * (currentPage - 1)) + index;
-                    return (
-                        categoryIndex < categories.length ?
-                            (<div key={index}
-                                title={categories[categoryIndex]}
-                                onClick={() => {
-                                    setCurrentCategoryIndex(categoryIndex);
-                                    setCurrentMenuIndex(null); // 카테고리를 변경했을 때 선택된 메뉴 초기화
-                                }}>
-                                {categories[categoryIndex]}
-                            </div>) :
-                            (<div key={index}></div>)
-                    );
-                })}
-                {/* 오른쪽으로 카테고리 이동 */}
-                <div id="menu_bar_right" onClick={slideRight}>&#62;</div>
-            </div>
-            {/* 카테고리에 맞는 메뉴 출력 */}
-            <div className="menu-container">
-                {menusByCategory[categories[currentCategoryIndex]]?.map((menu, index) => (
-                    <div key={menu.id} class="menu-item" onClick={() => selectMenu(index)}>
-                        <img src={menu.menu_pic} alt={menu.menu_name} />
-                        <h2>{menu.menu_name}</h2>
-                        <p>{menu.menu_price}</p>
-                        <p>{menu.menu_introduction}</p>
-                    </div>
-                ))}
-            </div>
+            <div id="top_bar_menu">
+                <div id="top_bar">{/* 홈 버튼 + 맨 위 로고 */}
+                    <div id="top_bar_home" onClick={herf_home}></div>
+                    <header>Easy KIOSK</header>
+                </div>
+                <div id="menu_bar">
+                    {/* 왼쪽으로 카테고리 이동 */}
+                    <div id="menu_bar_left" onClick={slideLeft}>&#60;</div>
 
-            {/* 서브메뉴 출력 */}
-            <div className="menu-container">
-                {currentMenuIndex !== null &&
-                    menusByCategory[categories[currentCategoryIndex]][currentMenuIndex].menu_option.map(optionId => {
-                        const optionCategory = Object.keys(optionsByCategory).find(category =>
-                            optionsByCategory[category].some(option => option.id === optionId)
-                        );
-                        return optionsByCategory[optionCategory]?.find(option => option.id === optionId);
-                    }).map(option =>
-                    (<div key={option.id} class="menu-item">
-                        <img src={option.option_pic} alt={option.option_name} />
-                        <h2>{option.option_name}</h2>
-                        <p>{option.option_price}</p>
-                        <p>{option.option_introduction}</p>
-                    </div>))
-                }
+                    {/* 3개의 카테고리씩 로드 */}
+                    {renderCategories()}
+
+                    {/* 오른쪽으로 카테고리 이동 */}
+                    <div id="menu_bar_right" onClick={slideRight}>&#62;</div>
+                </div>
+            </div>
+            <div id="munu_table">
+                {/* 카테고리에 맞는 메뉴 출력 */}
+                <div className="menu-container">
+                    {menusByCategory[categories[currentCategoryIndex]]?.map((menu, index) => (
+                        <MenuItem key={index} menu={menu} onClick={() => selectMenu(index)} />
+                    ))}
+                </div>
+
+                {/* 서브메뉴 출력 */}
+                {renderSubMenus()}
+            </div>
+            {/* 장바구니 및 결제 부분 */}
+            <div id="pay">
+                {/* 장바구니 부분 */}
+                <div id="order_list">
+
+                </div>
+                {/* 카드결제 부분 */}
+                <div id="order_list_right">
+
+                </div>
             </div>
         </div>
     );
 }
-

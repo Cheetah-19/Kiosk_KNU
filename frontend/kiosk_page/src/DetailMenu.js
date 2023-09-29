@@ -38,11 +38,10 @@ export default function DetailMenu() {
                         <h2>Submenu:</h2>
                         {selectedMenu.menu_option.map(option => (
                             <div key={option.id}>
+                                <p>Category: {option.category}</p> {/* 출력 부분 추가 */}
                                 <p>ID: {option.id}</p>
-                                <p>Picture: {option.option_pic}</p>
                                 <p>Name: {option.option_name}</p>
                                 <p>Price: {option.option_price}</p>
-                                <p>introduction: {option.option_introduction}</p>
                                 {/* ...추가적인 서브메뉴 정보 출력 */}
                             </div>
                         ))}
