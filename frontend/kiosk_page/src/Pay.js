@@ -6,10 +6,13 @@ export default function Pay() {
     const cart = location.state?.cart || [];
     const totalPrice = location.state?.totalPrice || 0;
     const option = location.state?.option || '';
+
+    console.log('Cart:', cart);
   
     return (
       <div>
         <h1>Payment Page</h1>
+        <pre>{JSON.stringify(cart, null, 2)}</pre>
         <p>{option === 'takeout' ? '포장 주문' : '매장식사 주문'}</p>
         {cart.map((item, index) => (
           <div key={index}>
