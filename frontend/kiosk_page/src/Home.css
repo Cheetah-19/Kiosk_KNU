@@ -204,6 +204,32 @@
     text-align: right;
 }
 
+.menu_item .selected_name {
+    text-align: left;
+    width: 40%; /* Set the width to 40% */
+}
+
+.menu_item .quantity_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%; /* Set the width to 20% */
+}
+
+.menu_item .selected_price {
+    text-align: right;
+    width: 40%; /* Set the width to 40% */
+}
+
+.menu_item .selected_name,
+.menu_item .quantity_section,
+.menu_item .selected_price {
+   white-space: nowrap; /* Prevent text from wrapping onto next line */
+   overflow:hidden; /* Ensure that text doesn't overflow its container */
+   text-overflow:ellipsis; /* Add an ellipsis when the text overflows its container */
+}
+
+
 /* 주문 담기 버튼을 포함하는 영역 */
 .order_section {
     height: 18%; /* Set explicit height */
@@ -231,7 +257,7 @@
 
 .minus{
     width: 6%;
-    background: orange;
+    background: gray;
     border-radius: 20%;
     color: white;
     font-weight:bolder;
@@ -239,9 +265,15 @@
 }
 .plus{
     width: 6%;
-    background: orange;
+    background: gray;
     border-radius: 20%;
     color: white;
     font-weight: bolder;
     font-size: 10px;
+}
+
+.quantity_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
