@@ -49,9 +49,9 @@ export default function MainMenu() {
     }
 
     //결제창 가는 함수(장바구니 정보 전송)
-function handlePayment() {
-    navigate('/pay', { state: { cart, totalPrice, option } });
-}
+    function handlePayment() {
+        navigate('/pay', { state: { cart, totalPrice, option } });
+    }
 
 
     //메뉴 항목을 렌더링하는 함수
@@ -262,9 +262,9 @@ function handlePayment() {
                 </div>
                 {/* 카드결제 부분 */}
                 <div id="order_list_right">
-                    <div id="pay_btn">
+                    <div id="pay_btn" onClick={handlePayment}>
                         <div id="card_img"></div>
-                        <div id="total_price" onClick={handlePayment}>{totalPrice.toLocaleString()}원 결제하기</div>
+                        <div id="total_price">{totalPrice.toLocaleString()}원 결제하기</div>
                     </div>
                 </div>
             </div>
