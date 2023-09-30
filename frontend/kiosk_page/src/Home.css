@@ -32,18 +32,7 @@
 
 /*상단부분*/
 #top_bar {
-    position: relative; /* Add this line */
-    background: #ef4444;
-    width: 100%;
-
-    /* Remove height property */
-    /* height: 6.67vh; */
-
-    color: white;
-    text-align: center;
-
-    display: flex;
-    justify-content: space-between;
+    height: 5%; /* Set explicit height */
 }
 
 /* 홈이미지 */
@@ -61,11 +50,10 @@
 /* 뒤로가기 이미지 */
 #top_bar_back {
     position:absolute; /* Add this line */
-    top:15px; /* Adjust as needed */
-    left:10px; /* Adjust as needed */
-    
-    width:30px; /* Set explicit size */
-    height:30px; /* Set explicit size */
+    right:0vw; /* Adjust as needed */
+
+    width:40px; /* Set explicit size */
+    height:40px; /* Set explicit size */
  
     background:url(img/back.png) no-repeat center / cover;
 }
@@ -153,4 +141,107 @@
 #order_list_right {
     width: 35%;
     flex-direction: column;
+}
+
+
+/* 세부메뉴 표시 */
+
+#fullscreen {
+    width: 100%;
+    height: 100vh; /* 전체 화면 높이로 설정 */
+    display: flex;
+}
+
+#left_menu {
+    width: 33%;
+    height: 100%;
+}
+
+#middle_menu {
+    width: 33%;
+    height: 100%;
+}
+
+#right_menu {
+    width: 33%;
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start; /* 버튼을 하단에 배치 */
+}
+
+.option_item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.option_name {
+    text-align: left;
+}
+
+.option_price {
+    text-align: right;
+}
+
+
+/* 메뉴, 사이드 메뉴 부분 */
+.menu_item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.selected_item {
+    height: 77%; /* Set explicit height */
+    overflow-y: auto; /* Add scrolling if content overflows */
+}
+
+.selected_name {
+    text-align: center;
+}
+
+.selected_price {
+    text-align: right;
+}
+
+/* 주문 담기 버튼을 포함하는 영역 */
+.order_section {
+    height: 18%; /* Set explicit height */
+}
+
+.order_button {
+    width: 100%; /* right_menu의 넓이를 꽉 채우게 설정 */
+    height: 100%; /* 버튼 높이는 필요에 따라 조정 */
+}
+
+/* 총합 금액 출력 영역 */
+.total_section {
+    height: 5%; /* Set explicit height */
+    display: flex;
+    justify-content: space-between;
+}
+
+.total_text {
+    text-align: left;
+}
+
+.total_price {
+    text-align: right;
+}
+
+.minus{
+    width: 6%;
+    background: orange;
+    border-radius: 20%;
+    color: white;
+    font-weight:bolder;
+    font-size: 10px;
+}
+.plus{
+    width: 6%;
+    background: orange;
+    border-radius: 20%;
+    color: white;
+    font-weight: bolder;
+    font-size: 10px;
 }
