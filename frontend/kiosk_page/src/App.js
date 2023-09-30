@@ -6,6 +6,8 @@ import MealOption from "./MealOption";
 import StartMenu from "./StartMenu";
 import MainMenu from "./MainMenu";
 import DetailMenu from "./DetailMenu";
+import Pay from "./Pay";
+
 
 
 
@@ -17,6 +19,8 @@ function App() {
         <Route path="/MealOption" element={<MealOption />} /> {/* Default route */}
         <Route path="/MainMenu" element={<MainMenu />} /> {/* Default route */}
         <Route path="/DetailMenu" element={<DetailMenu />} /> {/* Default route */}
+        <Route path="/Pay" element={<Pay />} /> {/* Default route */}
+
       </Routes>
     </div>
   );

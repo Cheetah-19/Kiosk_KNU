@@ -29,19 +29,39 @@ export default function DetailMenu() {
         return sum + (optionPrice * quantity);
     }, 0);
 
+    // 주문 담기 버튼을 클릭했을 때의 처리 함수
+    function handleOrderClick() {
+        // Create a new order item with the selected menu and options, and total price
+        const orderItem = {
+            menu: selectedMenu,
+            options: selectedOptions,
+            total: total,
+        };
+
+        // Get existing cart from local storage
+        let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+        // Add the new order item to the cart and update it in local storage 
+        existingCart.push(orderItem);
+        localStorage.setItem('cart', JSON.stringify(existingCart));
+
+        // Navigate back to MainMenu and pass the updated cart along as state 
+        navigate("/MainMenu", { state: { cart: existingCart } });
+    }
+
 
     //서브메뉴 수량 계산
     function handleQuantityChange(optionName, change) {
         setSelectedOptions(prevState => {
             const newQuantity = Math.max((prevState[optionName] || 0) + change, 0);
-    
+
             // If the new quantity is zero, remove the item from the state
             if (newQuantity === 0) {
                 const newState = { ...prevState };
                 delete newState[optionName];
                 return newState;
             }
-    
+
             // Otherwise, update the quantity as before
             return {
                 ...prevState,
@@ -96,7 +116,9 @@ export default function DetailMenu() {
                                     {/* onClick 핸들러 추가 */}
                                     <p className="option_item" onClick={() => handleOptionClick(option)}>
                                         <span className="option_name">{option.option_name}</span>
-                                        <span className="option_price">{option.option_price.toLocaleString()}원</span>
+                                        {option.option_price &&
+                                            (<span className="option_price">{option.option_price.toLocaleString()}원</span>)
+                                        }
                                     </p>
                                 </>
                             ))}
@@ -143,11 +165,12 @@ export default function DetailMenu() {
                     </ div >
 
                     {/* 주문 담기 버튼 */}
-                    < div className="order_section" >
-                        < button className="order_button" > 주문 담기 </ button >
-                    </ div >
+                    <div className="order_section">
+                        <button className="order_button" onClick={handleOrderClick}>주문 담기</button>
+                    </div>
                 </ div >
             </ div >
         </ div >
     );
 }
+
