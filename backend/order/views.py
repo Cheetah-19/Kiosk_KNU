@@ -3,6 +3,7 @@ from . import views
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serialize import *
+from django.http import HttpResponse
 import json
 def test(request):
     return render(request,'test1.html',context={})
@@ -20,6 +21,14 @@ class MenulistView(APIView) :
                 menulist['{}'.format(category.menucategory_name)] = menu_serializer.data
             
         return Response(menulist)
+    def post(self,request): #go payment
+        data = json.loads(request.body)
+        order_num = Order.objects.count()+10000000
+        order_data = Order(user=User.objects.get(id=data['user']).id, payment=Payment().objects.get(id='0').id )
+        order_data.save()
+        order_list = Ordered_Item(ordered_menu_num=order_num,order=order_data.id,menu=data['menu'])
+        order_list.save()        
+        return HttpResponse("Order is completed")
 
 class OptionView(APIView):
     def get(self,request,id):
@@ -35,10 +44,5 @@ class OptionView(APIView):
 
         return Response(optionlist)
 
-class OrderView(APIView):
-    def post(request):
-        data = json.load(request.body)
-        context = {
-            'order_info': data,
-        }
-        return http
+# class OrderView(APIView):
+    
