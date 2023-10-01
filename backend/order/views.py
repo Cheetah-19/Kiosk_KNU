@@ -22,8 +22,8 @@ class MenulistView(APIView):
             
         return Response(menulist)
     def post(self,request): #go payment
-        data = json.loads(request.body)
-        order_num = Order.objects.count()+10000000
+        data = json.loads(request.body) #HTTP POST 요청의 본문(body)을 JSON 형식으로 파싱하여 Python 딕셔너리로 변환
+        order_num = Order.objects.count()+10000000 #order 객체의 수 세고, 거기다 10000000 더해서 새로운 주문번호 생성
         order_data = Order(user=User.objects.get(id=data['user']).id, payment=Payment().objects.get(id='0').id )
         order_data.save()
         order_list = Ordered_Item(ordered_menu_num=order_num,order=order_data.id,menu=data['menu'])
@@ -44,5 +44,8 @@ class OptionView(APIView):
 
         return Response(optionlist)
 
-# class OrderView(APIView):
+class OrderView(APIView):
+    def post(self,request): 
+        list = [1, 2, 3]
+        return Response(list)
     
