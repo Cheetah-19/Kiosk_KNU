@@ -112,8 +112,8 @@ export default function MainMenu() {
           });
       
           const selectedMenu = { ...menuData, menu_option: options };
-
-          navigate('/DetailMenu', { state: { selectedMenu } });
+          //navigate('/DetailMenu', { state: { selectedMenu } });
+          navigate('/DetailMenu', { state: { selectedMenuItem, selectedOptions: options } });
         } catch (error) {
           console.error('ERROR : 저는~ 백엔드가 완료되야 뭘 할수 있을거 같아요. :', error);
         }
@@ -168,7 +168,7 @@ export default function MainMenu() {
         async function fetchMenusAndOptions() {
             try {
                 // 서버 URL에 테스트용 주소 넣어줄것.
-	            let responseMenus= await axios.get('서버URL');
+	            let responseMenus= await axios.get('http://127.0.0.1:8000/order/menu');
 	            let dataMenus= responseMenus.data;
 
 				let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
