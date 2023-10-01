@@ -152,51 +152,27 @@ export default function MainMenu() {
             );
         });
     }
-    //이곳을 수정해서 서버와 소통하게 만듬.
+    //서버로부터 정보를 받아온다. Axios 활용.
     useEffect(() => {
         async function fetchMenusAndOptions() {
             try {
-                // Fetch menus
-                let response = await fetch('./menus.json');
-                if (!response.ok) {
-                    let message = await response.text();
-                    throw new Error(message);
-                }
+                // 서버 URL에 서버 주소 넣어줄것.
+	            let responseMenus= await axios.get('서버URL');
+	            let dataMenus= responseMenus.data;
 
-                let dataMenus = await response.json();
+				let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
+				let menusFromServerMenu= {};
 
-                // 카테고리별 그룹 메뉴 추출
-                let categoriesFromServerMenu = dataMenus.categories.map(c => c.menucategory_name);
-                let menusFromServerMenu = {};
+				for(let category of categoriesFromServerMenu){
+					menusFromServerMenu[category]= dataMenus[category];
+				}
 
-                for (let category of categoriesFromServerMenu) {
-                    menusFromServerMenu[category] = dataMenus[category];
-                }
+				setCategories(categoriesFromServerMenu);
+				setMenusByCategory(menusFromServerMenu);
 
-                // Fetch options
-                response = await fetch('/options.json');
-                if (!response.ok) {
-                    let message = await response.text();
-                    throw new Error(message);
-                }
-
-                let dataOptions = await response.json();
-
-                // 카테고리별 그룹 옵션 추출
-                let optionsFromServerOption = {};
-
-                for (let category of dataOptions.categories.map(c => c.optioncategory_name)) {
-                    optionsFromServerOption[category] = dataOptions[category];
-                }
-
-                setCategories(categoriesFromServerMenu);
-                setMenusByCategory(menusFromServerMenu);
-
-                setOptionsByCategory(optionsFromServerOption);
-
-            } catch (error) {
-                console.error('Failed to fetch menu or option data:', error);
-            }
+			} catch (error) {
+				console.error('짜잔~ 실패했습니다.:', error);
+			}
         }
         //실행
         fetchMenusAndOptions();
