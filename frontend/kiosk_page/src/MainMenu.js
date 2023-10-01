@@ -52,7 +52,7 @@ export default function MainMenu() {
     //결제창 가는 함수(장바구니 정보 전송) 결제 버튼을 눌렀을때, 서버로 cart에 담긴 정보를 전송한다.
     async function handlePayment() {
         try {
-            await axios.post('서버 URL', { cart }); //요청이 성공해야만 결제 페이지로 이동한다.
+            await axios.post('http://127.0.0.1:8000/order/menu/orderpost/', { cart }); //요청이 성공해야만 결제 페이지로 이동한다.
             navigate('/pay', { state: { cart, totalPrice: totalPrice.toLocaleString(), option } });
         } catch(error) {
             console.error('서버로 Cart 데이터를 보내는데 실패했습니다:',error);
@@ -92,26 +92,32 @@ export default function MainMenu() {
     }
 
     //DetailMenu에 정보 전송
-    function selectMenu(index) {
+    async function selectMenu(index) {
         setCurrentMenuIndex(index);
         const selectedMenuItem = menusByCategory[categories[currentCategoryIndex]][index];
-
-        // Get the options for the menu item
-        const options = selectedMenuItem.menu_option.map(optionId => {
+      
+        try {
+          const response = await axios.get(`http://127.0.0.1:8000/order/menu/${selectedMenuItem.id}`);
+          const menuData = response.data;
+      
+          //서버로부터 가져온 메뉴옵션을 option에 할당.
+          const options = menuData.menu_option.map(optionId => {
             const optionCategory = Object.keys(optionsByCategory).find(category =>
-                optionsByCategory[category].some(option => option.id === optionId)
+              optionsByCategory[category].some(option => option.id === optionId)
             );
             const option = optionsByCategory[optionCategory]?.find(option => option.id === optionId);
-
-            // Add category to each option
+      
+            //각 옵션에 해당하는 category 추가
             return { ...option, category: optionCategory };
-        });
+          });
+      
+          const selectedMenu = { ...menuData, menu_option: options };
 
-        // Add the options to the menu item
-        const selectedMenu = { ...selectedMenuItem, menu_option: options };
-
-        navigate('/DetailMenu', { state: { selectedMenu } });
-    }
+          navigate('/DetailMenu', { state: { selectedMenu } });
+        } catch (error) {
+          console.error('ERROR : 저는~ 백엔드가 완료되야 뭘 할수 있을거 같아요. :', error);
+        }
+      }
 
     // index를 기준으로 카트에서 항목 삭제
     function handleDeleteFromCart(index) {
@@ -176,7 +182,7 @@ export default function MainMenu() {
 				setMenusByCategory(menusFromServerMenu);
 
 			} catch (error) {
-				console.error('짜잔~ 실패했습니다.:', error);
+				console.error('ERROR : 저는 백엔드가 완료되야...뭘 할수 있을거 같아요:', error);
 			}
         }
         //실행
