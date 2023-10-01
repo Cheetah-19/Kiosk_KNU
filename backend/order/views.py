@@ -8,7 +8,7 @@ import json
 def test(request):
     return render(request,'test1.html',context={})
 
-class MenulistView(APIView) :
+class MenulistView(APIView):
     def get(self, request):
         menulist={}
         menu_category = MenuCategory.objects.all() #메뉴 리스트 전체
