@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from signup.models import Ingredient, Menu, Option,Payment,Order,Ordered_Item
+from signup.models import Ingredient, Menu, Option,Payment,Ordered_Item,Order
 # Register your models here.
 
 admin.site.register(Menu)
