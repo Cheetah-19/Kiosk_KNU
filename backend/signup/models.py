@@ -85,13 +85,13 @@ class User(models.Model):
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
-    order_num = models.PositiveIntegerField(default=0)
+    order_num = models.PositiveIntegerField(default=0,null=True)
 
     def __str__(self):
         return str(self.order_num)
     
 class Ordered_Item(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE,default='')
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     option = models.ForeignKey(Option, on_delete=models.CASCADE)
     def __str__(self):
