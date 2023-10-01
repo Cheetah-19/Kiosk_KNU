@@ -161,7 +161,7 @@ export default function MainMenu() {
     useEffect(() => {
         async function fetchMenusAndOptions() {
             try {
-                // 서버 URL에 서버 주소 넣어줄것.
+                // 서버 URL에 테스트용 주소 넣어줄것.
 	            let responseMenus= await axios.get('서버URL');
 	            let dataMenus= responseMenus.data;
 
