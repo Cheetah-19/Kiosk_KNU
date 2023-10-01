@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import "./Common.css";
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -151,7 +152,7 @@ export default function MainMenu() {
             );
         });
     }
-
+    //이곳을 수정해서 서버와 소통하게 만듬.
     useEffect(() => {
         async function fetchMenusAndOptions() {
             try {
