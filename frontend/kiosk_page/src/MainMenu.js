@@ -49,9 +49,14 @@ export default function MainMenu() {
         navigate('/');
     }
 
-    //결제창 가는 함수(장바구니 정보 전송)
-    function handlePayment() {
-        navigate('/pay', { state: { cart, totalPrice, option } });
+    //결제창 가는 함수(장바구니 정보 전송) 결제 버튼을 눌렀을때, 서버로 cart에 담긴 정보를 전송한다.
+    async function handlePayment() {
+        try {
+            await axios.post('서버 URL', { cart }); //요청이 성공해야만 결제 페이지로 이동한다.
+            navigate('/pay', { state: { cart, totalPrice: totalPrice.toLocaleString(), option } });
+        } catch(error) {
+            console.error('서버로 Cart 데이터를 보내는데 실패했습니다:',error);
+        }
     }
 
 
