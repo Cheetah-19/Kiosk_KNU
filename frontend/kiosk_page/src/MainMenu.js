@@ -59,7 +59,6 @@ export default function MainMenu() {
         }
     }
 
-
     //메뉴 항목을 렌더링하는 함수
     function MenuItem({ menu, onClick }) {
         return (
@@ -173,10 +172,13 @@ export default function MainMenu() {
 				}
 
                 // 카테고리별 그룹 옵션 추출
+	            let responseOptions= await axios.get('http://127.0.0.1:8000/order/menu/order');
+	            let dataOptions= responseOptions.data;
+
                 let optionsFromServerOption = {};
 
-                for (let category of dataMenus.categories.map(c => c.optioncategory_name)) {
-                    optionsFromServerOption[category] = dataMenus[category];
+                for (let category of dataOptions.categories.map(c => c.optioncategory_name)) {
+                    optionsFromServerOption[category] = dataOptions[category];
                 }
 
 				setCategories(categoriesFromServerMenu);
