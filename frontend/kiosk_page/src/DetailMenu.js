@@ -11,27 +11,6 @@ export default function DetailMenu() {
     // 사용자가 선택한 사이드 메뉴들과 그들의 수량을 저장하는 state
     const [selectedOptions, setSelectedOptions] = React.useState({});
 
-       //DetailMenu.js가 실행될때, 그에 맞는 메뉴 옵션 데이터 가져오기
-       useEffect(() => {
-          async function fetchMenuOptions() {
-             try {
-                const response = await axios.get(`http://127.0.0.1:8000/order/menu/${selectedMenu.id}/`);
-                const menuOptionsData = response.data.menu_option;
-                    
-                    //서버에서 읽어온 Option값들을 option_name과 option_price에 할당.
-                const updateSelectedOption = (clickedOption) => {
-                   const selectedOption = menuOptionsData.find(item => item.option_name === clickedOption.option_name);
-                   clickedOption.option_name = selectedOption?.option_name;
-                   clickedOption.option_price = selectedOption?.option_price;
-                };
-
-                selectedMenu.menu_option.forEach(updateSelectedOption);
-             } catch (error) {
-                console.error('Failed to fetch menu options:', error);
-             }
-          }
-            fetchMenuOptions();
-   }, []);
     // 서브메뉴를 클릭했을 때의 처리 함수
     function handleOptionClick(option) {
         setSelectedOptions(prevState => ({

@@ -59,7 +59,6 @@ export default function MainMenu() {
         }
     }
 
-
     //메뉴 항목을 렌더링하는 함수
     function MenuItem({ menu, onClick }) {
         return (
@@ -161,23 +160,34 @@ export default function MainMenu() {
     useEffect(() => {
         async function fetchMenusAndOptions() {
             try {
-                // 서버 URL에 서버 주소 넣어줄것.
-	            let responseMenus= await axios.get('http://127.0.0.1:8000/order/menu');
-	            let dataMenus= responseMenus.data;
+                // 서버 URL에 테스트용 주소 넣어줄것.
+               let responseMenus= await axios.get('http://127.0.0.1:8000/order/menu');
+               let dataMenus= responseMenus.data;
 
-				let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
-				let menusFromServerMenu= {};
+            let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
+            let menusFromServerMenu= {};
 
-				for(let category of categoriesFromServerMenu){
-					menusFromServerMenu[category]= dataMenus[category];
-				}
+            for(let category of categoriesFromServerMenu){
+               menusFromServerMenu[category]= dataMenus[category];
+            }
 
-				setCategories(categoriesFromServerMenu);
-				setMenusByCategory(menusFromServerMenu);
+                // 카테고리별 그룹 옵션 추출
+               let responseOptions= await axios.get('http://127.0.0.1:8000/order/menu/option');
+               let dataOptions= responseOptions.data;
 
-			} catch (error) {
-				console.error('짜잔~ 실패했습니다.:', error);
-			}
+                let optionsFromServerOption = {};
+
+                for (let category of dataOptions.categories.map(c => c.optioncategory_name)) {
+                    optionsFromServerOption[category] = dataOptions[category];
+                }
+
+            setCategories(categoriesFromServerMenu);
+            setMenusByCategory(menusFromServerMenu);
+                setOptionsByCategory(optionsFromServerOption);
+
+         } catch (error) {
+            console.error('ERROR : 저는 백엔드가 완료되야…뭘 할수 있을거 같아요:', error);
+         }
         }
         //실행
         fetchMenusAndOptions();
@@ -253,5 +263,4 @@ export default function MainMenu() {
         </div>
     );
 }
-
 
