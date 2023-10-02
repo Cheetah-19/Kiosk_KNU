@@ -172,7 +172,7 @@ export default function MainMenu() {
 				}
 
                 // 카테고리별 그룹 옵션 추출
-	            let responseOptions= await axios.get('http://127.0.0.1:8000/order/menu/order');
+	            let responseOptions= await axios.get('http://127.0.0.1:8000/order/menu/option');
 	            let dataOptions= responseOptions.data;
 
                 let optionsFromServerOption = {};
