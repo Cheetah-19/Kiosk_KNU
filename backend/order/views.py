@@ -24,12 +24,14 @@ class MenulistView(APIView): #메뉴 리스트 출력 (일단은 비회원 전�
 
 
 class OptionView(APIView):
-    def get(self,request,id):
+    # def get(self,request,id):
+    def get(self,request):
         optionlist = {}
         option_category = OptionCategory.objects.all()                                          #옵션 카테고리 전체
         optionlist['categories'] = []                                                           #옵션 카테고리들을 넣어놓을 리스트
         for category in option_category:                                                        #선택한 메뉴(id)에 하나라도 옵션 카테고리에 해당하는게 있을 경우
-            options = Menu.objects.get(id=id).menu_option.filter(optioncategory = category.id)  #선택한 메뉴에 있는 옵션들 중 카테고리에 해당되는 옵션들만 가져오기 
+            options = Option.objects.filter(optioncategory=category.id)
+            #options = Menu.objects.get(id=id).menu_option.filter(optioncategory = category.id)  #선택한 메뉴에 있는 옵션들 중 카테고리에 해당되는 옵션들만 가져오기 
             if options.count() != 0 :                                                           #해당되는 옵션이 하나도 존재하지 않는 카테고리는 프론트에 보낼 정보에 포함되지 않음.
                 optionlist['categories'].append(OptionCategorySerializer(category).data)        #옵션 카테고리 리스트에 추가
                 option_serializer = OptionSerializer(options,many=True)                         
