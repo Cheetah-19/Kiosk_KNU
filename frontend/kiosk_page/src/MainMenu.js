@@ -94,7 +94,7 @@ export default function MainMenu() {
     //DetailMenu에 정보 전송
     async function selectMenu(index) {
         setCurrentMenuIndex(index);
-        const selectedMenuItem = menusByCategory[categories[currentCategoryIndex]][index];
+        const selectedMenuItem = menusByCategory[categories[currentMenuIndex]][index];
       
         try {
           const response = await axios.get(`http://127.0.0.1:8000/order/menu/${selectedMenuItem.id}`);
@@ -112,8 +112,8 @@ export default function MainMenu() {
           });
       
           const selectedMenu = { ...menuData, menu_option: options };
-          //navigate('/DetailMenu', { state: { selectedMenu } });
-          navigate('/DetailMenu', { state: { selectedMenuItem, selectedOptions: options } });
+          navigate('/DetailMenu', { state: { selectedMenu } });
+          //navigate('/DetailMenu', { state: { selectedMenuItem, selectedOptions: options } });
         } catch (error) {
           console.error('ERROR : 저는~ 백엔드가 완료되야 뭘 할수 있을거 같아요. :', error);
         }
