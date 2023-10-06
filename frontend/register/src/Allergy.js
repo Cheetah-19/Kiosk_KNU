@@ -47,7 +47,7 @@ function Allergy() {
       Shellfish: false,
       Crab: false,
       Squid: false,
-      food_containing_sulfite: false,
+      food_containing_Sulfite: false,
       해당없음: false
     });
 
@@ -97,7 +97,6 @@ function Allergy() {
         <set>
           <header>Easy KIOSK</header>
           <body>
-            <div className='upper-t'>알러지 확인 페이지</div>
             <div>
               <input type="checkbox" id="Buckwheat" name="number" value="1" onChange={handleCheckboxChange} />
               <label htmlFor="Buckwheat">메밀</label>
@@ -179,8 +178,8 @@ function Allergy() {
               <label htmlFor="Squid">오징어</label>
             </div>
             <div>
-              <input type="checkbox" id="food_containing_sulfite" name="number" value="1" onChange={handleCheckboxChange} />
-              <label htmlFor="food_containing_sulfite">아황산 포함식품</label>
+              <input type="checkbox" id="food_containing_Sulfite" name="number" value="1" onChange={handleCheckboxChange} />
+              <label htmlFor="food_containing_Sulfite">아황산 포함식품</label>
             </div>
           </body>
           <footer>
