@@ -20,7 +20,7 @@ export default function VeganCheck() {
             <button className= "next-button" onClick={() => navigate("/vegan", { state : {inputValue, PhoneNumber } })}>네</button>
             <br/>
             <br/>
-            <button className= "next-button" onClick={() => navigate("/religion", { state: { inputValue, PhoneNumber } })}>해당없음</button>
+            <button className= "next-button" onClick={() => navigate("/religioncheck", { state: { inputValue, PhoneNumber } })}>해당없음</button>
           </body>
           <footer>
           </footer>

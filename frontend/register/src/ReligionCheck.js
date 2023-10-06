@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import "./Common.css";
+import Vegan from './Vegan';
 
 export default function ReligionCheck() {
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
@@ -9,7 +10,13 @@ export default function ReligionCheck() {
 
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
-    
+    let VegancheckboxValue = location.state.checkedBox;
+
+    if (typeof VegancheckboxValue === 'undefined') {
+        VegancheckboxValue = 0;
+        console.log('비건쪽 체크박스 없는상태.')
+    }
+
     return (
       <div>
         <set>
@@ -17,10 +24,10 @@ export default function ReligionCheck() {
           <body>
             <div className="upper-t">믿으시는 종교가 있으신가요?</div>
             <br/>
-            <button className= "next-button" onClick={() => navigate("/religion", { state : {inputValue, PhoneNumber } })}>네</button>
+            <button className= "next-button" onClick={() => navigate("/religion", { state : {inputValue, PhoneNumber, checkedBox: VegancheckboxValue } })}>네</button>
             <br/>
             <br/>
-            <button className= "next-button" onClick={() => navigate("/allergycheck", { state: { inputValue, PhoneNumber } })}>무교</button>
+            <button className= "next-button" onClick={() => navigate("/allergycheck", { state: { inputValue, PhoneNumber, checkedBox: VegancheckboxValue } })}>무교</button>
           </body>
           <footer>
           </footer>

@@ -9,9 +9,20 @@ function Allergy() {
     const location = useLocation();
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
-    const VegancheckboxValue = location.state.VegancheckboxValue;
-    const ReligioncheckboxValue = location.state.checkedBox;
+
+    let ReligioncheckboxValue = location.state.checkedBox;
+    if (typeof ReligioncheckboxValue === 0) {
+      ReligioncheckboxValue = 0;
+      console.log('종교쪽 체크박스 없는상태.')
+    }
+
     const [allergyInfo, setAllergyInfo] = useState([]);
+
+    let VegancheckboxValue = location.state.checkedBox;
+    if (typeof VegancheckboxValue === 0) {
+        VegancheckboxValue = 0;
+        console.log('비건쪽 체크박스 없는상태.')
+    }
 
     //넘어온 정보 확인하려면 <body> 아래에 16번줄 코드 넣기.
     //사용자명 : {inputValue} <br /> 전화번호 : {PhoneNumber} <br /> 비건 체크박스 : {VegancheckboxValue} <br /> 종교 체크박스 : {ReligioncheckboxValue}
@@ -57,10 +68,16 @@ function Allergy() {
       const postData = {
           user_name: inputValue,
           user_phonenum: PhoneNumber,
-          user_vegetarian: VegancheckboxValue,
-          user_allergy: allergyInfo,
-          religion: ReligioncheckboxValue
+          user_allergy: allergyInfo
       };
+      
+      if (VegancheckboxValue !== 0) {
+        postData.user_vegetarian = VegancheckboxValue;
+      }
+
+      if (ReligioncheckboxValue !== 0) {
+        postData.religion = ReligioncheckboxValue;
+      }
 
       axios.post('서버 URL', postData)  // '서버 URL' 부분에 테스트할 서버 주소 넣어주면 됨.
           .then(response => {

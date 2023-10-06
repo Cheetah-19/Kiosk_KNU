@@ -8,7 +8,12 @@ export default function Religion() {
     const location = useLocation();
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
-    const VegancheckboxValue = location.state.checkedBox;
+    let VegancheckboxValue = location.state.checkedBox;
+
+    if (typeof VegancheckboxValue === 'undefined') {
+        VegancheckboxValue = 0;
+        console.log('비건쪽 체크박스 없는상태.')
+    }
 
     // 체크박스 초기화
     const [checkboxes, setCheckboxes] = useState({
