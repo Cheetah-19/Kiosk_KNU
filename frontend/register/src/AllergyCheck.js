@@ -10,13 +10,13 @@ export default function AllergyCheck() {
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
     let ReligioncheckboxValue = location.state.checkedBox;
+    let VegancheckboxValue = location.state.checkedBox;
 
     if (typeof ReligioncheckboxValue === 'undefined') {
         ReligioncheckboxValue = 0;
         console.log('종교 체크박스 없는상태.')
     }
 
-    let VegancheckboxValue = location.state.checkedBox;
     if (typeof VegancheckboxValue === 0) {
         VegancheckboxValue = 0;
         console.log('비건쪽 체크박스 없는상태.')
@@ -24,6 +24,9 @@ export default function AllergyCheck() {
 
     //서버로 사용자의 입력값을 보내준다. 등록버튼 클릭 시 호출.
     const handleButtonClick = () => {
+        
+      console.log(ReligioncheckboxValue); // 종교 체크박스 값 확인
+      console.log(VegancheckboxValue); // 비건 체크박스 값 확인
       // 서버로 데이터 전송
       const postData = {
           user_name: inputValue,
@@ -38,7 +41,7 @@ export default function AllergyCheck() {
         postData.religion = ReligioncheckboxValue;
       }
 
-      axios.post('서버 URL', postData)  // '서버 URL' 부분에 테스트할 서버 주소 넣어주면 됨.
+      axios.post('http://127.0.0.1:8000/signup/', postData)  // '서버 URL' 부분에 테스트할 서버 주소 넣어주면 됨.
           .then(response => {
               console.log(response.data);  // 요청 성공시 alert 하나 해줄 예정.
               alert("사용자 등록이 완료되었습니다");

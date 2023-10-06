@@ -11,7 +11,7 @@ function Allergy() {
     const inputValue = location.state.inputValue;
 
     let ReligioncheckboxValue = location.state.checkedBox;
-    if (typeof ReligioncheckboxValue === 0) {
+    if (typeof ReligioncheckboxValue === 'undefined') {
       ReligioncheckboxValue = 0;
       console.log('종교쪽 체크박스 없는상태.')
     }
@@ -19,7 +19,7 @@ function Allergy() {
     const [allergyInfo, setAllergyInfo] = useState([]);
 
     let VegancheckboxValue = location.state.checkedBox;
-    if (typeof VegancheckboxValue === 0) {
+    if (typeof VegancheckboxValue === 'undefined') {
         VegancheckboxValue = 0;
         console.log('비건쪽 체크박스 없는상태.')
     }
@@ -47,7 +47,7 @@ function Allergy() {
       Shellfish: false,
       Crab: false,
       Squid: false,
-      food_containing_sulfite: false,
+      food_containing_Sulfite: false,
       해당없음: false
     });
 
@@ -62,7 +62,9 @@ function Allergy() {
 
     //서버로 사용자의 입력값을 보내준다. 등록버튼 클릭 시 호출.
     const handleButtonClick = () => {
-      console.log(allergyInfo);  // 선택된 알러지 정보 확인
+      console.log(allergyInfo); // 선택된 알러지 정보 확인
+      console.log(ReligioncheckboxValue); // 종교 체크박스 값 확인
+      console.log(VegancheckboxValue); // 비건 체크박스 값 확인
 
       // 서버로 데이터 전송
       const postData = {
@@ -79,7 +81,7 @@ function Allergy() {
         postData.religion = ReligioncheckboxValue;
       }
 
-      axios.post('서버 URL', postData)  // '서버 URL' 부분에 테스트할 서버 주소 넣어주면 됨.
+      axios.post('http://127.0.0.1:8000/signup/', postData)  // '서버 URL' 부분에 테스트할 서버 주소 넣어주면 됨.
           .then(response => {
               console.log(response.data);  // 요청 성공시 alert 하나 해줄 예정.
               alert("사용자 등록이 완료되었습니다");
@@ -95,7 +97,6 @@ function Allergy() {
         <set>
           <header>Easy KIOSK</header>
           <body>
-            <div className='upper-t'>알러지 확인 페이지</div>
             <div>
               <input type="checkbox" id="Buckwheat" name="number" value="1" onChange={handleCheckboxChange} />
               <label htmlFor="Buckwheat">메밀</label>
@@ -177,8 +178,8 @@ function Allergy() {
               <label htmlFor="Squid">오징어</label>
             </div>
             <div>
-              <input type="checkbox" id="food_containing_sulfite" name="number" value="1" onChange={handleCheckboxChange} />
-              <label htmlFor="food_containing_sulfite">아황산 포함식품</label>
+              <input type="checkbox" id="food_containing_Sulfite" name="number" value="1" onChange={handleCheckboxChange} />
+              <label htmlFor="food_containing_Sulfite">아황산 포함식품</label>
             </div>
           </body>
           <footer>
