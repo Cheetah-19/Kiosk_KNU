@@ -29,7 +29,7 @@ export default function Vegan() {
         return;
       }
   
-      navigate('/Vegan', { state: { inputValue, PhoneNumber } });
+      navigate('/vegancheck', { state: { inputValue, PhoneNumber } });
   };
     
     return (

@@ -18,7 +18,6 @@ export default function Vegan() {
       LoctoOvo: false,
       Pesco: false,
       Pollo: false,
-      NoVegan: false
   });
 
   // 체크박스 변경사항 있을시
@@ -73,10 +72,6 @@ export default function Vegan() {
                 <div>
                   <input type="checkbox" id ="Pollo"name ="number"value ="7" onChange={handleCheckboxChange} />
                   <label htmlFor ="three">폴로</label>
-                </div>
-                <div>
-                  <input type="checkbox" id ="NoVegan"name ="number"value ="8" onChange={handleCheckboxChange} />
-                  <label htmlFor ="three">해당없음</label>
                 </div>
             </div>
           </body>
