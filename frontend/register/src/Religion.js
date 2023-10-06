@@ -8,7 +8,12 @@ export default function Religion() {
     const location = useLocation();
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
-    const VegancheckboxValue = location.state.checkedBox;
+    let VegancheckboxValue = location.state.checkedBox;
+
+    if (typeof VegancheckboxValue === 'undefined') {
+        VegancheckboxValue = 0;
+        console.log('비건쪽 체크박스 없는상태.')
+    }
 
     // 체크박스 초기화
     const [checkboxes, setCheckboxes] = useState({
@@ -18,26 +23,25 @@ export default function Religion() {
       Buddhism: false,
       Christian: false,
       Protestant: false,
-      NoReligion: false
     });
 
     // 체크박스 변경사항 있을시
-  const handleCheckboxChange = (event) => {
-    setCheckboxes({ ...checkboxes, [event.target.id]: event.target.checked });
-  };
+    const handleCheckboxChange = (event) => {
+      setCheckboxes({ ...checkboxes, [event.target.id]: event.target.checked });
+    };
 
-  // 체크박스 클릭시
-  const handleButtonClick = () => {
-    const checkedCount = Object.values(checkboxes).filter(Boolean).length;
-    if (checkedCount === 0) {
-        alert("1개의 체크박스를 선택해주세요");
-    } else if (checkedCount > 1) {
-        alert("1개의 체크박스만 선택해주세요");
-    } else {
-      const checkedId = Object.keys(checkboxes).find(id => checkboxes[id]);
-      navigate('/Allergy', { state: { inputValue, PhoneNumber, VegancheckboxValue, checkedBox: checkedId } });
-    }
-};
+    // 체크박스 클릭시
+    const handleButtonClick = () => {
+      const checkedCount = Object.values(checkboxes).filter(Boolean).length;
+      if (checkedCount === 0) {
+          alert("1개의 체크박스를 선택해주세요");
+      } else if (checkedCount > 1) {
+          alert("1개의 체크박스만 선택해주세요");
+      } else {
+        const checkedId = Object.keys(checkboxes).find(id => checkboxes[id]);
+        navigate('/Allergy', { state: { inputValue, PhoneNumber, VegancheckboxValue, checkedBox: checkedId } });
+      }
+    };
 
     return (
       <div>
@@ -70,10 +74,6 @@ export default function Religion() {
                 <div>
                   <input type="checkbox" id ="Protestant"name ="number"value ="6" onChange={handleCheckboxChange} />
                   <label htmlFor ="three">개신교</label>
-                </div>
-                <div>
-                  <input type="checkbox" id ="NoReligion"name ="number"value ="7" onChange={handleCheckboxChange} />
-                  <label htmlFor ="three">무교</label>
                 </div>
             </div>
           </body>

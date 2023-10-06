@@ -161,19 +161,19 @@ export default function MainMenu() {
         async function fetchMenusAndOptions() {
             try {
                 // 서버 URL에 테스트용 주소 넣어줄것.
-               let responseMenus= await axios.get('http://127.0.0.1:8000/order/menu');
-               let dataMenus= responseMenus.data;
+	            let responseMenus= await axios.get('http://127.0.0.1:8000/order/menu');
+	            let dataMenus= responseMenus.data;
 
-            let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
-            let menusFromServerMenu= {};
+				let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
+				let menusFromServerMenu= {};
 
-            for(let category of categoriesFromServerMenu){
-               menusFromServerMenu[category]= dataMenus[category];
-            }
+				for(let category of categoriesFromServerMenu){
+					menusFromServerMenu[category]= dataMenus[category];
+				}
 
                 // 카테고리별 그룹 옵션 추출
-               let responseOptions= await axios.get('http://127.0.0.1:8000/order/menu/option');
-               let dataOptions= responseOptions.data;
+	            let responseOptions= await axios.get('http://127.0.0.1:8000/order/menu/option');
+	            let dataOptions= responseOptions.data;
 
                 let optionsFromServerOption = {};
 
@@ -181,13 +181,13 @@ export default function MainMenu() {
                     optionsFromServerOption[category] = dataOptions[category];
                 }
 
-            setCategories(categoriesFromServerMenu);
-            setMenusByCategory(menusFromServerMenu);
+				setCategories(categoriesFromServerMenu);
+				setMenusByCategory(menusFromServerMenu);
                 setOptionsByCategory(optionsFromServerOption);
 
-         } catch (error) {
-            console.error('ERROR : 저는 백엔드가 완료되야…뭘 할수 있을거 같아요:', error);
-         }
+			} catch (error) {
+				console.error('ERROR : 저는 백엔드가 완료되야…뭘 할수 있을거 같아요:', error);
+			}
         }
         //실행
         fetchMenusAndOptions();
@@ -263,4 +263,5 @@ export default function MainMenu() {
         </div>
     );
 }
+
 
