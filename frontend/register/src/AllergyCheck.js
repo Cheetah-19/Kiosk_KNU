@@ -17,14 +17,14 @@ export default function AllergyCheck() {
         console.log('종교 체크박스 없는상태.')
     }
 
-    if (typeof VegancheckboxValue === 0) {
+    if (typeof VegancheckboxValue === 'undefined') {
         VegancheckboxValue = 0;
         console.log('비건쪽 체크박스 없는상태.')
     }
 
     //서버로 사용자의 입력값을 보내준다. 등록버튼 클릭 시 호출.
     const handleButtonClick = () => {
-        
+
       console.log(ReligioncheckboxValue); // 종교 체크박스 값 확인
       console.log(VegancheckboxValue); // 비건 체크박스 값 확인
       // 서버로 데이터 전송
