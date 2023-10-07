@@ -4,7 +4,7 @@ from signup.models import *
 class MenuSerializer(serializers.ModelSerializer):
     class Meta :
         model = Menu
-        exclude = ['menu_pic']
+        fields = '__all__'
         
 class MenuCategorySerializer(serializers.ModelSerializer):
     class Meta : 
