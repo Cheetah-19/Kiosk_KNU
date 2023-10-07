@@ -39,7 +39,7 @@ export default function AllergyCheck() {
         postData.religion = ReligioncheckboxValue;
       }
 
-      axios.post('서버 URL', postData)  // '서버 URL' 부분에 테스트할 서버 주소 넣어주면 됨.
+      axios.post(`http://127.0.0.1:8000/signup/`, postData)  // '서버 URL' 부분에 테스트할 서버 주소 넣어주면 됨.
           .then(response => {
               console.log(response.data);  // 요청 성공시 alert 하나 해줄 예정.
               alert("사용자 등록이 완료되었습니다");
