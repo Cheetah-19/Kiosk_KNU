@@ -34,7 +34,7 @@ export default function Vegan() {
         alert("1개의 체크박스만 선택해주세요");
     } else {
       const checkedId = Object.keys(checkboxes).find(id => checkboxes[id]);
-      navigate('/religioncheck', { state: { inputValue, PhoneNumber, checkedBox: checkedId } });
+      navigate('/religioncheck', { state: { inputValue, PhoneNumber, VeganCheckBox: checkedId } });
     }
   };
     return (

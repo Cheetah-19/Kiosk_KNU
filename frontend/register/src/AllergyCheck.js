@@ -9,22 +9,20 @@ export default function AllergyCheck() {
 
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
-    let ReligioncheckboxValue = location.state.checkedBox;
-    let VegancheckboxValue = location.state.checkedBox;
+    let ReligioncheckboxValue = location.state.ReligionCheckBox;
+    let VegancheckboxValue = location.state.VeganCheckBox;
 
     if (typeof ReligioncheckboxValue === 'undefined') {
         ReligioncheckboxValue = 0;
-        console.log('종교 체크박스 없는상태.')
     }
 
-    if (typeof VegancheckboxValue === 0) {
+    if (typeof VegancheckboxValue === 'undefined') {
         VegancheckboxValue = 0;
-        console.log('비건쪽 체크박스 없는상태.')
     }
 
     //서버로 사용자의 입력값을 보내준다. 등록버튼 클릭 시 호출.
     const handleButtonClick = () => {
-        
+
       console.log(ReligioncheckboxValue); // 종교 체크박스 값 확인
       console.log(VegancheckboxValue); // 비건 체크박스 값 확인
       // 서버로 데이터 전송
@@ -58,7 +56,7 @@ export default function AllergyCheck() {
           <body>
             <div className="upper-t">알러지가 있으신가요?</div>
             <br/>
-            <button className= "next-button" onClick={() => navigate("/allergy", { state : {inputValue, PhoneNumber } })}>네</button>
+            <button className = "next-button" onClick= {() => navigate('/Allergy', { state: { inputValue, PhoneNumber, ReligionCheckBox: ReligioncheckboxValue, VeganCheckBox: VegancheckboxValue } })}>네</button>
             <br/>
             <br/>
             {/*알러지 해당없으면 바로 등록 모달창으로 보내주기.*/}

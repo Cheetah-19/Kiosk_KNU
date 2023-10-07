@@ -9,10 +9,9 @@ export default function Religion() {
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
     let VegancheckboxValue = location.state.checkedBox;
-
+    let ReligionCheckBox;
     if (typeof VegancheckboxValue === 'undefined') {
         VegancheckboxValue = 0;
-        console.log('비건쪽 체크박스 없는상태.')
     }
 
     // 체크박스 초기화
@@ -39,7 +38,7 @@ export default function Religion() {
           alert("1개의 체크박스만 선택해주세요");
       } else {
         const checkedId = Object.keys(checkboxes).find(id => checkboxes[id]);
-        navigate('/Allergy', { state: { inputValue, PhoneNumber, VegancheckboxValue, checkedBox: checkedId } });
+        navigate('/Allergy', { state: { inputValue, PhoneNumber, ReligionCheckBox: checkedId, VeganCheckBox: VegancheckboxValue } });
       }
     };
 
