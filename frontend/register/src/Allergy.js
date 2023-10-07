@@ -10,7 +10,7 @@ function Allergy() {
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
 
-    let ReligioncheckboxValue = location.state.checkedBox;
+    let ReligioncheckboxValue = location.state.ReligionCheckBox;
     if (typeof ReligioncheckboxValue === 'undefined') {
       ReligioncheckboxValue = 0;
       console.log('종교쪽 체크박스 없는상태.')
@@ -18,7 +18,7 @@ function Allergy() {
 
     const [allergyInfo, setAllergyInfo] = useState([]);
 
-    let VegancheckboxValue = location.state.checkedBox;
+    let VegancheckboxValue = location.state.VeganCheckBox;
     if (typeof VegancheckboxValue === 'undefined') {
         VegancheckboxValue = 0;
         console.log('비건쪽 체크박스 없는상태.')

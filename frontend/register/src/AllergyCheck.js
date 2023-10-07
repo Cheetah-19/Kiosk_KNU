@@ -9,8 +9,8 @@ export default function AllergyCheck() {
 
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
-    let ReligioncheckboxValue = location.state.checkedBox;
-    let VegancheckboxValue = location.state.checkedBox;
+    let ReligioncheckboxValue = location.state.ReligionCheckBox;
+    let VegancheckboxValue = location.state.VeganCheckBox;
 
     if (typeof ReligioncheckboxValue === 'undefined') {
         ReligioncheckboxValue = 0;
@@ -58,7 +58,7 @@ export default function AllergyCheck() {
           <body>
             <div className="upper-t">알러지가 있으신가요?</div>
             <br/>
-            <button className= "next-button" onClick={() => navigate("/allergy", { state : {inputValue, PhoneNumber } })}>네</button>
+            <button className = "next-button" onClick= {() => navigate('/Allergy', { state: { inputValue, PhoneNumber, ReligionCheckBox: ReligioncheckboxValue, VeganCheckBox: VegancheckboxValue } })}>네</button>
             <br/>
             <br/>
             {/*알러지 해당없으면 바로 등록 모달창으로 보내주기.*/}
