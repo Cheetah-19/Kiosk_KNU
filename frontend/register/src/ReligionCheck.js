@@ -14,7 +14,6 @@ export default function ReligionCheck() {
 
     if (typeof VegancheckboxValue === 'undefined') {
         VegancheckboxValue = 0;
-        console.log('비건쪽 체크박스 없는상태.')
     }
 
     return (
