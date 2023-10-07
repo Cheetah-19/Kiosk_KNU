@@ -63,7 +63,7 @@ export default function MainMenu() {
     function MenuItem({ menu, onClick }) {
         return (
             <div key={menu.id} class="menu-item" onClick={onClick}>
-                <img src={menu.menu_pic} alt={menu.menu_name} />
+                <img src={"http://127.0.0.1:8000"+menu.menu_pic} alt={menu.menu_name} />
                 <h2>{menu.menu_name}</h2>
                 <p>{menu.menu_price}</p>
                 <p>{menu.menu_introduction}</p>
@@ -161,7 +161,7 @@ export default function MainMenu() {
         async function fetchMenusAndOptions() {
             try {
                 // 서버 URL에 테스트용 주소 넣어줄것.
-	            let responseMenus= await axios.get('http://127.0.0.1:8000/order/menu');
+	            let responseMenus= await axios.get('http://127.0.0.1:8000/menu/');
 	            let dataMenus= responseMenus.data;
 
 				let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
@@ -172,7 +172,7 @@ export default function MainMenu() {
 				}
 
                 // 카테고리별 그룹 옵션 추출
-	            let responseOptions= await axios.get('http://127.0.0.1:8000/order/menu/option');
+	            let responseOptions= await axios.get('http://127.0.0.1:8000/menu/option/');
 	            let dataOptions= responseOptions.data;
 
                 let optionsFromServerOption = {};

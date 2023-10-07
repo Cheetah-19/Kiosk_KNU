@@ -102,7 +102,7 @@ export default function DetailMenu() {
                 <div id="left_menu">
                     <h2>{selectedMenu.menu_name}</h2>
                     <p>ID: {selectedMenu.id}</p>
-                    <img src={selectedMenu.menu_pic} alt={selectedMenu.menu_name} />
+                    <img src={"http://127.0.0.1:8000"+selectedMenu.menu_pic} alt={selectedMenu.menu_name} />
                     {/*<p>Price: {selectedMenu.menu_price}</p> */}
                     <p>introduction: {selectedMenu.menu_introduction}</p>
                 </div>
