@@ -50,7 +50,8 @@ class OptionCategory(models.Model):
 class Option(models.Model):
     option_name = models.CharField(max_length=100)
     option_price = models.PositiveIntegerField()
-    option_pic = models.CharField(max_length=500, null=True)
+    # option_pic = models.CharField(max_length=500, null=True)
+    option_pic = models.ImageField(blank=True,null=True,upload_to="option")
     option_introduction = models.TextField(null=True)
     optioncategory = models.ForeignKey(OptionCategory, on_delete=models.CASCADE, null=True, blank=True) 
 
@@ -60,7 +61,7 @@ class Option(models.Model):
 class Menu(models.Model):
     menu_name = models.CharField(max_length=50)
     # menu_pic = models.URLField(max_length=500, null=True)
-    menu_pic = models.ImageField(blank=True, upload_to="image",null=True)
+    menu_pic = models.ImageField(blank=True, upload_to="menu",null=True)
     menu_price = models.PositiveIntegerField()
     menu_introduction = models.TextField(null=True)
     menu_ingredient = models.ManyToManyField(Ingredient)
