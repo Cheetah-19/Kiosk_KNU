@@ -42,7 +42,6 @@ def test(request):
 class OrderView(APIView):
     def post(self,request): #go payment
         post_data = json.loads(request.body)['cart'] #HTTP POST 요청의 본문(body)을 JSON 형식으로 파싱하여 Python 딕셔너리로 변환
-        print(post_data)
         order_num = Order.objects.count()+10000000 #order 객체의 수 세고, 거기다 10000000 더해서 새로운 주문번호 생성
         order_data = Order(\
             user=User.objects.get(user_phonenum='01022221111'),\
