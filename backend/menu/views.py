@@ -5,8 +5,20 @@ from .serializers import *
 from django.http import HttpResponse
 import json
 
+#여기서 회원 한명을 예시로 잡고 코딩할 예정 (신동혁)
+#01099992222 / 김찬호 / Lacto(과일, 채소, 우유 빼고 불가능) / Pork(돼지고기 못먹음) / Judaism(돼지고기 못먹음)
 class MenulistView(APIView): #메뉴 리스트 출력 (일단은 비회원 전제, 유저 데이터를 받으면 수정예정)
     def get(self, request):
+        test = User.objects.get(user_name = "김찬호")
+        allergy_noeat = test.user_allergy.all()
+        for canteat1 in allergy_noeat:
+            print(canteat1)
+        vegeinfo = test.user_vegetarian   #vege_noeat 의 값은 여기서는 Lacto 가 된다
+        vege_noeat = vegeinfo.vegetarian_ingredient.all()
+        for canteat2 in vege_noeat:
+            print(canteat2)
+
+
         menulist={}
         menu_category = MenuCategory.objects.all() #메뉴 리스트 전체
         menulist['categories'] = []  #메뉴 카테고리를 저장하기 위한 리스트
