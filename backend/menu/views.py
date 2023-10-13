@@ -9,6 +9,7 @@ import json
 #01099992222 / 김찬호 / Lacto(과일, 채소, 우유 빼고 불가능) / Pork(돼지고기 못먹음) / Judaism(돼지고기 못먹음)
 class MenulistView(APIView): #메뉴 리스트 출력 (일단은 비회원 전제, 유저 데이터를 받으면 수정예정)
     def get(self, request):
+        """  테스팅 코드 -> 잘 가져와짐
         test = User.objects.get(user_name = "김찬호")
         allergy_noeat = test.user_allergy.all()
         for canteat1 in allergy_noeat:
@@ -17,7 +18,11 @@ class MenulistView(APIView): #메뉴 리스트 출력 (일단은 비회원 전�
         vege_noeat = vegeinfo.vegetarian_ingredient.all()
         for canteat2 in vege_noeat:
             print(canteat2)
+        """
+        #메뉴를 띄우기 전에 회원이라면 메뉴 필터링을 적용해야 한다.
+        #즉 회원 정보를 가져와야 함.
 
+        #회원 정보 json 부분이 비어 있다면 (혹은 특정 값이 있다면) 비회원으로 인식 / 회원 정보 부분에 데이터가 있다면 회원
 
         menulist={}
         menu_category = MenuCategory.objects.all() #메뉴 리스트 전체
