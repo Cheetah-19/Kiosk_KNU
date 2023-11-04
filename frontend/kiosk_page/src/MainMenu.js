@@ -7,7 +7,7 @@ export default function MainMenu() {
     const navigate = useNavigate();
     const location = useLocation();
     const option = location.state?.option;
-    
+
     // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
     //optional chaining 사용
     const phoneNumber = location.state?.phoneNumber;
@@ -165,7 +165,8 @@ export default function MainMenu() {
         async function fetchMenusAndOptions() {
             try {
                 // 서버 URL에 테스트용 주소 넣어줄것.
-	            let responseMenus= await axios.get('http://127.0.0.1:8000/order/menu/');
+                const menuUrl = phoneNumber ? `http://127.0.0.1:8000/menu/${phoneNumber}` : 'http://127.0.0.1:8000/menu';
+	            let responseMenus= await axios.get(menuUrl);
 	            let dataMenus= responseMenus.data;
 
 				let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
@@ -176,7 +177,7 @@ export default function MainMenu() {
 				}
 
                 // 카테고리별 그룹 옵션 추출
-	            let responseOptions= await axios.get('http://127.0.0.1:8000/order/menu/option/');
+	            let responseOptions= await axios.get('http://127.0.0.1:8000/option/');
 	            let dataOptions= responseOptions.data;
 
                 let optionsFromServerOption = {};
@@ -190,7 +191,7 @@ export default function MainMenu() {
                 setOptionsByCategory(optionsFromServerOption);
 
 			} catch (error) {
-				console.error('ERROR : 저는 백엔드가 완료되야…뭘 할수 있을거 같아요:', error);
+				console.error('ERROR : 메뉴 데이터를 받아오는데 실패했습니다.', error);
 			}
         }
         //실행

@@ -10,7 +10,7 @@ export default function MainMenu() {
     };
 
     const handleRightButtonClick = () => {
-        navigate('/phone-num');
+        navigate('/phonenum');
     };
 
     const handleNoMemberClick = () => {
