@@ -6,7 +6,9 @@ export default function DetailMenu() {
     const navigate = useNavigate();
     const location = useLocation();
     const selectedMenu = location.state?.selectedMenu;
-    
+    // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
+    //optional chaining 사용
+    const phoneNumber = location.state?.phoneNumber;
     // 사용자가 선택한 사이드 메뉴들과 그들의 수량을 저장하는 state
     const [selectedOptions, setSelectedOptions] = React.useState({});
 
