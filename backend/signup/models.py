@@ -79,6 +79,7 @@ class User(models.Model):
     user_allergy = models.ManyToManyField(Allergy, blank=True)#빈칸허용
     religion = models.ForeignKey(Religion, on_delete=models.CASCADE, null=True, blank=True) #종교가 없을 수 있기 때문에, null = true 를 추가했고
     #유효성 검사를 통과하기 위해 blank=True 를 설정함
+    user_face_info = models.TextField(null=True)
 
 
     def __str__(self):
