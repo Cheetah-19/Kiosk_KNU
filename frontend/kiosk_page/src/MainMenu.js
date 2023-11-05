@@ -168,7 +168,7 @@ export default function MainMenu() {
                 const menuUrl = phoneNumber ? `http://127.0.0.1:8000/menu/${phoneNumber}` : 'http://127.0.0.1:8000/menu';
 	            let responseMenus= await axios.get(menuUrl);
 	            let dataMenus= responseMenus.data;
-
+                console.log(menuUrl);
 				let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
 				let menusFromServerMenu= {};
 
@@ -177,7 +177,7 @@ export default function MainMenu() {
 				}
 
                 // 카테고리별 그룹 옵션 추출
-	            let responseOptions= await axios.get('http://127.0.0.1:8000/option/');
+	            let responseOptions= await axios.get('http://127.0.0.1:8000/menu/option');
 	            let dataOptions= responseOptions.data;
 
                 let optionsFromServerOption = {};
