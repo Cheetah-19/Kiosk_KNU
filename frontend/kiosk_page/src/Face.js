@@ -13,7 +13,7 @@ export default function Face() {
     const timerIdRef = useRef(null);
 
     // Add state for remaining photos
-    const [remainingPhotos, setRemainingPhotos] = useState(10);
+    const [remainingPhotos, setRemainingPhotos] = useState(5);
 
     const startVideo = async () => {
         try {
@@ -52,7 +52,7 @@ export default function Face() {
             // Convert the canvas image to a base64 string
             const imgDataUrl = canvasRef.current.toDataURL('image/jpeg');
     
-            axios.post('/api/save-image', { imageData: imgDataUrl })
+            axios.post('http://127.0.0.1:8000/login/face/', { imageData: imgDataUrl })
                 .then(response => console.log(response))
                 .catch(error => console.error(error));
     
