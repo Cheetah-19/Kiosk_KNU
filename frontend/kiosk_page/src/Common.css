@@ -97,3 +97,18 @@ footer {
 .next-button:hover {
     background-color: #FD5A27;
 }
+
+
+/* 카메라 관련 css */
+
+#video_container {
+    margin: 0px auto;
+    width: 500px;
+    height: 375px;
+    border: 10px #333 solid;
+}
+#video_Element {
+    width: 500px;
+    height: 375px;
+    background-color: #666;
+}

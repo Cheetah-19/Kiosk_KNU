@@ -9,7 +9,7 @@ function StartMenu() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate('/MealOption');
+    navigate('/logincheck');
 };
 
 

@@ -8,6 +8,10 @@ export default function MainMenu() {
     const location = useLocation();
     const option = location.state?.option;
 
+    // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
+    //optional chaining 사용
+    const phoneNumber = location.state?.phoneNumber;
+
     // 총 가격 상태 변수 추가
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -62,7 +66,7 @@ export default function MainMenu() {
     //메뉴 항목을 렌더링하는 함수
     function MenuItem({ menu, onClick }) {
         return (
-            <div key={menu.id} class="menu-item" onClick={onClick}>
+            <div key={menu.id} className="menu-item" onClick={onClick}>
                 <img src={"http://127.0.0.1:8000"+menu.menu_pic} alt={menu.menu_name} />
                 <h2>{menu.menu_name}</h2>
                 <p>{menu.menu_price}</p>
@@ -161,9 +165,11 @@ export default function MainMenu() {
         async function fetchMenusAndOptions() {
             try {
                 // 서버 URL에 테스트용 주소 넣어줄것.
-	            let responseMenus= await axios.get('http://127.0.0.1:8000/menu/');
+                const phoneNumber = location.state?.phone_number;
+                const menuUrl = phoneNumber ? `http://127.0.0.1:8000/menu/${phoneNumber}/` : 'http://127.0.0.1:8000/menu/';
+	            let responseMenus= await axios.get(menuUrl);
 	            let dataMenus= responseMenus.data;
-
+                console.log(menuUrl);
 				let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
 				let menusFromServerMenu= {};
 
@@ -186,7 +192,7 @@ export default function MainMenu() {
                 setOptionsByCategory(optionsFromServerOption);
 
 			} catch (error) {
-				console.error('ERROR : 저는 백엔드가 완료되야…뭘 할수 있을거 같아요:', error);
+				console.error('ERROR : 메뉴 데이터를 받아오는데 실패했습니다.', error);
 			}
         }
         //실행

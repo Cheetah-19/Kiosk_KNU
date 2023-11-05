@@ -13,9 +13,7 @@ from .face_recognition.face_extractor import extractor
 
 class LoginView(APIView):
     def post(self, request):
-        phone_number = request.data.get('user_phonenum')
-
-
+        phone_number = request.data.get('phone_number')
 
         if phone_number:
             is_phone_number_already_here = User.objects.filter(user_phonenum=phone_number).exists()

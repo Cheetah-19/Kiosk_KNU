@@ -6,7 +6,9 @@ export default function DetailMenu() {
     const navigate = useNavigate();
     const location = useLocation();
     const selectedMenu = location.state?.selectedMenu;
-    
+    // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
+    //optional chaining 사용
+    const phoneNumber = location.state?.phoneNumber;
     // 사용자가 선택한 사이드 메뉴들과 그들의 수량을 저장하는 state
     const [selectedOptions, setSelectedOptions] = React.useState({});
 
@@ -102,7 +104,7 @@ export default function DetailMenu() {
                 <div id="left_menu">
                     <h2>{selectedMenu.menu_name}</h2>
                     <p>ID: {selectedMenu.id}</p>
-                    <img src={"http://127.0.0.1:8000"+selectedMenu.menu_pic} alt={selectedMenu.menu_name} />
+                    <img src={selectedMenu.menu_pic} alt={selectedMenu.menu_name} />
                     {/*<p>Price: {selectedMenu.menu_price}</p> */}
                     <p>introduction: {selectedMenu.menu_introduction}</p>
                 </div>

@@ -2,11 +2,12 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
+from signup.models import User  
 from django.http import HttpResponse
 import json
 
 class member_MenulistView(APIView): # 회원 메뉴 리스트 출력 
-    def get(self, request,  userphonenum):
+    def get(self, request, userphonenum):
         #이미 DB에 있는 회원인게 검증되었기 떄문에 검증과정이 필요없다
         UserGetter = User.objects.get(user_phonenum = userphonenum)     #전화번호를 통해 user데이터 불러오기
         exclude_ingredient = set()                                      #회원 필터링을 위해 제외할 재료를 저장해 둘 set 
