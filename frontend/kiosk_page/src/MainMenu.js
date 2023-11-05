@@ -8,10 +8,6 @@ export default function MainMenu() {
     const location = useLocation();
     const option = location.state?.option;
 
-    // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
-    //optional chaining 사용
-    const phoneNumber = location.state?.phoneNumber;
-
     // 총 가격 상태 변수 추가
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -165,6 +161,8 @@ export default function MainMenu() {
         async function fetchMenusAndOptions() {
             try {
                 // 서버 URL에 테스트용 주소 넣어줄것.
+                // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
+                //optional chaining 사용
                 const phoneNumber = location.state?.phone_number;
                 const menuUrl = phoneNumber ? `http://127.0.0.1:8000/menu/${phoneNumber}/` : 'http://127.0.0.1:8000/menu/';
                let responseMenus= await axios.get(menuUrl);
