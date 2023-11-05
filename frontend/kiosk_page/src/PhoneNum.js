@@ -13,7 +13,7 @@ export default function PhoneNum() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-          const response = await axios.post('http://127.0.0.1:8000/login', {
+          const response = await axios.post('http://127.0.0.1:8000/login/', {
               phone_number: phone_number
           });
           console.log(response.data);

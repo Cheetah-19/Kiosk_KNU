@@ -66,7 +66,7 @@ export default function MainMenu() {
     //메뉴 항목을 렌더링하는 함수
     function MenuItem({ menu, onClick }) {
         return (
-            <div key={menu.id} class="menu-item" onClick={onClick}>
+            <div key={menu.id} className="menu-item" onClick={onClick}>
                 <img src={"http://127.0.0.1:8000"+menu.menu_pic} alt={menu.menu_name} />
                 <h2>{menu.menu_name}</h2>
                 <p>{menu.menu_price}</p>
@@ -165,20 +165,21 @@ export default function MainMenu() {
         async function fetchMenusAndOptions() {
             try {
                 // 서버 URL에 테스트용 주소 넣어줄것.
-                const menuUrl = phoneNumber ? `http://127.0.0.1:8000/menu/${phoneNumber}` : 'http://127.0.0.1:8000/menu';
-	            let responseMenus= await axios.get(menuUrl);
-	            let dataMenus= responseMenus.data;
+                const phoneNumber = location.state?.phone_number;
+                const menuUrl = phoneNumber ? `http://127.0.0.1:8000/menu/${phoneNumber}/` : 'http://127.0.0.1:8000/menu/';
+               let responseMenus= await axios.get(menuUrl);
+               let dataMenus= responseMenus.data;
                 console.log(menuUrl);
-				let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
-				let menusFromServerMenu= {};
+            let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
+            let menusFromServerMenu= {};
 
-				for(let category of categoriesFromServerMenu){
-					menusFromServerMenu[category]= dataMenus[category];
-				}
+            for(let category of categoriesFromServerMenu){
+               menusFromServerMenu[category]= dataMenus[category];
+            }
 
                 // 카테고리별 그룹 옵션 추출
-	            let responseOptions= await axios.get('http://127.0.0.1:8000/menu/option');
-	            let dataOptions= responseOptions.data;
+               let responseOptions= await axios.get('http://127.0.0.1:8000/menu/option/');
+               let dataOptions= responseOptions.data;
 
                 let optionsFromServerOption = {};
 
@@ -186,13 +187,13 @@ export default function MainMenu() {
                     optionsFromServerOption[category] = dataOptions[category];
                 }
 
-				setCategories(categoriesFromServerMenu);
-				setMenusByCategory(menusFromServerMenu);
+            setCategories(categoriesFromServerMenu);
+            setMenusByCategory(menusFromServerMenu);
                 setOptionsByCategory(optionsFromServerOption);
 
-			} catch (error) {
-				console.error('ERROR : 메뉴 데이터를 받아오는데 실패했습니다.', error);
-			}
+         } catch (error) {
+            console.error('ERROR : 메뉴 데이터를 받아오는데 실패했습니다.', error);
+         }
         }
         //실행
         fetchMenusAndOptions();
@@ -268,5 +269,4 @@ export default function MainMenu() {
         </div>
     );
 }
-
 
