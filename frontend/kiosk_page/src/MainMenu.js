@@ -7,6 +7,7 @@ export default function MainMenu() {
     const navigate = useNavigate();
     const location = useLocation();
     const option = location.state?.option;
+    const phoneNumber = location.state?.phone_number; // 전역 변수로 phoneNumber 선언
 
     // 총 가격 상태 변수 추가
     const [totalPrice, setTotalPrice] = useState(0);
@@ -53,6 +54,10 @@ export default function MainMenu() {
     async function handlePayment() {
         try {
             await axios.post('http://127.0.0.1:8000/order/menu/orderpost/', { cart }); //요청이 성공해야만 결제 페이지로 이동한다.
+
+            // Clear cart state
+            setCart([]);
+
             navigate('/pay', { state: { cart, totalPrice: totalPrice.toLocaleString(), option } });
         } catch(error) {
             console.error('서버로 Cart 데이터를 보내는데 실패했습니다:',error);
@@ -109,7 +114,7 @@ export default function MainMenu() {
         // Add the options to the menu item
         const selectedMenu = { ...selectedMenuItem, menu_option: options };
 
-        navigate('/DetailMenu', { state: { selectedMenu } });
+        navigate('/DetailMenu', { state: { selectedMenu, phone_number : phoneNumber } }); // phoneNumber 추가
     }
 
     // index를 기준으로 카트에서 항목 삭제
@@ -163,7 +168,7 @@ export default function MainMenu() {
                 // 서버 URL에 테스트용 주소 넣어줄것.
                 // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
                 //optional chaining 사용
-                const phoneNumber = location.state?.phone_number;
+                phoneNumber = location.state?.phone_number;
                 const menuUrl = phoneNumber ? `http://127.0.0.1:8000/menu/${phoneNumber}/` : 'http://127.0.0.1:8000/menu/';
                let responseMenus= await axios.get(menuUrl);
                let dataMenus= responseMenus.data;

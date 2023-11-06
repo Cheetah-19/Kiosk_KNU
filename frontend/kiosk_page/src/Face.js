@@ -12,8 +12,11 @@ export default function Face() {
     // Add ref for timer id
     const timerIdRef = useRef(null);
 
+    // Add state for storing photos
+    const [photos, setPhotos] = useState([]);
+
     // Add state for remaining photos
-    const [remainingPhotos, setRemainingPhotos] = useState(10);
+    const [remainingPhotos, setRemainingPhotos] = useState(10); // 10장으로 설정
 
     const startVideo = async () => {
         try {
@@ -26,6 +29,11 @@ export default function Face() {
             if (videoRef.current) {
                 videoRef.current.srcObject = mediaStream;
                 await videoRef.current.play();
+
+                // 웹캠이 시작된 후 2초 동안 기다린 후에 사진 촬영을 시작하도록 설정
+                setTimeout(() => {
+                    timerIdRef.current = setInterval(captureFrame, 100); // 2초후 0.1초 간격으로 10장 촬영
+                }, 2000);
             }
 
         } catch (error) {
@@ -33,50 +41,46 @@ export default function Face() {
         }
     };
 
-    // Capture a frame and send it to the server
+
+    // Capture a frame and add it to the photos array
     const captureFrame = async () => {
-        if (remainingPhotos <= 0 || timerIdRef.current) return; // Stop capturing after reaching limit
-    
+        if (remainingPhotos <= 0) return; // Stop capturing after reaching limit
+
         if (videoRef.current && canvasRef.current) {
             const context = canvasRef.current.getContext('2d');
-    
-
-            //사진 크기 정하는 방법으로, 카메라 크기에 맞춰 조정된다.
 
             canvasRef.current.width = videoRef.current.videoWidth;
             canvasRef.current.height = videoRef.current.videoHeight;
 
             // Draw the video frame to the canvas
             context.drawImage(videoRef.current, 0, 0, videoRef.current.videoWidth, videoRef.current.videoHeight);
-    
+
             // Convert the canvas image to a base64 string
             const imgDataUrl = canvasRef.current.toDataURL('image/jpeg');
-    
-            axios.post('/api/save-image', { imageData: imgDataUrl })
+
+            // Add the photo to the photos array
+            setPhotos(prevPhotos => [...prevPhotos, imgDataUrl]);
+
+            // Decrement remaining photos count by one
+            setRemainingPhotos(prevCount => prevCount - 1);
+        }
+    };
+
+    // Send photos to the server when remainingPhotos becomes 0
+    useEffect(() => {
+        if (remainingPhotos === 0) {
+            clearInterval(timerIdRef.current);
+            axios.post('http://127.0.0.1:8000/login/face/', { imageData: photos })
                 .then(response => console.log(response))
                 .catch(error => console.error(error));
-    
-            // Decrement remaining photos count by one and then check if it's less than or equal to 0
-            setRemainingPhotos(prevCount => {
-                const newCount = prevCount - 1;
-                if (newCount <= 0) {
-                    clearTimeout(timerIdRef.current);
-                    //navigate('/MealOption');
-                    return;
-                }
-                return newCount;
-            });
         }
-    
-        timerIdRef.current = setTimeout(() => {
-            timerIdRef.current = null; // Reset timer ID after execution
-            captureFrame();
-        }, 500);
-    };
-    
+    }, [remainingPhotos, photos]);
+
+
+
 
     useEffect(() => {
-        startVideo().then(() => captureFrame());
+        startVideo();
     }, []);
 
     return (

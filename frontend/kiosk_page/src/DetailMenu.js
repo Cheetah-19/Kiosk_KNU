@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import "./Home.css";
 
@@ -8,9 +9,17 @@ export default function DetailMenu() {
     const selectedMenu = location.state?.selectedMenu;
     // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
     //optional chaining 사용
-    const phoneNumber = location.state?.phoneNumber;
+    const phoneNumber = location.state?.phone_number;
     // 사용자가 선택한 사이드 메뉴들과 그들의 수량을 저장하는 state
     const [selectedOptions, setSelectedOptions] = React.useState({});
+
+    function goBack() {
+        if(location.state && location.state.from) {
+            navigate(location.state.from);
+        } else {
+            navigate(-1); // 기본적으로 뒤로 가기
+        }
+      }
 
     // 서브메뉴를 클릭했을 때의 처리 함수
     function handleOptionClick(option) {
@@ -34,24 +43,30 @@ export default function DetailMenu() {
     }, 0);
 
     // 주문 담기 버튼을 클릭했을 때의 처리 함수
-    function handleOrderClick() {
-        // Create a new order item with the selected menu and options, and total price
-        const orderItem = {
-            menu: selectedMenu,
-            options: selectedOptions,
-            total: total,
-        };
+    // 주문 담기 버튼을 클릭했을 때의 처리 함수
+    async function handleOrderClick() {
+        try{
+            // Create a new order item with the selected menu and options, and total price
+            const orderItem = {
+                menu: selectedMenu,
+                options: selectedOptions,
+                total: total,
+            };
 
-        // Get existing cart from local storage
-        let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+            // Get existing cart from local storage
+            let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
 
-        // Add the new order item to the cart and update it in local storage 
-        existingCart.push(orderItem);
-        localStorage.setItem('cart', JSON.stringify(existingCart));
+            // Add the new order item to the cart and update it in local storage 
+            existingCart.push(orderItem);
+            localStorage.setItem('cart', JSON.stringify(existingCart));
 
-        // Navigate back to MainMenu and pass the updated cart along as state 
-        navigate("/MainMenu", { state: { cart: existingCart } });
+            // Go back to the previous page
+            goBack();
+        }catch{
+            console.error('주문 담기에 실패하였습니다.');
+        }
     }
+
 
 
     //서브메뉴 수량 계산
