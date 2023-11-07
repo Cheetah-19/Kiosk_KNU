@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function PhoneNum() {
+    const BASE_URL = 'https://kioskknu2023.run.goorm.site';
+
     const [phone_number, setPhoneNumber] = useState('');
     const navigate = useNavigate();
 
@@ -13,7 +15,7 @@ export default function PhoneNum() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-          const response = await axios.post('http://127.0.0.1:8000/login/', {
+          const response = await axios.post(`${BASE_URL}/login/`, {
               phone_number: phone_number
           });
           console.log(response.data);
