@@ -4,13 +4,12 @@ import "./Common.css";
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function MainMenu() {
+    const BASE_URL = 'https://kioskknu2023.run.goorm.site';
+
     const navigate = useNavigate();
     const location = useLocation();
     const option = location.state?.option;
-
-    // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
-    //optional chaining 사용
-    const phoneNumber = location.state?.phoneNumber;
+    let phoneNumber = location.state?.phone_number; // 전역 변수로 phoneNumber 선언
 
     // 총 가격 상태 변수 추가
     const [totalPrice, setTotalPrice] = useState(0);
@@ -56,7 +55,11 @@ export default function MainMenu() {
     //결제창 가는 함수(장바구니 정보 전송) 결제 버튼을 눌렀을때, 서버로 cart에 담긴 정보를 전송한다.
     async function handlePayment() {
         try {
-            await axios.post('http://127.0.0.1:8000/order/menu/orderpost/', { cart }); //요청이 성공해야만 결제 페이지로 이동한다.
+            await axios.post(`${BASE_URL}/order/menu/orderpost/`, { cart }); //요청이 성공해야만 결제 페이지로 이동한다.
+
+            // Clear cart state
+            setCart([]);
+
             navigate('/pay', { state: { cart, totalPrice: totalPrice.toLocaleString(), option } });
         } catch(error) {
             console.error('서버로 Cart 데이터를 보내는데 실패했습니다:',error);
@@ -67,13 +70,14 @@ export default function MainMenu() {
     function MenuItem({ menu, onClick }) {
         return (
             <div key={menu.id} className="menu-item" onClick={onClick}>
-                <img src={"http://127.0.0.1:8000"+menu.menu_pic} alt={menu.menu_name} />
+                <img src={`${BASE_URL}${menu.menu_pic}`} alt={menu.menu_name} />
                 <h2>{menu.menu_name}</h2>
                 <p>{menu.menu_price}</p>
                 <p>{menu.menu_introduction}</p>
             </div>
         );
     }
+    
 
     //카테고리 리스트를 렌더링하는 함수
     function renderCategories() {
@@ -113,7 +117,7 @@ export default function MainMenu() {
         // Add the options to the menu item
         const selectedMenu = { ...selectedMenuItem, menu_option: options };
 
-        navigate('/DetailMenu', { state: { selectedMenu } });
+        navigate('/DetailMenu', { state: { selectedMenu, phone_number : phoneNumber } }); // phoneNumber 추가
     }
 
     // index를 기준으로 카트에서 항목 삭제
@@ -162,24 +166,35 @@ export default function MainMenu() {
     }
     //서버로부터 정보를 받아온다. Axios 활용.
     useEffect(() => {
+        console.log("fetchMenusAndOptions 실행"); // 확인용 로그
         async function fetchMenusAndOptions() {
             try {
                 // 서버 URL에 테스트용 주소 넣어줄것.
-                const phoneNumber = location.state?.phone_number;
-                const menuUrl = phoneNumber ? `http://127.0.0.1:8000/menu/${phoneNumber}/` : 'http://127.0.0.1:8000/menu/';
-	            let responseMenus= await axios.get(menuUrl);
-	            let dataMenus= responseMenus.data;
+                // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
+                //optional chaining 사용
+                phoneNumber = location.state?.phone_number;
+                const menuUrl = phoneNumber ? `${BASE_URL}/menu/${phoneNumber}/` : `${BASE_URL}/menu/`;
+                let responseMenus= await axios.get(menuUrl);
+                let dataMenus= responseMenus.data;
+                console.log("dataMenus:", dataMenus); // 확인용 로그
                 console.log(menuUrl);
-				let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
-				let menusFromServerMenu= {};
+                let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
+                let menusFromServerMenu= {};
+                console.log("categoriesFromServerMenu:", categoriesFromServerMenu); // 확인용 로그
 
-				for(let category of categoriesFromServerMenu){
-					menusFromServerMenu[category]= dataMenus[category];
-				}
+                //메뉴가 있는 카테고리만 선택
+                for(let category of categoriesFromServerMenu){
+                    if(dataMenus[category] && dataMenus[category].length > 0) {
+                        menusFromServerMenu[category] = dataMenus[category];
+                    }
+                }
 
-                // 카테고리별 그룹 옵션 추출
-	            let responseOptions= await axios.get('http://127.0.0.1:8000/menu/option/');
-	            let dataOptions= responseOptions.data;
+                // 카테고리 중에서 메뉴가 있는 카테고리만 선택
+                let filteredCategories = Object.keys(menusFromServerMenu);
+
+                //카테고리별 그룹 옵션 추출
+                let responseOptions= await axios.get(`${BASE_URL}/menu/option/`);
+                let dataOptions= responseOptions.data;
 
                 let optionsFromServerOption = {};
 
@@ -187,13 +202,13 @@ export default function MainMenu() {
                     optionsFromServerOption[category] = dataOptions[category];
                 }
 
-				setCategories(categoriesFromServerMenu);
-				setMenusByCategory(menusFromServerMenu);
+                setCategories(filteredCategories);
+                setMenusByCategory(menusFromServerMenu);
                 setOptionsByCategory(optionsFromServerOption);
 
-			} catch (error) {
-				console.error('ERROR : 메뉴 데이터를 받아오는데 실패했습니다.', error);
-			}
+         } catch (error) {
+            console.error('ERROR : 메뉴 데이터를 받아오는데 실패했습니다.', error.message, error.stack, error.response?.status);
+        }
         }
         //실행
         fetchMenusAndOptions();
@@ -269,5 +284,4 @@ export default function MainMenu() {
         </div>
     );
 }
-
 
