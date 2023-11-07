@@ -73,12 +73,23 @@ export default function Face() {
         if (remainingPhotos === 0) {
             clearInterval(timerIdRef.current);
             axios.post(`${BASE_URL}/login/face/`, { imageData: photos })
-                .then(response => console.log(response))
+                .then(response => {
+                    //사용자의 얼굴 정보를 DB와 대조하여 회원 여부를 본다.
+                    //이후 DB에 있는 사용자라면 -> phone_number를 보내준다.
+                    console.log(response);
+                    const phone_number = response.data.phone_number;
+    
+                    if (!phone_number) {  // phoneNumber가 없다면 -> 얼굴인식 실패.
+                        alert('얼굴인식 실패! 휴대전화로 로그인 해주세요.');
+                        navigate('/PhoneNum');  // PhoneNum.js 페이지로 이동
+                    } else {
+                        console.log("로그인 성공");
+                        navigate('/MainMenu', { state: { phone_number }});
+                    }
+                })
                 .catch(error => console.error(error));
         }
-    }, [remainingPhotos, photos]);
-
-
+    }, [remainingPhotos, photos, navigate]);
 
 
 
