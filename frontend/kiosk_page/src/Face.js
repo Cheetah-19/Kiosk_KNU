@@ -83,7 +83,7 @@ export default function Face() {
                         alert('얼굴인식 실패! 휴대전화로 로그인 해주세요.');
                         navigate('/PhoneNum');  // PhoneNum.js 페이지로 이동
                     } else {
-                        console.log("로그인 성공");
+                        alert("로그인 성공");
                         navigate('/MainMenu', { state: { phone_number }});
                     }
                 })
