@@ -65,6 +65,7 @@ export default function Face() {
 
             // Decrement remaining photos count by one
             setRemainingPhotos(prevCount => prevCount - 1);
+
         }
     };
 

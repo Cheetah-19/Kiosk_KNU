@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .face_recognition.face_extractor import extractor
+from .face_recognition.face_identification import identification
 
 class LoginView(APIView):
     def post(self, request):
@@ -28,8 +29,7 @@ class LoginView(APIView):
             # 전화번호가 입력되지 않은 경우
             return Response({'message': '입력을 확인해 주세요.'}, status=400)
 
-
-def FaceLoginView(request):
+class FaceLoginView(APIView):
     '''
     얼굴 인식 로그인 작동 방식
     1. 프론트 face.js를 통해 n장의 base64파일 POST
@@ -51,27 +51,59 @@ def FaceLoginView(request):
         vector_str += str(v)+'/'
     vector_str = vector_str.rstrip('/')
     '''
+    def post(self,request):
+        
+        #1. 프론트 face.js를 통해 n장의 base64파일 POST
+        if request.method == 'POST':
+            try:
+                face_bases = request.data.get('imageData')
+            except:
+                return Response('')
+            input_vector = extractor(face_bases) #2. base64 -> vector (extractor)
+            user_table = User.objects.all() # 3.user의 모든 face data 불러오기
+            # 4. user의 모든 facedata와 2에서 생성한 vector의 거리 계산
+            # 5. 최단 거리인 user id 리턴
+            login_distance = 1e9
+            login_userid = ''
+            login_username = ''
+            for user in user_table:
+                user_id = user.id
+                user_name = user.user_name
+                user_face = user.user_face_info
+                try :
+                    # print(user_face)
+                    user_face = user_face.strip("'")
+                    user_face_list = user_face.split('/')
+                    # print('success {}'.format(len(user_face_list)) )
+                    user_face_vector = [float(dim) for dim in user_face_list]
+                    # print(len(user_face_vector))
+                    db_user_distance = identification(input_vector,user_face_vector)
+                    print('({}.{}) distance: {}'.format(user_id,user_name,db_user_distance))
+                    if db_user_distance < login_distance:
+                        login_distance = db_user_distance
+                        login_userid = user_id
+                        login_username = user_name
+                except Exception as e:
+                    # print('{} is {}'.format(user_name,e))
+                    pass
+            print('login is {}'.format(login_username))
+            
+            
+            return Response('')
+            
+
+        
+        
+        
+        
+        
     
-    '''
-    #1. 프론트 face.js를 통해 n장의 base64파일 POST
-    if request.method == 'POST':
-        code for post from front
-    '''
-    
-    '''
-    #2. base64 -> vector (extractor)
-    
-    '''
-   
-    # 3.user의 모든 face data 불러오기
-    face_dict = get_face_dict()
-    
-    # 4. user의 모든 facedata와 2에서 생성한 vector의 거리 계산
-    # 5. 최단 거리인 user id 리턴
-    
-    return Response({'message':'face recognition'})
-    
-    
+       
+        
+        
+        
+
+
     
     
     
@@ -83,21 +115,3 @@ class TestView(APIView):
 
     def get(self, request):
         return Response("Swagger 연동 테스트")
-
-
-def get_face_dict():
-    facelist = {}
-    user_table = User.objects.all()
-    for user in user_table:
-        user_name = user.id
-        user_face = user.user_face_info
-        try : 
-            user_face_vector = user_face.split('/')
-            facelist[user_name] = user_face_vector
-        except:
-            pass
-        
-    for keys in facelist.keys():
-        print(keys)
-        print(facelist[keys][0])
-    return facelist
