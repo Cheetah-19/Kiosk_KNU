@@ -180,19 +180,17 @@ export default function MainMenu() {
                 console.log(menuUrl);
                 let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
                 let menusFromServerMenu= {};
+                console.log("categoriesFromServerMenu:", categoriesFromServerMenu); // 확인용 로그
 
-                // 메뉴가 있는 카테고리만 선택
-                // for(let category of categoriesFromServerMenu){
-                //     if(dataMenus[category].length > 0) {
-                //     menusFromServerMenu[category]= dataMenus[category];
-                //     }
-                // }
+                //메뉴가 있는 카테고리만 선택
                 for(let category of categoriesFromServerMenu){
-                    menusFromServerMenu[category]= dataMenus[category];
+                    if(dataMenus[category] && dataMenus[category].length > 0) {
+                        menusFromServerMenu[category] = dataMenus[category];
+                    }
                 }
 
                 // 카테고리 중에서 메뉴가 있는 카테고리만 선택
-                let filteredCategories = categoriesFromServerMenu.filter(category => category in menusFromServerMenu);
+                let filteredCategories = Object.keys(menusFromServerMenu);
 
                 //카테고리별 그룹 옵션 추출
                 let responseOptions= await axios.get(`${BASE_URL}/menu/option/`);
@@ -204,8 +202,7 @@ export default function MainMenu() {
                     optionsFromServerOption[category] = dataOptions[category];
                 }
 
-                //setCategories(filteredCategories);
-                setCategories(categoriesFromServerMenu);
+                setCategories(filteredCategories);
                 setMenusByCategory(menusFromServerMenu);
                 setOptionsByCategory(optionsFromServerOption);
 
