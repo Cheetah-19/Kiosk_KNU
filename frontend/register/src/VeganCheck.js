@@ -7,6 +7,7 @@ export default function VeganCheck() {
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const location = useLocation();
 
+    const photos = location.state.photos;
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
     
@@ -17,10 +18,10 @@ export default function VeganCheck() {
           <body>
             <div className="upper-t">혹시 비건이신가요?</div>
             <br/>
-            <button className= "next-button" onClick={() => navigate("/vegan", { state : {inputValue, PhoneNumber } })}>네</button>
+            <button className= "next-button" onClick={() => navigate("/vegan", { state : {inputValue, PhoneNumber, photos } })}>네</button>
             <br/>
             <br/>
-            <button className= "next-button" onClick={() => navigate("/religioncheck", { state: { inputValue, PhoneNumber } })}>해당없음</button>
+            <button className= "next-button" onClick={() => navigate("/religioncheck", { state: { inputValue, PhoneNumber, photos } })}>해당없음</button>
           </body>
           <footer>
           </footer>

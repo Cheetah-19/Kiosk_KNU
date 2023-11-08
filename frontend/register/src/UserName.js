@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import "./Common.css";
 import "./UserName.css";
 
 export default function UserName() {
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
+    const location = useLocation();
+    const photos = location.state.photos;
     const [inputValue, setInputValue] = useState('');
     //inputValue에 사용자의 입력값이 담기게 된다. {inputValue}로 확인가능
     const handleChange = (event) => {
@@ -22,7 +25,7 @@ export default function UserName() {
     //PhoneNum페이지로 input된 정보를 넘겨준다.
     const handleSubmit = (event) => {
       event.preventDefault();
-      navigate('/PhoneNum', { state: { inputValue } });
+      navigate('/PhoneNum', { state: { inputValue, photos } });
     };
 
     const handleNext = () => {
@@ -30,7 +33,7 @@ export default function UserName() {
       if (inputValue.trim().length === 0) {
         alert('숫자 또는 공백을 입력할 수 없습니다.');
       } else {
-        navigate('/PhoneNum', { state: { inputValue } });
+        navigate('/PhoneNum', { state: { inputValue, photos } });
       }
     };
 

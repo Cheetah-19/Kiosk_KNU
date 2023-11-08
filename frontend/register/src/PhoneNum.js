@@ -6,6 +6,7 @@ import "./Common.css";
 export default function Vegan() {
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const location = useLocation();
+    const photos = location.state.photos;
     const inputValue = location.state.inputValue;
     const [PhoneNumber, setInputValue] = useState('');
     //PhoneNum페이지로 input된 정보를 넘겨준다.
@@ -28,8 +29,7 @@ export default function Vegan() {
         //navigate 하지 않도록 return
         return;
       }
-  
-      navigate('/vegancheck', { state: { inputValue, PhoneNumber } });
+      navigate('/vegancheck', { state: { inputValue, PhoneNumber, photos } });
   };
     
     return (
