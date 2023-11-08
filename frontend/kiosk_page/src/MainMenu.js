@@ -66,7 +66,8 @@ export default function MainMenu() {
             });
     
             // 서버로 cartWithUser를 전송하거나 다른 작업 수행
-    
+            await axios.post(`${BASE_URL}/order/menu/orderpost/`, { cart : cartWithUser });
+
             // 결제 버튼을 누르면 cart 배열 초기화
             localStorage.removeItem('cart');
             setCart([]);
