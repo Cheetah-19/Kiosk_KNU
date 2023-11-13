@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./Common.css";
+import "./Home.css"
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function MainMenu() {
@@ -86,11 +87,12 @@ export default function MainMenu() {
             <div key={menu.id} className="menu-item" onClick={onClick}>
                 <img src={`${BASE_URL}${menu.menu_pic}`} alt={menu.menu_name} />
                 <h2>{menu.menu_name}</h2>
-                <p>{menu.menu_price}</p>
+                <p>{menu.menu_price.toLocaleString()} 원</p>
                 <p>{menu.menu_introduction}</p>
             </div>
         );
     }
+    
     
 
     //카테고리 리스트를 렌더링하는 함수
@@ -131,7 +133,7 @@ export default function MainMenu() {
         // Add the options to the menu item
         const selectedMenu = { ...selectedMenuItem, menu_option: options };
 
-        navigate('/DetailMenu', { state: { selectedMenu, phone_number : phoneNumber } }); // phoneNumber 추가
+        navigate('/DetailMenu', { state: { selectedMenu, phone_number: phoneNumber, menu_pic: selectedMenu.menu_pic } });
     }
 
     // index를 기준으로 카트에서 항목 삭제
@@ -166,7 +168,7 @@ export default function MainMenu() {
                         {/* Middle section - placeholder for now */}
                         <div className="cart_item_options">
                             {/* Add a delete button */}
-                            <button onClick={() => handleDeleteFromCart(index)}>X</button>
+                            <div className="delete" onClick={() => handleDeleteFromCart(index)}>X</div>
                         </div>
 
                         {/* Right section - total price for this item */}

@@ -38,7 +38,7 @@
 /* 홈이미지 */
 
 #top_bar_menu {
-    height: 15vh; /* vh is viewport height */
+    height: calc(10vh + 5%); /* Calculate the height */
     /* Add other styles as needed */
 }
 
@@ -65,8 +65,10 @@
 }
 
 #menu_table {
-    max-height: 50vh; /* vh is viewport height */
-    overflow-y: auto; /* Add this line */
+    height: calc(100vh - 15vh - 35vh); /* Calculate the remaining height */
+    max-height: 50vh; /* Add this line if you want to limit the height */
+    overflow-y: auto; /* Add this line for scrolling if needed */
+    background-color: white;
 }
 
 #menu_bar  {
@@ -87,11 +89,12 @@
 }
 
 
-/* 메뉴 표시 css */
+/* MainMenu 메뉴 표시 css */
 .menu-container {
+    max-height: 50vh;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-items: flex-start; /* Add this line */
 }
 
@@ -101,31 +104,39 @@
     align-items: center;
     justify-content: space-around;
     width: 200px; /* adjust as needed */
-    height: 300px; /* adjust as needed */
+    height: 350px; /* adjust the height to accommodate the content */
     border: 1px solid black; /* add border to the box */
 
-    
-    margin-top : 10px ; 
-    margin-bottom : 10px ; 
-    margin-left : auto ; 
-    margin-right : auto ;
+    margin: 2px; /* adjust the margin to reduce spacing */
+    padding: 10px; /* adjust the padding to reduce spacing */
+
+    overflow: hidden; /* Add this line to hide overflowing content */
 }
+
+
+
 .menu-item img {
-   width: 100%;
-   height: auto;
-}
+    width: 100%;
+    height: 200px; /* set a fixed height */
+    object-fit: cover; /* specify how the image should be resized to cover the container */
+    border-radius: 15px; /* Add border-radius to the image */
+ }
 
 .menu-item h2 {
    font-size: 20px; /* adjust as needed */
+   text-align: center; /* Center the text */
 }
 
 .menu-item p {
    color: gray; /* make the text color light gray */
+   text-align: center; /* Center the text */
 }
 
 .menu-item .price {
-   color:red; /* make the price text red */
+   color: red; /* make the price text red */
+   text-align: center; /* Center the text */
 }
+
 
 .menu-details-container {
     display: flex;
@@ -141,7 +152,7 @@
     height: 35vh; /* vh is viewport height */
     width: 100%;
     
-    background-color: rgb(211, 210, 210); /* Set the background color to gray */
+    background-color: rgb(190, 189, 189); /* Set the background color to gray */
     display: flex;
 }
 
@@ -175,6 +186,7 @@
 }
 
 .cart_item_options {
+    width: 15%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,7 +199,7 @@
 
 .cart_item_price {
     flex-grow: 1;
-    width: 15%;
+    width: 35%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -225,26 +237,34 @@
     margin-top: 10px; 
 }
 
+#pay_page{
+    background-color: white;
+}
+
 
 /* 세부메뉴 표시 */
 
 #fullscreen {
+    background-color: white;
     width: 100%;
     height: 100vh; /* 전체 화면 높이로 설정 */
     display: flex;
 }
 
 #left_menu {
+    background-color: white;
     width: 33%;
     height: 100%;
 }
 
 #middle_menu {
+    background-color: white;
     width: 33%;
     height: 100%;
 }
 
 #right_menu {
+    background-color: white;
     width: 33%;
     height: 100%;
     
@@ -267,7 +287,7 @@
 }
 
 
-/* 메뉴, 사이드 메뉴 부분 */
+/* 메뉴, 사이드 option 메뉴 부분 */
 .menu_item {
     display: flex;
     justify-content: space-between;
@@ -315,6 +335,23 @@
    text-overflow:ellipsis; /* Add an ellipsis when the text overflows its container */
 }
 
+.delete{
+    width: 40px; /* Set explicit size */
+    height: 40px; /* Set explicit size */
+    background: gray;
+    border-radius: 20%; /* Use 50% to make it a circle */
+    color: white;
+    font-weight: bolder;
+    font-size: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.delete:hover {
+    background-color: #FD5A27;
+}
+
 
 /* 주문 담기 버튼을 포함하는 영역 */
 .order_section {
@@ -322,8 +359,21 @@
 }
 
 .order_button {
+    display: inline-flex;  /* 버튼을 인라인 플렉스 요소로 바꿉니다 */
+    align-items: center;  /* 버튼 내부의 텍스트를 가운데 정렬합니다 */
+    justify-content: center;  /* 버튼 내부의 텍스트를 가운데 정렬합니다 */
     width: 100%; /* right_menu의 넓이를 꽉 채우게 설정 */
     height: 100%; /* 버튼 높이는 필요에 따라 조정 */
+    margin: 0 auto;  /* 좌우 자동 마진을 적용하여 가운데 정렬합니다 */
+    border-radius: .45rem;
+    background-color: #838383;
+    color: #FFFFFF;
+    padding: .5rem .75rem;
+    font-size: .875rem;
+}
+
+.order_button:hover {
+    background-color: #FD5A27;
 }
 
 /* 총합 금액 출력 영역 */
@@ -342,20 +392,28 @@
 }
 
 .minus{
-    width: 6%;
+    width: 20%;
     background: gray;
     border-radius: 20%;
     color: white;
     font-weight:bolder;
     font-size: 10px;
+    text-align: center;
+}
+.minus:hover {
+    background-color: #FD5A27;
 }
 .plus{
-    width: 6%;
+    width: 20%;
     background: gray;
     border-radius: 20%;
     color: white;
     font-weight: bolder;
     font-size: 10px;
+    text-align: center;
+}
+.plus:hover {
+    background-color: #FD5A27;
 }
 
 .quantity_section {

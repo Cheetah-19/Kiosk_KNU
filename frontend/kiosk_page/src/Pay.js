@@ -1,16 +1,26 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import "./Home.css"
+import "./Common.css"
 
 export default function Pay() {
     const location = useLocation();
+    const navigate = useNavigate();
     const cart = location.state?.cart || [];
     const totalPrice = location.state?.totalPrice || 0;
     const option = location.state?.option || '';
 
     console.log('Cart:', cart);
+
+    //홈 화면 가는 함수
+    function herf_home() {
+      navigate('/');
+    }
   
     return (
-      <div>
+      <div id = "pay_page">
+        <div id="top_bar_home" onClick={herf_home}></div>
+        <header>Easy KIOSK</header>
         <h1>Payment Page</h1>
         <pre>{JSON.stringify(cart, null, 2)}</pre>
         <p>{option === 'takeout' ? '포장 주문' : '매장식사 주문'}</p>

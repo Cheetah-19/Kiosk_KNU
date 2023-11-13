@@ -7,6 +7,11 @@ import "./Common.css";
 export default function Face() {
     const BASE_URL = 'https://kioskknu2023.run.goorm.site';
 
+    //홈 화면 가는 함수
+    function herf_home() {
+        navigate('/');
+    }
+
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
@@ -99,17 +104,19 @@ export default function Face() {
 
     return (
         <div>
-            <set>
+            <div id="top_bar_menu">
+                <div id="top_bar_home" onClick={herf_home}></div>
                 <header>Easy KIOSK</header>
-                <body>
+            </div>
+            <div id = "mid">
                     <div id="video_container">
                         <video ref={videoRef} id="video_Element"></video>
                         {/* Display remaining photos count */}
                         <p style={{ color: 'black', fontSize: '32px' }}>{remainingPhotos}</p>
                         <canvas ref={canvasRef} style={{ display: 'none' }} />
                     </div>
-                </body>
-            </set>
+            </div>
+            <div id = "bottom"></div>
             {/* Face recognition content... */}
         </div>
     );

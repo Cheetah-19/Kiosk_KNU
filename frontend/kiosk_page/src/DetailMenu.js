@@ -43,7 +43,6 @@ export default function DetailMenu() {
     }, 0);
 
     // 주문 담기 버튼을 클릭했을 때의 처리 함수
-    // 주문 담기 버튼을 클릭했을 때의 처리 함수
     async function handleOrderClick() {
         try{
             // Create a new order item with the selected menu and options, and total price
@@ -97,7 +96,7 @@ export default function DetailMenu() {
 
 
     function herf_back() {
-        navigate("/MainMenu");
+        goBack();
     }
 
     // 서브메뉴를 카테고리별로 그룹화하는 함수
@@ -118,10 +117,8 @@ export default function DetailMenu() {
                 {/* ...추가적인 메뉴 정보 출력 */}
                 <div id="left_menu">
                     <h2>{selectedMenu.menu_name}</h2>
-                    <p>ID: {selectedMenu.id}</p>
-                    <img src={selectedMenu.menu_pic} alt={selectedMenu.menu_name} />
-                    {/*<p>Price: {selectedMenu.menu_price}</p> */}
-                    <p>introduction: {selectedMenu.menu_introduction}</p>
+                    <img src={location.state?.menu_pic} alt={selectedMenu.menu_name} />
+                    <p>{selectedMenu.menu_introduction}</p>
                 </div>
 
 
@@ -167,9 +164,9 @@ export default function DetailMenu() {
                                 <div className="menu_item">
                                     <span className="selected_name">{optionName}</span>
                                     <div className="quantity_section">
-                                        <button className="minus" onClick={() => handleQuantityChange(optionName, -1)}>-</button>
+                                        <div className="minus" onClick={() => handleQuantityChange(optionName, -1)}>-</div>
                                         <span>{quantity}</span>
-                                        <button className="plus" onClick={() => handleQuantityChange(optionName, 1)}>+</button>
+                                        <div className="plus" onClick={() => handleQuantityChange(optionName, 1)}>+</div>
                                     </div>
                                     < span className="selected_price" > {(option.option_price * quantity).toLocaleString()} 원 </ span >
                                 </ div >
@@ -185,7 +182,7 @@ export default function DetailMenu() {
 
                     {/* 주문 담기 버튼 */}
                     <div className="order_section">
-                        <button className="order_button" onClick={handleOrderClick}>주문 담기</button>
+                        <div className="order_button" onClick={handleOrderClick}>주문 담기</div>
                     </div>
                 </ div >
             </ div >
