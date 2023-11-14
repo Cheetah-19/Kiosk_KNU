@@ -63,7 +63,8 @@ class FaceLoginView(APIView):
             input_vector_list = []
             for base in face_bases: #2. 리스트 안의 base64들을 벡터로 변환
                 input_vector = extractor(base) # base64 -> vector (extractor)
-                input_vector_list.append(input_vector)
+                if input_vector != None:
+                    input_vector_list.append(input_vector)
             print("Received face data from front")
             user_table = User.objects.all() # 3.user의 모든 face data 불러오기
             candidate_logins = {}
@@ -75,14 +76,18 @@ class FaceLoginView(APIView):
                         continue
                     else:
                         user_face_list = eval(user.user_face_info) #str로 저장되어있는 리스트를 list로 변환 ->[[d1,d2,...,d512],[d1,d2,...,d512],...]
-                    for user_faces in user_face_list:   #db에 있는 유저의 모든 얼굴정보 벡터와 인풋의 벡터 길이 측정
-                        distance = identification(inputs,user_faces)    #최솟값 추출
-                        if min_distance > distance:
-                            min_distance = distance
-                            login_id = user.id
-                            mininum_vector = user_faces
-                        
-                print("candidate is {}".format(login_id))       
+                        for user_faces in user_face_list:   #db에 있는 유저의 모든 얼굴정보 벡터와 인풋의 벡터 길이 측정
+                            try:
+                                distance = identification(inputs,user_faces)    #최솟값 추출
+                                if distance != None:
+                                    if min_distance > distance:
+                                        min_distance = distance
+                                        login_id = user.id
+                                        mininum_vector = user_faces
+                            except Exception as e:
+                                pass
+                if login_id != '':
+                    print("candidate is {}".format(login_id))       
                 #10개의 인풋에 대한 후보 유저를 딕셔너리에 벡터값과 같이 등록
                 #db에 유저 얼굴 벡터에 대한 데이터셋을 추가시켜 얼굴인식 정확도를 높이는데 기여함
                 if candidate_logins.get(login_id) == None:
@@ -93,7 +98,6 @@ class FaceLoginView(APIView):
             login_candidates = -1
             candidate = User()
             for candi in candidate_logins.keys():
-                
                 candi_counts = len(candidate_logins[candi])
                 if login_candidates <= candi_counts:
                     candidate = User.objects.get(id = candi)
