@@ -96,7 +96,9 @@ class Order(models.Model):
 class Ordered_Item(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    menu_num = models.IntegerField(null=True)                       #메뉴 구분을 위한 num
     option = models.ForeignKey(Option, on_delete=models.CASCADE,null=True)
+    option_num = models.IntegerField(null=True)                     #옵션 갯수 
     def __str__(self):
         return str(self.order.order_num)
 
