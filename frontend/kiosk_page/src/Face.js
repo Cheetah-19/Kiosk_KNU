@@ -5,7 +5,7 @@ import axios from 'axios';
 import "./Common.css";
 
 export default function Face() {
-    const BASE_URL = 'https://kioskknu2023.run.goorm.site';
+    const BASE_URL = 'frontend/kiosk_page/src/MainMenu.js';
 
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const videoRef = useRef(null);

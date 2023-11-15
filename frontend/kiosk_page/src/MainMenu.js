@@ -4,7 +4,7 @@ import "./Common.css";
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function MainMenu() {
-    const BASE_URL = 'https://kioskknu2023.run.goorm.site';
+    const BASE_URL = 'frontend/kiosk_page/src/MainMenu.js';
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -55,16 +55,30 @@ export default function MainMenu() {
     //결제창 가는 함수(장바구니 정보 전송) 결제 버튼을 눌렀을때, 서버로 cart에 담긴 정보를 전송한다.
     async function handlePayment() {
         try {
-            await axios.post(`${BASE_URL}/order/menu/orderpost/`, { cart }); //요청이 성공해야만 결제 페이지로 이동한다.
+            const user = phoneNumber ? phoneNumber : '';
+            const cartWithUser = cart.map(item => {
+                return {
+                    user: user,
+                    menu: item.menu,
+                    options: item.options,
+                    total: item.total
+                };
+            });
+    
+            // 서버로 cartWithUser를 전송하거나 다른 작업 수행
+            await axios.post(`${BASE_URL}/order/menu/orderpost/`, { cart : cartWithUser });
 
-            // Clear cart state
+            // 결제 버튼을 누르면 cart 배열 초기화
+            localStorage.removeItem('cart');
             setCart([]);
-
-            navigate('/pay', { state: { cart, totalPrice: totalPrice.toLocaleString(), option } });
-        } catch(error) {
-            console.error('서버로 Cart 데이터를 보내는데 실패했습니다:',error);
+    
+            navigate('/pay', { state: { cart: cartWithUser, totalPrice: totalPrice.toLocaleString(), option } });
+        } catch (error) {
+            console.error('서버로 Cart 데이터를 보내는데 실패했습니다:', error);
         }
     }
+    
+
 
     //메뉴 항목을 렌더링하는 함수
     function MenuItem({ menu, onClick }) {

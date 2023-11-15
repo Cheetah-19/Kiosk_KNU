@@ -41,11 +41,13 @@ def test(request):
 
 class OrderView(APIView):
     def post(self,request): #go payment
+        print("hello")
         post_data = json.loads(request.body)['cart'] #HTTP POST 요청의 본문(body)을 JSON 형식으로 파싱하여 Python 딕셔너리로 변환
+        post_data_user = post_data[0]['user'] #나중에 user정보가 추가되면 여기에 user의 번호가 올 것이다
         print(post_data)
         order_num = Order.objects.count()+10000000 #order 객체의 수 세고, 거기다 10000000 더해서 새로운 주문번호 생성
         order_data = Order(\
-            user=User.objects.get(user_phonenum='01022221111'),\
+            user=User.objects.get(user_phonenum=post_data_user),\
             order_num=order_num,\
             payment=Payment.objects.get(payment_name='Credit')\
         )
@@ -70,3 +72,21 @@ class OrderView(APIView):
                 )        
                 order_menu_info.save()                                 
         return HttpResponse("Order is completed")
+    
+
+class user_OrderDetailView(APIView):
+    def get(self, request, userphonenum):
+        UserGetter = User.objects.get(user_phonenum = userphonenum) 
+        UserOrderGetter = Order.objects.filter(user=UserGetter)
+        num = 1
+        for order in UserOrderGetter:
+            print(str(num) + "번째 주문")
+            UserOrderedItemGetter = Ordered_Item.objects.filter(order=order)
+            for orderitem in UserOrderedItemGetter:
+                print(orderitem.menu)
+                print(orderitem.option)
+
+            print('======================')
+            num+=1
+
+        return HttpResponse("OrderDetailView is completed")

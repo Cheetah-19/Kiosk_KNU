@@ -8,4 +8,5 @@ urlpatterns = [
     # path('menu/option/', views.OptionView.as_view(),name='option'),
     # path('menu/<int:id>/',views.OptionView.as_view(),name='option'),
     path('menu/orderpost/', views.OrderView.as_view(),name='order'),
+    path('<str:userphonenum>/orderdetail/', views.user_OrderDetailView.as_view(), name='orderdetail')
 ]

@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 
 class Payment(models.Model):
     payment_name = models.CharField(max_length=50)
@@ -89,7 +89,7 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
     order_num = models.PositiveIntegerField(default=0)
-
+    order_time = models.DateTimeField(default=datetime.now) #주문 날짜와 시간 추가
     def __str__(self):
         return str(self.order_num)
     
