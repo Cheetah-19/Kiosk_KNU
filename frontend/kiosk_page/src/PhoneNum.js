@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function PhoneNum() {
-    const BASE_URL = 'frontend/kiosk_page/src/MainMenu.js';
+    const BASE_URL = 'https://kioskknu2023.run.goorm.site';
 
     const [phone_number, setPhoneNumber] = useState('');
     const navigate = useNavigate();

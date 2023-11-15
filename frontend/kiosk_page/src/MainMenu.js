@@ -4,7 +4,7 @@ import "./Common.css";
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function MainMenu() {
-    const BASE_URL = 'frontend/kiosk_page/src/MainMenu.js';
+    const BASE_URL = 'https://kioskknu2023.run.goorm.site';
 
     const navigate = useNavigate();
     const location = useLocation();
