@@ -1,4 +1,11 @@
 /*기본적인 레이아웃을 설정할 CSS*/
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 .container{
     background-color : white;
 }
