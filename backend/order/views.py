@@ -125,15 +125,30 @@ class user_OrderDetailView(APIView):
     def get(self, request, userphonenum):
         UserGetter = User.objects.get(user_phonenum = userphonenum) 
         UserOrderGetter = Order.objects.filter(user=UserGetter)
-        num = 1
+        # menunownnum = 0
         for order in UserOrderGetter:
-            print(str(num) + "번째 주문")
             UserOrderedItemGetter = Ordered_Item.objects.filter(order=order)
+            menunownnum = 0
             for orderitem in UserOrderedItemGetter:
-                print(orderitem.menu)
-                print(orderitem.option)
+                # if(menunownum == orderitem.menu_num):
+                #     print(menunownum + "번째 메뉴")
+                #     print(orderitem.menu)
+                #     print(orderitem.option)
+                # else:
+
+                # print(orderitem.menu)
+                # print(orderitem.option)
+                # print(orderitem.menu_num)
+                if(menunownnum == orderitem.menu_num):                    #전 거와 메뉴가 동일하되 옵션만 다른 경우이므로 옵션만 출력하면 된다.
+                    print(orderitem.option)
+
+                else:
+                    print(str(orderitem.menu_num) + "번째 메뉴")
+                    print(orderitem.menu)
+                    print(orderitem.option)
+                    menunownnum = orderitem.menu_num
+
 
             print('======================')
-            num+=1
 
         return HttpResponse("OrderDetailView is completed")
