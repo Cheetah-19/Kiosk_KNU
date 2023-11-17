@@ -5,6 +5,18 @@
     font-style: normal;
 }
 
+/* 수직 스크롤바 */
+::-webkit-scrollbar {
+    width: 10px;   /* 스크롤바 너비 설정 */
+    height: 1px; 
+    background-color: #E6E6E6; /* 스크롤바 배경색 설정 */
+}
+
+/* 스크롤바 엄지 */
+::-webkit-scrollbar-thumb {
+    background-color: #FF7A00; /* 스크롤바 색상 설정 */
+}
+
 #start_img { /*처음 시작 화면*/
     width: 100%;
     height: 100vh;
@@ -74,11 +86,12 @@
     height: calc(100vh - 15vh - 35vh); /* Calculate the remaining height */
     max-height: 50vh; /* Add this line if you want to limit the height */
     overflow-y: auto; /* Add this line for scrolling if needed */
-    background-color: white;
+    background-color: F3F3F3;
 }
 
 #menu_bar  {
-    background: #ef4444;
+    height: 90.5px;
+    background: #FF7A00;
     color: white;
     padding-top: 7px;
     padding-bottom: 5px;
@@ -87,7 +100,40 @@
     justify-content: space-around;
     font-size: 11px;
     font-weight: bold;
+}
 
+.category_name{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-weight: bold;
+    font-size: 16px;
+
+    color: #FFF;
+
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+#menu_bar_left,
+#menu_bar_right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #FFF;
+
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
 #order {
@@ -105,14 +151,13 @@
 }
 
 .menu-item {
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    width: 200px; /* adjust as needed */
-    height: 350px; /* adjust the height to accommodate the content */
-    border: 1px solid black; /* add border to the box */
-
+    width: 230px; /* adjust as needed */
+    height: 230px; /* adjust the height to accommodate the content */
     margin: 2px; /* adjust the margin to reduce spacing */
     padding: 10px; /* adjust the padding to reduce spacing */
 
@@ -122,20 +167,30 @@
 
 
 .menu-item img {
-    width: 100%;
-    height: 200px; /* set a fixed height */
+    width: 230px;
+    height: 160px; /* set a fixed height */
     object-fit: cover; /* specify how the image should be resized to cover the container */
-    border-radius: 15px; /* Add border-radius to the image */
  }
 
 .menu-item h2 {
-   font-size: 20px; /* adjust as needed */
-   text-align: center; /* Center the text */
+    color: #000;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
 .menu-item p {
-   color: gray; /* make the text color light gray */
-   text-align: center; /* Center the text */
+    color: #000;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
 }
 
 .menu-item .price {
@@ -154,6 +209,16 @@
 
 /* 장바구니 및 결제창 */
 
+#order_list_text{
+    color: #FF7A00;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 18px;
+}
+
 #pay {
     height: 35vh; /* vh is viewport height */
     width: 100%;
@@ -162,12 +227,12 @@
     display: flex;
 }
 
-#order_list {
-    width: 66%; 
-    height: 100%;
-    overflow-y: auto;
-    background-color: transparent;
-}
+/* #order_list {
+    width: 456px; 
+    height: 124px;
+    overflow-x: auto;
+    background-color: white;
+} */
 
 #order_list_right {
     width: 34%;
@@ -180,72 +245,89 @@
     justify-content: flex-end; /* This aligns children to the end of the container (bottom) */
 }
 
-.cart_item {
+#menu_div {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    margin: 10px; /* Adjust as needed */
+    background-color: white;
+    border-bottom: 1px solid #ccc; /* 테두리 하단에 밑줄 추가 */
+    margin-bottom: 19px; /* 메뉴 사이에 간격 추가 */
+}
+
+#menu_div.multi-options {
+    height: auto;
 }
 
 .cart_item_name {
-    flex-grow: 1;
-    width: 50%;
+    width: 100%;
 }
 
 .cart_item_options {
-    width: 15%;
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: flex-start;
 }
 
-
 .cart_item_name h3 {
-    margin-bottom: 0; /* Adjust as needed */
+    color: #000;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-left: 18px;
 }
 
 .cart_item_price {
-    flex-grow: 1;
-    width: 35%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: #000;
+    text-align: right;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-right: 18px;
 }
 
 .cart_options {
-    margin-top: 0; /* Adjust as needed */
+    margin-top: 0; /* 필요에 따라 조정 */
     font-size: smaller;
-    text-align:left;
+    text-align: left;
+    margin-left: 18px;
 }
 
-#menu_div {
-    background-color: white;
-    border-radius : 15px ;
-}
-
-#card_img {
-    width: 40px;
-    height: 40px;
-    background: url(img/card.png) no-repeat center / cover;
+.cart_delete{
+    color: #FD5A27;
+    margin-right: 18px;
+    text-align: right;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
 #pay_btn {
-    width: 100%;
-    height: 50%;
-    background: #ef4444;
-    border-radius: 8px;
+    width: 399px;
+    height: 107px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #151515;
     display: flex;
-    color: white;
-    font-size: 13px;
-    font-weight: bold;
-    align-items: center;
-    justify-content: space-around;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
 
-    margin-top: 10px; 
+#pay_btn.disabled {
+    background: #999999; /* 0원일 때 배경색을 회색으로 변경 */
+    cursor: not-allowed; /* 클릭 비활성화 */
 }
 
 #pay_page{
     background-color: white;
 }
+
 
 
 /* 세부메뉴 표시 */
@@ -341,24 +423,6 @@
    text-overflow:ellipsis; /* Add an ellipsis when the text overflows its container */
 }
 
-.delete{
-    width: 40px; /* Set explicit size */
-    height: 40px; /* Set explicit size */
-    background: gray;
-    border-radius: 20%; /* Use 50% to make it a circle */
-    color: white;
-    font-weight: bolder;
-    font-size: 10px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.delete:hover {
-    background-color: #FD5A27;
-}
-
-
 /* 주문 담기 버튼을 포함하는 영역 */
 .order_section {
     height: 18%; /* Set explicit height */
@@ -394,7 +458,15 @@
 }
 
 .total_price {
-    text-align: right;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
 }
 
 .minus{
