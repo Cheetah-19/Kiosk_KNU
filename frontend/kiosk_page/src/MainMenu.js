@@ -373,9 +373,9 @@ export default function MainMenu() {
                                             <div className="option-row">
                                                 <div className="option-name">{option.option_name}</div>
                                                 <div className="quantity-section">
-                                                    <div onClick={() => handleQuantityChange(option.option_name, -1)}>-</div>
-                                                    <span>{selectedOptions[option.option_name] || 0}</span>
-                                                    <div onClick={() => handleQuantityChange(option.option_name, +1)}>+</div>
+                                                    <div className="minus" onClick={() => handleQuantityChange(option.option_name, -1)}></div>
+                                                    <span className="option-count">{selectedOptions[option.option_name] || 0}</span>
+                                                    <div className="plus" onClick={() => handleQuantityChange(option.option_name, +1)}></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -383,12 +383,15 @@ export default function MainMenu() {
                                 )}
                             </Modal.Body>
 
+                            <div className="fullscreen">
+                                <Modal.Footer >
 
-                            <Modal.Footer>
-                                <div className = "add_btn" variant="secondary" onClick={addToCart}>
-                                    <di className = "add_btn_text">메뉴 추가하기</di>
-                                </div>
-                            </Modal.Footer>
+                                    <div className="add_btn" variant="secondary" onClick={addToCart}>
+                                        <di className="add_btn_text">메뉴 추가하기</di>
+                                    </div>
+
+                                </Modal.Footer>
+                            </div>
                         </Modal>
                         {/* 카테고리에 맞는 메뉴 출력 */}
                         <div className="menu-container">
