@@ -28,11 +28,11 @@ export default function MainMenu() {
             <body>
                 <div className='container'>
                     <div id="button-container">
-                        <button onClick={handleLeftButtonClick}>얼굴인식</button>
-                        <button onClick={handleRightButtonClick}>휴대폰번호</button>
+                        <div onClick={handleLeftButtonClick}>얼굴인식</div>
+                        <div onClick={handleRightButtonClick}>휴대폰번호</div>
                     </div>
                     <div>
-                        <button className='button2' onClick={handleNoMemberClick}>비회원으로 주문하기</button>
+                        <div className='button2' onClick={handleNoMemberClick}>비회원으로 주문하기</div>
                     </div>
                 </div>
             </body>
