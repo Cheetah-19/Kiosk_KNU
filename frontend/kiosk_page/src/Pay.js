@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import "./Home.css"
 import "./Common.css"
+import "./Pay.css";
 
 export default function Pay() {
     const location = useLocation();
@@ -16,27 +17,35 @@ export default function Pay() {
     function herf_home() {
       navigate('/');
     }
+
+    // 이전 페이지로 이동하는 함수
+    function goBack() {
+      navigate('/MainMenu'); // '/MainMenu'를 이전 페이지의 경로로 교체하세요.
+    }
   
     return (
       <div id = "pay_page">
         <div id="top_bar_home" onClick={herf_home}></div>
         <header>Easy KIOSK</header>
-        <h1>Payment Page</h1>
-        <pre>{JSON.stringify(cart, null, 2)}</pre>
-        <p>{option === 'takeout' ? '포장 주문' : '매장식사 주문'}</p>
-        {cart.map((item, index) => (
-          <div key={index}>
-            <h2>{item.menu.menu_name}</h2>
-            {Object.entries(item.options).map(([optionName, quantity]) => (
-              <>
-                <p key={optionName}>{optionName}: {quantity}개</p>
-              </>
+        <div className='rect1'>
+          <div className='txt1'>주문목록을 확인해주세요!</div>
+          <div className="rect2">
+            <p>{option === 'takeout' ? '포장 주문' : '매장식사 주문'}</p>
+            {cart.map((item, index) => (
+              <div key={index}>
+                <h2>{item.menu.menu_name}</h2>
+                {Object.entries(item.options).map(([optionName, quantity]) => (
+                  <p key={optionName}>{optionName}: {quantity}개</p>
+                ))}
+                <p>가격: {item.total.toLocaleString()}원</p>
+              </div>
             ))}
-            {/* 각 메뉴의 총 가격 출력 */}
-          <p>메뉴 {index + 1} 가격: {item.total.toLocaleString()}원</p>
           </div>
-        ))}
-        <h2>총 결제 금액: {totalPrice.toLocaleString()}원</h2>
+          <div className='sum-txt'>합계</div>
+          <div className='sum-price'>{totalPrice.toLocaleString()}원</div>
+          <button className='prev-button' onClick={goBack}>이전으로</button> {/* 수정 */}
+          <button className='pay-button'>결제</button>
+        </div>
       </div>
     );
   }
