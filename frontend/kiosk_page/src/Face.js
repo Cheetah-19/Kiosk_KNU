@@ -2,15 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import "./Common.css";
+import "./Face.css";
 
-export default function Face() {
+export default function Face(props) {
     const BASE_URL = 'https://kioskknu2023.run.goorm.site';
-
-    //홈 화면 가는 함수
-    function herf_home() {
-        navigate('/');
-    }
 
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const videoRef = useRef(null);
@@ -31,7 +26,7 @@ export default function Face() {
                 throw new Error('Camera not available on this browser');
             }
 
-            const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+            const mediaStream = await navigator.mediaDevices.getUserMedia({ video: { width: 720, height: 720 } });
 
             if (videoRef.current) {
                 videoRef.current.srcObject = mediaStream;
@@ -86,7 +81,11 @@ export default function Face() {
     
                     if (!phone_number) {  // phoneNumber가 없다면 -> 얼굴인식 실패.
                         alert('얼굴인식 실패! 휴대전화로 로그인 해주세요.');
-                        navigate('/PhoneNum');  // PhoneNum.js 페이지로 이동
+                        //navigate('/PhoneNum');  // PhoneNum.js 페이지로 이동
+
+                        // 휴대폰 번호 입력창 띄우기
+                        props.setGotoPhoneNUm(true);
+                        props.setSlide(true);
                     } else {
                         alert("로그인 성공");
                         navigate('/MainMenu', { state: { phone_number }});
@@ -103,21 +102,11 @@ export default function Face() {
     }, []);
 
     return (
-        <div>
-            <div id="top_bar_menu">
-                <div id="top_bar_home" onClick={herf_home}></div>
-                <header>Easy KIOSK</header>
-            </div>
-            <div id = "mid">
-                    <div id="video_container">
-                        <video ref={videoRef} id="video_Element"></video>
-                        {/* Display remaining photos count */}
-                        <p style={{ color: 'black', fontSize: '32px' }}>{remainingPhotos}</p>
-                        <canvas ref={canvasRef} style={{ display: 'none' }} />
-                    </div>
-            </div>
-            <div id = "bottom"></div>
-            {/* Face recognition content... */}
+        <div id = "video-container">
+            <video ref={videoRef} id="video-element"></video>
+            {/* Display remaining photos count */}
+            <p style={{ color: 'black', fontSize: '32px', marginTop: '20px' }}>{remainingPhotos}</p>
+            <canvas ref={canvasRef} style={{ display: 'none' }} />
         </div>
     );
 }

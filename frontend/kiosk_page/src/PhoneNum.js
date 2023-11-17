@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import "./Common.css"
-import axios from 'axios';
+import "./PhoneNum.css"
 
 export default function PhoneNum() {
     const BASE_URL = 'https://kioskknu2023.run.goorm.site';
@@ -12,11 +13,6 @@ export default function PhoneNum() {
     const handleInputChange = (e) => {
         setPhoneNumber(e.target.value);
     };
-
-    //홈 화면 가는 함수
-    function herf_home() {
-        navigate('/');
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,7 +26,10 @@ export default function PhoneNum() {
 
         } catch (error) {
             console.error(error);
-            alert("휴대전화번호 전송에 실패했습니다. 다시 시도해 주세요.");
+            alert("휴대폰 번호가 틀렸습니다.");
+
+            // 휴대폰 번호까지 틀렸을 시 홈화면으로 이동
+            navigate('/');
         }
     };
 
@@ -42,18 +41,9 @@ export default function PhoneNum() {
     };
 
     return (
-        <div>
-            <div id="top_bar_menu">
-                <div id="top_bar_home" onClick={herf_home}></div>
-                <header>Easy KIOSK</header>
-            </div>
-            <div id = "mid">
-                <div className="upper-t">휴대폰 번호를 입력해 주세요 ('-'제외)</div>
-                <input className="input-des" type="text" value={phone_number} onChange={handleInputChange} onKeyPress={handleKeyPress} />
-            </div>
-            <div id = "bottom">
-                <div className="next-button" onClick={handleSubmit}>다음으로</div>
-            </div>
+        <div id="phoneNum-inner-container">
+            <input id="phoneNum-input" type="text" value={phone_number} placeholder="휴대폰 번호를 입력해 주세요 ('-' 제외)" onChange={handleInputChange} onKeyPress={handleKeyPress} />
+            <div className='light-gray-btn' onClick={handleSubmit}>확인</div>
         </div>
     );
 }

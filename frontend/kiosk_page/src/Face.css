@@ -1,0 +1,20 @@
+#video-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    height: 300px;
+
+    padding-top: 45px;
+
+    animation: fade-in 0.5s linear 1;
+}
+
+#video-element {
+    height: 350px;
+    width: 350px;
+    border-radius: 100%;
+
+    transform: rotateY(180deg);
+}

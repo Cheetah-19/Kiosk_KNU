@@ -15,11 +15,11 @@ function StartMenu() {
   };
 
   return (
-    <div id='login_background'>
+    <div id='login-background'>
       <img id='logo' src={logo}></img>
-      <div id='login_btn_container'>
-        <div className='login_btn' onClick={handleLogin}>로그인하기</div>
-        <div className='login_btn' onClick={handleGuestOrder}>비회원 주문하기</div>
+      <div id='login-btn-container'>
+        <div className='login-btn' onClick={handleLogin}>로그인하기</div>
+        <div className='login-btn' onClick={handleGuestOrder}>비회원 주문하기</div>
       </div>
     </div>
   );
