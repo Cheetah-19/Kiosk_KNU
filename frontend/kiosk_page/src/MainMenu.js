@@ -3,6 +3,8 @@ import axios from 'axios';
 import "./Common.css";
 import "./Home.css"
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Modal, Button, ListGroup } from 'react-bootstrap';
+
 
 export default function MainMenu() {
     const BASE_URL = 'https://kioskknu2023.run.goorm.site';
@@ -11,6 +13,27 @@ export default function MainMenu() {
     const location = useLocation();
     const option = location.state?.option;
     let phoneNumber = location.state?.phone_number; // 전역 변수로 phoneNumber 선언
+
+    const [selectedOptions, setSelectedOptions] = React.useState({});
+
+
+    // 모달 상태 변수 및 함수 추가
+    const [showModal, setShowModal] = useState(false);
+    const closeModal = () => setShowModal(false);
+    const openModal = () => setShowModal(true);
+
+    // 선택한 메뉴 상태 변수 추가
+    const [selectedMenu, setSelectedMenu] = useState(null);
+    // 선택한 사이드 메뉴들과 그들의 총 가격 계산
+    const total = selectedMenu ? selectedMenu.menu_price + Object.entries(selectedOptions).reduce((sum, [optionName, quantity]) => {
+        const optionPrice = findSelectedOption(optionName).option_price;
+        return sum + (optionPrice * quantity);
+    }, 0) : 0;
+
+    // 선택된 옵션에 대한 정보를 찾는 함수 추가
+    function findSelectedOption(optionName) {
+        return selectedMenu.menu_option.find(option => option.option_name === optionName);
+    }
 
     // 총 가격 상태 변수 추가
     const [totalPrice, setTotalPrice] = useState(0);
@@ -52,6 +75,49 @@ export default function MainMenu() {
 
         navigate('/');
     }
+
+    // 모달 내에서 "메뉴 추가하기" 버튼을 클릭했을 때 호출되는 함수
+    function addToCart() {
+        // Create a new order item with the selected menu and options, and total price
+        const orderItem = {
+            menu: selectedMenu,
+            options: selectedOptions,
+            total: total,
+        };
+
+        // Get existing cart from local storage
+        let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+        // Add the new order item to the cart and update it in local storage
+        existingCart.push(orderItem);
+        localStorage.setItem('cart', JSON.stringify(existingCart));
+
+        // Update the cart state
+        setCart(existingCart);
+
+        // 닫기 버튼 클릭 시 모달을 닫도록 설정
+        closeModal();
+    }
+
+    //서브메뉴 수량 계산
+    function handleQuantityChange(optionName, change) {
+        setSelectedOptions(prevState => {
+            const currentQuantity = prevState[optionName] || 0;
+            const newQuantity = Math.max(currentQuantity + change, 0);
+
+            if (newQuantity === 0) {
+                const { [optionName]: removedOption, ...rest } = prevState;
+                return rest;
+            }
+
+            return {
+                ...prevState,
+                [optionName]: newQuantity,
+            };
+        });
+    }
+
+
 
     //결제창 가는 함수(장바구니 정보 전송) 결제 버튼을 눌렀을때, 서버로 cart에 담긴 정보를 전송한다.
     async function handlePayment() {
@@ -119,7 +185,6 @@ export default function MainMenu() {
         });
     }
 
-
     //DetailMenu에 정보 전송
     function selectMenu(index) {
         setCurrentMenuIndex(index);
@@ -139,7 +204,9 @@ export default function MainMenu() {
         // Add the options to the menu item
         const selectedMenu = { ...selectedMenuItem, menu_option: options };
 
-        navigate('/DetailMenu', { state: { selectedMenu, phone_number: phoneNumber, menu_pic: selectedMenu.menu_pic } });
+        //navigate('/DetailMenu', { state: { selectedMenu, phone_number: phoneNumber, menu_pic: selectedMenu.menu_pic } });
+        setSelectedMenu(selectedMenu); // 선택한 메뉴 정보를 상태 변수에 저장
+        openModal(); // 모달 열기
     }
 
     // index를 기준으로 카트에서 항목 삭제
@@ -287,6 +354,42 @@ export default function MainMenu() {
                         </div>
                     </div>
                     <div id="menu_table">
+                        {/* 모달 컴포넌트 작성 */}
+                        <Modal show={showModal} onHide={closeModal}>
+                            <Modal.Header closeButton>
+
+                                {selectedMenu && ( // Check if selectedMenu exists
+                                    <div>
+                                        <h3 className="selected-menu">{selectedMenu.menu_name}</h3>
+                                        <p className="selected-menu">{selectedMenu.menu_price.toLocaleString()} 원</p>
+                                        {/* 추가적인 정보 표시 등 */}
+                                    </div>
+                                )}
+                            </Modal.Header>
+                            <Modal.Body>
+                                {selectedMenu && selectedMenu.menu_option && (
+                                    selectedMenu.menu_option.map(option => (
+                                        <div key={option.id} className="option-text">
+                                            <div className="option-row">
+                                                <div className="option-name">{option.option_name}</div>
+                                                <div className="quantity-section">
+                                                    <div onClick={() => handleQuantityChange(option.option_name, -1)}>-</div>
+                                                    <span>{selectedOptions[option.option_name] || 0}</span>
+                                                    <div onClick={() => handleQuantityChange(option.option_name, +1)}>+</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                )}
+                            </Modal.Body>
+
+
+                            <Modal.Footer>
+                                <div className = "add_btn" variant="secondary" onClick={addToCart}>
+                                    <di className = "add_btn_text">메뉴 추가하기</di>
+                                </div>
+                            </Modal.Footer>
+                        </Modal>
                         {/* 카테고리에 맞는 메뉴 출력 */}
                         <div className="menu-container">
                             {menusByCategory[categories[currentCategoryIndex]]?.map((menu, index) => (
