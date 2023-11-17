@@ -19,7 +19,7 @@ export default function MainMenu() {
     };
 
     const handleNoMemberClick = () => {
-        navigate('/MainMenu');
+        navigate('/MealOption');
     };
     return (
         <div id="top_bar_menu">

@@ -43,8 +43,8 @@ export default function Pay() {
           </div>
           <div className='sum-txt'>합계</div>
           <div className='sum-price'>{totalPrice.toLocaleString()}원</div>
-          <button className='prev-button' onClick={goBack}>이전으로</button> {/* 수정 */}
-          <button className='pay-button'>결제</button>
+          <div className='prev-button' onClick={goBack}>이전으로</div> {/* 수정 */}
+          <div className='pay-button'>결제</div>
         </div>
       </div>
     );
