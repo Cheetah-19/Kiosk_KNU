@@ -1,4 +1,4 @@
-.container {
+.main-container {
     width: 1280px;
     height: 800px;
     position: absolute;
@@ -10,16 +10,16 @@
 
 .logo-container {
     width: 366.53px;
-    height: 60.979px;
+    height: 61.74px;
     position: absolute;
-    top: 171.31px;
-    left: 457px;
+    top: 171px;
+    left: 400px;
     background: url(./img/logo.png);
 }
 
-.upper-button{
+.up-button{
     position: absolute;
-    left: 610px;
+    left: 337px;
     top: 366px;
     width: 607px;
     height: 118px;
@@ -33,9 +33,9 @@
     font-weight: 700;
 }
 
-.lower-button{
+.low-button{
     position: absolute;
-    left: 610px;
+    left: 337px;
     top: 512px;
     width: 607px;
     height: 118px;
@@ -49,13 +49,13 @@
     font-weight: 700;
 }
 
-.upper-button:hover{
+.up-button:hover{
     border: 3px solid #000;
     background-color: #FFF;
     color:black;
 }
 
-.lower-button:hover {
+.low-button:hover {
     border: 3px solid #000;
     background-color: #FFF;
     color: black;
