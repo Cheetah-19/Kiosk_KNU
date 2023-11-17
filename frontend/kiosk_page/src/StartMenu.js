@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./StartMenu.css";
+import logo from "./img/logo.png" 
 
 function StartMenu() {
   const navigate = useNavigate();
@@ -10,14 +11,16 @@ function StartMenu() {
   };
 
   const handleGuestOrder = () => {
-    navigate('/MainMenu');
+    navigate('/mealoption');
   };
 
   return (
-    <div className='main-container'>
-      <div className='logo-container'></div>
-      <div className='up-button' onClick={handleLogin}>로그인하기</div>
-      <div className='low-button' onClick={handleGuestOrder}>비회원 주문하기</div>
+    <div id='login_background'>
+      <img id='logo' src={logo}></img>
+      <div id='login_btn_container'>
+        <div className='login_btn' onClick={handleLogin}>로그인하기</div>
+        <div className='login_btn' onClick={handleGuestOrder}>비회원 주문하기</div>
+      </div>
     </div>
   );
 }

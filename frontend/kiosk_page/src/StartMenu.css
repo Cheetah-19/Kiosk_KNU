@@ -1,62 +1,48 @@
-.main-container {
-    width: 1280px;
-    height: 800px;
-    position: absolute;
-    top: 0;
-    left: 0;
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-    background: linear-gradient(35deg, #FF7A00 11.31%, #F90 85.68%);
+#login_background{
+    background: linear-gradient(110deg, #FF7A00, #FF9900);
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.logo-container {
-    width: 366.53px;
-    height: 61.74px;
-    position: absolute;
-    top: 171px;
-    left: 465px;
-    background: url(./img/logo.png);
+#logo {
+    position: relative;
+    top: 170px;
 }
 
-.up-button{
-    position: absolute;
-    left: 337px;
-    top: 366px;
+#login_btn_container {
+    position: relative;
+    top: 300px;
+    
     width: 607px;
-    height: 118px;
-    border-radius:15px;
-    border: 3px solid #FFFFFF;
-    background:none;
-    text-align:center;
-    font-family:'pretendard-regular';
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 700;
+
+    display: flex;
+    flex-direction: column;
 }
 
-.low-button{
-    position: absolute;
-    left: 337px;
-    top: 512px;
-    width: 607px;
+.login_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     height: 118px;
-    border-radius:15px;
-    border: 3px solid #FFFFFF;
-    background:none;
-    text-align:center;
-    font-family:'pretendard-regular';
-    font-size: 40px;
-    font-style: normal;
+    margin: 14px;
+
+    border-radius: 15px;
+    border: 3px solid white;
+
+    font-family: Pretendard;
+    font-size: 35px;
     font-weight: 700;
+    color: white;
 }
 
-.up-button:hover{
-    border: 3px solid #000;
+.login_btn:hover{
     background-color: #FFF;
     color:black;
-}
-
-.low-button:hover {
-    border: 3px solid #000;
-    background-color: #FFF;
-    color: black;
 }
