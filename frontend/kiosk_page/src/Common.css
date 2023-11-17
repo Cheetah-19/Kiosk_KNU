@@ -29,7 +29,7 @@ header {
     justify-content: center;
     font-family: Inter;
     font-size : 1.5rem;
-
+    font-weight: bold;
 }
 
 body {
