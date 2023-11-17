@@ -6,6 +6,8 @@ import "./Common.css";
 export default function Religion() {
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const location = useLocation();
+
+    const photos = location.state.photos;
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
     let VegancheckboxValue = location.state.checkedBox;
@@ -38,7 +40,7 @@ export default function Religion() {
           alert("1개의 체크박스만 선택해주세요");
       } else {
         const checkedId = Object.keys(checkboxes).find(id => checkboxes[id]);
-        navigate('/Allergy', { state: { inputValue, PhoneNumber, ReligionCheckBox: checkedId, VeganCheckBox: VegancheckboxValue } });
+        navigate('/Allergy', { state: { inputValue, PhoneNumber, ReligionCheckBox: checkedId, VeganCheckBox: VegancheckboxValue, photos } });
       }
     };
 
@@ -49,7 +51,7 @@ export default function Religion() {
           <body> 
           {/* Checkbox inputs */}
           <div className="upper-t">종교가 있으신가요?</div>
-          <div classname = "check-box-out">
+          <div className = "check-box-out">
                 <div>
                   <input type="checkbox" id="Judaism" name="number" value="1" onChange={handleCheckboxChange} />
                   <label htmlFor="Judaism">유대교</label>

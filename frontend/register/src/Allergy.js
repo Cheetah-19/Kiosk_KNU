@@ -8,6 +8,8 @@ function Allergy() {
   const BASE_URL = 'https://kioskknu2023.run.goorm.site';
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const location = useLocation();
+
+    const photos = location.state.photos;
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
 
@@ -64,12 +66,14 @@ function Allergy() {
       console.log(allergyInfo); // 선택된 알러지 정보 확인
       console.log(ReligioncheckboxValue); // 종교 체크박스 값 확인
       console.log(VegancheckboxValue); // 비건 체크박스 값 확인
+      console.log(photos) // 사진 확인
 
       // 서버로 데이터 전송
       const postData = {
           user_name: inputValue,
           user_phonenum: PhoneNumber,
-          user_allergy: allergyInfo
+          user_allergy: allergyInfo,
+          user_photo : photos
       };
       
       if (VegancheckboxValue !== 0) {

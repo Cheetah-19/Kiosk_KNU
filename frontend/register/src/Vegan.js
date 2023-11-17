@@ -6,6 +6,7 @@ import "./Common.css";
 export default function Vegan() {
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const location = useLocation();
+    const photos = location.state.photos;
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
 
@@ -34,7 +35,7 @@ export default function Vegan() {
         alert("1개의 체크박스만 선택해주세요");
     } else {
       const checkedId = Object.keys(checkboxes).find(id => checkboxes[id]);
-      navigate('/religioncheck', { state: { inputValue, PhoneNumber, VeganCheckBox: checkedId } });
+      navigate('/religioncheck', { state: { inputValue, PhoneNumber, VeganCheckBox: checkedId, photos } });
     }
   };
     return (
@@ -44,7 +45,7 @@ export default function Vegan() {
           <body>
             <div className="upper-t">비건이신가요?</div>
             {/* Checkbox inputs */}
-            <div classname = "check-box-out">
+            <div className = "check-box-out">
                 <div>
                   <input type="checkbox" id="Fruiterian" name="number" value="1" onChange={handleCheckboxChange} />
                   <label htmlFor="one">프루테리언</label>

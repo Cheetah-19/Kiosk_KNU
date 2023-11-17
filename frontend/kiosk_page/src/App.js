@@ -13,7 +13,6 @@ import PhoneNum from "./PhoneNum";
 
 function App() {
   return (
-    <div >
       <Routes>
         <Route path="/" element={<StartMenu />} /> {/* Default route */}
         <Route path="/LoginCheck" element={<LoginCheck />} />
@@ -23,9 +22,7 @@ function App() {
         <Route path="/MainMenu" element={<MainMenu />} /> {/* Default route */}
         <Route path="/DetailMenu" element={<DetailMenu />} /> {/* Default route */}
         <Route path="/Pay" element={<Pay />} /> {/* Default route */}
-
       </Routes>
-    </div>
   );
 }
 

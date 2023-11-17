@@ -8,6 +8,7 @@ export default function ReligionCheck() {
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const location = useLocation();
 
+    const photos = location.state.photos;
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
     let VegancheckboxValue = location.state.VeganCheckBox;
@@ -23,10 +24,10 @@ export default function ReligionCheck() {
           <body>
             <div className="upper-t">믿으시는 종교가 있으신가요?</div>
             <br/>
-            <button className="next-button" onClick={() => navigate("/religion", { state : {inputValue, PhoneNumber, VeganCheckBox: VegancheckboxValue } })}>네</button>
+            <button className="next-button" onClick={() => navigate("/religion", { state : {inputValue, PhoneNumber, VeganCheckBox: VegancheckboxValue, photos } })}>네</button>
             <br/>
             <br/>
-            <button className="next-button" onClick={() => navigate("/allergycheck", { state: { inputValue, PhoneNumber, VeganCheckBox: VegancheckboxValue } })}>무교</button>
+            <button className="next-button" onClick={() => navigate("/allergycheck", { state: { inputValue, PhoneNumber, VeganCheckBox: VegancheckboxValue, photos } })}>무교</button>
           </body>
           <footer>
           </footer>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./Common.css";
+import "./Home.css"
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function MainMenu() {
-    // const BASE_URL = 'https://kioskknu2023.run.goorm.site';
-    const BASE_URL = 'http://127.0.0.1:8000';
+    const BASE_URL = 'https://kioskknu2023.run.goorm.site';
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -55,6 +55,11 @@ export default function MainMenu() {
 
     //결제창 가는 함수(장바구니 정보 전송) 결제 버튼을 눌렀을때, 서버로 cart에 담긴 정보를 전송한다.
     async function handlePayment() {
+        //0원 일 때는 실행 x
+        if (totalPrice === 0) {
+            return;
+        }
+
         try {
             const user = phoneNumber ? phoneNumber : '';
             const cartWithUser = cart.map(item => {
@@ -65,20 +70,20 @@ export default function MainMenu() {
                     total: item.total
                 };
             });
-    
+
             // 서버로 cartWithUser를 전송하거나 다른 작업 수행
-            await axios.post(`${BASE_URL}/order/menu/orderpost/`, { cart : cartWithUser });
+            await axios.post(`${BASE_URL}/order/menu/orderpost/`, { cart: cartWithUser });
 
             // 결제 버튼을 누르면 cart 배열 초기화
             localStorage.removeItem('cart');
             setCart([]);
-    
+
             navigate('/pay', { state: { cart: cartWithUser, totalPrice: totalPrice.toLocaleString(), option } });
         } catch (error) {
             console.error('서버로 Cart 데이터를 보내는데 실패했습니다:', error);
         }
     }
-    
+
 
 
     //메뉴 항목을 렌더링하는 함수
@@ -87,14 +92,14 @@ export default function MainMenu() {
             <div key={menu.id} className="menu-item" onClick={onClick}>
                 <img src={`${BASE_URL}${menu.menu_pic}`} alt={menu.menu_name} />
                 <h2>{menu.menu_name}</h2>
-                <p>{menu.menu_price}</p>
-                <p>{menu.menu_introduction}</p>
+                <p>{menu.menu_price.toLocaleString()} 원</p>
+                {/* <p>{menu.menu_introduction}</p> */}
             </div>
         );
     }
-    
 
-    //카테고리 리스트를 렌더링하는 함수
+
+
     function renderCategories() {
         return [...Array(itemsPerPage)].map((_, index) => {
             let categoryIndex = (itemsPerPage * (currentPage - 1)) + index;
@@ -105,13 +110,15 @@ export default function MainMenu() {
                         onClick={() => {
                             setCurrentCategoryIndex(categoryIndex);
                             setCurrentMenuIndex(null); // 카테고리를 변경했을 때 선택된 메뉴 초기화
-                        }}>
+                        }}
+                        className="category_name">
                         {categories[categoryIndex]}
                     </div>) :
                     (<div key={index}></div>)
             );
         });
     }
+
 
     //DetailMenu에 정보 전송
     function selectMenu(index) {
@@ -132,7 +139,7 @@ export default function MainMenu() {
         // Add the options to the menu item
         const selectedMenu = { ...selectedMenuItem, menu_option: options };
 
-        navigate('/DetailMenu', { state: { selectedMenu, phone_number : phoneNumber } }); // phoneNumber 추가
+        navigate('/DetailMenu', { state: { selectedMenu, phone_number: phoneNumber, menu_pic: selectedMenu.menu_pic } });
     }
 
     // index를 기준으로 카트에서 항목 삭제
@@ -152,29 +159,27 @@ export default function MainMenu() {
     function renderCart() {
         return cart.map((item, index) => {
             const allOptions = Object.entries(item.options);
-
+            const isMultiOptions = allOptions.length > 1;
             return (
-                <div id="menu_div" key={index}>
-                    <div className="cart_item">
-                        {/* Left section - menu name and options */}
-                        <div className="cart_item_name">
-                            <h3>{item.menu.menu_name}</h3>
-                            {allOptions.map(([optionName, quantity]) => (
-                                <p key={optionName} id="cart_options">{optionName}: {quantity}개</p>
-                            ))}
-                        </div>
-
-                        {/* Middle section - placeholder for now */}
-                        <div className="cart_item_options">
-                            {/* Add a delete button */}
-                            <button onClick={() => handleDeleteFromCart(index)}>X</button>
-                        </div>
-
-                        {/* Right section - total price for this item */}
-                        {item.total &&
-                            (<p className="cart_item_price">{item.total.toLocaleString()}원</p>)
-                        }
+                <div id="menu_div" className={isMultiOptions ? 'multi-options' : ''} key={index}>
+                    {/* top section - placeholder for now */}
+                    <div className="cart_item_options">
+                        {/* Add a delete button */}
+                        <div className="cart_delete" onClick={() => handleDeleteFromCart(index)}>삭제</div>
                     </div>
+
+                    {/* middle section - menu name and options */}
+                    <div className="cart_item_name">
+                        <h3>{item.menu.menu_name}</h3>
+                        {allOptions.map(([optionName, quantity]) => (
+                            <div className="cart_options"><p key={optionName}>{optionName}: {quantity}개</p></div>
+                        ))}
+                    </div>
+
+                    {/* bottom section - total price for this item */}
+                    {item.total &&
+                        (<div className="cart_item_price"><p >{item.total.toLocaleString()}원</p></div>)
+                    }
                 </div>
             );
         });
@@ -189,17 +194,17 @@ export default function MainMenu() {
                 //optional chaining 사용
                 phoneNumber = location.state?.phone_number;
                 const menuUrl = phoneNumber ? `${BASE_URL}/menu/${phoneNumber}/` : `${BASE_URL}/menu/`;
-                let responseMenus= await axios.get(menuUrl);
-                let dataMenus= responseMenus.data;
+                let responseMenus = await axios.get(menuUrl);
+                let dataMenus = responseMenus.data;
                 console.log("dataMenus:", dataMenus); // 확인용 로그
                 console.log(menuUrl);
-                let categoriesFromServerMenu= dataMenus.categories.map(c => c.menucategory_name);
-                let menusFromServerMenu= {};
+                let categoriesFromServerMenu = dataMenus.categories.map(c => c.menucategory_name);
+                let menusFromServerMenu = {};
                 console.log("categoriesFromServerMenu:", categoriesFromServerMenu); // 확인용 로그
 
                 //메뉴가 있는 카테고리만 선택
-                for(let category of categoriesFromServerMenu){
-                    if(dataMenus[category] && dataMenus[category].length > 0) {
+                for (let category of categoriesFromServerMenu) {
+                    if (dataMenus[category] && dataMenus[category].length > 0) {
                         menusFromServerMenu[category] = dataMenus[category];
                     }
                 }
@@ -208,8 +213,8 @@ export default function MainMenu() {
                 let filteredCategories = Object.keys(menusFromServerMenu);
 
                 //카테고리별 그룹 옵션 추출
-                let responseOptions= await axios.get(`${BASE_URL}/menu/option/`);
-                let dataOptions= responseOptions.data;
+                let responseOptions = await axios.get(`${BASE_URL}/menu/option/`);
+                let dataOptions = responseOptions.data;
 
                 let optionsFromServerOption = {};
 
@@ -221,9 +226,9 @@ export default function MainMenu() {
                 setMenusByCategory(menusFromServerMenu);
                 setOptionsByCategory(optionsFromServerOption);
 
-         } catch (error) {
-            console.error('ERROR : 메뉴 데이터를 받아오는데 실패했습니다.', error.message, error.stack, error.response?.status);
-        }
+            } catch (error) {
+                console.error('ERROR : 메뉴 데이터를 받아오는데 실패했습니다.', error.message, error.stack, error.response?.status);
+            }
         }
         //실행
         fetchMenusAndOptions();
@@ -258,41 +263,49 @@ export default function MainMenu() {
     }, [cart]);
 
     return (
-        <div>
-            <div id="top_bar_menu">
-                <div id="top_bar_home" onClick={herf_home}></div>
-                <header>Easy KIOSK</header>
-                <div id="menu_bar">
-                    {/* 왼쪽으로 카테고리 이동 */}
-                    <div id="menu_bar_left" onClick={slideLeft}>&#60;</div>
-
-                    {/* 3개의 카테고리씩 로드 */}
-                    {renderCategories()}
-
-                    {/* 오른쪽으로 카테고리 이동 */}
-                    <div id="menu_bar_right" onClick={slideRight}>&#62;</div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8" style={{ width: '800px', height: '800px', backgroundColor: '#f1f1f1' }}>
+                    <div class="row">
+                        <div class="col-lg-4" style={{ height: '90.5px', backgroundColor: '#FF7A00', textAlign: 'left' }}>
+                            <div id="top_bar_home" onClick={herf_home}></div>
+                        </div>
+                        <div class="col-lg-4" style={{ height: '90.5px', backgroundColor: '#FF7A00', textAlign: 'center' }}>
+                            <header>Easy KIOSK</header>
+                        </div>
+                        <div class="col-lg-4" style={{ height: '90.5px', backgroundColor: '#FF7A00', textAlign: 'right' }}>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="menu_bar">
+                            {/* 왼쪽으로 카테고리 이동 */}
+                            <div id="menu_bar_left" onClick={slideLeft}>&#60;</div>
+                            {/* 3개의 카테고리씩 로드 */}
+                            {renderCategories()}
+                            {/* 오른쪽으로 카테고리 이동 */}
+                            <div id="menu_bar_right" onClick={slideRight}>&#62;</div>
+                        </div>
+                    </div>
+                    <div id="menu_table">
+                        {/* 카테고리에 맞는 메뉴 출력 */}
+                        <div className="menu-container">
+                            {menusByCategory[categories[currentCategoryIndex]]?.map((menu, index) => (
+                                <MenuItem key={index} menu={menu} onClick={() => selectMenu(index)} />
+                            ))}
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div id="menu_table">
-                {/* 카테고리에 맞는 메뉴 출력 */}
-                <div className="menu-container">
-                    {menusByCategory[categories[currentCategoryIndex]]?.map((menu, index) => (
-                        <MenuItem key={index} menu={menu} onClick={() => selectMenu(index)} />
-                    ))}
-                </div>
-
-            </div>
-            {/* 장바구니 및 결제 부분 */}
-            <div id="pay">
-                {/* 장바구니 부분 - renderCart 함수 호출로 변경 */}
-                <div id="order_list">
-                    {renderCart()}
-                </div>
-                {/* 카드결제 부분 */}
-                <div id="order_list_right">
-                    <div id="pay_btn" onClick={handlePayment}>
-                        <div id="card_img"></div>
-                        <div id="total_price">{totalPrice.toLocaleString()}원 결제하기</div>
+                <div class="col-lg-4" style={{ width: '432px', height: '800px', backgroundColor: '#FFFFFF' }}>
+                    <div style={{ height: '100px', backgroundColor: '#FFFFFF', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                        <div id="order_list_text">주문목록</div>
+                    </div>
+                    <div style={{ height: '496px', backgroundColor: '#FFFFFF', overflowY: 'auto' }}>
+                        {renderCart()}
+                    </div>
+                    <div style={{ height: '204px', backgroundColor: '#FFFFFF' }}>
+                        <div id="pay_btn" onClick={handlePayment} className={totalPrice === 0 ? 'disabled' : ''}>
+                            <div className="total_price">{totalPrice.toLocaleString()}원 결제하기</div>
+                        </div>
                     </div>
                 </div>
             </div>

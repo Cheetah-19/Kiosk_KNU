@@ -9,6 +9,11 @@ export default function MainMenu() {
         navigate('/face');
     };
 
+    //홈 화면 가는 함수
+    function herf_home() {
+        navigate('/');
+    }
+
     const handleRightButtonClick = () => {
         navigate('/phonenum');
     };
@@ -18,6 +23,7 @@ export default function MainMenu() {
     };
     return (
         <div id="top_bar_menu">
+            <div id="top_bar_home" onClick={herf_home}></div>
             <header>Easy KIOSK</header>
             <body>
                 <div className='container'>

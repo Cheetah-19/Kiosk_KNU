@@ -1,5 +1,14 @@
 /*기본적인 레이아웃을 설정할 CSS*/
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
 
+.container{
+    background-color : white;
+}
 set {
     display: flex;
     flex-direction: column; /*header - body - footer 세로배치*/
@@ -11,7 +20,7 @@ set {
 header {
     width : 100%;
     height : 3.75rem;
-    background : #FD5A27;
+    background : #FF7A00;
     color: #F0F0F0;
     
     display: flex;
@@ -20,17 +29,42 @@ header {
     justify-content: center;
     font-family: Inter;
     font-size : 1.5rem;
+
 }
 
-body {
-    width: 100%;
-    height: 68vh;
+body, root {
+    width: 1280px;
+    height: 800px;
     margin:0px;
 }
 
 footer {
     margin-top : .5%
 }
+
+#top_bar_menu {
+    background-color: white;
+    height: calc(10vh + 5%); /* Calculate the height */
+    /* Add other styles as needed */
+}
+
+#mid {
+    background-color: white;
+    height: 60vh; /* Calculate the remaining height */
+    max-height: 50vh; /* Add this line if you want to limit the height */
+    overflow-y: auto; /* Add this line for scrolling if needed */
+    background-color: white;
+}
+
+#bottom {
+    background-color: white;
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    justify-content: center; /* 추가 */
+    align-items: center; /* 추가 */
+}
+
 
 @keyframes fade-in {
     0% { opacity: 0; }
@@ -46,16 +80,19 @@ footer {
 }
 
 .next-button {
-
-    width : 65%;
-    height : 6.5vh;
-    margin-left : 18%;
+    display: inline-flex;  /* 버튼을 인라인 플렉스 요소로 바꿉니다 */
+    align-items: center;  /* 버튼 내부의 텍스트를 가운데 정렬합니다 */
+    justify-content: center;  /* 버튼 내부의 텍스트를 가운데 정렬합니다 */
+    width: 65%;
+    height: 6.5vh;
+    margin: 0 auto;  /* 좌우 자동 마진을 적용하여 가운데 정렬합니다 */
     border-radius: .45rem;
-    background-color : #838383;
-    color : #FFFFFF;
+    background-color: #838383;
+    color: #FFFFFF;
     padding: .5rem .75rem;
     font-size: .875rem;
 }
+
 
 .upper-t {
     margin-top : 23vh;

@@ -130,15 +130,6 @@ class user_OrderDetailView(APIView):
             UserOrderedItemGetter = Ordered_Item.objects.filter(order=order)
             menunownnum = 0
             for orderitem in UserOrderedItemGetter:
-                # if(menunownum == orderitem.menu_num):
-                #     print(menunownum + "번째 메뉴")
-                #     print(orderitem.menu)
-                #     print(orderitem.option)
-                # else:
-
-                # print(orderitem.menu)
-                # print(orderitem.option)
-                # print(orderitem.menu_num)
                 if(menunownnum == orderitem.menu_num):                    #전 거와 메뉴가 동일하되 옵션만 다른 경우이므로 옵션만 출력하면 된다.
                     print(orderitem.option)
 
