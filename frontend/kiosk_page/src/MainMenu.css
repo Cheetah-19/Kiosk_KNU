@@ -1,0 +1,40 @@
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-container {
+    width: 824px;
+    height: 800px;
+    background-color: #f1f1f1;
+  }
+
+  .top-bar {
+    height: 90.5px;
+    background-color: #ff7a00;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .left-bar,
+.center-bar,
+.right-bar {
+    height: 90.5px;
+  width: 33.33%;
+}
+
+.side-container {
+    width: 456px;
+    height: 800px;
+    background-color: #ffffff;
+    padding: 10px;
+  }
+
+  .order-list {
+    height: 100px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
