@@ -44,12 +44,20 @@ class OrderView(APIView):
         post_data = json.loads(request.body)['cart'] #HTTP POST 요청의 본문(body)을 JSON 형식으로 파싱하여 Python 딕셔너리로 변환
         post_data_user = post_data[0]['user'] #나중에 user정보가 추가되면 여기에 user의 번호가 올 것이다
         order_num = Order.objects.count()+10000000 #order 객체의 수 세고, 거기다 10000000 더해서 새로운 주문번호 생성
-        order_data = Order(\
-            user=User.objects.get(user_phonenum=post_data_user),\
-            order_num=order_num,\
-            payment=Payment.objects.get(payment_name='Credit')\
-        )
-        order_data.save()                      #주문 정보 저장 (user는 db에 있는거 아무거나, payment는 credit으로 임시로 설정해놓음)
+        if(post_data_user == ""):
+                order_data = Order(\
+                user=User.objects.get(user_phonenum="00000000000"),\
+                order_num=order_num,\
+                payment=Payment.objects.get(payment_name='Credit')\
+            )
+                order_data.save()
+        else:
+            order_data = Order(\
+                user=User.objects.get(user_phonenum=post_data_user),\
+                order_num=order_num,\
+                payment=Payment.objects.get(payment_name='Credit')\
+            )
+            order_data.save()                      #주문 정보 저장 (user는 db에 있는거 아무거나, payment는 credit으로 임시로 설정해놓음)
 
         menudistinctionnum = 1                 #메뉴 구분을 위한 숫자..
         for order_menu in post_data:                                            #첫번째 for : 선택된 메뉴들

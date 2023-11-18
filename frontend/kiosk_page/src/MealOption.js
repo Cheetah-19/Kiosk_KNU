@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-// import "./Home.css";
-// import "./Common.css";
-import "./MealOption.css"
-import eatImage from './img/store_meal.png'; // Add this line
-import takeOutImage from './img/takeout.png'; // Add this line
+import { useLocation, useNavigate } from 'react-router-dom';
+import "./MealOption.css";
+import eatImage from './img/store_meal.png';
+import takeOutImage from './img/takeout.png';
 
 export default function MealOption() {
     const [selected, setSelected] = useState('');
-    const navigate = useNavigate(); // Get the navigate function
+    const [phoneNumber, setPhoneNumber] = useState(''); // State to store phone number
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    // Extract phone number from location state when component mounts
+    React.useEffect(() => {
+        setPhoneNumber(location.state?.phone_number || ''); 
+    }, []);
 
     const handleClick = (option) => {
-        navigate('/MainMenu', { state: { option } });
-    };
+        navigate('/MainMenu', { state: { option, phone_number: phoneNumber } });
+    };  
 
-    //홈 화면 가는 함수
     function herf_home() {
         navigate('/');
-      }
+    }
 
     return (
-        
         <div className="full_screen">
             <div id="top_bar_home" onClick={herf_home}></div>
             <header>Easy KIOSK</header>
@@ -44,4 +47,3 @@ export default function MealOption() {
         </div>
     );
 }
-

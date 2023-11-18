@@ -22,7 +22,10 @@ export default function Pay() {
     function goBack() {
       navigate('/MainMenu'); // '/MainMenu'를 이전 페이지의 경로로 교체하세요.
     }
-  
+    
+    function goToPayCheck() {
+      navigate('/PayCheck', {state: {totalPrice: totalPrice} });
+    }
     return (
       <div id = "pay_page">
         <div id="top_bar_home" onClick={herf_home}></div>
@@ -30,7 +33,7 @@ export default function Pay() {
         <div className='rect1'>
           <div className='txt1'>주문목록을 확인해주세요!</div>
           <div className="rect2">
-            <p>{option === 'takeout' ? '포장 주문' : '매장식사 주문'}</p>
+            <p>{option === '테이크아웃' ? '테이크아웃' : '매장식사'}</p>
             {cart.map((item, index) => (
               <div key={index}>
                 <h2>{item.menu.menu_name}</h2>
@@ -43,8 +46,8 @@ export default function Pay() {
           </div>
           <div className='sum-txt'>합계</div>
           <div className='sum-price'>{totalPrice.toLocaleString()}원</div>
-          <div className='prev-button' onClick={goBack}>이전으로</div> {/* 수정 */}
-          <div className='pay-button'>결제</div>
+          <div className='prev-button' onClick={goBack}>이전으로 </div>
+          <div className='pay-button' onClick={goToPayCheck}>결제</div>
         </div>
       </div>
     );

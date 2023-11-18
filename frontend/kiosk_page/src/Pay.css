@@ -67,6 +67,10 @@
 }
 
 .prev-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     position: absolute;
     left: 70px;
     top: 500px;
@@ -85,6 +89,10 @@
 }
 
 .pay-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
     position: absolute;
     right: 70px;
     top: 500px;
