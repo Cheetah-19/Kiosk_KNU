@@ -22,7 +22,10 @@ export default function Pay() {
     function goBack() {
       navigate('/MainMenu'); // '/MainMenu'를 이전 페이지의 경로로 교체하세요.
     }
-  
+    
+    function goToPayCheck() {
+      navigate('/PayCheck', {state: {totalPrice: totalPrice} });
+    }
     return (
       <div id = "pay_page">
         <div id="top_bar_home" onClick={herf_home}></div>
@@ -43,8 +46,8 @@ export default function Pay() {
           </div>
           <div className='sum-txt'>합계</div>
           <div className='sum-price'>{totalPrice.toLocaleString()}원</div>
-          <div className='prev-button' onClick={goBack}>이전으로</div> {/* 수정 */}
-          <div className='pay-button'>결제</div>
+          <div className='prev-button' onClick={goBack}>이전으로 </div>
+          <div className='pay-button' onCLick={goToPayCheck}>결제</div>
         </div>
       </div>
     );
