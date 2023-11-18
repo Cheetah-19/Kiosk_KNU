@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import *
 from rest_framework.response import Response
-
+from face_recognition.face_methods import base_to_vector
 class UserSerializer(serializers.ModelSerializer):
     
     user_vegetarian = serializers.SlugRelatedField(
@@ -31,15 +31,15 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['user_name', 'user_phonenum', 'user_vegetarian', 'user_allergy', 'religion']
+        fields = ['user_name', 'user_phonenum', 'user_vegetarian', 'user_allergy', 'religion','user_face_info']
 
     def create(self, validated_data):
 
         #추가해야 할 것들 -> DB로 넣기 전에 데이터가 이미 존재하는지 / 존재하지 않는 새로운 형태인지 판별
-
+        print(validated_data)
         username=validated_data.get('user_name')
         userphonenum=validated_data.get('user_phonenum')
-
+        
         #username 이나 userphonenum 이 null 인 경우
         if username == "" or userphonenum == "":
             raise serializers.ValidationError({'message': '입력값이 없어서 등록이 불가합니다.'})
@@ -66,7 +66,8 @@ class UserSerializer(serializers.ModelSerializer):
             vegetarian_name = validated_data.get('user_vegetarian')
             religion_type = validated_data.get('religion')
             allergy_names = validated_data.get('user_allergy')
-
+            user_photos = validated_data.get('user_photos')
+            print(user_photos)
             if vegetarian_name is not None:
                 vegetarian = Vegetarian.objects.get(vegetarian_name=vegetarian_name)
                 user.vegetarian_id = vegetarian.id
@@ -79,7 +80,10 @@ class UserSerializer(serializers.ModelSerializer):
                 for allergy_name in allergy_names:
                     allergy = Allergy.objects.get(allergy_name=allergy_name)
                     user.user_allergy.add(allergy)
-                    
+            if user_photos is not None:
+                face_list = base_to_vector(user_photos)
+                print(len(face_list))
+                user.user_face_info = str(face_list)
             user.save()
 
             return user

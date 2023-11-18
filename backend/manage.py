@@ -5,6 +5,11 @@ import sys
 
 
 def main():
+    
+    #파이썬 경로 추가
+    if sys.path.count(os.path.dirname(__file__)) == 0 :
+        sys.path.append(os.path.dirname(__file__))
+        print("add ",os.path.dirname(__file__))
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_react_project.settings")
     try:
