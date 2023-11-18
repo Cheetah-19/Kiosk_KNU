@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import "./Common.css"
 import "./PhoneNum.css"
 
 export default function PhoneNum() {
     const BASE_URL = 'https://kioskknu2023.run.goorm.site';
+    // const BASE_URL = 'http://127.0.0.1:8000';
 
     const [phone_number, setPhoneNumber] = useState('');
     const navigate = useNavigate();
@@ -22,7 +24,7 @@ export default function PhoneNum() {
             });
             console.log(response.data);
             alert("로그인 성공");
-            navigate('/mainmenu', { state: { phone_number } });  // 성공 시 MainMenu로 페이지 이동 + phoneNumber 전달
+            navigate('/MealOption', { state: { phone_number } });  // 성공 시 MainMenu로 페이지 이동 + phoneNumber 전달
 
         } catch (error) {
             console.error(error);
