@@ -6,9 +6,41 @@
     font-style: normal;
 }
 
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+@keyframes slider-open {
+    0% {
+        opacity: 0;
+        transform: translateY(-7%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slider-close {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-7%);
+    }
+}
+
 .container{
     background-color : white;
 }
+
 set {
     display: flex;
     flex-direction: column; /*header - body - footer 세로배치*/
@@ -18,24 +50,41 @@ set {
 }
 
 header {
+    display: flex;
+    align-items : center;
+    text-align: center;
+    justify-content: center;
+
     width : 100%;
     height : 3.75rem;
     background : #FF7A00;
     color: #F0F0F0;
     
-    display: flex;
-    align-items : center;
-    text-align: center;
-    justify-content: center;
     font-family: Inter;
     font-size : 1.5rem;
-
+    font-weight: bold;
 }
 
-body, root {
+body {
     width: 1280px;
     height: 800px;
     margin:0px;
+}
+
+#root {
+    width: 1280px;
+    height: 800px;
+    margin:0px;
+}
+
+#background{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #FFFCF3;
+    width: 100%;
+    height: 100%;
 }
 
 footer {
@@ -57,61 +106,21 @@ footer {
 }
 
 #bottom {
-    background-color: white;
-    width: 100%;
-    height: 60vh;
     display: flex;
     justify-content: center; /* 추가 */
     align-items: center; /* 추가 */
-}
-
-
-@keyframes fade-in {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    
+    background-color: white;
+    width: 100%;
+    height: 60vh;
 }
 
 .blinking-text {
-
     align-items : center;
     text-align: center;
     justify-content: center;
+
     animation: fade-in 3s forwards;
-}
-
-.next-button {
-    display: inline-flex;  /* 버튼을 인라인 플렉스 요소로 바꿉니다 */
-    align-items: center;  /* 버튼 내부의 텍스트를 가운데 정렬합니다 */
-    justify-content: center;  /* 버튼 내부의 텍스트를 가운데 정렬합니다 */
-    width: 65%;
-    height: 6.5vh;
-    margin: 0 auto;  /* 좌우 자동 마진을 적용하여 가운데 정렬합니다 */
-    border-radius: .45rem;
-    background-color: #838383;
-    color: #FFFFFF;
-    padding: .5rem .75rem;
-    font-size: .875rem;
-}
-
-
-.upper-t {
-    margin-top : 23vh;
-    font-size : 1.5rem;
-    align-items : center;
-    text-align: center;
-    justify-content: center;
-    animation: fade-in 3s forwards;
-}
-
-.input-des {
-    border-radius: 2rem;
-    width: 65%;
-    margin-left:17%;
-    margin-top: 0%;
-    height: 6.5vh;
-    align-items : center;
-    text-align: center;
-    justify-content: center;
 }
 
 .check-box-out{
@@ -119,6 +128,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
     width : 65%;
     height : 6.5vh;
     margin-left : 18%;
@@ -130,22 +140,26 @@ footer {
     width:"100%";
 }
 
-/*수정해야 할 hover.*/
-.next-button:hover {
-    background-color: #FD5A27;
+.light-gray-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #E8E8E8;
+    width: 265px;
+    height: 86px;
+
+    border-radius: 10px;
+
+    font-family: Pretendard-Regular;
+    font-size: 32px;
+    font-weight: 700;
+    color: black;
 }
 
+.light-gray-btn:hover {
+    background-color: #FF7A00;
 
-/* 카메라 관련 css */
-
-#video_container {
-    margin: 0px auto;
-    width: 500px;
-    height: 375px;
-    border: 10px #333 solid;
-}
-#video_Element {
-    width: 500px;
-    height: 375px;
-    background-color: #666;
+    color: white;
 }

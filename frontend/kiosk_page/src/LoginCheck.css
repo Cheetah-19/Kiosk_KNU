@@ -1,42 +1,51 @@
-#button-container {
-    position: absolute;
-    top: 50%;
-    left: 51%;
-    transform: translate(-50%, -50%);
+#inner-bg {
+    background-color: white;
+    width: 1200px;
+    height: 720px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 28px 0px #DFD5D2;
+    
+    font-family: Pretendard-Regular;
+    font-weight: 700;
+}
+
+#face-img-container {
     display: flex;
-    justify-content: space-between;
-    width: 750px; /* 버튼 사이의 거리를 조절하려면 이 값을 변경하세요 */
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+    top: 180px;
+    height: 300px;
+    
+    font-size: 40px;
+
+    animation: blink 1.5s linear 2;
 }
 
-button {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width : 65%;
-    height : 6.5vh;
-    margin-left : 18%;
-    border-radius: .45rem;
-    background-color : #838383;
-    color : #FFFFFF;
-    padding: .5rem .75rem;
-    font-size: .875rem;
+#face-contents {
+    color:#FF7A00;
 }
 
-/*비회원 버튼*/
-.button2 {
-
-    border:none;
-    width : 200px;
-    height : 3.5vh;
-    margin-left : 28%;
-    border-radius: .45rem;
-    background-color : #FFFFFF;
-    color : black;
-    padding: .5rem .75rem;
-    font-size: .875rem;
-    text-decoration: underline;
+#camera-container {
+    position: relative;
+    top: 170px;
+    height: 300px;
 }
 
-button:not(.button2):hover {
-    background-color: #FD5A27;
+#phoneNum-container{
+    position: relative;
+    top: 245px;
+    height: 300px;
+}
+
+.gotoPhoneNum-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+    top: 300px;
+
+    font-size: 25px;
 }

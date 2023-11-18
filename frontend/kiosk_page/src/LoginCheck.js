@@ -1,41 +1,55 @@
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+
+import Camera from "./Face";
+import PhoneNum from "./PhoneNum";
+
 import "./Common.css";
 import "./LoginCheck.css";
 
+import face from './img/face.png';
+import down from './img/down_arrow.png';
+
 export default function MainMenu() {
-    const navigate = useNavigate();
+    const [alert, setAlert] = useState(false);
 
-    const handleLeftButtonClick = () => {
-        navigate('/face');
-    };
+    const [gotoPhoneNUm, setGotoPhoneNUm] = useState(false);
+    const [slide, setSlide] = useState(false);
 
-    //홈 화면 가는 함수
-    function herf_home() {
-        navigate('/');
-    }
-
-    const handleRightButtonClick = () => {
-        navigate('/phonenum');
-    };
-
-    const handleNoMemberClick = () => {
-        navigate('/MainMenu');
-    };
+    useEffect(()=>{
+        setTimeout(() => { setAlert(true) }, 2200);
+    });
+    
     return (
-        <div id="top_bar_menu">
-            <div id="top_bar_home" onClick={herf_home}></div>
-            <header>Easy KIOSK</header>
-            <body>
-                <div className='container'>
-                    <div id="button-container">
-                        <button onClick={handleLeftButtonClick}>얼굴인식</button>
-                        <button onClick={handleRightButtonClick}>휴대폰번호</button>
-                    </div>
-                    <div>
-                        <button className='button2' onClick={handleNoMemberClick}>비회원으로 주문하기</button>
-                    </div>
-                </div>
-            </body>
+        <div id='background'>
+            <div id='inner-bg'>
+                {
+                    gotoPhoneNUm === true ?
+                        <div id='phoneNum-container' style={{animation: slide ? 'slider-open 0.5s forwards 1':'slider-close 0.5s forwards 1'}}><PhoneNum/></div>
+                        :
+                        alert ===  true ?
+                            <div id='camera-container'><Camera setGotoPhoneNUm={setGotoPhoneNUm} setSlide={setSlide}/></div>
+                            :
+                            <div id='face-img-container'>
+                                <img src={face} style={{width: '200px', margin: '0px 0px 40px 0px'}}/>
+                                <div>
+                                    <span id='face-contents'>얼굴을 인식</span>하여 간편하게 주문하세요!
+                                </div>
+                            </div>
+                }
+                
+                {
+                    gotoPhoneNUm === false ?
+                        <div class='gotoPhoneNum-btn' onClick={() => {setGotoPhoneNUm(true); setSlide(true)}}>
+                            휴대폰 번호로 주문하기
+                            <img src={down} style={{width: '48px'}}/>
+                        </div>
+                        :
+                        <div class='gotoPhoneNum-btn' onClick={() => {setSlide(false); setTimeout(() => {setGotoPhoneNUm(false)}, 150)}}>
+                            <img src={down} style={{width: '48px', transform: 'rotate(180deg)'}}/>  
+                            얼굴 인식으로 주문하기
+                        </div>
+                }
+            </div>
         </div>
     );
 }

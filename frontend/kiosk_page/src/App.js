@@ -5,8 +5,9 @@ import "./App.css";
 import MealOption from "./MealOption";
 import StartMenu from "./StartMenu";
 import MainMenu from "./MainMenu";
-import DetailMenu from "./DetailMenu";
 import Pay from "./Pay";
+import PayCheck from "./PayCheck";
+import SignUp from "./SignUp";
 import Face from "./Face";
 import LoginCheck from "./LoginCheck";
 import PhoneNum from "./PhoneNum";
@@ -20,8 +21,9 @@ function App() {
         <Route path="/Face" element={<Face />} /> {/* Default route */}
         <Route path="/MealOption" element={<MealOption />} /> {/* Default route */}
         <Route path="/MainMenu" element={<MainMenu />} /> {/* Default route */}
-        <Route path="/DetailMenu" element={<DetailMenu />} /> {/* Default route */}
         <Route path="/Pay" element={<Pay />} /> {/* Default route */}
+        <Route path="/PayCheck" element={<PayCheck />} />
+        <Route path="/SignUp" element={<SignUp />} />
       </Routes>
   );
 }

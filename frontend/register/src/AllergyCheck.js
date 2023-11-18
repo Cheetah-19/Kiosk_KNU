@@ -8,9 +8,10 @@ export default function AllergyCheck() {
 
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const location = useLocation();
-
+    const photos = location.state.photos;
     const PhoneNumber = location.state.PhoneNumber;
     const inputValue = location.state.inputValue;
+    
     let ReligioncheckboxValue = location.state.ReligionCheckBox;
     let VegancheckboxValue = location.state.VeganCheckBox;
 
@@ -31,6 +32,7 @@ export default function AllergyCheck() {
       const postData = {
           user_name: inputValue,
           user_phonenum: PhoneNumber,
+          user_photos : photos
       };
       
       if (VegancheckboxValue !== 0) {
@@ -58,7 +60,7 @@ export default function AllergyCheck() {
           <body>
             <div className="upper-t">알러지가 있으신가요?</div>
             <br/>
-            <button className = "next-button" onClick= {() => navigate('/Allergy', { state: { inputValue, PhoneNumber, ReligionCheckBox: ReligioncheckboxValue, VeganCheckBox: VegancheckboxValue } })}>네</button>
+            <button className = "next-button" onClick= {() => navigate('/Allergy', { state: { inputValue, PhoneNumber, ReligionCheckBox: ReligioncheckboxValue, VeganCheckBox: VegancheckboxValue,photos } })}>네</button>
             <br/>
             <br/>
             {/*알러지 해당없으면 바로 등록 모달창으로 보내주기.*/}

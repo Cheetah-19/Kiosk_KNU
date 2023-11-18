@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./Common.css";
 import "./Home.css"
+import "./MainMenu.css"
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
+
 
 export default function MainMenu() {
     const BASE_URL = 'https://kioskknu2023.run.goorm.site';
@@ -11,6 +14,27 @@ export default function MainMenu() {
     const location = useLocation();
     const option = location.state?.option;
     let phoneNumber = location.state?.phone_number; // 전역 변수로 phoneNumber 선언
+
+    const [selectedOptions, setSelectedOptions] = React.useState({});
+
+
+    // 모달 상태 변수 및 함수 추가
+    const [showModal, setShowModal] = useState(false);
+    const closeModal = () => setShowModal(false);
+    const openModal = () => setShowModal(true);
+
+    // 선택한 메뉴 상태 변수 추가
+    const [selectedMenu, setSelectedMenu] = useState(null);
+    // 선택한 사이드 메뉴들과 그들의 총 가격 계산
+    const total = selectedMenu ? selectedMenu.menu_price + Object.entries(selectedOptions).reduce((sum, [optionName, quantity]) => {
+        const optionPrice = findSelectedOption(optionName).option_price;
+        return sum + (optionPrice * quantity);
+    }, 0) : 0;
+
+    // 선택된 옵션에 대한 정보를 찾는 함수 추가
+    function findSelectedOption(optionName) {
+        return selectedMenu.menu_option.find(option => option.option_name === optionName);
+    }
 
     // 총 가격 상태 변수 추가
     const [totalPrice, setTotalPrice] = useState(0);
@@ -52,6 +76,49 @@ export default function MainMenu() {
 
         navigate('/');
     }
+
+    // 모달 내에서 "메뉴 추가하기" 버튼을 클릭했을 때 호출되는 함수
+    function addToCart() {
+        // Create a new order item with the selected menu and options, and total price
+        const orderItem = {
+            menu: selectedMenu,
+            options: selectedOptions,
+            total: total,
+        };
+
+        // Get existing cart from local storage
+        let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+        // Add the new order item to the cart and update it in local storage
+        existingCart.push(orderItem);
+        localStorage.setItem('cart', JSON.stringify(existingCart));
+
+        // Update the cart state
+        setCart(existingCart);
+
+        // 닫기 버튼 클릭 시 모달을 닫도록 설정
+        closeModal();
+    }
+
+    //서브메뉴 수량 계산
+    function handleQuantityChange(optionName, change) {
+        setSelectedOptions(prevState => {
+            const currentQuantity = prevState[optionName] || 0;
+            const newQuantity = Math.max(currentQuantity + change, 0);
+
+            if (newQuantity === 0) {
+                const { [optionName]: removedOption, ...rest } = prevState;
+                return rest;
+            }
+
+            return {
+                ...prevState,
+                [optionName]: newQuantity,
+            };
+        });
+    }
+
+
 
     //결제창 가는 함수(장바구니 정보 전송) 결제 버튼을 눌렀을때, 서버로 cart에 담긴 정보를 전송한다.
     async function handlePayment() {
@@ -99,7 +166,7 @@ export default function MainMenu() {
     }
 
 
-
+    // 카테고리를 렌더링 하는 함수
     function renderCategories() {
         return [...Array(itemsPerPage)].map((_, index) => {
             let categoryIndex = (itemsPerPage * (currentPage - 1)) + index;
@@ -119,28 +186,23 @@ export default function MainMenu() {
         });
     }
 
-
-    //DetailMenu에 정보 전송
+    //선택한 메뉴 정보 저장 ( 모달에서 사용용도 )
     function selectMenu(index) {
-        setCurrentMenuIndex(index);
         const selectedMenuItem = menusByCategory[categories[currentCategoryIndex]][index];
-
-        // Get the options for the menu item
         const options = selectedMenuItem.menu_option.map(optionId => {
             const optionCategory = Object.keys(optionsByCategory).find(category =>
                 optionsByCategory[category].some(option => option.id === optionId)
             );
             const option = optionsByCategory[optionCategory]?.find(option => option.id === optionId);
-
-            // Add category to each option
             return { ...option, category: optionCategory };
         });
 
-        // Add the options to the menu item
         const selectedMenu = { ...selectedMenuItem, menu_option: options };
-
-        navigate('/DetailMenu', { state: { selectedMenu, phone_number: phoneNumber, menu_pic: selectedMenu.menu_pic } });
+        setSelectedMenu(selectedMenu); // 선택한 메뉴 정보를 상태 변수에 저장
+        setSelectedOptions({}); // 옵션과 수량 초기화
+        openModal(); // 모달 열기
     }
+
 
     // index를 기준으로 카트에서 항목 삭제
     function handleDeleteFromCart(index) {
@@ -165,14 +227,14 @@ export default function MainMenu() {
                     {/* top section - placeholder for now */}
                     <div className="cart_item_options">
                         {/* Add a delete button */}
-                        <div className="cart_delete" onClick={() => handleDeleteFromCart(index)}>삭제</div>
+                        <div className="cart_item_delete" onClick={() => handleDeleteFromCart(index)}>삭제</div>
                     </div>
 
                     {/* middle section - menu name and options */}
                     <div className="cart_item_name">
                         <h3>{item.menu.menu_name}</h3>
                         {allOptions.map(([optionName, quantity]) => (
-                            <div className="cart_options"><p key={optionName}>{optionName}: {quantity}개</p></div>
+                            <div className="cart_item_count"><p key={optionName}>{optionName}: {quantity}개</p></div>
                         ))}
                     </div>
 
@@ -184,6 +246,7 @@ export default function MainMenu() {
             );
         });
     }
+
     //서버로부터 정보를 받아온다. Axios 활용.
     useEffect(() => {
         console.log("fetchMenusAndOptions 실행"); // 확인용 로그
@@ -263,20 +326,21 @@ export default function MainMenu() {
     }, [cart]);
 
     return (
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-8" style={{ width: '800px', height: '800px', backgroundColor: '#f1f1f1' }}>
-                    <div class="row">
-                        <div class="col-lg-4" style={{ height: '90.5px', backgroundColor: '#FF7A00', textAlign: 'left' }}>
+        <div className="container-fluid">
+            <div className="row">
+                <div className = "col-lg-8 main-container">
+                    <div className="row top-bar">
+                        <div className="col-lg-4 left-bar">
                             <div id="top_bar_home" onClick={herf_home}></div>
                         </div>
-                        <div class="col-lg-4" style={{ height: '90.5px', backgroundColor: '#FF7A00', textAlign: 'center' }}>
+                        <div className="col-lg-4 center-bar">
                             <header>Easy KIOSK</header>
                         </div>
-                        <div class="col-lg-4" style={{ height: '90.5px', backgroundColor: '#FF7A00', textAlign: 'right' }}>
+                        <div className="col-lg-4 right-bar">
+                            {/* 내정보 보는 곳 ? 넣을 지 말지 정해야함. */}
                         </div>
                     </div>
-                    <div class="row">
+                    <div className="row">
                         <div id="menu_bar">
                             {/* 왼쪽으로 카테고리 이동 */}
                             <div id="menu_bar_left" onClick={slideLeft}>&#60;</div>
@@ -287,23 +351,60 @@ export default function MainMenu() {
                         </div>
                     </div>
                     <div id="menu_table">
+                        {/* 모달 컴포넌트 작성 */}
+                        <Modal show={showModal} onHide={closeModal}>
+                            <Modal.Header closeButton>
+
+                                {selectedMenu && ( // Check if selectedMenu exists
+                                    <div>
+                                        <h3 className="selected_menu">{selectedMenu.menu_name}</h3>
+                                        <p className="selected_menu">{selectedMenu.menu_price.toLocaleString()} 원</p>
+                                        {/* 추가적인 정보 표시 등 */}
+                                    </div>
+                                )}
+                            </Modal.Header>
+                            <Modal.Body>
+                                {selectedMenu && selectedMenu.menu_option && (
+                                    selectedMenu.menu_option.map(option => (
+                                        <div key={option.id} className="option_text">
+                                            <div className="option_row">
+                                                <div className="option_name">{option.option_name}</div>
+                                                <div className="quantity_section">
+                                                    <div className="minus" onClick={() => handleQuantityChange(option.option_name, -1)}></div>
+                                                    <span className="option_count">{selectedOptions[option.option_name] || 0}</span>
+                                                    <div className="plus" onClick={() => handleQuantityChange(option.option_name, +1)}></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                )}
+                            </Modal.Body>
+
+                            <Modal.Footer >
+
+                                <div className="add_btn" variant="secondary" onClick={addToCart}>
+                                    <di className="add_btn_text">메뉴 추가하기</di>
+                                </div>
+
+                            </Modal.Footer>
+                        </Modal>
                         {/* 카테고리에 맞는 메뉴 출력 */}
-                        <div className="menu-container">
+                        <div className="menu_container">
                             {menusByCategory[categories[currentCategoryIndex]]?.map((menu, index) => (
                                 <MenuItem key={index} menu={menu} onClick={() => selectMenu(index)} />
                             ))}
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4" style={{ width: '432px', height: '800px', backgroundColor: '#FFFFFF' }}>
-                    <div style={{ height: '100px', backgroundColor: '#FFFFFF', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <div className="col-lg-4 side-container">
+                    <div className = "order-list">
                         <div id="order_list_text">주문목록</div>
                     </div>
-                    <div style={{ height: '496px', backgroundColor: '#FFFFFF', overflowY: 'auto' }}>
+                    <div id="order_list_area">
                         {renderCart()}
                     </div>
-                    <div style={{ height: '204px', backgroundColor: '#FFFFFF' }}>
-                        <div id="pay_btn" onClick={handlePayment} className={totalPrice === 0 ? 'disabled' : ''}>
+                    <div id="pay">
+                        <div id="pay_btn" onClick={handlePayment} className={totalPrice === 0 ? 'disabled' : ''}> {/* 0원이면 클릭 못하게 하기 */}
                             <div className="total_price">{totalPrice.toLocaleString()}원 결제하기</div>
                         </div>
                     </div>

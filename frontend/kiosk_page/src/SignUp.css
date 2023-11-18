@@ -1,0 +1,40 @@
+.qr-txt{
+    position: absolute;
+    left: 178px;
+    top: 289px;
+    color: #000;
+    text-align: center;
+    font-family: 'pretendard-regular';
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.in-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    left:308px;
+    top:401px;
+
+    width: 264px;
+    height: 86px;
+    border-radius: 10px;
+    background: #FFF;
+
+    color: #000;
+    text-align: center;
+    font-family: Pretendard-Regular;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.in-button:hover{
+    color: white;
+    background: #FF7A00;
+}

@@ -16,14 +16,6 @@
 ::-webkit-scrollbar-thumb {
     background-color: #FF7A00; /* 스크롤바 색상 설정 */
 }
-
-#start_img { /*처음 시작 화면*/
-    width: 100%;
-    height: 100vh;
-    background: url(./img/start_img.jpeg) no-repeat center / cover;
-    border-radius: 15px;
-}
-
 .container {
     display: flex;
     justify-content: center;
@@ -48,40 +40,22 @@
    background-color:#FD5A27 ;
 }
 
-/*상단부분*/
-#top_bar {
-    height: 5%; /* Set explicit height */
-}
-
-/* 홈이미지 */
-
+/* 상단 주황색 부분 크기 지정 */
 #top_bar_menu {
     height: calc(10vh + 5%); /* Calculate the height */
-    /* Add other styles as needed */
 }
 
+/* 처음으로 가는 사진 */
 #top_bar_home {
     position:absolute; /* Add this line */
     top:15px; /* Adjust as needed */
     left:10px; /* Adjust as needed */
-    
     width:30px; /* Set explicit size */
     height:30px; /* Set explicit size */
- 
     background:url(img/top_bar_home.png) no-repeat center / cover;
 }
 
-/* 뒤로가기 이미지 */
-#top_bar_back {
-    position:absolute; /* Add this line */
-    right:0vw; /* Adjust as needed */
-
-    width:40px; /* Set explicit size */
-    height:40px; /* Set explicit size */
- 
-    background:url(img/back.png) no-repeat center / cover;
-}
-
+/* 메뉴가 출력되는 부분 */
 #menu_table {
     height: calc(100vh - 15vh - 35vh); /* Calculate the remaining height */
     max-height: 50vh; /* Add this line if you want to limit the height */
@@ -89,6 +63,7 @@
     background-color: F3F3F3;
 }
 
+/* 카테고리 바 */
 #menu_bar  {
     height: 90.5px;
     background: #FF7A00;
@@ -100,24 +75,6 @@
     justify-content: space-around;
     font-size: 11px;
     font-weight: bold;
-}
-
-.category_name{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    font-weight: bold;
-    font-size: 16px;
-
-    color: #FFF;
-
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
 }
 
 #menu_bar_left,
@@ -136,13 +93,27 @@
     line-height: normal;
 }
 
-#order {
-    display: none;
+/* 카테고리 이름 */
+.category_name{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-weight: bold;
+    font-size: 16px;
+
+    color: #FFF;
+
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
-
-/* MainMenu 메뉴 표시 css */
-.menu-container {
+/* MainMenu의 메뉴 테두리 */
+.menu_container {
     max-height: 50vh;
     display: flex;
     flex-wrap: wrap;
@@ -160,7 +131,6 @@
     height: 230px; /* adjust the height to accommodate the content */
     margin: 2px; /* adjust the margin to reduce spacing */
     padding: 10px; /* adjust the padding to reduce spacing */
-
     overflow: hidden; /* Add this line to hide overflowing content */
 }
 
@@ -193,19 +163,6 @@
 
 }
 
-.menu-item .price {
-   color: red; /* make the price text red */
-   text-align: center; /* Center the text */
-}
-
-
-.menu-details-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
 
 /* 장바구니 및 결제창 */
 
@@ -219,30 +176,10 @@
     margin-left: 18px;
 }
 
-#pay {
-    height: 35vh; /* vh is viewport height */
-    width: 100%;
-    
-    background-color: rgb(190, 189, 189); /* Set the background color to gray */
-    display: flex;
-}
-
-/* #order_list {
-    width: 456px; 
-    height: 124px;
-    overflow-x: auto;
-    background-color: white;
-} */
-
-#order_list_right {
-    width: 34%;
-    height: 100%;
-    background-color: transparent;
-    
-    /* Add the following lines */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* This aligns children to the end of the container (bottom) */
+#order_list_area{
+    height: 496px;
+    background-color: #FFFFFF;
+    overflow-y: auto;
 }
 
 #menu_div {
@@ -258,6 +195,7 @@
     height: auto;
 }
 
+/* 장바구니 출력 부분 */
 .cart_item_name {
     width: 100%;
 }
@@ -290,14 +228,14 @@
     margin-right: 18px;
 }
 
-.cart_options {
+.cart_item_count {
     margin-top: 0; /* 필요에 따라 조정 */
     font-size: smaller;
     text-align: left;
     margin-left: 18px;
 }
 
-.cart_delete{
+.cart_item_delete{
     color: #FD5A27;
     margin-right: 18px;
     text-align: right;
@@ -306,6 +244,15 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+/* 결제 버튼 css */
+#pay {
+    height: 204px;
+    background-color: #FFFFFF;
+    display: flex; /* 자식 요소들을 가로로 정렬하기 위해 flex로 설정 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
 }
 
 #pay_btn {
@@ -328,135 +275,7 @@
     background-color: white;
 }
 
-
-
-/* 세부메뉴 표시 */
-
-#fullscreen {
-    background-color: white;
-    width: 100%;
-    height: 100vh; /* 전체 화면 높이로 설정 */
-    display: flex;
-}
-
-#left_menu {
-    background-color: white;
-    width: 33%;
-    height: 100%;
-}
-
-#middle_menu {
-    background-color: white;
-    width: 33%;
-    height: 100%;
-}
-
-#right_menu {
-    background-color: white;
-    width: 33%;
-    height: 100%;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content:flex-start; /* 버튼을 하단에 배치 */
-}
-
-.option_item {
-    display: flex;
-    justify-content: space-between;
-}
-
-.option_name {
-    text-align: left;
-}
-
-.option_price {
-    text-align: right;
-}
-
-
-/* 메뉴, 사이드 option 메뉴 부분 */
-.menu_item {
-    display: flex;
-    justify-content: space-between;
-}
-
-.sub-menu-item {
-    text-align:left;
- }
-
-.selected_item {
-    height: 77%; /* Set explicit height */
-    overflow-y: auto; /* Add scrolling if content overflows */
-}
-
-.selected_name {
-    text-align: center;
-}
-
-.selected_price {
-    text-align: right;
-}
-
-.menu_item .selected_name {
-    text-align: left;
-    width: 40%; /* Set the width to 40% */
-}
-
-.menu_item .quantity_section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20%; /* Set the width to 20% */
-}
-
-.menu_item .selected_price {
-    text-align: right;
-    width: 40%; /* Set the width to 40% */
-}
-
-.menu_item .selected_name,
-.menu_item .quantity_section,
-.menu_item .selected_price {
-   white-space: nowrap; /* Prevent text from wrapping onto next line */
-   overflow:hidden; /* Ensure that text doesn't overflow its container */
-   text-overflow:ellipsis; /* Add an ellipsis when the text overflows its container */
-}
-
-/* 주문 담기 버튼을 포함하는 영역 */
-.order_section {
-    height: 18%; /* Set explicit height */
-}
-
-.order_button {
-    display: inline-flex;  /* 버튼을 인라인 플렉스 요소로 바꿉니다 */
-    align-items: center;  /* 버튼 내부의 텍스트를 가운데 정렬합니다 */
-    justify-content: center;  /* 버튼 내부의 텍스트를 가운데 정렬합니다 */
-    width: 100%; /* right_menu의 넓이를 꽉 채우게 설정 */
-    height: 100%; /* 버튼 높이는 필요에 따라 조정 */
-    margin: 0 auto;  /* 좌우 자동 마진을 적용하여 가운데 정렬합니다 */
-    border-radius: .45rem;
-    background-color: #838383;
-    color: #FFFFFF;
-    padding: .5rem .75rem;
-    font-size: .875rem;
-}
-
-.order_button:hover {
-    background-color: #FD5A27;
-}
-
-/* 총합 금액 출력 영역 */
-.total_section {
-    height: 5%; /* Set explicit height */
-    display: flex;
-    justify-content: space-between;
-}
-
-.total_text {
-    text-align: left;
-}
-
+/* 총합 금액 css */
 .total_price {
     color: #FFF;
     font-family: Pretendard;
@@ -469,34 +288,97 @@
     align-items: center; /* 수직 가운데 정렬 */
 }
 
-.minus{
-    width: 20%;
-    background: gray;
-    border-radius: 20%;
-    color: white;
-    font-weight:bolder;
-    font-size: 10px;
-    text-align: center;
+
+
+/* 모달 표시 css */
+h3.selected_menu {
+    color: #000;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+p.selected_menu{
+    color: #000;
+
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
-.minus:hover {
-    background-color: #FD5A27;
+
+.option_text {
+    color: #000;
+
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+.option_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 17px;
+    margin-top: 17px;
+}
+
+.option_count{
+    color: #000;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+
+.minus{
+    width: 24px;
+    height: 24px;
+    background:url(img/minus.png) no-repeat center / cover;
 }
 .plus{
-    width: 20%;
-    background: gray;
-    border-radius: 20%;
-    color: white;
-    font-weight: bolder;
-    font-size: 10px;
-    text-align: center;
-}
-.plus:hover {
-    background-color: #FD5A27;
+    width: 24px;
+    height: 24px;
+    background:url(img/plus.png) no-repeat center / cover;
 }
 
 .quantity_section {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 9px;
 }
 
+
+/* 모달 내 메뉴 추가 버튼 css */
+.add_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 465px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #FF7A00;
+}
+
+.add_btn_text{
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.option_name {
+    text-align: left;
+}
