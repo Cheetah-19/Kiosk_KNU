@@ -7,7 +7,6 @@ from deepface.commons import functions
 import cv2
 import matplotlib.pyplot as plt
 
-
 # recognizer
 model_name = 'Facenet512'
 target_size = functions.find_target_size(model_name)
