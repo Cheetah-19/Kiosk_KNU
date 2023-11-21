@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import "./Common.css";
 
 function Allergy() {
-  const BASE_URL = 'https://kioskknu2023.run.goorm.site';
+  // const BASE_URL = 'https://kioskknu2023.run.goorm.site';
+  const BASE_URL = 'http://127.0.0.1:8000';
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const location = useLocation();
 
@@ -73,7 +74,7 @@ function Allergy() {
           user_name: inputValue,
           user_phonenum: PhoneNumber,
           user_allergy: allergyInfo,
-          user_photo : photos
+          user_face_info : photos
       };
       
       if (VegancheckboxValue !== 0) {
@@ -86,7 +87,8 @@ function Allergy() {
 
       axios.post(`${BASE_URL}/signup/`, postData)  // '서버 URL' 부분에 테스트할 서버 주소 넣어주면 됨.
           .then(response => {
-              console.log(response.data);  // 요청 성공시 alert 하나 해줄 예정.
+            console.log(postData);  
+            console.log(response.data);  // 요청 성공시 alert 하나 해줄 예정.
               alert("사용자 등록이 완료되었습니다");
           })
           .catch(error => {

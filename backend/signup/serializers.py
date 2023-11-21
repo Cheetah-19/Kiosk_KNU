@@ -31,7 +31,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['user_name', 'user_phonenum', 'user_vegetarian', 'user_allergy', 'religion','user_face_info']
+        fields = ['user_name', 'user_phonenum', 'user_vegetarian', 'user_allergy', 'religion', 'user_face_info']
 
     def create(self, validated_data):
 
@@ -66,7 +66,7 @@ class UserSerializer(serializers.ModelSerializer):
             vegetarian_name = validated_data.get('user_vegetarian')
             religion_type = validated_data.get('religion')
             allergy_names = validated_data.get('user_allergy')
-            user_photos = validated_data.get('user_photos')
+            user_photos = validated_data.get('user_face_info')
             print(user_photos)
             if vegetarian_name is not None:
                 vegetarian = Vegetarian.objects.get(vegetarian_name=vegetarian_name)
