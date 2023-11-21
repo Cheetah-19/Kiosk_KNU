@@ -1,0 +1,61 @@
+#middle_border {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 60%;
+    height: 70%;
+    padding: 20px;
+}
+
+#text1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 80px;
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+#buttons div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 280px;
+    height: 280px;
+
+    background-color: white;
+
+    cursor: pointer;
+    margin: 25px;
+    border-radius: 10px; 
+
+    box-shadow: 0px 0px 18px 0px #DFD5D2;
+}
+
+#buttons img {
+    margin-bottom: 20px;
+}
+
+#buttons span {
+    text-align: center;
+    font-size: 35px;
+}
+
+#buttons div:hover {
+    background-color: #FF7A00;
+    color: white
+}
+
+#eat-btn:hover img {
+    content: url(./img/hover_store_meal.png);
+}
+
+#takeout-btn:hover img {
+    content: url(./img/hover_takeout.png);
+}
