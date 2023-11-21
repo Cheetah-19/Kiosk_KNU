@@ -133,7 +133,6 @@ class user_OrderDetailView(APIView):
     def get(self, request, userphonenum):
         UserGetter = User.objects.get(user_phonenum = userphonenum) 
         UserOrderGetter = Order.objects.filter(user=UserGetter)
-        # menunownnum = 0
         for order in UserOrderGetter:
             UserOrderedItemGetter = Ordered_Item.objects.filter(order=order)
             menunownnum = 0
@@ -149,5 +148,9 @@ class user_OrderDetailView(APIView):
 
 
             print('======================')
+
+
+
+        #가장 많이 팔린 메뉴 
 
         return HttpResponse("OrderDetailView is completed")
