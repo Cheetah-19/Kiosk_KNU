@@ -33,8 +33,8 @@ export default function AllergyCheck() {
       const postData = {
           user_name: inputValue,
           user_phonenum: PhoneNumber,
-          user_face_info: photos
-          // user_face_info : photos.join(',')            // 배열을 문자열로 변환해서 저장. 
+          // user_face_info: photos
+          user_face_info : photos.join('||')            // 배열을 문자열로 변환해서 저장. 
       };
       
       if (VegancheckboxValue !== 0) {
@@ -52,6 +52,7 @@ export default function AllergyCheck() {
               alert("사용자 등록이 완료되었습니다");
           })
           .catch(error => {
+              console.log(postData);
               console.error(error);
               alert("사용자 등록이 실패했습니다. 다시 시도해주세요.");
           });
