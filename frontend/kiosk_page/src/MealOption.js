@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import "./Common.css";
 import "./MealOption.css";
 import eatImage from './img/store_meal.png';
-import takeOutImage from './img/takeout.png';
+import takeoutImage from './img/takeout.png';
 
 export default function MealOption() {
     const [selected, setSelected] = useState('');
@@ -24,22 +25,18 @@ export default function MealOption() {
     }
 
     return (
-        <div className="full_screen">
-            <div id="top_bar_home" onClick={herf_home}></div>
-            <header>Easy KIOSK</header>
+        <div id="background">
             <div id="middle_border">
                 <div id="text1">주문방식을 선택해 주세요.</div>
-                <div id="Buttons">
-                    <div 
-                        className={selected === '매장식사' ? 'selected' : ''} 
+                <div id="buttons">
+                    <div id='eat-btn' 
                         onClick={() => handleClick('매장식사')}>
                         <img src={eatImage} alt="매장식사"/>
                         <span>매장식사</span>
                     </div>
-                    <div 
-                        className={selected === '테이크아웃' ? 'selected' : ''} 
+                    <div id='takeout-btn'
                         onClick={() => handleClick('테이크아웃')}>
-                        <img src={takeOutImage} alt="테이크아웃"/>
+                        <img src={takeoutImage} alt="테이크아웃"/>
                         <span>테이크아웃</span>
                     </div>
                 </div>
