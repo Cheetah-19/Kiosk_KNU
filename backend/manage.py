@@ -7,7 +7,8 @@ import sys
 def main():
     
     #파이썬 경로 추가
-    if sys.path.count(os.path.dirname(__file__)) == 0 :
+    if os.path.dirname(__file__) not in sys.path:
+        print(sys.path)
         sys.path.append(os.path.dirname(__file__))
         print("add ",os.path.dirname(__file__))
     """Run administrative tasks."""
