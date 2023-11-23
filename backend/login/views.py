@@ -60,17 +60,17 @@ class FaceLoginView(APIView):
                     if user.user_face_info == None:
                         continue
                     else:
-                        user_face_list = eval(user.user_face_info) #str로 저장되어있는 리스트를 list로 변환 ->[[d1,d2,...,d512],[d1,d2,...,d512],...]
-                        for user_faces in user_face_list:   #db에 있는 유저의 모든 얼굴정보 벡터와 인풋의 벡터 길이 측정
-                            try:
+                        try:
+                            user_face_list = eval(user.user_face_info) #str로 저장되어있는 리스트를 list로 변환 ->[[d1,d2,...,d512],[d1,d2,...,d512],...]
+                            for user_faces in user_face_list:   #db에 있는 유저의 모든 얼굴정보 벡터와 인풋의 벡터 길이 측정
                                 distance = identification(inputs,user_faces) #거리 추출
                                 if distance != None:
                                     if min_distance > distance:      #input된 벡터와 모든 유저에 있는 거리 최솟값, 유저의 아이디 구하기 
                                         min_distance = distance
                                         login_id = user.id
                                         mininum_vector = user_faces
-                            except Exception as e:
-                                pass
+                        except Exception as e:
+                            pass
                 if login_id != '':
                     print("candidate is {}".format(login_id))       
                 #10개의 인풋에 대한 후보 유저를 딕셔너리에 벡터값과 같이 등록
