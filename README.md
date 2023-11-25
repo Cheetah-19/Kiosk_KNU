@@ -3,9 +3,7 @@
 </div>
 2023 경북대 종합설계프로젝트1, 오픈소스 기반의 사이니지 솔루션 개발
 
-<div align=center>
-	<h3>📚 Tech Stack 📚</h3>
-</div>
+<div align=center><h1>📚 STACKS</h1></div>
 <div align="center">
 	<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"/>
 	<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
