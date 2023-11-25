@@ -30,7 +30,6 @@
 	  <img src = "https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white" />
           </div>
     </div>
-    <div align= "left">
 	## 목차
 	1. [깨끗한 코드](#1장.-깨끗한-코드)
 	2. [의미 있는 이름](#2장.-의미-있는-이름)
@@ -47,5 +46,4 @@
 	* 변수(혹은 함수나 클래스)의 존재 이유는?
 	* 수행 기능은?
 	* 사용 방법은?
-    </div>
     
