@@ -5,9 +5,9 @@
     width: 880px;
     height: 616px;
     border-radius: 10px;
-    background: #F3F3F3;
+    background: white;
     left : 200px;
-    top : 144px;
+    top : 120px;
 }
 
 .rect2 {
@@ -15,10 +15,12 @@
     overflow-y: auto;
     left:40px;
     top:122px;
+
     background: #FFF;
     height: 270px;
     width: 800px;
-    padding: 20px;
+    
+    padding: 0 20px;
     box-sizing: border-box;
 }
 
@@ -28,16 +30,12 @@
 }
 
 .txt1 {
-    position: absolute;
-    left: 239px;
+    position: relative;
+    margin: 0 auto;
     top: 42px;
-    color: #000;
-    text-align: center;
-    font-family: 'pretendard-regular';
+
     font-size: 40px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
 }
 
 .sum-txt {
@@ -108,4 +106,57 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+}
+
+#pay-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    top: 430px;
+}
+
+#pay-btn-container div {
+    width: 355px;
+    margin: 0px 15px 0px 15px;
+}
+
+#order-list {
+    display: flex;
+    position: relative;
+
+    margin: 0px 10px 0px 10px;
+}
+
+#menu-name, #total-price {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+#option-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 10px 0 10px;
+    margin: 0 0 0 5px;
+
+    border: 3px solid #FF7A00;
+    border-radius: 50px;
+
+    color: #FF7A00;
+}
+
+#total-price {
+    position: absolute;
+    right: 0;
+}
+
+#separator {
+    background-color: #F1F0F0;
+    width: 100%;
+    height: 1px;
+
+    margin: 30px 0 30px 0;
 }

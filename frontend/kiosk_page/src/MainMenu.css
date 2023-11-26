@@ -38,3 +38,7 @@
     flex-direction: column;
     justify-content: center;
   }
+
+.modal-dialog {
+  margin-top: 120px !important;
+}
