@@ -66,7 +66,8 @@
 
 /* 메뉴가 출력되는 부분 */
 #menu_table {
-    height: calc(100vh - 15vh - 35vh); /* Calculate the remaining height */
+    /* height: calc(100vh - 15vh - 35vh); Calculate the remaining height */
+    margin: 30px 0px 30px 0px;
     max-height: 50vh; /* Add this line if you want to limit the height */
     overflow-y: auto; /* Add this line for scrolling if needed */
     background-color: F3F3F3;
@@ -281,7 +282,11 @@
 }
 
 #pay_page{
-    background-color: white;
+    background-color: #F3F3F3;
+    width: 100%;
+    height: 100%;
+    
+    font-family: Pretendard-Regular;
 }
 
 /* 총합 금액 css */
