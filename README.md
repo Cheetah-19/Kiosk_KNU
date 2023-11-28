@@ -1,5 +1,4 @@
-<img width="899" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/567d958a-2866-42a0-8c9f-618e7b5c7b45"><div align= "center">
-    <img src="https://capsule-render.vercel.app/api?type=cylinder&color=auto&height=180&text=Kiosk_KNU&animation=twinkling&fontColor=ffffff&fontSize=90" />
+<img src="https://capsule-render.vercel.app/api?type=cylinder&color=auto&height=180&text=Kiosk_KNU&animation=twinkling&fontColor=ffffff&fontSize=90" />
     </div>
     <div align= "center"> 
     	<h2 style="border-bottom: 1px solid #21262d; color: #c9d1d9;"> 2023 경북대 종합설계프로젝트1, 오픈소스 기반의 사이니지 솔루션 개발 </h2>  
