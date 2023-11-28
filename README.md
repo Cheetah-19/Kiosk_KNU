@@ -318,12 +318,33 @@ WebOs : [https://www.webosose.org/]
  - title : 어플의 제목입니다.
  - version : 버전을 명시할 수 있습니다.
 
-   Success가 되고 폴더가 생성되고, 설정한 내용이 들어있음을 확인 할 수 있습니다.
+  Success가 되고 폴더가 생성되고, 설정한 내용이 들어있음을 확인 할 수 있습니다.
    
-   <img width="789" alt="14" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/6cbb0492-6400-4927-b2b6-de58753b5f09">
+  <img width="789" alt="14" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/6cbb0492-6400-4927-b2b6-de58753b5f09">
 
+  3. Build한 내용을 위에 생성판 폴더에 덮어 씌우기.
+  
+  4. 패키징
+     - 패키징
+     - 아래 코드에서 'sampleApp' 에 해당하는 부분만 원하는 프로젝트 명으로 바꾸시면 됩니다. (sampleApp = 폴더명)
+    
+	ares-package ./sampleApp
 
+  <img width="418" alt="15" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/395c1cc3-c671-4e50-923e-6c146c8b21f2">
 
-   
+  Success가 되면 성공입니다.
+  - 위에 사진을 보면 com.domain.app_0.0.1.ipk 가 있습니다.
+  - 이 ipk파일이 라즈베리파이의 webOS에 설치하는 App 입니다.
+
+  5. 설치
+     	- 아래 코드에서 'Rasberry' 는 위에 ssh 설정해서 설정했던 Devide name 입니다.
+	- 'com.domain.app_0.0.1_all.ipk' 는 패키징 후 완성된 ipk 파일 명을 쓰시면 됩니다.
+     
+	ares-install —device Rasberry com.domain.app_0.0.1_all.ipk
+
+  Success가 되면 성공이며, 어플이 성공적으로 동작할 것입니다.
+  
+  ![16](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/8190f164-fd48-4206-b16b-b4ebbf5b95b2)
+
 
 # 소스코드 설명
