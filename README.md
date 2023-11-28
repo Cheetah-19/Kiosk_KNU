@@ -1,4 +1,4 @@
-<div align= "center">
+<img width="899" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/567d958a-2866-42a0-8c9f-618e7b5c7b45"><div align= "center">
     <img src="https://capsule-render.vercel.app/api?type=cylinder&color=auto&height=180&text=Kiosk_KNU&animation=twinkling&fontColor=ffffff&fontSize=90" />
     </div>
     <div align= "center"> 
@@ -172,8 +172,8 @@
 # 2-5 Sequence Diagram
 [사진]
 # 2-6 시스템 아키텍처
->* 하드웨어 : Raspberry PI 4 
->* OS : WebOS
+>* Hardware : Raspberry PI 4 Model B 8GB
+>* OS : WebOS 2-24
 >* 프론트엔드 : React Framework
    >- HTML, Js, css
 >* 백엔드 : Django Framework
@@ -231,6 +231,40 @@ WebOs : [https://www.webosose.org/]
 
 # 개발환경 세팅
 ## 라즈베리파이
+* HardWare : Raspberry PI 4 Model B 8GB
+* OS : [webos 다운로드 링크](https://github.com/webosose/build-webos/releases)
+  >- 현 프로젝트는 webos-ose-2-24-0-raspberrypi4-64.tar.bz2 버전을 설치 하였습니다.
+  # 설치 방법
+  1. [webos 다운로드 링크](https://github.com/webosose/build-webos/releases) 에서 image 다운로드
+     <img width="899" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/1f147666-4f88-4db0-bac5-4f7d88631648">
+  2. [7-zip](https://www.7-zip.org/) 프로그램을 이용하여 압축 해재
+     ![1](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/ed374a79-e867-4a87-a388-56b2023ef70f) <br />
+     * 압축을 해제하시면 됩니다. <br />
+     	![2](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/03555465-ac71-4b42-b756-ee4412a94e8d) <br />
+     * webos-ose-2-24-0-raspberrypi4-64.tar 라는 폴더가 생성됩니다. <br />
+     	 ![3](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/f8e1629b-020f-422a-8267-04e1c93c48ce)<br />
+     * 폴더 안에 들어오면 .tar 파일이 있는데, 압축해제를 진행하시면 됩니다. <br />
+     	![4](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/a863fbc4-99cc-4150-bea7-ab89cae26c73) <br />
+      	![5](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/d80c904e-979f-46ca-8dd1-951add57e53c) <br />
+     * 압축을 해제하면 webos-ose-2-24-0-raspberrypi4-64 라는 폴더가 생성됩니다. <br />
+     	![6](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/be9e14e9-4aeb-4eb9-adc4-3fb449fbf6d5) <br />
+     * 폴더 안에 들어오면 .mic 파일이 있는데, 이러면 Image 파일은 준비가 된 겁니다.
+   3. SD 카드 포맷하기
+      [Flashing webOS Open Source Edition](https://www.webosose.org/docs/guides/setup/flashing-webos-ose/) 참고 하여 SD카드 포맷하시면 됩니다.
+      단순히 윈도우 10 기본 포맷도 상관 없습니다!
+   4. [Win 32 Disk Imager](https://sourceforge.net/projects/win32diskimager/) 프로그램을 이용하여 sd 카드에 image flashing
+      * 위에서 얻은 .mic 파일을 선택하고, 포맷한 SD카드를 선택하여 Write 버튼을 눌러주세요.
+        ![8](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/2c0252ba-a718-4e1b-9857-593a12b6f12a)
+        * 시간이 좀 걸립니다.
+	![9](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/2cf967ab-8a65-4c13-8abd-a0cec6607281)
+        ![10](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/5015e33f-8ff7-44e4-8ad6-8976d0befe53)
+
+
+ 
+
+
+
+
 ## 터치 디스플레이
 ## CLI
 
