@@ -92,6 +92,7 @@ function Allergy() {
               alert("사용자 등록이 완료되었습니다");
           })
           .catch(error => {
+              console.log(postData); 
               console.error(error);
               alert("사용자 등록이 실패했습니다. 다시 시도해주세요.");
           });
