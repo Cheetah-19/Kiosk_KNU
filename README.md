@@ -254,15 +254,12 @@ WebOs : [https://www.webosose.org/]
    4. [Win 32 Disk Imager](https://sourceforge.net/projects/win32diskimager/) 프로그램을 이용하여 sd 카드에 image flashing
       * 위에서 얻은 .mic 파일을 선택하고, 포맷한 SD카드를 선택하여 Write 버튼을 눌러주세요.
         ![8](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/2c0252ba-a718-4e1b-9857-593a12b6f12a)
-        * 시간이 좀 걸립니다.
+      * 시간이 좀 걸립니다.
 	![9](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/2cf967ab-8a65-4c13-8abd-a0cec6607281)
+      * 완료! 이제 SD 카드를 라즈베리 파이 하단에 삽입 후 부팅하면 WebOs가 정상적으로 부팅이 됩니다!
+        ※주의※
+        * sd카드를 sd 리더기에 삽입 후 그 자체로 USB에 삽입하면 부팅이 안됩니다! 반드시 sd카드만 따로 빼서 라즈베리파이 하단에 삽입해주세요!
         ![10](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/5015e33f-8ff7-44e4-8ad6-8976d0befe53)
-
-
- 
-
-
-
 
 ## 터치 디스플레이
 ## CLI
