@@ -263,7 +263,7 @@ WebOs : [https://www.webosose.org/]
 
 ## 터치 디스플레이
 * HardWare : [라즈베리파이 디스플레이 10.1인치 터치스크린 LCD](https://smartstore.naver.com/mcuboard/products/5006590307?NaPm=ct%3Dlpihmuhk%7Cci%3D2d0b272112d74fa2c41384d2a3b0e4a94ff945f5%7Ctr%3Dsls%7Csn%3D186400%7Chk%3D991293f6377b661f14470419dc8bc00fa26ea908)
-   터치 디스플레이에 구성품들을 잘 조립하고 라즈베리파이에 전원을 인가하면 화면이 잘 나오는 것을 확인 할 수 있습니다.
+   - 터치 디스플레이에 구성품들을 잘 조립하고 라즈베리파이에 전원을 인가하면 화면이 잘 나오는 것을 확인 할 수 있습니다.
   ![11](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/3f2edb87-7a3c-4c05-8dd7-0b0c24286da1)
   
 ## CLI
