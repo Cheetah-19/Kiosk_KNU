@@ -53,7 +53,7 @@
 2. [개발환경 세팅](#개발환경-세팅)
    - [라즈베리파이](#라즈베리파이)
    - [터치 디스플레이](#터치-디스플레이)
-   - [CLI](#cli)
+   - [CLI 환경 구축](#cli-환경구축)
 3. [패키징 및 설치](#패키징-및-설치)
 4. [소스코드 설명](#소스코드-설명)
 
@@ -266,7 +266,7 @@ WebOs : [https://www.webosose.org/]
    - 터치 디스플레이에 구성품들을 잘 조립하고 라즈베리파이에 전원을 인가하면 화면이 잘 나오는 것을 확인 할 수 있습니다.
   ![11](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/3f2edb87-7a3c-4c05-8dd7-0b0c24286da1)
   
-## CLI
+## CLI 환경구축
    1. Node.js 설치 [링크](https://nodejs.org/en)
       	- 설치가 잘 되었다면 아래 명령어를 실행하여 버전을 확인가능합니다.
         
@@ -284,7 +284,7 @@ WebOs : [https://www.webosose.org/]
 	npm install –g @webosose/ares-cli
 
 # 패키징 및 설치
-   1. SSH 설정
+  1. SSH 설정
       	- ssh 연결을 위한 디바이스 설정이 필요합니다.
 
 	ares-setup-device 
@@ -304,11 +304,23 @@ WebOs : [https://www.webosose.org/]
  - Default : 사진에선 N 이지만 Y로 선택하시는게 편합니다.
  - Save : Y 로 저장해주세요.
 
-   2. 
+  2. webOS OSE app 설치
+     	- templete을 이용하여 app을 생성해야 합니다.
+     	- 아래 코드에서 'sampleApp' 에 해당하는 부분만 원하는 프로젝트 명으로 바꾸시면 됩니다. (sampleApp = 폴더명)
 
+	ares-generate -t webapp sampleApp
 
+   <img width="483" alt="13" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/620b1604-5726-481b-a2fb-6f9afef7f91a">
+ 
+   Success가 되면 성공입니다.
+   
+ - app id : app을 구분하는 id로 생략하셔도 됩니다.
+ - title : 어플의 제목입니다.
+ - version : 버전을 명시할 수 있습니다.
 
-
+   Success가 되고 폴더가 생성되고, 설정한 내용이 들어있음을 확인 할 수 있습니다.
+   
+   <img width="789" alt="14" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/6cbb0492-6400-4927-b2b6-de58753b5f09">
 
 
 
