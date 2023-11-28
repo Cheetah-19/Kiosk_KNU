@@ -230,10 +230,10 @@ WebOs : [https://www.webosose.org/]
 
 # 개발환경 세팅
 ## 라즈베리파이
-* HardWare : Raspberry PI 4 Model B 8GB
+* HardWare : [Raspberry PI 4 Model B 8GB](https://smartstore.naver.com/eleparts/products/4799825062?n_media=11068&n_query=%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B44&n_rank=4&n_ad_group=grp-a001-02-000000007238914&n_ad=nad-a001-02-000000229608972&n_campaign_type=2&n_mall_id=ncp_1nlzbo_01&n_mall_pid=4799825062&n_ad_group_type=2&n_match=3&NaPm=ct%3Dlpihmmrs%7Cci%3D0Au0003H1knzI6qsyfp7%7Ctr%3Dpla%7Chk%3D9ad14e585bbe9eea74201d2e1f1481527ed653e7)
 * OS : [webos 다운로드 링크](https://github.com/webosose/build-webos/releases)
   >- 현 프로젝트는 webos-ose-2-24-0-raspberrypi4-64.tar.bz2 버전을 설치 하였습니다.
-  # 설치 방법
+  ### 설치 방법
   1. [webos 다운로드 링크](https://github.com/webosose/build-webos/releases) 에서 image 다운로드
      <img width="899" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/1f147666-4f88-4db0-bac5-4f7d88631648">
   2. [7-zip](https://www.7-zip.org/) 프로그램을 이용하여 압축 해재
@@ -257,13 +257,61 @@ WebOs : [https://www.webosose.org/]
       * 시간이 좀 걸립니다.
 	![9](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/2cf967ab-8a65-4c13-8abd-a0cec6607281)
       * 완료! 이제 SD 카드를 라즈베리 파이 하단에 삽입 후 부팅하면 WebOs가 정상적으로 부팅이 됩니다!
-        ※주의※
-        * sd카드를 sd 리더기에 삽입 후 그 자체로 USB에 삽입하면 부팅이 안됩니다! 반드시 sd카드만 따로 빼서 라즈베리파이 하단에 삽입해주세요!
-        ![10](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/5015e33f-8ff7-44e4-8ad6-8976d0befe53)
+      ※주의※
+      * sd카드를 sd 리더기에 삽입 후 그 자체로 USB에 삽입하면 부팅이 안됩니다! 반드시 sd카드만 따로 빼서 라즈베리파이 하단에 삽입해주세요!
+      	![10](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/5015e33f-8ff7-44e4-8ad6-8976d0befe53)
 
 ## 터치 디스플레이
+* HardWare : [라즈베리파이 디스플레이 10.1인치 터치스크린 LCD](https://smartstore.naver.com/mcuboard/products/5006590307?NaPm=ct%3Dlpihmuhk%7Cci%3D2d0b272112d74fa2c41384d2a3b0e4a94ff945f5%7Ctr%3Dsls%7Csn%3D186400%7Chk%3D991293f6377b661f14470419dc8bc00fa26ea908)
+   터치 디스플레이에 구성품들을 잘 조립하고 라즈베리파이에 전원을 인가하면 화면이 잘 나오는 것을 확인 할 수 있습니다.
+  ![11](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/3f2edb87-7a3c-4c05-8dd7-0b0c24286da1)
+  
 ## CLI
+   1. Node.js 설치 [링크](https://nodejs.org/en)
+      	- 설치가 잘 되었다면 아래 명령어를 실행하여 버전을 확인가능합니다.
+        
+	node -v
+
+   2. npm 설치
+   	- npm은 Node.js에 포함되어 있으므로 Node.js를 성공적으로 설치한 경우 이미 npm을 사용할 수 있습니다.
+   	- 아래 명령어를 통해 npm이 잘 설치되어있는지 확인가능합니다.
+
+ 	npm -v
+
+   3. CLI 설치
+      	- -g 옵션을 사용하여 터미널에서 다음 명령을 실행하여 CLI를 전체적으로 설치합니다.
+
+	npm install –g @webosose/ares-cli
 
 # 패키징 및 설치
+   1. SSH 설정
+      	- ssh 연결을 위한 디바이스 설정이 필요합니다.
+
+	ares-setup-device 
+ 
+   <img width="566" alt="12" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/17ff7663-0290-433c-8a12-016ea5cc8487">
+
+   위 사진을 보면 새로운 장치가 추가된 것을 확인 할 수 있습니다.
+
+ - Add : 추가 하기
+ - Name : 장치 이름을 정해주세요.
+ - IP address : 라즈베리파이의 IP 주소를 적으시면 됩니다.
+ - Port : port 번호는 22 로 정했습니다. (다른 포트로 하니 패키지 에러가 떴습니다.)
+ - User : root로 설정하시면 됩니다.
+ - Description : 생략해도 됩니다. ( 생략 = Enter )
+ - Authentication : 권한 설정을 비밀번호로 할지, ssh key로 할지 선택합니다. 비밀번호가 간단하여 비밀번호를 선택하였습니다.
+ - Password : 비밀번호를 설정해주시면 됩니다. ( 생략 = Enter )
+ - Default : 사진에선 N 이지만 Y로 선택하시는게 편합니다.
+ - Save : Y 로 저장해주세요.
+
+   2. 
+
+
+
+
+
+
+
+   
 
 # 소스코드 설명
