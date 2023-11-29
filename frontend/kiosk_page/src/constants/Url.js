@@ -1,0 +1,1 @@
+export const BASE_URL = 'https://kioskknu2023.run.goorm.site';

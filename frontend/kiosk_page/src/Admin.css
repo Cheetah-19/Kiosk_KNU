@@ -46,7 +46,35 @@
     line-height: normal;
 }
 
+.del-menubtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    width: 355px;
+    height: 86px;
+    border-radius: 10px;
+    background: #E8E8E8;
+
+    right: 68px;
+    top: 197px;
+
+    color: #000;
+    text-align: center;
+    font-family: 'pretendard-regular';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
 .add-menubtn:hover {
+    background: #FF7A00;
+    color: #FFF;
+}
+
+.del-menubtn:hover {
     background: #FF7A00;
     color: #FFF;
 }
