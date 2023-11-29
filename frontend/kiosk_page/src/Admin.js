@@ -15,10 +15,6 @@ export default function Admin() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [menuName, setMenuName] = useState('');
     const [image, setImage] = useState(null);
-    
-    const [categories, setCategories] = useState([]);
-    const [menusByCategory, setMenusByCategory] = useState({});
-    const [optionsByCategory, setOptionsByCategory] = useState({});
 
     // 모달 상태 변수 및 함수 추가
     const [showModal, setShowModal] = useState(false);
@@ -45,63 +41,14 @@ export default function Admin() {
         setMenuName(e.target.value);
     };
 
-    React.useEffect(() => {
-        setPhoneNumber(location.state?.phone_number || ''); 
-    }, []);
-
-    //서버로부터 정보를 받아온다. Axios 활용.
-    useEffect(() => {
-        console.log("fetchMenusAndOptions 실행"); // 확인용 로그
-        async function fetchMenusAndOptions() {
-            try {
-                // 서버 URL에 테스트용 주소 넣어줄것.
-                // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
-                //optional chaining 사용
-                const menuUrl = phoneNumber ? `${BASE_URL}/menu/${phoneNumber}/` : `${BASE_URL}/menu/`;
-                let responseMenus = await axios.get(menuUrl);
-                let dataMenus = responseMenus.data;
-                console.log("dataMenus:", dataMenus); // 확인용 로그
-                console.log(menuUrl);
-                let categoriesFromServerMenu = dataMenus.categories.map(c => c.menucategory_name);
-                let menusFromServerMenu = {};
-                console.log("categoriesFromServerMenu:", categoriesFromServerMenu); // 확인용 로그
-
-                //메뉴가 있는 카테고리만 선택
-                for (let category of categoriesFromServerMenu) {
-                    if (dataMenus[category] && dataMenus[category].length > 0) {
-                        menusFromServerMenu[category] = dataMenus[category];
-                    }
-                }
-
-                // 카테고리 중에서 메뉴가 있는 카테고리만 선택
-                let filteredCategories = Object.keys(menusFromServerMenu);
-
-                //카테고리별 그룹 옵션 추출
-                let responseOptions = await axios.get(`${BASE_URL}/menu/option/`);
-                let dataOptions = responseOptions.data;
-
-                let optionsFromServerOption = {};
-
-                for (let category of dataOptions.categories.map(c => c.optioncategory_name)) {
-                    optionsFromServerOption[category] = dataOptions[category];
-                }
-
-                setCategories(filteredCategories);
-                setMenusByCategory(menusFromServerMenu);
-                setOptionsByCategory(optionsFromServerOption);
-              
-            } catch (error) {
-                console.error('ERROR : 메뉴 데이터를 받아오는데 실패했습니다.', error.message, error.stack, error.response?.status);
-            }
-        }
-        //실행
-        fetchMenusAndOptions();
-    }, []);
     //홈 화면 가는 함수
     function herf_home() {
         navigate('/');
     }
 
+    function delHandle() {
+        navigate('/Delete');
+    }
     return(
         <div id = "pay_page">
             <div id="top_bar_home" onClick={herf_home}></div>
@@ -109,7 +56,7 @@ export default function Admin() {
             <div className='rect1'>
               <div className='txt1'>어떤일을 하시겠어요?</div>
               <div className='add-menubtn' onClick={openModal}>메뉴추가</div>
-              <div className='del-menubtn'>메뉴삭제</div>
+              <div className='del-menubtn' onClick={delHandle}>메뉴/옵션 삭제</div>
             </div>
 
             <Modal show={showModal} onHide={closeModal}>

@@ -12,6 +12,7 @@ import Face from "./Face";
 import LoginCheck from "./LoginCheck";
 import PhoneNum from "./PhoneNum";
 import Admin from "./Admin";
+import Delete from "./Delete";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/PayCheck" element={<PayCheck />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Admin" element={<Admin />} />
+        <Route path="/Delete" element={<Delete />} />
       </Routes>
   );
 }
