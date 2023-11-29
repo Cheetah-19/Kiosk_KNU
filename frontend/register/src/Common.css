@@ -119,15 +119,17 @@ footer {
 }
 
 .input-des {
-    border-radius: 2rem;
-    width: 65%;
-    margin-left:17%;
-    margin-top: 0%;
-    height: 6.5vh;
+    width: 63%;
+    height: 8%;
+    flex-shrink: 0;
     align-items : center;
     text-align: center;
     justify-content: center;
+    border: none; /* 모든 라인 없음 */
+    border-bottom: 1px solid #FF7A00; /* 아래쪽 라인만 있음 */
+    background: #FEFAF2;
 }
+
 
 .check-box-out{
     display: flex;
