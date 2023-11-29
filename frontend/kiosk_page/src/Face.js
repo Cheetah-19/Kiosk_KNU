@@ -47,7 +47,7 @@ export default function Face(props) {
 
     // Capture a frame and add it to the photos array
     const captureFrame = async () => {
-        if (remainingPhotos <= 0) return; // Stop capturing after reaching limit
+        if (remainingPhotos <= 0) return ; // Stop capturing after reaching limit
 
         if (videoRef.current && canvasRef.current) {
             const context = canvasRef.current.getContext('2d');
