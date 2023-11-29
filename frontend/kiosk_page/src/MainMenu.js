@@ -384,7 +384,7 @@ export default function MainMenu() {
                             <Modal.Footer >
 
                                 <div className="add_btn" variant="secondary" onClick={addToCart}>
-                                    <di className="add_btn_text">메뉴 추가하기</di>
+                                    <div className="add_btn_text">메뉴 추가하기</div>
                                 </div>
 
                             </Modal.Footer>
