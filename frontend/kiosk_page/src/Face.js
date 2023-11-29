@@ -67,6 +67,8 @@ export default function Face(props) {
             // Decrement remaining photos count by one
             setRemainingPhotos(prevCount => prevCount - 1);
         }
+
+        console.log("hehehe");
     };
 
     // Send photos to the server when remainingPhotos becomes 0

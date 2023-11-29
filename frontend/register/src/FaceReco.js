@@ -42,7 +42,7 @@ export default function FaceReco() {
 
   // Capture a frame and add it to the photos array
   const captureFrame = async () => {
-    if (remainingPhotos <= 0) return; // Stop capturing after reaching limit
+    if (remainingPhotos <= 0) return 0; // Stop capturing after reaching limit
 
     if (videoRef.current && canvasRef.current) {
         const context = canvasRef.current.getContext('2d');
@@ -62,13 +62,17 @@ export default function FaceReco() {
         // Decrement remaining photos count by one
         setRemainingPhotos(prevCount => prevCount - 1);
     }
+
+    console.log("hello")
 };
 
 // Send photos to the server when remainingPhotos becomes 0
 useEffect(() => {
-  if (remainingPhotos === 0) {
+  console.log(remainingPhotos)
+  if (remainingPhotos <= 0) {
       clearInterval(timerIdRef.current);
       console.log(photos); // 확인용 로그
+      console.log("사진 촬영이 완료되었습니다.");
   }
 });
 
