@@ -11,6 +11,7 @@ import SignUp from "./SignUp";
 import Face from "./Face";
 import LoginCheck from "./LoginCheck";
 import PhoneNum from "./PhoneNum";
+import Admin from "./Admin";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/Pay" element={<Pay />} /> {/* Default route */}
         <Route path="/PayCheck" element={<PayCheck />} />
         <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/Admin" element={<Admin />} />
       </Routes>
   );
 }
