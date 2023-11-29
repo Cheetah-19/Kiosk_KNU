@@ -35,7 +35,7 @@ export default function FaceReco() {
         <div className="Middle_Menu">
           <div id="inner-bg">
             <div className="middle_count">
-              <div className="middle_count_text">1/4</div>
+              <div className="middle_count_text">1/5</div>
             </div>
             <div className="middle_title">
               <div className="middle_title_text">얼굴정보 등록하기</div>
@@ -58,11 +58,11 @@ export default function FaceReco() {
         <div className="Bottom_button">
           <div className="right_section">
             <div className="right_section">
-              <div id="right_button">
-                <div className="button_text" onClick={() => {
+              <div id="right_button" onClick={() => {
                   console.log(photos); // photos를 출력
                   navigate("/username", { state: { photos } }); // 다음 페이지로 이동
-                }}> 다음으로 </div>
+                }}>
+                <div className="button_text" > 다음으로 </div>
               </div>
             </div>
           </div>

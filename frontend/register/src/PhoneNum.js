@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+
+
 import "./Common.css";
 
-export default function Vegan() {
-    const navigate = useNavigate(); // useNavigate hook to get the navigate function
+
+export default function FaceReco() {
+  const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const location = useLocation();
     const photos = location.state.photos;
     const inputValue = location.state.inputValue;
@@ -19,36 +22,61 @@ export default function Vegan() {
       }
     }
 
-    
-
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      //입력한 문자열의 길이가 11글자가 아닐 경우
-      if(PhoneNumber.length !== 11){
+    const handleNext = () => {
+      if (PhoneNumber.length !== 11) {
         alert("핸드폰 번호는 11글자를 입력해야 합니다.");
-        //navigate 하지 않도록 return
         return;
       }
       navigate('/vegancheck', { state: { inputValue, PhoneNumber, photos } });
+    };
+
+  const goback = () => {
+    navigate('/username', { state: { inputValue: null } });
   };
-    
-    return (
+
+  return (
+    <div>
       <div>
-        <set>
-          <header>Easy KIOSK</header>
-          <body>
-            <div className="upper-t">휴대폰 번호를 입력해 주세요 ('-'제외)</div>
-              <form onSubmit={handleSubmit}>
-                <input className ="input-des" type="text" value={PhoneNumber} onChange={handleChange} />
-              </form>
-          </body>
-          <footer>
-            
-          <div className="blinking-text">나의 정보를 등록하세요 3/6</div>
-          <button className = "next-button" onClick={handleSubmit}>휴대폰번호등록페이지</button> {/* Button to navigate to the next page */}
-          </footer>
-        </set>        
-        {/* Religion content... */}
+        <header>Easy KIOSK</header>
       </div>
-    );
+      <div>
+        <div className="Top_text">
+          <div className="title"> 내 정보 등록하기 </div>
+        </div>
+        <div className="Middle_Menu">
+          <div id="inner-bg">
+            <div className="middle_count">
+              <div className="middle_count_text">3/5</div>
+            </div>
+            <div className="middle_title">
+              <div className="middle_title_text">휴대폰번호 등록하기</div>
+            </div>
+            <div className="middle_camera">
+              <input className="input-des" type="text" value={PhoneNumber} onChange={handleChange} placeholder="휴대폰 번호를 입력해 주세요 ('-'제외)" />
+            </div>
+
+          </div>
+        </div>
+        <div className="Bottom_button">
+          <div className="left_section">
+            <div id="left_button" onClick={goback}>
+              <div className="button_text" > 이전으로 </div>
+            </div>
+          </div>
+          <div className="right_section">
+            <div id="right_button" onClick={() => {
+                console.log(photos); // photos를 출력
+                console.log(inputValue); // 이름 출력
+                console.log(PhoneNumber); // 번호 출력
+                handleNext(); // 다음 페이지로 이동
+              }}>
+              <div className="button_text"> 다음으로 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
+
+
