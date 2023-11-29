@@ -353,11 +353,7 @@ export default function Delete() {
                                         <div key={option.id} className="option_text">
                                             <div className="option_row">
                                                 <div className="option_name">{option.option_name}</div>
-                                                <div className="quantity_section">
-                                                    <div className="minus" onClick={() => handleQuantityChange(option.option_name, -1)}></div>
-                                                    <span className="option_count">{selectedOptions[option.option_name] || 0}</span>
-                                                    <div className="plus" onClick={() => handleQuantityChange(option.option_name, +1)}></div>
-                                                </div>
+                                                <div className="quantity_section"></div>
                                             </div>
                                         </div>
                                     ))
