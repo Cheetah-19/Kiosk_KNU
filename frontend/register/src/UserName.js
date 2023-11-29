@@ -9,27 +9,23 @@ export default function UserName() {
     const location = useLocation();
     const photos = location.state.photos;
     const [inputValue, setInputValue] = useState('');
-    //inputValue에 사용자의 입력값이 담기게 된다. {inputValue}로 확인가능
+
     const handleChange = (event) => {
-      //처음에 숫자를 입력할 경우
       if (/^\d+$/.test(event.target.value)) {
         alert('숫자는 입력할 수 없습니다.'); 
-      } //입력하는 도중 중간에 공백을 입력할 경우
-      else if (event.target.value.split(' ').join('') !== event.target.value) {
+      } else if (event.target.value.split(' ').join('') !== event.target.value) {
         alert('공백은 입력할 수 없습니다.');
       } else {
         setInputValue(event.target.value);
       }
     }
 
-    //PhoneNum페이지로 input된 정보를 넘겨준다.
     const handleSubmit = (event) => {
       event.preventDefault();
       navigate('/PhoneNum', { state: { inputValue, photos } });
     };
 
     const handleNext = () => {
-      // Check if the input value is a number or empty
       if (inputValue.trim().length === 0) {
         alert('숫자 또는 공백을 입력할 수 없습니다.');
       } else {
@@ -39,20 +35,18 @@ export default function UserName() {
 
     return (
       <div>
-        <set>
-          <header>Easy KIOSK</header>
-          <body>
-              <div className="upper-t">사용자명을 입력해주세요</div>
-              <br/>
-              <form onSubmit={handleSubmit}>
-                <input className ="input-des" type="text" value={inputValue} onChange={handleChange} />
-              </form>
-          </body>
-          <footer>
+        <header>Easy KIOSK</header>
+        <div>
+          <div className="upper-t">사용자명을 입력해주세요</div>
+          <br/>
+          <form onSubmit={handleSubmit}>
+            <input className ="input-des" type="text" value={inputValue} onChange={handleChange} />
+          </form>
+        </div>
+        <footer>
           <div className="blinking-text">나의 정보를 등록하세요 2/6</div>
-            <button className = "next-button" onClick={handleNext}>다음으로</button> {/* Button to navigate to the next page */}
-          </footer>
-        </set>      
+          <button className="next-button" onClick={handleNext}>다음으로</button>
+        </footer>
         {/* User Name Content... */}
       </div>
     );

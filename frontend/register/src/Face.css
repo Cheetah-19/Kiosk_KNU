@@ -1,0 +1,17 @@
+#video-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    height: 60%;
+    width: 60%;
+    animation: fade-in 0.5s linear 1;
+  }
+
+#video-element {
+    height: 100%;
+    border-radius: 100%;
+
+    transform: rotateY(180deg);
+}

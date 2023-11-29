@@ -1,4 +1,46 @@
 /*기본적인 레이아웃을 설정할 CSS*/
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+@keyframes slider-open {
+    0% {
+        opacity: 0;
+        transform: translateY(-7%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slider-close {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-7%);
+    }
+}
+
+.container{
+    background-color : white;
+}
+
 
 set {
     display: flex;
@@ -9,17 +51,19 @@ set {
 }
 
 header {
-    width : 100%;
-    height : 3.75rem;
-    background : #FD5A27;
-    color: #F0F0F0;
-    
     display: flex;
     align-items : center;
     text-align: center;
     justify-content: center;
+
+    width : 100%;
+    height : 3.75rem;
+    background : #FF7A00;
+    color: #F0F0F0;
+    
     font-family: Inter;
     font-size : 1.5rem;
+    font-weight: bold;
 }
 
 body {
@@ -28,20 +72,28 @@ body {
     margin:0px;
 }
 
+#background{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #FFFCF3;
+    width: 100%;
+    height: 100%;
+    
+    font-family: Pretendard-Regular;
+    font-weight: 700;
+}
+
 footer {
     margin-top : .5%
 }
 
-@keyframes fade-in {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
 .blinking-text {
-
     align-items : center;
     text-align: center;
     justify-content: center;
+
     animation: fade-in 3s forwards;
 }
 
@@ -97,3 +149,198 @@ footer {
 .next-button:hover {
     background-color: #FD5A27;
 }
+
+
+/* css 개편하면서 만든 css */
+
+/* Top_text, Middle_Menu, Bottom_button의 CSS */
+.Top_text, .Middle_Menu, .Bottom_button {
+    width: 100%;
+    position: relative;
+}
+
+.Top_text {
+    height: 10vh; /* 전체 화면 높이의 17.5% */
+    background-color: #FFFCF3; /* 예시로 색상을 지정합니다. */
+}
+
+.Middle_Menu {
+    display: flex;
+    flex-direction: column;
+    height: 67vh;
+    background-color: #FFFCF3;
+  }
+  
+  .middle_count {
+    height: 10%;
+    width: 100%;
+    /* middle-count에 대한 추가적인 스타일을 설정하세요 */
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .middle_count_text{
+    width: 13%;
+    height: 70%;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 1px solid #FF7A00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #FF7A00;
+
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  
+  .middle_title {
+    height: 10%;
+    width: 100%;
+    background-color: transparent;
+    /* middle-title에 대한 추가적인 스타일을 설정하세요 */
+  }
+
+  .middle_title_text{
+    color: #000;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .middle_camera {
+    height: 80%;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+
+.Bottom_button {
+    height: 17vh; /* 전체 화면 높이의 17.5% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFCF3; /* 예시로 색상을 지정합니다. */
+}
+
+.title {
+    color: #000;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* 부모 요소의 높이에 맞게 설정해주세요. */
+  }
+
+  .Bottom_button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  @media (max-width: 768px) {
+    .left_button,
+    .right_button {
+      width: 100%;
+    }
+  }
+
+  #inner-bg {
+    background-color: white;
+    width: 87%;
+    height: 93%;
+    border-radius: 12px;
+    box-shadow: 0px 0px 12px 0px #DFD5D2;
+  
+    position: absolute; /* inner-bg의 position을 absolute로 설정 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+
+  .left_section {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .left_section #left_button {
+    margin: auto;
+  }
+  
+  .right_section {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .right_section #right_button {
+    margin: auto;
+  }
+  
+  #left_button {
+    width: 80%;
+    height: 60%;
+    border-radius: 10px;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #left_button span {
+    text-align: center;
+  }
+  
+  #right_button {
+    width: 80%;
+    height: 60%;
+    border-radius: 10px;
+    background: #FF7A00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #right_button span {
+    text-align: center;
+  }
+  
+
+  .button_text {
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
