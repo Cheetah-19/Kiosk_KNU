@@ -41,16 +41,21 @@ export default function FaceReco() {
               <div className="middle_title_text">얼굴정보 등록하기</div>
             </div>
             <div className="middle_camera">
+              {
+              alert ===  true ?
               <Face setPhotos={setPhotos} />
+              :
+              <div id='face-img-container'>
+                <img src={face} style={{ width: '30%', margin: '0px 0px 40px 0px' }} />
+                <div>
+                  <span id='face-contents'>아이콘을 터치해</span><br />얼굴 정보를 등록해주세요.
+                </div>
+              </div>
+              }
             </div>
           </div>
         </div>
         <div className="Bottom_button">
-          <div className="left_section">
-            <div id="left_button">
-              <div className="button_text"> 이전으로 </div>
-            </div>
-          </div>
           <div className="right_section">
             <div className="right_section">
               <div id="right_button">
