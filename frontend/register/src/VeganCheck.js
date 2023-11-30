@@ -23,7 +23,7 @@ export default function FaceReco() {
     if (inputValue.trim().length === 0) {
       alert('숫자 또는 공백을 입력할 수 없습니다.');
     } else {
-      navigate("/religioncheck", { state: { inputValue, PhoneNumber, photos } });
+      navigate("/Allergy", { state: { inputValue, PhoneNumber, photos, selectedItemId, selectedReligion } });
     }
   };
 
