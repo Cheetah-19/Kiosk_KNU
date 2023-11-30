@@ -52,7 +52,7 @@ export default function FaceReco() {
               <div className="middle_title_text">휴대폰번호 등록하기</div>
             </div>
             <div className="middle_camera">
-              <input className="input-des" type="text" value={PhoneNumber} onChange={handleChange} placeholder="휴대폰 번호를 입력해 주세요 ('-'제외)" />
+              <input className="input-des" type="text" value={PhoneNumber} onChange={handleChange} placeholder="휴대폰 번호를 입력해 주세요" />
             </div>
 
           </div>

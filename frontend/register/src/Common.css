@@ -128,8 +128,19 @@ footer {
     border: none; /* 모든 라인 없음 */
     border-bottom: 1px solid #FF7A00; /* 아래쪽 라인만 있음 */
     background: #FEFAF2;
+    
+    color: #FF7A00;
+
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
+.input-des::placeholder {
+    color: #FF7A00; /* 원하는 Placeholder 색상으로 변경 */
+  }
 
 .check-box-out{
     display: flex;
@@ -230,6 +241,230 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+  }
+  
+  .top_section {
+    height: 10%;
+    width: 100%;
+    /* 위에 해당하는 스타일 */
+    color: #000;
+
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px; /* 130% */
+    border-bottom: 2px dotted #D9D9D9; /* 하단 점선 스타일 추가 */
+  }
+  
+  .middle_section {
+    height: 45%;
+    width: 100%;
+    /* 중간에 해당하는 스타일 */
+    border-bottom: 2px dotted #D9D9D9; /* 하단 점선 스타일 추가 */
+    display: flex;
+    flex-direction: column; /* 수정: 세로로 배치 */
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50%; /* 추가: 각 row의 높이 조절 */
+  }
+
+ 
+  
+  .left {
+    /* 왼쪽에 해당하는 스타일 */
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .left svg {
+    width: 4px;
+    height: 4px;
+    flex-shrink: 0;
+    fill: #FF7A00;
+  }
+  
+  .center {
+    /* 중앙에 해당하는 스타일 */
+    width: 66%; /* 수정: 중앙 영역의 너비 조절 */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    color: #000;
+
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .center_2 {
+    /* 중앙에 해당하는 스타일 */
+    width: 45%; /* 수정: 중앙 영역의 너비 조절 */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    color: #D9D9D9;
+
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  
+  .right {
+    /* 오른쪽에 해당하는 스타일 */
+    width: 24%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .right_2{
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* 부모 요소인 .row의 높이에 맞추기 위해 */
+  }
+
+  .right_2.uncheck {
+    pointer-events: none; /* 드롭다운 비활성화 */
+    background-color: #D9D9D9; /* 원하는 배경색으로 변경 */
+  }
+
+  #uncheck {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    background-color: #FFFCF3;
+    background:url(img/uncheck.png)
+  }
+
+  #check {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    background-color: #FFFCF3;
+    background:url(img/check.png)
+  }
+
+  /* 드롭다운 스타일 */
+.drop_text{
+    color: #000;
+
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.select-wrapper {
+    position: relative;
+    width: 90px; /* 드롭다운 너비 설정 */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: transparent;
+    border: none;
+  }
+
+  .select-wrapper select {
+    width: 100%;
+    height: 19px; /* 드롭다운 높이 설정 */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    appearance: none; /* 기본 스타일 제거 (크로스브라우징을 위해 사용) */
+  }
+  
+  /* 드롭다운 화살표 스타일 */
+  .select-wrapper::after {
+    content: "\25BC"; /* 화살표 모양 (유니코드 사용) */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  
+  
+  .bottom_section {
+    height: 45%;
+    width: 100%;
+    /* 아래에 해당하는 스타일 */
+    border-bottom: 2px dotted #D9D9D9; /* 하단 점선 스타일 추가 */
+  }
+
+  .row_2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30%; /* 추가: 각 row의 높이 조절 */
+  }
+
+  .row_2_button_area{
+    display: flex;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* 임의의 너비 설정 */
+  }
+
+  .line{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .row_2_button{
+    width: 80%;
+    height: 90%;
+    flex-shrink: 0;
+    color: #000;
+
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    border-radius: 10px;
+    background: #F1F1F1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+  }
+
+  .row_2_button.selected {
+    background-color: #000;
+    color: #D9D9D9;
   }
   
 
