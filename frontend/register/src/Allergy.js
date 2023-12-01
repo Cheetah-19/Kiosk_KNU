@@ -7,7 +7,7 @@ import "./Common.css";
 
 
 export default function FaceReco() {
-   const BASE_URL = 'https://kioskknu2023.run.goorm.site';
+  const BASE_URL = 'https://kioskknu2023.run.goorm.site';
   //const BASE_URL = 'http://127.0.0.1:8000';
 
   const navigate = useNavigate(); // useNavigate hook to get the navigate function
@@ -27,7 +27,7 @@ export default function FaceReco() {
     selectedVeganItemId = 0;
   }
 
-  const [selectedAllergy, setSelectedAllergy] = useState([""]); // 'None'으로 초기화
+  const [selectedAllergy, setSelectedAllergy] = useState([]); // 'None'으로 초기화
 
   const resetPhotos = () => {
     navigate('/VeganCheck', { state: { inputValue, PhoneNumber, photos } });
@@ -36,7 +36,7 @@ export default function FaceReco() {
   //알레르기 선택
   const handleClickAllergy = (allergy) => {
     if (allergy === "") {
-      setSelectedAllergy([""]); // 해당없음을 누르면 selectedAllergy 배열에 "" 값만 남게 함
+      setSelectedAllergy([]); // 해당없음을 누르면 selectedAllergy 배열에 "" 값만 남게 함
     } else {
       const index = selectedAllergy.indexOf(allergy);
 
@@ -66,7 +66,7 @@ export default function FaceReco() {
       user_name: inputValue,
       user_phonenum: PhoneNumber,
       user_allergy: selectedAllergy,
-      user_face_info: photos
+      user_face_info: photos.join('||')
     };
 
     if (selectedVeganItemId !== 0) {
@@ -82,7 +82,7 @@ export default function FaceReco() {
         console.log(postData);
         console.log(response.data);  // 요청 성공시 alert 하나 해줄 예정.
         alert("사용자 등록이 완료되었습니다");
-      navigate("/complete", { state: { inputValue, PhoneNumber, photos, selectedVeganItemId, selectedReligion, selectedAllergy } });
+        navigate("/complete", { state: { inputValue, PhoneNumber, photos, selectedVeganItemId, selectedReligion, selectedAllergy } });
 
       })
       .catch(error => {
@@ -117,11 +117,12 @@ export default function FaceReco() {
               <div className="row_2_button_area_2">
                 <div className="button_pair">
                   <div
-                    className={`row_2_button ${selectedAllergy.includes("") ? 'selected' : ''}`}
+                    className={`row_2_button ${selectedAllergy.length === 0 ? 'selected' : ''}`}
                     onClick={() => handleClickAllergy("")}
                   >
                     해당없음
                   </div>
+
                   <div
                     className={`row_2_button ${selectedAllergy.includes('Buckwheat') ? 'selected' : ''}`}
                     id="Buckwheat"
