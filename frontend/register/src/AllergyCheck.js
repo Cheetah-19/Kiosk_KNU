@@ -33,7 +33,7 @@ export default function AllergyCheck() {
       const postData = {
           user_name: inputValue,
           user_phonenum: PhoneNumber,
-          user_face_info: photos
+          user_face_info: photos.join('||') 
           // user_face_info : photos.join(',')            // 배열을 문자열로 변환해서 저장. 
       };
       

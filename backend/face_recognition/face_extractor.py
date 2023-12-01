@@ -15,6 +15,7 @@ target_size = functions.find_target_size(model_name)
 def extractor(base64_string):
     # base64_string 전처리
     base64_string = base64_string.split(',')[1]
+    
     # string -> base64
     img_data = base64.b64decode(base64_string)
     # base64 -> image
