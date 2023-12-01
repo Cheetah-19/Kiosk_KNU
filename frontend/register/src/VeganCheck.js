@@ -14,17 +14,13 @@ export default function FaceReco() {
   const PhoneNumber = location.state.PhoneNumber;
   const inputValue = location.state.inputValue;
 
-  const [selectedItemId, setSelectedItemId] = useState('None');
+  const [selectedItemId, setSelectedItemId] = useState("");
   const [isUnchecked, setIsUnchecked] = useState(true); // uncheck 상태 여부를 추적하는 상태 추가
-  const [selectedReligion, setSelectedReligion] = useState('None'); // 'None'으로 초기화
+  const [selectedReligion, setSelectedReligion] = useState(""); // 'None'으로 초기화
 
 
   const handleNext = () => {
-    if (inputValue.trim().length === 0) {
-      alert('숫자 또는 공백을 입력할 수 없습니다.');
-    } else {
       navigate("/Allergy", { state: { inputValue, PhoneNumber, photos, selectedItemId, selectedReligion } });
-    }
   };
 
   //이전으로
@@ -36,13 +32,13 @@ export default function FaceReco() {
   const handleUncheck = () => {
     setIsUnchecked((prevValue) => {
       if (prevValue) {
-        setSelectedItemId('None'); // uncheck 상태이면 selectedItemId를 'None'으로 설정
+        setSelectedItemId(""); // uncheck 상태이면 selectedItemId를 'None'으로 설정
       }
       return !prevValue; // 상태를 토글하여 변경
     });
   };
-  
-  
+
+
   //드롭다운
   const handleDropdownSelect = (selectedItemId) => {
     setSelectedItemId(selectedItemId);
@@ -144,8 +140,8 @@ export default function FaceReco() {
                 <div className="row_2_button_area">
                   <div className="line">
                     <div
-                      className={`row_2_button ${selectedReligion === 'None' ? 'selected' : ''}`}
-                      onClick={() => handleClickReligion('None')}
+                      className={`row_2_button ${selectedReligion === "" ? 'selected' : ""}`}
+                      onClick={() => handleClickReligion("")}
                     >
                       해당없음
                     </div>
@@ -173,7 +169,33 @@ export default function FaceReco() {
                       불교
                     </div>
                   </div>
+                  <div className="line">
+                    <div
+                      className={`row_2_button ${selectedReligion === 'Judaism' ? 'selected' : ''}`}
+                      id="Judaism"
+                      onClick={() => handleClickReligion('Judaism')}
+                    >
+                      유대교
+                    </div>
+                    <div
+                      className={`row_2_button ${selectedReligion === 'Christian' ? 'selected' : ''}`}
+                      id="Christian"
+                      onClick={() => handleClickReligion('Christian')}
+                    >
+                      기독교
+                    </div>
+                  </div>
+                  <div className="line">
+                    <div
+                      className={`row_2_button ${selectedReligion === 'Protestant' ? 'selected' : ''}`}
+                      id="Protestant"
+                      onClick={() => handleClickReligion('Protestant')}
+                    >
+                      개신교
+                    </div>
+                  </div>
                 </div>
+
               </div>
             </div>
 

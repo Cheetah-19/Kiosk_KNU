@@ -12,6 +12,7 @@ import PhoneNum from "./PhoneNum";
 import VeganCheck from "./VeganCheck";
 import AllergyCheck from "./AllergyCheck";
 import ReligionCheck from "./ReligionCheck";
+import Complete from "./Complete";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/username" element={<UserName />} />
         <Route path="/religion" element={<Religion />} />
         <Route path="/allergy" element={<Allergy />} />
+        <Route path="/Complete" element={<Complete />} />
       </Routes>
     </div>
   );
