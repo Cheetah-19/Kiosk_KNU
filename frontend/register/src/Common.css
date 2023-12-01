@@ -435,6 +435,15 @@ footer {
     height: 20%; /* 추가: 각 row의 높이 조절 */
   }
 
+  .line{
+    width: 50%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
   .row_2_button_area{
     display: flex;
     height: 80%;
@@ -445,17 +454,20 @@ footer {
     width: 100%; /* 임의의 너비 설정 */
     overflow-y: auto;
   }
-
-  .line{
-    width: 50%;
-    height: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
+  .row_2_button_area_2 {
+    width: 100%;
+    height: 90%; /* 스크롤이 보이도록 설정할 높이 */
+    overflow-y: auto; /* 세로 스크롤이 보이도록 설정 */
   }
-
-  .row_2_button{
+  
+  .button_pair {
+    width: 100%;
+    height: 20%; /* row_2_button_area_2의 높이의 20%를 차지 */
+    display: flex;
+    justify-content: space-between;
+  }
+  .row_2_button_1 {
+    margin: 0 10px;
     width: 80%;
     height: 100%;
     flex-shrink: 0;
@@ -474,7 +486,39 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 10px;
+    }
+
+  .row_2_button {
+    margin: 0 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 15%;
+    height: 80%;
+    border-radius: 10px;
+    background: #F1F1F1;
+    color: #000;
+
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    }
+  
+  /* 미디어 쿼리를 사용하여 화면 크기에 따라 버튼의 개수를 조정합니다. */
+  @media screen and (max-width: 768px) {
+    .row_2_button {
+      width: 100%; /* 모바일에서는 버튼을 한 개만 표시 */
+    }
+  }
+
+  .row_2_button_1.selected {
+    background-color: #000;
+    color: #D9D9D9;
   }
 
   .row_2_button.selected {

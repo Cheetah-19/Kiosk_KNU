@@ -19,10 +19,6 @@ export default function FaceReco() {
         navigate('/', { state: { photos: [] } });
     };
 
-    const handleNext = () => {
-        navigate("/complete", { state: { inputValue, PhoneNumber, photos, selectedItemId, selectedReligion } });
-    };
-
     return (
         <div>
             <div>
@@ -44,7 +40,15 @@ export default function FaceReco() {
                 </div>
                 <div className="Bottom_button">
                     <div className="left_section">
-                        <div id="left_button" onClick={goback}>
+                        <div id="left_button" onClick={() =>{
+                            console.log(photos); // photos를 출력
+                            console.log(PhoneNumber);
+                            console.log(inputValue);
+                            console.log(selectedItemId);
+                            console.log(selectedReligion);
+                            goback();
+                            }}>
+                            
                             <div className="button_text" > 메인으로 </div>
                         </div>
                     </div>

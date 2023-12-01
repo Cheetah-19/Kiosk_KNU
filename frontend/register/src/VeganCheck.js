@@ -20,6 +20,7 @@ export default function FaceReco() {
 
 
   const handleNext = () => {
+
       navigate("/Allergy", { state: { inputValue, PhoneNumber, photos, selectedItemId, selectedReligion } });
   };
 
@@ -140,13 +141,13 @@ export default function FaceReco() {
                 <div className="row_2_button_area">
                   <div className="line">
                     <div
-                      className={`row_2_button ${selectedReligion === "" ? 'selected' : ""}`}
+                      className={`row_2_button_1 ${selectedReligion === "" ? 'selected' : ""}`}
                       onClick={() => handleClickReligion("")}
                     >
                       해당없음
                     </div>
                     <div
-                      className={`row_2_button ${selectedReligion === 'Islam' ? 'selected' : ''}`}
+                      className={`row_2_button_1 ${selectedReligion === 'Islam' ? 'selected' : ''}`}
                       id="Islam"
                       onClick={() => handleClickReligion('Islam')}
                     >
@@ -155,14 +156,14 @@ export default function FaceReco() {
                   </div>
                   <div className="line">
                     <div
-                      className={`row_2_button ${selectedReligion === 'Hinduism' ? 'selected' : ''}`}
+                      className={`row_2_button_1 ${selectedReligion === 'Hinduism' ? 'selected' : ''}`}
                       id="Hinduism"
                       onClick={() => handleClickReligion('Hinduism')}
                     >
                       힌두교
                     </div>
                     <div
-                      className={`row_2_button ${selectedReligion === 'Buddhism' ? 'selected' : ''}`}
+                      className={`row_2_button_1 ${selectedReligion === 'Buddhism' ? 'selected' : ''}`}
                       id="Buddhism"
                       onClick={() => handleClickReligion('Buddhism')}
                     >
@@ -171,14 +172,14 @@ export default function FaceReco() {
                   </div>
                   <div className="line">
                     <div
-                      className={`row_2_button ${selectedReligion === 'Judaism' ? 'selected' : ''}`}
+                      className={`row_2_button_1 ${selectedReligion === 'Judaism' ? 'selected' : ''}`}
                       id="Judaism"
                       onClick={() => handleClickReligion('Judaism')}
                     >
                       유대교
                     </div>
                     <div
-                      className={`row_2_button ${selectedReligion === 'Christian' ? 'selected' : ''}`}
+                      className={`row_2_button_1 ${selectedReligion === 'Christian' ? 'selected' : ''}`}
                       id="Christian"
                       onClick={() => handleClickReligion('Christian')}
                     >
@@ -187,7 +188,7 @@ export default function FaceReco() {
                   </div>
                   <div className="line">
                     <div
-                      className={`row_2_button ${selectedReligion === 'Protestant' ? 'selected' : ''}`}
+                      className={`row_2_button_1 ${selectedReligion === 'Protestant' ? 'selected' : ''}`}
                       id="Protestant"
                       onClick={() => handleClickReligion('Protestant')}
                     >
