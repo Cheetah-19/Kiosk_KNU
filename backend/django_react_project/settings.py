@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'order',
     'signup',
     'menu',
+    'recommendation',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
