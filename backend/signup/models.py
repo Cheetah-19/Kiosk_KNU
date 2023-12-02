@@ -102,3 +102,14 @@ class Ordered_Item(models.Model):
     def __str__(self):
         return str(self.order.order_num)
 
+
+class PreprocessedData(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    # ordered_item = models.ForeignKey(Ordered_Item, on_delete=models.CASCADE)
+
+    # 종교, 알러지, 비건 등의 이유로 못 먹는 재료들의 id를 저장해 둠
+    excluded_ingredients = models.TextField(null=True)
+    def __str__(self):
+        return str(self.user.user_phonenum)
+

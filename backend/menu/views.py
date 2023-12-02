@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
-from signup.models import User  
+from signup.models import User, Menu, Order, Ordered_Item, PreprocessedData 
 from django.http import HttpResponse
 import json
 
@@ -12,32 +12,18 @@ class member_MenulistView(APIView): # 회원 메뉴 리스트 출력
         UserGetter = User.objects.get(user_phonenum = userphonenum)     #전화번호를 통해 user데이터 불러오기
         exclude_ingredient = set()                                      #회원 필터링을 위해 제외할 재료를 저장해 둘 set 
 
-        UserReligionGetter = UserGetter.religion
+        try:
+            preprocessed_data = PreprocessedData.objects.get(user=UserGetter)
+            exclude_ingredient_str = preprocessed_data.excluded_ingredients
+        except PreprocessedData.DoesNotExist:
+            exclude_ingredient_str = ""
 
-        if UserReligionGetter: 
-            UserReligionIngredients = UserReligionGetter.religion_ingredient.all()
-            for ingredient in UserReligionIngredients:
-                exclude_ingredient.add(ingredient.id)
-        
-        #2. 알러지 정보
+        #String 을 Set 으로 변경하는 과정
+        # 중괄호 제거 후 쉼표로 분할
+        exclude_ingredient_list = exclude_ingredient_str[1:-1].split(',')
+        #문자열 -> 정수 변환 후 set 제작
+        exclude_ingredient_set = set(int(item.strip()) for item in exclude_ingredient_list)
 
-        UserAllergyGetter = UserGetter.user_allergy
-
-        if UserAllergyGetter:
-            UserAllergyIngredients = UserAllergyGetter.all()
-            for allergy in UserAllergyIngredients:
-                allergy_ingredients = allergy.allergy_ingredient.all()
-                for ingredient in allergy_ingredients:
-                    exclude_ingredient.add(ingredient.id)
-        
-        #3. 비건 정보
-        UserVegetarianGetter = UserGetter.user_vegetarian
-
-        if UserVegetarianGetter:
-            UserVegetarianIngredients = UserVegetarianGetter.vegetarian_ingredient.all()
-            for vegetarian in UserVegetarianIngredients:
-                exclude_ingredient.add(vegetarian.id)
-        
         menulist={}
         menu_category = MenuCategory.objects.all() #메뉴 리스트 전체
         menulist['categories'] = []  #메뉴 카테고리를 저장하기 위한 리스트
@@ -50,7 +36,7 @@ class member_MenulistView(APIView): # 회원 메뉴 리스트 출력
                 for menudata in menu_serializer.data:                                       # QuerySet에 대한 직렬화된 데이터를 for문으로 순회
                     menu_ingredient_ids = menudata['menu_ingredient']                       # menu_ingredient 부분을 가져옴 (현재 id 값으로 저장되어 있음 - 리스트)
                     menu_ingredient = set(menu_ingredient_ids)                              # 비교를 위해 set으로 변환하기
-                    if not menu_ingredient & exclude_ingredient:                            # 유저가 못 먹는 재료와 겹치는 재료가 없는 경우만 추가 
+                    if not menu_ingredient & exclude_ingredient_set:                            # 유저가 못 먹는 재료와 겹치는 재료가 없는 경우만 추가 
                         new_menu_data.append(menudata)
                     
                 menulist['{}'.format(category.menucategory_name)] = new_menu_data   #메뉴 카테고리 이름 key, serialized data 를 value로 추가
