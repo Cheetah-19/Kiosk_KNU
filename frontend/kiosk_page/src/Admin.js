@@ -60,9 +60,9 @@ export default function Admin() {
     async function addMenu() {
         try {
             const formData = new FormData();
-            formData.append('menuName', menuName);
-            formData.append('image', image);
-            formData.append('category', selectedCategory);
+            formData.append('menu_name', menuName);
+            formData.append('menu_pic', image);
+            formData.append('menucategory', selectedCategory);
             //Debug용 console log
             console.log('메뉴 이름', menuName);
             console.log('이미지:',image);
