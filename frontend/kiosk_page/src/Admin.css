@@ -69,6 +69,29 @@
     line-height: normal;
 }
 
+/* 모달 내 메뉴 추가 버튼 css */
+.add_menu_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 465px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #FF7A00;
+}
+
+.add_menu_btn_text{
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+
 .add-menubtn:hover {
     background: #FF7A00;
     color: #FFF;

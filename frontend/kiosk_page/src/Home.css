@@ -55,6 +55,15 @@
     background:url(img/top_bar_home.png) no-repeat center / cover;
 }
 
+#top_bar_back {
+    position:absolute; /* Add this line */
+    top:15px; /* Adjust as needed */
+    left:10px; /* Adjust as needed */
+    width:30px; /* Set explicit size */
+    height:30px; /* Set explicit size */
+    background:url(img/top_bar_back.png) no-repeat center / cover;
+}
+
 /* 메뉴가 출력되는 부분 */
 #menu_table {
     height: calc(100vh - 15vh - 35vh); /* Calculate the remaining height */

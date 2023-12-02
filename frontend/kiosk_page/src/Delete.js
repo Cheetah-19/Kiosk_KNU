@@ -64,15 +64,15 @@ export default function Delete() {
         if (currentPage < totalPages) setCurrentPage(currentPage + 1);
     }
 
-    //홈 화면 가는 함수
-    function herf_home() {
+    //뒤로 가는 함수
+    function herf_back() {
         // Clear local storage
         localStorage.removeItem('cart');
 
         // Clear cart state
         setCart([]);
 
-        navigate('/');
+        navigate('/Admin');
     }
 
     // 모달 내에서 "메뉴 추가하기" 버튼을 클릭했을 때 호출되는 함수
@@ -319,7 +319,7 @@ export default function Delete() {
                 <div className = "col-lg-8 main-container">
                     <div className="row top-bar">
                         <div className="col-lg-4 left-bar">
-                            <div id="top_bar_home" onClick={herf_home}></div>
+                            <div id="top_bar_back" onClick={herf_back}></div>
                         </div>
                         <div className="col-lg-4 center-bar">
                             <header>KIOSK Admin</header>

@@ -49,6 +49,31 @@ export default function Admin() {
     function delHandle() {
         navigate('/Delete');
     }
+
+    async function addMenu() {
+        try {
+            const formData = new FormData();
+            formData.append('menuName', menuName);
+            formData.append('image', image);
+            //Debug용 console log
+            console.log('메뉴 이름', menuName);
+            console.log('이미지:',image);
+            const response = await axios.post(`${BASE_URL}/서버URL`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            
+            if (response.status === 200) {
+                alert('메뉴 추가 완료');
+                closeModal();
+            } else {
+                alert('메뉴 추가 실패');
+            }
+        } catch (error) {
+            console.error('메뉴 추가 실패:', error);
+        }
+    }
     return(
         <div id = "pay_page">
             <div id="top_bar_home" onClick={herf_home}></div>
@@ -61,25 +86,29 @@ export default function Admin() {
 
             <Modal show={showModal} onHide={closeModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>메뉴 추가</Modal.Title>
+                    <div>
+                        <h3 className="selected_menu">메뉴 추가</h3>
+                    </div>
                 </Modal.Header>
                 <Modal.Body>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <div>카테고리</div>
-                    <input 
-                        type="file" 
-                        accept="image/*" 
-                        onChange={handleImageUpload} 
-                        id="fileInput" 
-                        style={{ display: 'none' }} // 파일 입력 필드 숨기기
-                    />
-                    <label htmlFor="fileInput" style={{ cursor: 'pointer' }}>이미지 업로드(터치)</label>
-                    {image && <img src={image} alt="Selected" style={{ width: '230px', height: '160px', objectFit: 'cover' }} />}
-                    <input type="text" value={menuName} placeholder="메뉴 이름을 입력해 주세요." onChange={handleMenuNameChange} />
-                </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div>카테고리</div>
+                        <input 
+                            type="file" 
+                            accept="image/*" 
+                            onChange={handleImageUpload} 
+                            id="fileInput"
+                            style={{ display: 'none' }} // 파일 입력 필드 숨기기
+                        />
+                        <label htmlFor="fileInput" style={{ cursor: 'pointer' }}>이미지 업로드(터치)</label>
+                        {image && <img src={image} alt="Selected" style={{ width: '230px', height: '160px', objectFit: 'cover' }} />}
+                        <input type="text" value={menuName} placeholder="메뉴 이름을 입력해 주세요." onChange={handleMenuNameChange} />
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button onClick={closeModal}>닫기</button>
+                    <div className="add_menu_btn" variant="secondary" onClick={addMenu}>
+                        <div className="add_menu_btn_text">메뉴 추가하기</div>
+                    </div>
                 </Modal.Footer>
             </Modal>
         </div>
