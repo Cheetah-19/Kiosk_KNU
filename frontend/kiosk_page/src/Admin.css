@@ -91,6 +91,26 @@
     line-height: normal;
 }
 
+.categories_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 230px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #FF7A00;
+}
+
+.categories_btn_text{
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
 
 .add-menubtn:hover {
     background: #FF7A00;
@@ -101,4 +121,5 @@
     background: #FF7A00;
     color: #FFF;
 }
+
 

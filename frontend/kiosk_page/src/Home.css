@@ -318,6 +318,14 @@ p.selected_menu{
     line-height: normal;
 }
 
+h4.selected_menu {
+    color: #000;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
 .option_text {
     color: #000;
 
