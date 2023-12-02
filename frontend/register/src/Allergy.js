@@ -8,8 +8,8 @@ import "./Common.css";
 
 export default function FaceReco() {
 
-  const BASE_URL = 'https://kioskknu2023.run.goorm.site';
-  //const BASE_URL = 'http://127.0.0.1:8000';
+  // const BASE_URL = 'https://kioskknu2023.run.goorm.site';
+  const BASE_URL = 'http://127.0.0.1:8000';
 
   const navigate = useNavigate(); // useNavigate hook to get the navigate function
   const location = useLocation();
@@ -87,6 +87,7 @@ export default function FaceReco() {
 
       })
       .catch(error => {
+        console.log(postData);
         console.error(error);
         alert("사용자 등록이 실패했습니다. 다시 시도해주세요.");
       });
