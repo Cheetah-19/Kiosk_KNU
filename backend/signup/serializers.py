@@ -109,6 +109,6 @@ class UserSerializer(serializers.ModelSerializer):
             user.save()
             preprocessed_data = PreprocessedData.objects.create(
                 user=user,
-                excluded_ingredients=str(exclude_ingredient)  #set 을 string 형태로 바꾸어 저장한다.
+                excluded_ingredients=str(exclude_ingredient)  #set 을 string 형태로 바꾸어
             )
             return user
