@@ -126,9 +126,9 @@ export default function FaceReco() {
                   </div>
 
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Buckwheat') ? 'selected' : ''}`}
-                    id="Buckwheat"
-                    onClick={() => handleClickAllergy('Buckwheat')}
+                    className={`row_2_button ${selectedAllergy.includes('통밀') ? 'selected' : ''}`}
+                    id="통밀"
+                    onClick={() => handleClickAllergy('통밀')}
                   >
                     메밀
                   </div>
@@ -136,16 +136,16 @@ export default function FaceReco() {
 
                 <div className="button_pair">
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Wheat') ? 'selected' : ''}`}
-                    id="Wheat"
-                    onClick={() => handleClickAllergy('Wheat')}
+                    className={`row_2_button ${selectedAllergy.includes('밀') ? 'selected' : ''}`}
+                    id="밀"
+                    onClick={() => handleClickAllergy('밀')}
                   >
                     밀
                   </div>
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Soybean') ? 'selected' : ''}`}
-                    id="Soybean"
-                    onClick={() => handleClickAllergy('Soybean')}
+                    className={`row_2_button ${selectedAllergy.includes('대두') ? 'selected' : ''}`}
+                    id="대두"
+                    onClick={() => handleClickAllergy('대두')}
                   >
                     대두
                   </div>
@@ -154,16 +154,16 @@ export default function FaceReco() {
 
                 <div className="button_pair">
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Walnut') ? 'selected' : ''}`}
-                    id="Walnut"
-                    onClick={() => handleClickAllergy('Walnut')}
+                    className={`row_2_button ${selectedAllergy.includes('호두') ? 'selected' : ''}`}
+                    id="호두"
+                    onClick={() => handleClickAllergy('호두')}
                   >
                     호두
                   </div>
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Peanut') ? 'selected' : ''}`}
-                    id="Peanut"
-                    onClick={() => handleClickAllergy('Peanut')}
+                    className={`row_2_button ${selectedAllergy.includes('땅콩') ? 'selected' : ''}`}
+                    id="땅콩"
+                    onClick={() => handleClickAllergy('땅콩')}
                   >
                     땅콩
                   </div>
@@ -172,16 +172,16 @@ export default function FaceReco() {
 
                 <div className="button_pair">
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Peach') ? 'selected' : ''}`}
-                    id="Peach"
-                    onClick={() => handleClickAllergy('Peach')}
+                    className={`row_2_button ${selectedAllergy.includes('복숭아') ? 'selected' : ''}`}
+                    id="복숭아"
+                    onClick={() => handleClickAllergy('복숭아')}
                   >
                     복숭아
                   </div>
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Tomato') ? 'selected' : ''}`}
-                    id="Tomato"
-                    onClick={() => handleClickAllergy('Tomato')}
+                    className={`row_2_button ${selectedAllergy.includes('토마토') ? 'selected' : ''}`}
+                    id="토마토"
+                    onClick={() => handleClickAllergy('토마토')}
                   >
                     토마토
                   </div>
@@ -190,16 +190,16 @@ export default function FaceReco() {
 
                 <div className="button_pair">
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Pork') ? 'selected' : ''}`}
-                    id="Pork"
-                    onClick={() => handleClickAllergy('Pork')}
+                    className={`row_2_button ${selectedAllergy.includes('돼지고기') ? 'selected' : ''}`}
+                    id="돼지고기"
+                    onClick={() => handleClickAllergy('돼지고기')}
                   >
                     돼지고기
                   </div>
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Egg') ? 'selected' : ''}`}
-                    id="Egg"
-                    onClick={() => handleClickAllergy('Egg')}
+                    className={`row_2_button ${selectedAllergy.includes('계란') ? 'selected' : ''}`}
+                    id="계란"
+                    onClick={() => handleClickAllergy('계란')}
                   >
                     난류
                   </div>
@@ -208,16 +208,16 @@ export default function FaceReco() {
 
                 <div className="button_pair">
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Milk') ? 'selected' : ''}`}
-                    id="Milk"
-                    onClick={() => handleClickAllergy('Milk')}
+                    className={`row_2_button ${selectedAllergy.includes('우유') ? 'selected' : ''}`}
+                    id="우유"
+                    onClick={() => handleClickAllergy('우유')}
                   >
                     우유
                   </div>
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Chicken') ? 'selected' : ''}`}
-                    id="Chicken"
-                    onClick={() => handleClickAllergy('Chicken')}
+                    className={`row_2_button ${selectedAllergy.includes('닭고기') ? 'selected' : ''}`}
+                    id="닭고기"
+                    onClick={() => handleClickAllergy('닭고기')}
                   >
                     닭고기
                   </div>
@@ -226,34 +226,33 @@ export default function FaceReco() {
 
                 <div className="button_pair">
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Beef') ? 'selected' : ''}`}
-                    id="Beef"
-                    onClick={() => handleClickAllergy('Beef')}
+                    className={`row_2_button ${selectedAllergy.includes('소고기') ? 'selected' : ''}`}
+                    id="소고기"
+                    onClick={() => handleClickAllergy('소고기')}
                   >
                     쇠고기
                   </div>
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Shrimp') ? 'selected' : ''}`}
-                    id="Shrimp"
-                    onClick={() => handleClickAllergy('Shrimp')}
+                    className={`row_2_button ${selectedAllergy.includes('새우') ? 'selected' : ''}`}
+                    id="새우"
+                    onClick={() => handleClickAllergy('새우')}
                   >
                     새우
                   </div>
 
                 </div>
-
                 <div className="button_pair">
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Mackerel') ? 'selected' : ''}`}
-                    id="Mackerel"
-                    onClick={() => handleClickAllergy('Mackerel')}
+                    className={`row_2_button ${selectedAllergy.includes('고등어') ? 'selected' : ''}`}
+                    id="고등어"
+                    onClick={() => handleClickAllergy('고등어')}
                   >
                     고등어
                   </div>
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Mussels') ? 'selected' : ''}`}
-                    id="Mussels"
-                    onClick={() => handleClickAllergy('Mussels')}
+                    className={`row_2_button ${selectedAllergy.includes('홍합') ? 'selected' : ''}`}
+                    id="홍합"
+                    onClick={() => handleClickAllergy('홍합')}
                   >
                     홍합
                   </div>
@@ -262,16 +261,16 @@ export default function FaceReco() {
 
                 <div className="button_pair">
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Abalone') ? 'selected' : ''}`}
-                    id="Abalone"
-                    onClick={() => handleClickAllergy('Abalone')}
+                    className={`row_2_button ${selectedAllergy.includes('전복') ? 'selected' : ''}`}
+                    id="전복"
+                    onClick={() => handleClickAllergy('전복')}
                   >
                     전복
                   </div>
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Oyster') ? 'selected' : ''}`}
-                    id="Oyster"
-                    onClick={() => handleClickAllergy('Oyster')}
+                    className={`row_2_button ${selectedAllergy.includes('굴') ? 'selected' : ''}`}
+                    id="굴"
+                    onClick={() => handleClickAllergy('굴')}
                   >
                     귤
                   </div>
@@ -280,16 +279,16 @@ export default function FaceReco() {
 
                 <div className="button_pair">
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('shellfish') ? 'selected' : ''}`}
-                    id="shellfish"
-                    onClick={() => handleClickAllergy('shellfish')}
+                    className={`row_2_button ${selectedAllergy.includes('조개류') ? 'selected' : ''}`}
+                    id="조개류"
+                    onClick={() => handleClickAllergy('조개류')}
                   >
                     조개류
                   </div>
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Crab') ? 'selected' : ''}`}
-                    id="Crab"
-                    onClick={() => handleClickAllergy('Crab')}
+                    className={`row_2_button ${selectedAllergy.includes('게') ? 'selected' : ''}`}
+                    id="게"
+                    onClick={() => handleClickAllergy('게')}
                   >
                     게
                   </div>
@@ -298,16 +297,16 @@ export default function FaceReco() {
 
                 <div className="button_pair">
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('Squid') ? 'selected' : ''}`}
-                    id="Squid"
-                    onClick={() => handleClickAllergy('Squid')}
+                    className={`row_2_button ${selectedAllergy.includes('오징어') ? 'selected' : ''}`}
+                    id="오징어"
+                    onClick={() => handleClickAllergy('오징어')}
                   >
                     오징어
                   </div>
                   <div
-                    className={`row_2_button ${selectedAllergy.includes('food_containing_Sulfite') ? 'selected' : ''}`}
-                    id="food_containing_Sulfite"
-                    onClick={() => handleClickAllergy('food_containing_Sulfite')}
+                    className={`row_2_button ${selectedAllergy.includes('아황산 포함식품') ? 'selected' : ''}`}
+                    id="아황산 포함식품"
+                    onClick={() => handleClickAllergy('아황산 포함식품')}
                   >
                     아황산 포함식품
                   </div>
