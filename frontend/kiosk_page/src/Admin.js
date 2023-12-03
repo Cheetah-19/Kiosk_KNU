@@ -145,7 +145,8 @@ export default function Admin() {
                                 onClick={() => handleCategoryClick(3)}
                                 style={{ 
                                     backgroundColor: selectedCategory === 3 ? '#FF7A00' : '#E8E8E8',
-                                    marginRight: '5px'
+                                    marginRight: '5px',
+                                    marginBottom: '10px' //카테고리 버튼과 다음 요소간의 margin을 설정.
                                 }}
                             >
                                 <span className="categories_btn_text" 
@@ -168,6 +169,11 @@ export default function Admin() {
                                 </span>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <h4 className="selected_menu">메뉴사진</h4>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <input 
                             type="file" 
                             accept="image/*" 
