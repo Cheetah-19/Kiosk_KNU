@@ -177,7 +177,9 @@ export default function Admin() {
                         />
                         <label htmlFor="fileInput" style={{ cursor: 'pointer' }}>이미지 업로드(터치)</label>
                         {image && <img src={image} alt="Selected" style={{ width: '230px', height: '160px', objectFit: 'cover' }} />}
-                        <input type="text" value={menuName} placeholder="메뉴 이름을 입력해 주세요." onChange={handleMenuNameChange} />
+                        <div id="menuName-inner-container">
+                            <input id="menuName-input" type="text" value={menuName} placeholder="메뉴 이름을 입력해 주세요" onChange={handleMenuNameChange} />
+                        </div>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
