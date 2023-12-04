@@ -17,7 +17,7 @@ export default function Admin() {
     const [image, setImage] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [category, setCategory] = useState(null);
-
+    const [menuPrice, setmenuPrice] = useState(null);
     // 모달 상태 변수 및 함수 추가
     const [showModal, setShowModal] = useState(false);
     const openModal = () => setShowModal(true);
@@ -48,6 +48,9 @@ export default function Admin() {
         setMenuName(e.target.value);
     };
 
+    const handleMenuPriceChange = (e) => {
+        setmenuPrice(e.target.value);
+    }
     //홈 화면 가는 함수
     function herf_home() {
         navigate('/');
@@ -60,13 +63,15 @@ export default function Admin() {
     async function addMenu() {
         try {
             const formData = new FormData();
-            formData.append('menu_name', menuName);
-            formData.append('menu_pic', image);
             formData.append('menucategory', selectedCategory);
+            formData.append('menu_pic', image);
+            formData.append('menu_name', menuName);
+            formData.append('menu_price', menuPrice);
             //Debug용 console log
-            console.log('메뉴 이름', menuName);
-            console.log('이미지:',image);
             console.log('선택된 카테고리:', selectedCategory);
+            console.log('이미지:',image);
+            console.log('메뉴 이름', menuName);
+            console.log('메뉴 가격', menuPrice);
             const response = await axios.post(`${BASE_URL}/서버URL`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -196,6 +201,9 @@ export default function Admin() {
                         {image && <img src={image} alt="Selected" style={{ width: '230px', height: '160px', objectFit: 'cover' }} />}
                         <div id="menuName-inner-container">
                             <input id="menuName-input" type="text" value={menuName} placeholder="메뉴 이름을 입력해 주세요" onChange={handleMenuNameChange} />
+                        </div>
+                        <div id="menuName-inner-container">
+                            <input id="menuName-input" type="text" value={menuPrice} placeholder="가격을 설정해주세요" onChange={handleMenuPriceChange} />
                         </div>
                     </div>
                 </Modal.Body>
