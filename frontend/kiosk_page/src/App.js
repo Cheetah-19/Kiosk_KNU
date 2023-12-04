@@ -11,8 +11,8 @@ import SignUp from "./SignUp";
 import Face from "./Face";
 import LoginCheck from "./LoginCheck";
 import PhoneNum from "./PhoneNum";
-import Admin from "./Admin";
-import Delete from "./Delete";
+import Admin from "./admin/Admin";
+import Delete from "./admin/Delete";
 
 function App() {
   return (

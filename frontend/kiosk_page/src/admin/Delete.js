@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "./Common.css";
-import "./Home.css"
-import "./MainMenu.css"
+import "../Common.css";
+import "../Home.css"
+import "../MainMenu.css"
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
-import { BASE_URL } from './constants/Url';
+import { BASE_URL } from '../constants/Url';
 
 export default function Delete() {
 
