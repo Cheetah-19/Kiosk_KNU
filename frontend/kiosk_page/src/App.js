@@ -14,6 +14,8 @@ import PhoneNum from "./PhoneNum";
 import Admin from "./admin/Admin";
 import Delete from "./admin/Delete";
 import AddCategories from "./admin/AddCategories";
+import AddOptions from "./admin/AddOptions";
+import AddLast from "./admin/AddLast";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route path="/Admin" element={<Admin />} />
         <Route path="/Delete" element={<Delete />} />
         <Route path="/AddCategories" element={<AddCategories />} />
+        <Route path="/AddOptions" element={<AddOptions />} />
+        <Route path="/AddLast" element={<AddLast />} />
       </Routes>
   );
 }

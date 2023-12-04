@@ -22,7 +22,7 @@ export default function AddCategories() {
             <div id="top_bar_back" onClick={herf_back}></div>
             <header>KIOSK Admin</header>
             <div className='rect1'>
-              <div className='txt1'>카테고리를 선택하세요</div>
+              <div className='txt1'>옵션을 선택하세요</div>
               <div className='rect2'></div>
             </div>
         </div>
