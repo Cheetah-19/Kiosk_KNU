@@ -10,6 +10,25 @@
     top : 144px;
 }
 
+.rect2 {
+    position: absolute;
+    width: 800px;
+    height: 400px;
+    border-radius: 10px;
+    background: #FFF;
+    left: 43px;
+    top: 120px;
+}
+
+#top_bar_back {
+    position:absolute; /* Add this line */
+    top:15px; /* Adjust as needed */
+    left:10px; /* Adjust as needed */
+    width:30px; /* Set explicit size */
+    height:30px; /* Set explicit size */
+    background:url(../img/top_bar_back.png) no-repeat center / cover;
+}
+
 .txt1 {
     position: absolute;
     left: 260px;
