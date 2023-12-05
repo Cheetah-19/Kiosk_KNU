@@ -46,6 +46,7 @@ urlpatterns = [
     path('login/', include('login.urls')),
     path('order/',include('order.urls')),
     path('menu/', include('menu.urls')),
+    path('manager/',include('manager.urls'))
     # path('menu/',include('api.urls')),   
     # path('user/', include('signup.urls')),
     # path('api/', include('rest_framework.urls')),
