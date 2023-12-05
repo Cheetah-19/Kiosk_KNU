@@ -20,12 +20,6 @@
     animation: blink 2s; /*한번만 실행*/
 }
 
-@keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
 .price-txt{
     position: absolute;
     left:354px;

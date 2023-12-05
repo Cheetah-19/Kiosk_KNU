@@ -27,28 +27,30 @@ export default function Pay() {
       navigate('/PayCheck', {state: {totalPrice: totalPrice} });
     }
     return (
-      <div id = "pay_page">
+      <div id="pay_page">
         <div id="top_bar_home" onClick={herf_home}></div>
         <header>Easy KIOSK</header>
-        <div className='rect1'>
-          <div className='txt1'>주문목록을 확인해주세요!</div>
-          <div className="rect2">
+        <div className='pay-container'>
+          <div className='pay-title'>주문목록을 확인해주세요!</div>
+          <div className="pay-inner-container">
             <p style={{margin: '10px'}}>{option === '테이크아웃' ? '테이크아웃' : '매장식사'}</p>
             {cart.map((item, index) => (
               <div>
                 <div id='order-list' key={index}>
                   <div id='menu-name'>{item.menu.menu_name}</div>
-                  {Object.entries(item.options).map(([optionName, quantity]) => (
-                    <div id='option-name' key={optionName}>{optionName}+{quantity}</div>
-                  ))}
+                  <div id='option-list'>
+                    {Object.entries(item.options).map(([optionName, quantity]) => (
+                      <div id='option-name' key={optionName}>{optionName}+{quantity}</div>
+                    ))}
+                  </div>
                   <div id='total-price'>{item.total.toLocaleString()}원</div>
                 </div>
                 <div id='separator'></div>
               </div>
             ))}
           </div>
-          <div className='sum-txt'>합계</div>
-          <div className='sum-price'>{totalPrice.toLocaleString()}원</div>
+          <div className='pay-sum-txt'>합계</div>
+          <div className='pay-sum-price'>{totalPrice.toLocaleString()}원</div>
           <div id='pay-btn-container'>
             <div className='light-gray-btn' onClick={goBack}>이전으로 </div>
             <div className='light-gray-btn' onClick={goToPayCheck}>결제하기</div>
