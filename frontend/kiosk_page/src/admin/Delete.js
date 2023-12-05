@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "./Common.css";
-import "./Home.css"
-import "./MainMenu.css"
+import "../Common.css";
+import "../Home.css"
+import "../MainMenu.css"
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
-import { BASE_URL } from './constants/Url';
+import { BASE_URL } from '../constants/Url';
 
 export default function Delete() {
 
@@ -15,7 +15,7 @@ export default function Delete() {
     let phoneNumber = location.state?.phone_number; // 전역 변수로 phoneNumber 선언
 
     const [selectedOptions, setSelectedOptions] = React.useState({});
-
+    const [deletedMenus, setDeletedMenus] = useState([]); //삭제희망목록의 메뉴들을 추적하는 상태변수.
     // 모달 상태 변수 및 함수 추가
     const [showModal, setShowModal] = useState(false);
     const closeModal = () => setShowModal(false);
@@ -64,15 +64,15 @@ export default function Delete() {
         if (currentPage < totalPages) setCurrentPage(currentPage + 1);
     }
 
-    //홈 화면 가는 함수
-    function herf_home() {
+    //뒤로 가는 함수
+    function herf_back() {
         // Clear local storage
         localStorage.removeItem('cart');
 
         // Clear cart state
         setCart([]);
 
-        navigate('/');
+        navigate('/Admin');
     }
 
     // 모달 내에서 "메뉴 추가하기" 버튼을 클릭했을 때 호출되는 함수
@@ -83,7 +83,7 @@ export default function Delete() {
             options: selectedOptions,
             total: total,
         };
-
+        setDeletedMenus(prevDeletedMenus => [...prevDeletedMenus, orderItem]);
         // Get existing cart from local storage
         let existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
 
@@ -242,11 +242,15 @@ export default function Delete() {
     function handleDeleteFromCart(index) {
         setCart(prevCart => {
             const newCart = [...prevCart];
+            const deletedItem = newCart[index];
             newCart.splice(index, 1);
-
+    
             // Update the local storage as well
             localStorage.setItem('cart', JSON.stringify(newCart));
-
+    
+            // deletedMenus 상태에서 삭제한 메뉴 제거
+            setDeletedMenus(prevDeletedMenus => prevDeletedMenus.filter(item => item.menu.id !== deletedItem.menu.id));
+    
             return newCart;
         });
     }
@@ -315,7 +319,7 @@ export default function Delete() {
                 <div className = "col-lg-8 main-container">
                     <div className="row top-bar">
                         <div className="col-lg-4 left-bar">
-                            <div id="top_bar_home" onClick={herf_home}></div>
+                            <div id="top_bar_back" onClick={herf_back}></div>
                         </div>
                         <div className="col-lg-4 center-bar">
                             <header>KIOSK Admin</header>
@@ -371,7 +375,7 @@ export default function Delete() {
                         {/* 카테고리에 맞는 메뉴 출력 */}
                         <div className="menu_container">
                             {menusByCategory[categories[currentCategoryIndex]]?.map((menu, index) => (
-                                <MenuItem key={index} menu={menu} onClick={() => selectMenu(index)} />
+                                !deletedMenus.some(item => item.menu.id === menu.id) && <MenuItem key={index} menu={menu} onClick={() => selectMenu(index)} />
                             ))}
                         </div>
                     </div>

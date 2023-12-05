@@ -1,0 +1,165 @@
+.rect1 {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 880px;
+    height: 616px;
+    border-radius: 10px;
+    background: #F3F3F3;
+    left : 200px;
+    top : 144px;
+}
+
+.rect2 {
+    position: absolute;
+    width: 800px;
+    height: 400px;
+    border-radius: 10px;
+    background: #FFF;
+    left: 43px;
+    top: 120px;
+}
+
+#top_bar_back {
+    position:absolute; /* Add this line */
+    top:15px; /* Adjust as needed */
+    left:10px; /* Adjust as needed */
+    width:30px; /* Set explicit size */
+    height:30px; /* Set explicit size */
+    background:url(../img/top_bar_back.png) no-repeat center / cover;
+}
+
+.txt1 {
+    position: absolute;
+    left: 260px;
+    top: 62px;
+    color: #000;
+    text-align: center;
+    font-family: 'pretendard-regular';
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.add-menubtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    width: 355px;
+    height: 286px;
+    border-radius: 10px;
+    background: #E8E8E8;
+
+    left: 68px;
+    top: 197px;
+
+    color: #000;
+    text-align: center;
+    font-family: 'pretendard-regular';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.del-menubtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    width: 355px;
+    height: 286px;
+    border-radius: 10px;
+    background: #E8E8E8;
+
+    right: 68px;
+    top: 197px;
+
+    color: #000;
+    text-align: center;
+    font-family: 'pretendard-regular';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+/* 모달 내 메뉴 추가 버튼 css */
+.add_menu_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 465px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #FF7A00;
+}
+
+.add_menu_btn_text{
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.categories_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 230px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #FF7A00;
+}
+
+#menuName-inner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    font-family: Pretendard-Regular;
+}
+
+#menuName-input {
+    width: 430px;
+    height: 50px;
+    border-radius: 10px;
+    border: 3px solid black;
+
+    margin-top: 15px;
+
+    text-align: center;
+    font-size: 20px;
+}
+
+.categories_btn_text{
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.add-menubtn:hover {
+    background: #FF7A00;
+    color: #FFF;
+}
+
+.del-menubtn:hover {
+    background: #FF7A00;
+    color: #FFF;
+}
+
+
