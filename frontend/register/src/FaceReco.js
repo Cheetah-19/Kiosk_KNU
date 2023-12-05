@@ -1,107 +1,73 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Face from "./Face"; // Face 컴포넌트 import
+
+import PhoneNum from "./PhoneNum";
+
 import "./Common.css";
+import "./FaceReco.css";
+
+import face from './img/face.png';
 
 export default function FaceReco() {
-    const navigate = useNavigate(); // useNavigate hook to get the navigate function
-    const videoRef = useRef(null);
-    const canvasRef = useRef(null);
+  const navigate = useNavigate(); // useNavigate hook to get the navigate function
+  const [alert, setAlert] = useState(false);
 
-    // Add ref for timer id
-    const timerIdRef = useRef(null);
+  const [gotoPhoneNUm, setGotoPhoneNUm] = useState(false);
+  const [slide, setSlide] = useState(false);
 
-    // Add state for storing photos
-    const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState([]); // photos 상태 추가
 
-    // Add state for remaining photos
-    const [remainingPhotos, setRemainingPhotos] = useState(10); // 10장으로 설정
+  useEffect(() => {
+    setTimeout(() => { setAlert(true) }, 2200);
+  });
 
-    const startVideo = async () => {
-      try {
-          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-              throw new Error('Camera not available on this browser');
-          }
-
-          const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
-
-          if (videoRef.current) {
-              videoRef.current.srcObject = mediaStream;
-              await videoRef.current.play();
-
-              // 웹캠이 시작된 후 2초 동안 기다린 후에 사진 촬영을 시작하도록 설정
-              setTimeout(() => {
-                  timerIdRef.current = setInterval(captureFrame, 100); // 2초후 0.1초 간격으로 10장 촬영
-              }, 2000);
-          }
-
-      } catch (error) {
-          console.log("Something went wrong!", error);
-      }
-  };
-
-  // Capture a frame and add it to the photos array
-  const captureFrame = async () => {
-    if (remainingPhotos <= 0) return 0; // Stop capturing after reaching limit
-
-    if (videoRef.current && canvasRef.current) {
-        const context = canvasRef.current.getContext('2d');
-
-        canvasRef.current.width = videoRef.current.videoWidth;
-        canvasRef.current.height = videoRef.current.videoHeight;
-
-        // Draw the video frame to the canvas
-        context.drawImage(videoRef.current, 0, 0, videoRef.current.videoWidth, videoRef.current.videoHeight);
-
-        // Convert the canvas image to a base64 string
-        const imgDataUrl = canvasRef.current.toDataURL('image/jpeg');
-
-        // Add the photo to the photos array
-        setPhotos(prevPhotos => [...prevPhotos, imgDataUrl]);
-
-        // Decrement remaining photos count by one
-        setRemainingPhotos(prevCount => prevCount - 1);
-    }
-
-    console.log("hello")
-};
-
-// Send photos to the server when remainingPhotos becomes 0
-useEffect(() => {
-  console.log(remainingPhotos)
-  if (remainingPhotos <= 0) {
-      clearInterval(timerIdRef.current);
-      console.log(photos); // 확인용 로그
-      console.log("사진 촬영이 완료되었습니다.");
-  }
-});
-
-
-
-useEffect(() => {
-  startVideo();
-}, []);
-
-    return (
+  return (
+    <div>
       <div>
-        <set>
-          <header>Easy KIOSK</header>
-          <body>
-          <div id="video_container">
-              <video ref={videoRef} id="video_Element"></video>
-                  {/* Display remaining photos count */}
-                  <p style={{ color: 'black', fontSize: '32px' }}>
-                    {remainingPhotos}
-                  </p>
-                  <canvas ref={canvasRef} style={{ display: 'none' }}/>
-            </div>
-          </body>
-          <footer>
-            <div className="blinking-text">나의 정보를 등록하세요 1/6</div>
-            <button className="next-button" onClick={() => navigate("/username", { state: { photos } })}>다음으로</button>
-          </footer>
-        </set>
-        {/* Face recognition content... */}
+        <header>Easy KIOSK</header>
       </div>
-    );
+      <div>
+        <div className="Top_text">
+          <div className="title"> 내 정보 등록하기 </div>
+        </div>
+        <div className="Middle_Menu">
+          <div id="inner-bg">
+            <div className="middle_count">
+              <div className="middle_count_text">1/5</div>
+            </div>
+            <div className="middle_title">
+              <div className="middle_title_text">얼굴정보 등록하기</div>
+            </div>
+            <div className="middle_camera">
+              {
+              alert ===  true ?
+              <Face setPhotos={setPhotos} />
+              :
+              <div id='face-img-container'>
+                <img src={face} style={{ width: '30%', margin: '0px 0px 40px 0px' }} />
+                <div>
+                  <span id='face-contents'>아이콘을 터치해</span><br />얼굴 정보를 등록해주세요.
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+        <div className="Bottom_button">
+          <div className="right_section">
+            <div className="right_section">
+              <div id="right_button" onClick={() => {
+                  console.log(photos); // photos를 출력
+                  navigate("/username", { state: { photos } }); // 다음 페이지로 이동
+                }}>
+                <div className="button_text" > 다음으로 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

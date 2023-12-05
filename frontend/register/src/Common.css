@@ -1,4 +1,46 @@
 /*기본적인 레이아웃을 설정할 CSS*/
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+@keyframes slider-open {
+    0% {
+        opacity: 0;
+        transform: translateY(-7%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slider-close {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-7%);
+    }
+}
+
+.container{
+    background-color : white;
+}
+
 
 set {
     display: flex;
@@ -9,17 +51,19 @@ set {
 }
 
 header {
-    width : 100%;
-    height : 3.75rem;
-    background : #FD5A27;
-    color: #F0F0F0;
-    
     display: flex;
     align-items : center;
     text-align: center;
     justify-content: center;
+
+    width : 100%;
+    height : 3.75rem;
+    background : #FF7A00;
+    color: #F0F0F0;
+    
     font-family: Inter;
     font-size : 1.5rem;
+    font-weight: bold;
 }
 
 body {
@@ -28,20 +72,28 @@ body {
     margin:0px;
 }
 
+#background{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #FFFCF3;
+    width: 100%;
+    height: 100%;
+    
+    font-family: Pretendard-Regular;
+    font-weight: 700;
+}
+
 footer {
     margin-top : .5%
 }
 
-@keyframes fade-in {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
 .blinking-text {
-
     align-items : center;
     text-align: center;
     justify-content: center;
+
     animation: fade-in 3s forwards;
 }
 
@@ -67,15 +119,28 @@ footer {
 }
 
 .input-des {
-    border-radius: 2rem;
-    width: 65%;
-    margin-left:17%;
-    margin-top: 0%;
-    height: 6.5vh;
+    width: 63%;
+    height: 8%;
+    flex-shrink: 0;
     align-items : center;
     text-align: center;
     justify-content: center;
+    border: none; /* 모든 라인 없음 */
+    border-bottom: 1px solid #FF7A00; /* 아래쪽 라인만 있음 */
+    background: #FEFAF2;
+    
+    color: #FF7A00;
+
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
+
+.input-des::placeholder {
+    color: #FF7A00; /* 원하는 Placeholder 색상으로 변경 */
+  }
 
 .check-box-out{
     display: flex;
@@ -97,3 +162,498 @@ footer {
 .next-button:hover {
     background-color: #FD5A27;
 }
+
+
+/* css 개편하면서 만든 css */
+
+/* Top_text, Middle_Menu, Bottom_button의 CSS */
+.Top_text, .Middle_Menu, .Bottom_button {
+    width: 100%;
+    position: relative;
+}
+
+.Top_text {
+    height: 10vh; /* 전체 화면 높이의 17.5% */
+    background-color: #FFFCF3; /* 예시로 색상을 지정합니다. */
+}
+
+.Middle_Menu {
+    display: flex;
+    flex-direction: column;
+    height: 67vh;
+    background-color: #FFFCF3;
+  }
+  
+  .middle_count {
+    height: 10%;
+    width: 100%;
+    /* middle-count에 대한 추가적인 스타일을 설정하세요 */
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .middle_count_text{
+    width: 13%;
+    height: 70%;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 1px solid #FF7A00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #FF7A00;
+
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  
+  .middle_title {
+    height: 10%;
+    width: 100%;
+    background-color: transparent;
+    /* middle-title에 대한 추가적인 스타일을 설정하세요 */
+  }
+
+  .middle_title_text{
+    color: #000;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .middle_camera {
+    height: 80%;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .top_section {
+    height: 10%;
+    width: 100%;
+    /* 위에 해당하는 스타일 */
+    color: #000;
+
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px; /* 130% */
+    border-bottom: 2px dotted #D9D9D9; /* 하단 점선 스타일 추가 */
+  }
+  
+  .middle_section {
+    height: 25%;
+    width: 100%;
+    /* 중간에 해당하는 스타일 */
+    border-bottom: 2px dotted #D9D9D9; /* 하단 점선 스타일 추가 */
+    display: flex;
+    flex-direction: column; /* 수정: 세로로 배치 */
+  }
+
+  .middle_text{
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 26px; /* 130% */
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50%; /* 추가: 각 row의 높이 조절 */
+  }
+
+ 
+  
+  .left {
+    /* 왼쪽에 해당하는 스타일 */
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .left svg {
+    width: 4px;
+    height: 4px;
+    flex-shrink: 0;
+    fill: #FF7A00;
+  }
+  
+  .center {
+    /* 중앙에 해당하는 스타일 */
+    width: 66%; /* 수정: 중앙 영역의 너비 조절 */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    color: #000;
+
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .center_2 {
+    /* 중앙에 해당하는 스타일 */
+    width: 45%; /* 수정: 중앙 영역의 너비 조절 */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    color: #D9D9D9;
+
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  
+  .right {
+    /* 오른쪽에 해당하는 스타일 */
+    width: 24%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .right_2{
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* 부모 요소인 .row의 높이에 맞추기 위해 */
+  }
+
+  .right_2.uncheck {
+    pointer-events: none; /* 드롭다운 비활성화 */
+    background-color: #D9D9D9; /* 원하는 배경색으로 변경 */
+  }
+
+  #uncheck {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    background-color: #FFFCF3;
+    background:url(img/uncheck.png)
+  }
+
+  #check {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    background-color: #FFFCF3;
+    background:url(img/check.png)
+  }
+
+  /* 드롭다운 스타일 */
+.drop_text{
+    color: #000;
+
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.select-wrapper {
+    position: relative;
+    width: 90px; /* 드롭다운 너비 설정 */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: transparent;
+    border: none;
+  }
+
+  .select-wrapper select {
+    width: 100%;
+    height: 19px; /* 드롭다운 높이 설정 */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    appearance: none; /* 기본 스타일 제거 (크로스브라우징을 위해 사용) */
+  }
+  
+  /* 드롭다운 화살표 스타일 */
+  .select-wrapper::after {
+    content: "\25BC"; /* 화살표 모양 (유니코드 사용) */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  
+  
+  .bottom_section {
+    height: 65%;
+    width: 100%;
+    /* 아래에 해당하는 스타일 */
+    border-bottom: 2px dotted #D9D9D9; /* 하단 점선 스타일 추가 */
+  }
+
+  .row_2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20%; /* 추가: 각 row의 높이 조절 */
+  }
+
+  .line{
+    width: 50%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .row_2_button_area{
+    display: flex;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* 임의의 너비 설정 */
+    overflow-y: auto;
+  }
+  .row_2_button_area_2 {
+    width: 100%;
+    height: 90%; /* 스크롤이 보이도록 설정할 높이 */
+    overflow-y: auto; /* 세로 스크롤이 보이도록 설정 */
+  }
+  
+  .button_pair {
+    width: 100%;
+    height: 20%; /* row_2_button_area_2의 높이의 20%를 차지 */
+    display: flex;
+    justify-content: space-between;
+  }
+  .row_2_button_1 {
+    margin: 0 10px;
+    width: 80%;
+    height: 100%;
+    flex-shrink: 0;
+    color: #000;
+
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    border-radius: 10px;
+    background: #F1F1F1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+  .row_2_button {
+    margin: 0 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 15%;
+    height: 80%;
+    border-radius: 10px;
+    background: #F1F1F1;
+    color: #000;
+
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    }
+  
+  /* 미디어 쿼리를 사용하여 화면 크기에 따라 버튼의 개수를 조정합니다. */
+  @media screen and (max-width: 768px) {
+    .row_2_button {
+      width: 100%; /* 모바일에서는 버튼을 한 개만 표시 */
+    }
+  }
+
+  .row_2_button_1.selected {
+    background-color: #000;
+    color: #D9D9D9;
+  }
+
+  .row_2_button.selected {
+    background-color: #000;
+    color: #D9D9D9;
+  }
+  
+
+.Bottom_button {
+    height: 17vh; /* 전체 화면 높이의 17.5% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFCF3; /* 예시로 색상을 지정합니다. */
+}
+
+.title {
+    color: #000;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* 부모 요소의 높이에 맞게 설정해주세요. */
+  }
+
+  .Bottom_button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  @media (max-width: 768px) {
+    .left_button,
+    .right_button {
+      width: 100%;
+    }
+  }
+
+  #inner-bg {
+    background-color: white;
+    width: 87%;
+    height: 93%;
+    border-radius: 12px;
+    box-shadow: 0px 0px 12px 0px #DFD5D2;
+  
+    position: absolute; /* inner-bg의 position을 absolute로 설정 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #inner-bg_2 {
+    background-color: white;
+    width: 87%;
+    height: 93%;
+    border-radius: 12px;
+    box-shadow: 0px 0px 12px 0px #DFD5D2;
+  
+    position: absolute; /* inner-bg의 position을 absolute로 설정 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+
+
+  .left_section {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .left_section #left_button {
+    margin: auto;
+  }
+  
+  .right_section {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .right_section #right_button {
+    margin: auto;
+  }
+  
+  #left_button {
+    width: 80%;
+    height: 60%;
+    border-radius: 10px;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #left_button span {
+    text-align: center;
+  }
+  
+  #right_button {
+    width: 80%;
+    height: 60%;
+    border-radius: 10px;
+    background: #FF7A00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #right_button span {
+    text-align: center;
+  }
+  
+
+  .button_text {
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }

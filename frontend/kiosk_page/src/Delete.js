@@ -7,9 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { BASE_URL } from './constants/Url';
 
-export default function MainMenu() {
-    // const BASE_URL = 'https://kioskknu2023.run.goorm.site';
-    const BASE_URL = 'http://127.0.0.1:8000';
+export default function Delete() {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -17,7 +15,6 @@ export default function MainMenu() {
     let phoneNumber = location.state?.phone_number; // 전역 변수로 phoneNumber 선언
 
     const [selectedOptions, setSelectedOptions] = React.useState({});
-
 
     // 모달 상태 변수 및 함수 추가
     const [showModal, setShowModal] = useState(false);
@@ -118,11 +115,57 @@ export default function MainMenu() {
             };
         });
     }
+    async function fetchMenusAndOptions() {
+        try {
+            // 서버 URL에 테스트용 주소 넣어줄것.
+            // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
+            //optional chaining 사용
+            const menuUrl = phoneNumber ? `${BASE_URL}/menu/${phoneNumber}/` : `${BASE_URL}/menu/`;
+            let responseMenus = await axios.get(menuUrl);
+            let dataMenus = responseMenus.data;
+            console.log("dataMenus:", dataMenus); // 확인용 로그
+            console.log(menuUrl);
+            let categoriesFromServerMenu = dataMenus.categories.map(c => c.menucategory_name);
+            let menusFromServerMenu = {};
+            console.log("categoriesFromServerMenu:", categoriesFromServerMenu); // 확인용 로그
 
+            //메뉴가 있는 카테고리만 선택
+            for (let category of categoriesFromServerMenu) {
+                if (dataMenus[category] && dataMenus[category].length > 0) {
+                    menusFromServerMenu[category] = dataMenus[category];
+                }
+            }
 
+            // 카테고리 중에서 메뉴가 있는 카테고리만 선택
+            let filteredCategories = Object.keys(menusFromServerMenu);
 
-    //결제창 가는 함수(장바구니 정보 전송) 결제 버튼을 눌렀을때, 서버로 cart에 담긴 정보를 전송한다.
-    async function handlePayment() {
+            //카테고리별 그룹 옵션 추출
+            let responseOptions = await axios.get(`${BASE_URL}/menu/option/`);
+            let dataOptions = responseOptions.data;
+
+            let optionsFromServerOption = {};
+
+            for (let category of dataOptions.categories.map(c => c.optioncategory_name)) {
+                optionsFromServerOption[category] = dataOptions[category];
+            }
+
+            setCategories(filteredCategories);
+            setMenusByCategory(menusFromServerMenu);
+            setOptionsByCategory(optionsFromServerOption);
+
+        } catch (error) {
+            console.error('ERROR : 메뉴 데이터를 받아오는데 실패했습니다.', error.message, error.stack, error.response?.status);
+        }
+    }
+    //서버로부터 정보를 받아온다. Axios 활용.
+    useEffect(() => {
+        console.log("fetchMenusAndOptions 실행"); // 확인용 로그
+        //실행
+        fetchMenusAndOptions();
+    }, []);
+
+    //삭제 버튼을 눌렀을때, 서버로 담겨있는 menu.id를 배열에 담아 보낸다.
+    async function handleDelMenu() {
         //0원 일 때는 실행 x
         if (totalPrice === 0) {
             return;
@@ -130,29 +173,20 @@ export default function MainMenu() {
 
         try {
             const user = phoneNumber ? phoneNumber : '';
-            const cartWithUser = cart.map(item => {
-                return {
-                    user: user,
-                    menu: item.menu,
-                    options: item.options,
-                    total: item.total
-                };
-            });
+            //item.menu.id만 추출해서 배열로 만든다.
+            const cartMenuIds = cart.map(item => item.menu.id);
+            // 서버로 삭제할 데이터를 전송
+            console.log(cartMenuIds);
+            await axios.post(`${BASE_URL}/뒤에URL추가할것`, { cart: cartMenuIds });
 
-            // 서버로 cartWithUser를 전송하거나 다른 작업 수행
-            await axios.post(`${BASE_URL}/order/menu/orderpost/`, { cart: cartWithUser });
-
-            // 결제 버튼을 누르면 cart 배열 초기화
+            //삭제하기를 누르면 cart 배열 초기화
             localStorage.removeItem('cart');
             setCart([]);
-
-            navigate('/pay', { state: { cart: cartWithUser, totalPrice: totalPrice.toLocaleString(), option } });
+            fetchMenusAndOptions(); //삭제 이후에 메뉴 정보를 다시 받아온다.
         } catch (error) {
-            console.error('서버로 Cart 데이터를 보내는데 실패했습니다:', error);
+            console.error('서버로 삭제할 메뉴 데이터를 보내는데 실패했습니다:', error);
         }
     }
-
-
 
     //메뉴 항목을 렌더링하는 함수
     function MenuItem({ menu, onClick }) {
@@ -165,7 +199,6 @@ export default function MainMenu() {
             </div>
         );
     }
-
 
     // 카테고리를 렌더링 하는 함수
     function renderCategories() {
@@ -248,56 +281,6 @@ export default function MainMenu() {
         });
     }
 
-    //서버로부터 정보를 받아온다. Axios 활용.
-    useEffect(() => {
-        console.log("fetchMenusAndOptions 실행"); // 확인용 로그
-        async function fetchMenusAndOptions() {
-            try {
-                // 서버 URL에 테스트용 주소 넣어줄것.
-                // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
-                //optional chaining 사용
-                phoneNumber = location.state?.phone_number;
-                const menuUrl = phoneNumber ? `${BASE_URL}/menu/${phoneNumber}/` : `${BASE_URL}/menu/`;
-                let responseMenus = await axios.get(menuUrl);
-                let dataMenus = responseMenus.data;
-                console.log("dataMenus:", dataMenus); // 확인용 로그
-                console.log(menuUrl);
-                let categoriesFromServerMenu = dataMenus.categories.map(c => c.menucategory_name);
-                let menusFromServerMenu = {};
-                console.log("categoriesFromServerMenu:", categoriesFromServerMenu); // 확인용 로그
-
-                //메뉴가 있는 카테고리만 선택
-                for (let category of categoriesFromServerMenu) {
-                    if (dataMenus[category] && dataMenus[category].length > 0) {
-                        menusFromServerMenu[category] = dataMenus[category];
-                    }
-                }
-
-                // 카테고리 중에서 메뉴가 있는 카테고리만 선택
-                let filteredCategories = Object.keys(menusFromServerMenu);
-
-                //카테고리별 그룹 옵션 추출
-                let responseOptions = await axios.get(`${BASE_URL}/menu/option/`);
-                let dataOptions = responseOptions.data;
-
-                let optionsFromServerOption = {};
-
-                for (let category of dataOptions.categories.map(c => c.optioncategory_name)) {
-                    optionsFromServerOption[category] = dataOptions[category];
-                }
-
-                setCategories(filteredCategories);
-                setMenusByCategory(menusFromServerMenu);
-                setOptionsByCategory(optionsFromServerOption);
-
-            } catch (error) {
-                console.error('ERROR : 메뉴 데이터를 받아오는데 실패했습니다.', error.message, error.stack, error.response?.status);
-            }
-        }
-        //실행
-        fetchMenusAndOptions();
-    }, []);
-
     // DetailMenu에서 넘어온 주문정보를 장바구니에 추가 및 로컬 스토리지 업데이트
     useEffect(() => {
         if (location.state?.orderItem) {
@@ -335,7 +318,7 @@ export default function MainMenu() {
                             <div id="top_bar_home" onClick={herf_home}></div>
                         </div>
                         <div className="col-lg-4 center-bar">
-                            <header>Easy KIOSK</header>
+                            <header>KIOSK Admin</header>
                         </div>
                         <div className="col-lg-4 right-bar">
                             {/* 내정보 보는 곳 ? 넣을 지 말지 정해야함. */}
@@ -370,11 +353,7 @@ export default function MainMenu() {
                                         <div key={option.id} className="option_text">
                                             <div className="option_row">
                                                 <div className="option_name">{option.option_name}</div>
-                                                <div className="quantity_section">
-                                                    <div className="minus" onClick={() => handleQuantityChange(option.option_name, -1)}></div>
-                                                    <span className="option_count">{selectedOptions[option.option_name] || 0}</span>
-                                                    <div className="plus" onClick={() => handleQuantityChange(option.option_name, +1)}></div>
-                                                </div>
+                                                <div className="quantity_section"></div>
                                             </div>
                                         </div>
                                     ))
@@ -384,7 +363,7 @@ export default function MainMenu() {
                             <Modal.Footer >
 
                                 <div className="add_btn" variant="secondary" onClick={addToCart}>
-                                    <div className="add_btn_text">메뉴 추가하기</div>
+                                    <div className="add_btn_text">이 메뉴를 삭제할래요.</div>
                                 </div>
 
                             </Modal.Footer>
@@ -399,14 +378,14 @@ export default function MainMenu() {
                 </div>
                 <div className="col-lg-4 side-container">
                     <div className = "order-list">
-                        <div id="order_list_text">주문목록</div>
+                        <div id="order_list_text">삭제희망목록</div>
                     </div>
                     <div id="order_list_area">
                         {renderCart()}
                     </div>
                     <div id="pay">
-                        <div id="pay_btn" onClick={handlePayment} className={totalPrice === 0 ? 'disabled' : ''}> {/* 0원이면 클릭 못하게 하기 */}
-                            <div className="total_price">{totalPrice.toLocaleString()}원 결제하기</div>
+                        <div id="pay_btn" onClick={handleDelMenu} className={totalPrice === 0 ? 'disabled' : ''}> {/* 0원이면 클릭 못하게 하기 */}
+                            <div className="total_price">삭제하기</div>
                         </div>
                     </div>
                 </div>

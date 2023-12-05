@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { BASE_URL } from './constants/Url';
 import "./Face.css";
 
 export default function Face(props) {

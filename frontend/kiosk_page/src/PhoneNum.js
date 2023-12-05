@@ -23,8 +23,14 @@ export default function PhoneNum() {
                 phone_number: phone_number
             });
             console.log(response.data);
-            alert("로그인 성공");
-            navigate('/MealOption', { state: { phone_number } });  // 성공 시 MainMenu로 페이지 이동 + phoneNumber 전달
+            // 로그인 성공 후 사용자가 입력한 내용이 '12345678901'인 경우
+            if (phone_number === '12345678901') {
+                alert("관리자 모드를 실행합니다.");
+                navigate('/Admin', { state: { phone_number } });
+            } else {
+                alert("로그인 성공");
+                navigate('/MealOption', { state: { phone_number } });  // 성공 시 MainMenu로 페이지 이동 + phoneNumber 전달
+            }
 
         } catch (error) {
             console.error(error);
