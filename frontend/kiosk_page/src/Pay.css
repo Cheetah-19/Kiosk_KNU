@@ -1,4 +1,4 @@
-.rect1 {
+.pay-container {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@
     top : 120px;
 }
 
-.rect2 {
+.pay-inner-container {
     position:absolute;
     overflow-y: auto;
     left:40px;
@@ -29,7 +29,7 @@
     padding: 10px 0; /* 위아래 패딩 */
 }
 
-.txt1 {
+.pay-title {
     position: relative;
     margin: 0 auto;
     top: 42px;
@@ -38,7 +38,7 @@
     font-weight: 700;
 }
 
-.sum-txt {
+.pay-sum-txt {
     position: absolute;
     left: 70px;
     top: 412px;
@@ -51,7 +51,7 @@
     line-height: normal;
 }
 
-.sum-price {
+.pay-sum-price {
     position: absolute;
     right: 70px;
     top: 412px;
@@ -59,50 +59,6 @@
     color:#000;
     font-family: 'pretendard-regular';
     font-size: 40px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-}
-
-.prev-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    position: absolute;
-    left: 70px;
-    top: 500px;
-    width: 355px;
-    height: 86px;
-    border-radius: 18px;
-    background: #E8E8E8;
-
-    color: #000;
-    text-align: center;
-    font-family: 'pretendard-regular';
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-}
-
-.pay-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    position: absolute;
-    right: 70px;
-    top: 500px;
-    width: 355px;
-    height: 86px;
-    border-radius: 18px;
-    background: #E8E8E8;
-
-    color: #000;
-    text-align: center;
-    font-family: 'pretendard-regular';
-    font-size: 32px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -132,15 +88,34 @@
 #menu-name, #total-price {
     font-size: 25px;
     font-weight: 600;
+
+    white-space: nowrap;
+}
+
+#option-list {
+    display: flex;
+
+    margin-left: 10px;
+    margin-right: 110px;
+    padding-bottom: 7px;
+
+    width: 100%;
+    
+    overflow: auto;
+
 }
 
 #option-name {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    
     padding: 0 10px 0 10px;
     margin: 0 0 0 5px;
+
+    height: 35px;
+
+    white-space: nowrap;
 
     border: 3px solid #FF7A00;
     border-radius: 50px;

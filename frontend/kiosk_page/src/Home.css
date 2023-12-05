@@ -8,13 +8,17 @@
 /* 수직 스크롤바 */
 ::-webkit-scrollbar {
     width: 10px;   /* 스크롤바 너비 설정 */
-    height: 1px; 
+    height: 5px; 
     background-color: #E6E6E6; /* 스크롤바 배경색 설정 */
+
+    border-radius: 10px;
 }
 
 /* 스크롤바 엄지 */
 ::-webkit-scrollbar-thumb {
     background-color: #FF7A00; /* 스크롤바 색상 설정 */
+    
+    border-radius: 10px;
 }
 .container {
     display: flex;
