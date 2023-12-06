@@ -42,7 +42,7 @@ class manage_category(APIView):
         if request.method == 'POST' :
             data = request.data
             new_category = data.get('category')
-            new_cat = MenuCategory(new_category)
+            new_cat = MenuCategory(new_category['menucategory_name'])
             new_cat.save()
             return HttpResponse(status = 200)
             
