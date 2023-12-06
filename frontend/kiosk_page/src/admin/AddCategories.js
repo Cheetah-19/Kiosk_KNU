@@ -1,8 +1,8 @@
-//서버로부터 카테고리 가져와서 보여주는 곳.
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { BASE_URL } from "../constants/Url";
+import { Modal } from 'react-bootstrap';
 import "../Home.css";
 import "./Admin.css";
 import "./AddCategories.css";
@@ -12,29 +12,52 @@ export default function AddCategories() {
     const navigate = useNavigate();
     const location = useLocation();
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [categories, setCategories] = useState([]); // 카테고리를 저장할 상태
+    const [categories, setCategories] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [menucategory_name, setMenucategoryName] = useState(''); 
 
-    // 카테고리 선택 핸들러
-    const selectCategory = (category) => {
-        setSelectedCategory(category);
+    const selectCategory = category => setSelectedCategory(category);
+
+    // 카테고리를 가져오는 함수를 useEffect 밖으로 빼냄
+    const fetchCategories = async () => {
+        try {
+            const response = await axios.get(`${BASE_URL}/manager/get-category/`);
+            setCategories(response.data.category);
+        } catch (error) {
+            console.error('카테고리를 가져오는데 실패했습니다:', error);
+        }
     };
 
     useEffect(() => {
-        // 서버에서 카테고리를 가져오는 함수
-        const fetchCategories = async () => {
-            try {
-                const response = await axios.get(`${BASE_URL}/manager/get-category/`);
-                setCategories(response.data); // 받아온 데이터를 상태에 저장
-                console.log(response.data);
-            } catch (error) {
-                console.error('카테고리를 가져오는데 실패했습니다:', error);
-            }
-        };
+        fetchCategories();
+    }, []);
 
-        fetchCategories(); // 함수 호출
-    }, []); // 컴포넌트가 마운트 될 때 한 번만 실행
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setMenucategoryName('');
+    }
+    const handleMenucategoryNameChange = (event) => {
+        setMenucategoryName(event.target.value);
+    };
 
-    // 다음 페이지로 이동하는 핸들러
+    const addCategory = async () => {
+        try {
+            const sendData = { categories: [{ menucategory_name }] };  // 보낼 데이터를 수정
+            console.log(sendData); // 보낼 데이터 출력
+            await axios.post(`${BASE_URL}/manager/add-category/`, sendData); // 데이터 전송
+            setIsModalOpen(false);
+            setMenucategoryName('');
+            await fetchCategories();  
+        } catch (error) {
+            console.error('카테고리 추가에 실패했습니다:', error);
+            alert("카테고리 추가 실패!");
+            setIsModalOpen(false);
+            setMenucategoryName('');
+        }
+    };
+    
+
     const goToNextPage = () => {
         if (selectedCategory !== null) { 
             navigate('/AddOptions', { 
@@ -50,7 +73,6 @@ export default function AddCategories() {
         }
     };
 
-    //뒤로 가는 함수
     function herf_back() {
         navigate('/Admin');
     }
@@ -72,7 +94,29 @@ export default function AddCategories() {
                   </div>
                 ))}
               </div>
-              <div className='prev-btn' onClick={herf_back}>이전으로</div>
+              <div className='prev-btn' onClick={openModal}>카테고리 추가</div>
+              <Modal show={isModalOpen} onHide={closeModal}>
+                <Modal.Header closeButton>
+                    <div>
+                        <h3 className="selected_menu">카테고리 추가</h3>
+                    </div>
+                </Modal.Header>
+                <Modal.Body>
+                    <div>
+                        <h4 className="selected_menu">추가할 카테고리 이름 입력</h4>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div id="menuName-inner-container">
+                            <input id="menuName-input" type="text" value={menucategory_name} placeholder="카테고리 이름을 입력해 주세요" onChange={handleMenucategoryNameChange} />
+                        </div>
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <div className="add_menu_btn" variant="secondary" onClick={addCategory}>
+                        <div className="add_menu_btn_text">카테고리 추가하기</div>
+                    </div>
+                </Modal.Footer>
+              </Modal>
               <div className='next-btn' onClick={goToNextPage}>다음으로</div>
             </div>
         </div>
