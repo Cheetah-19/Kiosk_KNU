@@ -4,14 +4,10 @@ import "./App.css";
 
 /*Router 이동을 위한 import*/
 import FaceReco from "./FaceReco";
+import Vegan_Religion_Check from "./Vegan_Religion_Check";
 import UserName from "./UserName";
-import Vegan from "./Vegan";
-import Religion from "./Religion";
 import Allergy from "./Allergy";
 import PhoneNum from "./PhoneNum";
-import VeganCheck from "./VeganCheck";
-import AllergyCheck from "./AllergyCheck";
-import ReligionCheck from "./ReligionCheck";
 import Complete from "./Complete";
 
 function App() {
@@ -19,13 +15,9 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<FaceReco />} /> {/* Default route */}
-        <Route path="/vegan" element= {<Vegan />} />
-        <Route path="/vegancheck" element= {<VeganCheck />} />
-        <Route path="/religioncheck" element= {<ReligionCheck />} />
-        <Route path="/allergycheck" element= {<AllergyCheck />} />
+        <Route path="/Vegan_Religion_Check" element= {<Vegan_Religion_Check />} />
         <Route path="/phonenum" element = {<PhoneNum/>} />
         <Route path="/username" element={<UserName />} />
-        <Route path="/religion" element={<Religion />} />
         <Route path="/allergy" element={<Allergy />} />
         <Route path="/Complete" element={<Complete />} />
       </Routes>
