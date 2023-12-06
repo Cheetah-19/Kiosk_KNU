@@ -42,7 +42,7 @@ class manage_category(APIView):
         if request.method == 'POST' :
             data = request.data
             new_category = data.get('category')
-            new_cat = MenuCategory(new_category['menucategory_name'])
+            new_cat = MenuCategory(menucategory_name=new_category['menucategory_name'])
             new_cat.save()
             return HttpResponse(status = 200)
             
@@ -83,8 +83,8 @@ class manage_ingredient(APIView):
     def post(self,request:Request):
         if request.method == 'POST' :
             data = request.data
-            new_ingredient = data.get('option')
-            new_ing = Ingredient(ingredient_name =new_ingredient)
+            new_ingredient = data.get('ingredient')
+            new_ing = Ingredient(ingredient_name =new_ingredient['ingredient_name'])
             new_ing.save()
             return HttpResponse(status = 200)
     
