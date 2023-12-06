@@ -23,3 +23,30 @@ class delete_menu (APIView):
                 del_result.append(menu.delete())
             
             return Response({'result'})
+
+class getcategory(APIView):
+    def get(self,request:Request):    
+        if request.method == 'GET':
+            category = MenuCategory.objects.all()
+            category_list = []
+            for cate in category:
+                cate_dict = {}
+                cate_dict['id'] = cate.id
+                cate_dict['menucategory_name'] =cate.menucategory_name
+                category_list.append(cate_dict)
+            
+            return Response({'category':category_list})
+
+class getoption(APIView):
+    def get(self,request:Request):
+        if request.method =='GET':
+            option = Option.objects.all()
+            option_list = []
+            for opt in option:
+                opt_dict = {}
+                opt_dict['id'] = opt.id
+                opt_dict['name'] =opt.option_name
+                opt_dict['price'] = opt.option_price
+                option_list.append(opt_dict)
+                
+        return Response({'option':option_list})
