@@ -10,7 +10,6 @@ import "./AddCategories.css";
 export default function AddCategories() {
     
     const navigate = useNavigate();
-    const location = useLocation();
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [categories, setCategories] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,21 +42,19 @@ export default function AddCategories() {
 
     const addCategory = async () => {
         try {
-            const sendData = { categories: [{ menucategory_name }] };  // 보낼 데이터를 수정
+            const sendData = { categories: { menucategory_name } };  // 보낼 데이터를 수정
             console.log(sendData); // 보낼 데이터 출력
-            await axios.post(`${BASE_URL}/manager/add-category/`, sendData); // 데이터 전송
-            setIsModalOpen(false);
-            setMenucategoryName('');
-            await fetchCategories();  
+            await axios.post(`${BASE_URL}/manager/add-category/`, sendData); // 데이터 전송 
         } catch (error) {
             console.error('카테고리 추가에 실패했습니다:', error);
             alert("카테고리 추가 실패!");
+        } finally {
             setIsModalOpen(false);
             setMenucategoryName('');
+            await fetchCategories(); 
         }
     };
     
-
     const goToNextPage = () => {
         if (selectedCategory !== null) { 
             navigate('/AddOptions', { 
@@ -106,8 +103,8 @@ export default function AddCategories() {
                         <h4 className="selected_menu">추가할 카테고리 이름 입력</h4>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <div id="menuName-inner-container">
-                            <input id="menuName-input" type="text" value={menucategory_name} placeholder="카테고리 이름을 입력해 주세요" onChange={handleMenucategoryNameChange} />
+                        <div id="ingName-inner-container">
+                            <input id="ingName-input" type="text" value={menucategory_name} placeholder="카테고리 이름을 입력해 주세요" onChange={handleMenucategoryNameChange} />
                         </div>
                     </div>
                 </Modal.Body>

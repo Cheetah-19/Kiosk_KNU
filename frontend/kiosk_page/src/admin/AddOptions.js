@@ -11,6 +11,9 @@ export default function AddCategories() {
     
     const navigate = useNavigate();
     const location = useLocation();
+    //AddCategories로부터 받아온 정보들.
+    const selectedCategoryId = location.state.selectedCategoryId;
+    const selectedCategoryName = location.state.selectedCategoryName;
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [options, setOptions] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -53,24 +56,28 @@ export default function AddCategories() {
     // 옵션 추가 함수
     const addOption = async () => {
         try {
-            const sendData = { option: [{ option_name, option_price }] };  // 보낼 데이터를 수정
+            const sendData = { option: { option_name, option_price } };  // 보낼 데이터를 수정
             console.log(sendData); // 보낼 데이터 출력
             await axios.post(`${BASE_URL}/manager/add-option/`, sendData); // 데이터 전송
+        } catch (error) {
+            console.error('옵션 추가에 실패했습니다:', error);
+        } finally {
             setIsModalOpen(false);
             setOptionName('');
             setOptionPrice('');
             await fetchOptions();
-        } catch (error) {
-            console.error('옵션 추가에 실패했습니다:', error);
         }
     };
 
+
     const goToNextPage = () => {
         if (selectedOptions.length !== 0) { 
-            navigate('/AddLast', { 
+            navigate('/AddIngredient', { 
                 state: { 
                     selectedOptionIds: selectedOptions.map(option => option.id), 
-                    selectedOptionNames: selectedOptions.map(option => option.menucategory_name) 
+                    selectedOptionNames: selectedOptions.map(option => option.menucategory_name),
+                    selectedCategoryId: selectedCategoryId,
+                    selectedCategoryName: selectedCategoryName
                 } 
             });
         }
@@ -79,7 +86,7 @@ export default function AddCategories() {
             alert('하나 이상의 옵션을 선택해주세요!');
         }
     };
-
+    
     function main_back() {
         navigate('/Admin');
     }
@@ -94,7 +101,7 @@ export default function AddCategories() {
             <div id="top_bar_back" onClick={main_back}></div>
             <header>KIOSK Admin</header>
             <div className='rect1'>
-              <div className='txt1'>옵션을 선택하세요</div>
+              <div className='txt2'>옵션을 선택하세요</div>
               <div className='rect2'>
                 {options.map((option) => (
                     <div
