@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { BASE_URL } from "../constants/Url";
 import "../Home.css";
-import "../Common.css";
 import "./Admin.css";
+import "./AddCategories.css";
 
 export default function AddCategories() {
     
@@ -73,13 +73,12 @@ export default function AddCategories() {
               <div className='rect2'>
                 {categories.map((category) => (
                     <div
-                        key={category.id}
-                        className='category-button'
-                        style={selectedCategory === category ? { backgroundColor: '#FF7400', color: '#FFFFFF' } : null}
-                        onClick={() => selectCategory(category)}
+                    key={category.id}
+                    className={`category-btn ${selectedCategory === category ? 'selected' : ''}`}
+                    onClick={() => selectCategory(category)}
                     >
-                        {category.menucategory_name}
-                    </div>
+                    {category.menucategory_name}
+                  </div>
                 ))}
               </div>
               <div className='prev-btn' onClick={herf_back}>이전으로</div>

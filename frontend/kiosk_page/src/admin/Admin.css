@@ -25,27 +25,6 @@
     top: 90px;
 }
 
-.category-button {
-    flex-basis: calc(50% - 10px);
-    margin-bottom: 20px;
-    /*width: 140px;*/
-    height: 100px;
-    border-radius: 10px;
-    font-family: 'Pretendard';
-    font-size: 22px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    background-color: #E8E8E8;
-}
-
-.category-button-selected {
-    background-color: #FF7400;
-    color: #FFFFFF;
-}
-
 .next-btn {
     display: flex;
     align-items: center;
