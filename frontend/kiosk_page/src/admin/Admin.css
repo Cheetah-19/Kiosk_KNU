@@ -11,13 +11,90 @@
 }
 
 .rect2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-y: auto; /*세로방향 스크롤 추가*/
+
     position: absolute;
     width: 800px;
     height: 400px;
     border-radius: 10px;
     background: #FFF;
     left: 43px;
-    top: 120px;
+    top: 90px;
+}
+
+.category-button {
+    flex-basis: calc(50% - 10px);
+    margin-bottom: 20px;
+    /*width: 140px;*/
+    height: 100px;
+    border-radius: 10px;
+    font-family: 'Pretendard';
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    background-color: #E8E8E8;
+}
+
+.category-button-selected {
+    background-color: #FF7400;
+    color: #FFFFFF;
+}
+
+.next-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    width: 370px;
+    height: 85px;
+    border-radius: 10px;
+    background: #E8E8E8;
+
+    right: 48px;
+    top: 510px;
+
+    color: #000;
+    text-align: center;
+    font-family: 'pretendard-regular';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.prev-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    width: 370px;
+    height: 85px;
+    border-radius: 10px;
+    background: #E8E8E8;
+
+    left: 58px;
+    top: 510px;
+
+    color: #000;
+    text-align: center;
+    font-family: 'pretendard-regular';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.prev-btn:hover, .next-btn:hover {
+    background-color: #FF7A00;
+    color: #FFF;
 }
 
 #top_bar_back {
@@ -32,7 +109,7 @@
 .txt1 {
     position: absolute;
     left: 260px;
-    top: 62px;
+    top: 34px;
     color: #000;
     text-align: center;
     font-family: 'pretendard-regular';
