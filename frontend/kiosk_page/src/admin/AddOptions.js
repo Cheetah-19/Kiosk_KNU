@@ -11,7 +11,10 @@ export default function AddCategories() {
     
     const navigate = useNavigate();
     const location = useLocation();
-    
+    const selectedCategoryId = location.state.selectedCategoryId;
+    const selectedCategoryName = location.state.selectedCategoryName;
+    console.log(selectedCategoryId);
+    console.log(selectedCategoryName);
     //뒤로 가는 함수
     function herf_back() {
         navigate('/Admin');

@@ -12,16 +12,41 @@ export default function AddCategories() {
     const navigate = useNavigate();
     const location = useLocation();
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [categories, setCategories] = useState([]); // 카테고리를 저장할 상태
 
     // 카테고리 선택 핸들러
     const selectCategory = (category) => {
         setSelectedCategory(category);
     };
 
+    useEffect(() => {
+        // 서버에서 카테고리를 가져오는 함수
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get(`${BASE_URL}/manager/get-category/`);
+                setCategories(response.data); // 받아온 데이터를 상태에 저장
+                console.log(response.data);
+            } catch (error) {
+                console.error('카테고리를 가져오는데 실패했습니다:', error);
+            }
+        };
+
+        fetchCategories(); // 함수 호출
+    }, []); // 컴포넌트가 마운트 될 때 한 번만 실행
+
     // 다음 페이지로 이동하는 핸들러
     const goToNextPage = () => {
-        if (selectedCategory !== null) {
-            navigate('/AddOptions', { state: { selectedCategory } });
+        if (selectedCategory !== null) { 
+            navigate('/AddOptions', { 
+                state: { 
+                    selectedCategoryId: selectedCategory.id, 
+                    selectedCategoryName: selectedCategory.menucategory_name 
+                } 
+            });
+        }
+        else
+        {
+            alert('카테고리를 하나 선택해주세요!');
         }
     };
 
@@ -29,41 +54,7 @@ export default function AddCategories() {
     function herf_back() {
         navigate('/Admin');
     }
-
-    const categories = [
-        {
-            "id": 1,
-            "menucategory_name": "라면류"
-        },
-        {
-            "id": 2,
-            "menucategory_name": "국수류"
-        },
-        {
-            "id": 4,
-            "menucategory_name": "사이드"
-        },
-        {
-            "id": 5,
-            "menucategory_name": "추천메뉴"
-        },
-        {
-            "id": 6,
-            "menucategory_name": "신동혁"
-        },
-        {
-            "id": 8,
-            "menucategory_name": "신영재"
-        },
-        {
-            "id": 10,
-            "menucategory_name": "추가한거"
-        },
-        {
-            "id": 11,
-            "menucategory_name": "신용재"
-        }
-    ];
+    
     return (
         <div id = "pay_page">
             <div id="top_bar_back" onClick={herf_back}></div>
@@ -74,7 +65,7 @@ export default function AddCategories() {
                 {categories.map((category) => (
                     <div
                     key={category.id}
-                    className={`category-btn ${selectedCategory === category ? 'selected' : ''}`}
+                    className={`category-btn ${selectedCategory && selectedCategory.id === category.id ? 'selected' : ''}`}
                     onClick={() => selectCategory(category)}
                     >
                     {category.menucategory_name}

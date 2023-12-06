@@ -14,7 +14,7 @@
     background-color: #E8E8E8;
 }
 
-.category-btn-selected {
+.category-btn.selected {
     background-color: #FF7400;
     color: #FFFFFF;
 }
