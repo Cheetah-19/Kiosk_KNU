@@ -219,14 +219,15 @@ deepface 프레임워크를 사용하여 파이썬으로 개발할 계획입니�
 LG open-source software platform WebOS 의 인 기술 블로그에 기술문서를 작성하여 open-source contribution에 할 예정입니다. <br />
 WebOs : [https://www.webosose.org/]
 ## 참여인력 세부
-써야하나?
+<img width="440" alt="17" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/eef0977c-4576-4e9f-ae79-e9abce4ad932">
+
 ## GitHub 정보
 >* https://github.com/Cheetah-19/Kiosk_KNU
->* 신영재/Apoliasm
->* 김다훈/baegopababjo
->* 박준석/Lucerna00
->* 이승운/Usimth
->* 신동혁/WannaBeTop
+>* 신영재 / [Apoliasm](https://github.com/Apoliasm)
+>* 김다훈 / [baegopababjo](https://github.com/baegopababjo)
+>* 박준석 / [Lucerna00](https://github.com/Lucerna00)
+>* 이승운 / [Usimth](https://github.com/Usimth)
+>* 신동혁 / [WannaBeTop](https://github.com/WannaBeTop)
 
 # 개발환경 세팅
 ## 라즈베리파이
@@ -257,8 +258,8 @@ WebOs : [https://www.webosose.org/]
       * 시간이 좀 걸립니다.
 	![9](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/2cf967ab-8a65-4c13-8abd-a0cec6607281)
       * 완료! 이제 SD 카드를 라즈베리 파이 하단에 삽입 후 부팅하면 WebOs가 정상적으로 부팅이 됩니다!
-      ※주의※
-      * sd카드를 sd 리더기에 삽입 후 그 자체로 USB에 삽입하면 부팅이 안됩니다! 반드시 sd카드만 따로 빼서 라즈베리파이 하단에 삽입해주세요!
+        <br />※주의※
+        * sd카드를 sd 리더기에 삽입 후 그 자체로 USB에 삽입하면 부팅이 안됩니다! 반드시 sd카드만 따로 빼서 라즈베리파이 하단에 삽입해주세요!
       	![10](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/5015e33f-8ff7-44e4-8ad6-8976d0befe53)
 
 ## 터치 디스플레이
