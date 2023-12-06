@@ -28,9 +28,11 @@ export default function Pay() {
     }
     return (
       <div id="pay_page">
-        <div id="top_bar_home" onClick={herf_home}></div>
-        <header>Easy KIOSK</header>
-        <div className='pay-container'>
+        <div id="pay-header">
+          <div id="top_bar_home" onClick={herf_home}></div>
+          <header>Easy KIOSK</header> 
+        </div>
+          <div className='pay-container'> 
           <div className='pay-title'>주문목록을 확인해주세요!</div>
           <div className="pay-inner-container">
             <p style={{margin: '10px'}}>{option === '테이크아웃' ? '테이크아웃' : '매장식사'}</p>

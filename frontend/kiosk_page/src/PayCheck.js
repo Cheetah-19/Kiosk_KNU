@@ -24,8 +24,10 @@ export default function Pay() {
     }
     return (
       <div id = "pay_page">
-        <div id="top_bar_home" onClick={herf_home}></div>
-        <header>Easy KIOSK</header>
+        <div id="pay-header">
+          <div id="top_bar_home" onClick={herf_home}></div>
+          <header>Easy KIOSK</header>
+        </div>
         <div className='rect3'>
             <div className='blink-image'></div>
             <div className='price-txt'>{totalPrice.toLocaleString()}원</div>

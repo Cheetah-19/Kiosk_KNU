@@ -43,6 +43,7 @@ export default function Delete() {
 
     // 카테고리, 메뉴를 빈 배열로 초기화
     const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState(0);
     const [menusByCategory, setMenusByCategory] = useState({});
 
     const itemsPerPage = 3; // 3개씩 보여주기로 설정
@@ -56,13 +57,20 @@ export default function Delete() {
 
     //한 페이지씩 왼쪽으로 이동
     function slideLeft() {
-        if (currentPage > 1) setCurrentPage(currentPage - 1);
+        if (currentPage > 1){
+            setSelectedCategory(itemsPerPage * (currentPage - 2));
+            setCurrentPage(currentPage - 1);
+        }
     }
 
     //한 페이지씩 오른쪽으로 이동
     function slideRight() {
-        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+        if (currentPage < totalPages){
+            setSelectedCategory(itemsPerPage * (currentPage));
+            setCurrentPage(currentPage + 1);
+        }
     }
+
 
     //뒤로 가는 함수
     function herf_back() {
@@ -223,8 +231,9 @@ export default function Delete() {
                         onClick={() => {
                             setCurrentCategoryIndex(categoryIndex);
                             setCurrentMenuIndex(null); // 카테고리를 변경했을 때 선택된 메뉴 초기화
+                            setSelectedCategory(categoryIndex); // 선택된 카테고리
                         }}
-                        className="category_name">
+                        className={`category_name ${selectedCategory === categoryIndex ? 'selectedCategory' : ''}`}>
                         {categories[categoryIndex]}
                     </div>) :
                     (<div key={index}></div>)
@@ -345,7 +354,9 @@ export default function Delete() {
                             {/* 왼쪽으로 카테고리 이동 */}
                             <div id="menu_bar_left" onClick={slideLeft}>&#60;</div>
                             {/* 3개의 카테고리씩 로드 */}
-                            {renderCategories()}
+                            <div id="category-container">
+                                {renderCategories()}
+                            </div>
                             {/* 오른쪽으로 카테고리 이동 */}
                             <div id="menu_bar_right" onClick={slideRight}>&#62;</div>
                         </div>

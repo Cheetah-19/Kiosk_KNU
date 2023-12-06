@@ -14,8 +14,10 @@ export default function Pay() {
     }
     return (
       <div id = "pay_page">
-        <div id="top_bar_home" onClick={herf_home}></div>
-        <header>Easy KIOSK</header>
+        <div id="pay-header">
+          <div id="top_bar_home" onClick={herf_home}></div>
+          <header>Easy KIOSK</header>
+        </div>
         <div className='singup-container'>
           <div className='qr-txt'>QR코드를 스캔하여 등록해주세요</div>
           <div className='light-gray-btn' onClick={herf_home}>처음으로</div>
