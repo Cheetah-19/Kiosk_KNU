@@ -5,7 +5,8 @@ import { BASE_URL } from './constants/Url';
 import "./Face.css";
 
 export default function Face(props) {
-    // const BASE_URL = 'http://127.0.0.1:8000';
+    // const BASE_URL = 'https://kioskknu2023.run.goorm.site';
+    const BASE_URL = 'http://127.0.0.1:8000';
 
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const videoRef = useRef(null);
@@ -46,7 +47,7 @@ export default function Face(props) {
 
     // Capture a frame and add it to the photos array
     const captureFrame = async () => {
-        if (remainingPhotos <= 0) return; // Stop capturing after reaching limit
+        if (remainingPhotos <= 0) return ; // Stop capturing after reaching limit
 
         if (videoRef.current && canvasRef.current) {
             const context = canvasRef.current.getContext('2d');
@@ -66,6 +67,8 @@ export default function Face(props) {
             // Decrement remaining photos count by one
             setRemainingPhotos(prevCount => prevCount - 1);
         }
+
+        console.log("hehehe");
     };
 
     // Send photos to the server when remainingPhotos becomes 0

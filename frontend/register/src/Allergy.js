@@ -62,12 +62,14 @@ export default function FaceReco() {
     console.log(selectedReligion); // 선택된 종교 정보 출력
     console.log(selectedAllergy); // 선택된 알레르기 정보 출력
 
+
+
     // 서버로 데이터 전송
     const postData = {
       user_name: inputValue,
       user_phonenum: PhoneNumber,
       user_allergy: selectedAllergy,
-      user_face_info: photos.join('||')
+      user_face_info : photos.join('||')
     };
 
     if (selectedVeganItemId !== 0) {
@@ -77,7 +79,7 @@ export default function FaceReco() {
     if (selectedReligion !== 0) {
       postData.religion = selectedReligion;
     }
-
+    
     axios.post(`${BASE_URL}/signup/`, postData)  // '서버 URL' 부분에 테스트할 서버 주소 넣어주면 됨.
       .then(response => {
         console.log(postData);
@@ -87,6 +89,7 @@ export default function FaceReco() {
 
       })
       .catch(error => {
+        console.log(postData);
         console.error(error);
         alert("사용자 등록이 실패했습니다. 다시 시도해주세요.");
       });
