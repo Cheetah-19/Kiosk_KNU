@@ -176,8 +176,20 @@ export default function Delete() {
             //item.menu.id만 추출해서 배열로 만든다.
             const cartMenuIds = cart.map(item => item.menu.id);
             // 서버로 삭제할 데이터를 전송
-            console.log(cartMenuIds);
-            await axios.post(`${BASE_URL}/뒤에URL추가할것`, { cart: cartMenuIds });
+            console.log({ cart: cartMenuIds });
+            await axios.delete(`${BASE_URL}/manager/delete-menu/`, { params: { cart: cartMenuIds } })
+            .then(response => {
+                console.log(cartMenuIds);
+                console.log(response.data);  // 요청 성공시 alert 하나 해줄 예정.
+                alert("메뉴가 삭제 되었습니다. ");
+                // navigate("/complete", { state: { inputValue, PhoneNumber, photos, selectedVeganItemId, selectedReligion, selectedAllergy } });
+        
+              })
+              .catch(error => {
+                console.log(cartMenuIds);
+                console.error(error);
+                alert("메뉴 삭제 실패"+error);
+              });
 
             //삭제하기를 누르면 cart 배열 초기화
             localStorage.removeItem('cart');
