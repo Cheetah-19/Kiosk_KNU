@@ -27,8 +27,9 @@ export default function AddIngredients() {
 
     const fetchIngredients = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}/manager/get-category/`);
-            setIngredients(response.data.category); 
+            const response = await axios.get(`${BASE_URL}/manager/manage-ingredient/`);
+            setIngredients(response.data.ingredient); 
+            console.log(response.data.ingredient);
         } catch (error) {
             console.error('재료를 가져오는데 실패했습니다:', error);
         }
@@ -49,7 +50,7 @@ export default function AddIngredients() {
         try {
             const sendData = { ingredient: { ingredient_name } };
             console.log(sendData);
-            await axios.post(`${BASE_URL}/manager/add-ingredient/`, sendData);
+            await axios.post(`${BASE_URL}/manager/manage-ingredient/`, sendData);
         } catch (error) {
             console.error('재료 추가에 실패했습니다:', error);
         } finally {
@@ -97,7 +98,7 @@ export default function AddIngredients() {
                     className={`category-btn ${selectedIngredients.find(selected => selected.id === ingredient.id) ? 'selected' : ''}`}
                     onClick={() => selectIngredient(ingredient)}
                     >
-                    {ingredient.menucategory_name}
+                    {ingredient.name}
                   </div>
                 ))}
               </div>

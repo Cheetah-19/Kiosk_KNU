@@ -20,7 +20,7 @@ export default function AddCategories() {
     // 카테고리를 가져오는 함수를 useEffect 밖으로 빼냄
     const fetchCategories = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}/manager/get-category/`);
+            const response = await axios.get(`${BASE_URL}/manager/manage-category/`);
             setCategories(response.data.category);
         } catch (error) {
             console.error('카테고리를 가져오는데 실패했습니다:', error);
@@ -44,7 +44,7 @@ export default function AddCategories() {
         try {
             const sendData = { categories: { menucategory_name } };  // 보낼 데이터를 수정
             console.log(sendData); // 보낼 데이터 출력
-            await axios.post(`${BASE_URL}/manager/add-category/`, sendData); // 데이터 전송 
+            await axios.post(`${BASE_URL}/manager/manage-category/`, sendData); // 데이터 전송 
         } catch (error) {
             console.error('카테고리 추가에 실패했습니다:', error);
             alert("카테고리 추가 실패!");

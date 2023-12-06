@@ -31,8 +31,9 @@ export default function AddCategories() {
     // 옵션을 가져오는 함수
     const fetchOptions = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}/manager/get-category/`);
-            setOptions(response.data.category); 
+            const response = await axios.get(`${BASE_URL}/manager/manage-option/`);
+            setOptions(response.data.option); 
+            console.log(response.data.option);
         } catch (error) {
             console.error('옵션을 가져오는데 실패했습니다:', error);
         }
@@ -58,7 +59,7 @@ export default function AddCategories() {
         try {
             const sendData = { option: { option_name, option_price } };  // 보낼 데이터를 수정
             console.log(sendData); // 보낼 데이터 출력
-            await axios.post(`${BASE_URL}/manager/add-option/`, sendData); // 데이터 전송
+            await axios.post(`${BASE_URL}/manager/manage-option/`, sendData); // 데이터 전송
         } catch (error) {
             console.error('옵션 추가에 실패했습니다:', error);
         } finally {
@@ -75,7 +76,7 @@ export default function AddCategories() {
             navigate('/AddIngredient', { 
                 state: { 
                     selectedOptionIds: selectedOptions.map(option => option.id), 
-                    selectedOptionNames: selectedOptions.map(option => option.menucategory_name),
+                    selectedOptionNames: selectedOptions.map(option => option.option_name),
                     selectedCategoryId: selectedCategoryId,
                     selectedCategoryName: selectedCategoryName
                 } 
@@ -109,7 +110,7 @@ export default function AddCategories() {
                     className={`category-btn ${selectedOptions.find(selected => selected.id === option.id) ? 'selected' : ''}`}
                     onClick={() => selectOption(option)}
                     >
-                    {option.menucategory_name}
+                    {option.name}
                   </div>
                 ))}
               </div>
