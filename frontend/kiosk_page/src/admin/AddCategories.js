@@ -22,6 +22,7 @@ export default function AddCategories() {
         try {
             const response = await axios.get(`${BASE_URL}/manager/manage-category/`);
             setCategories(response.data.category);
+            console.log(response.data.category);
         } catch (error) {
             console.error('카테고리를 가져오는데 실패했습니다:', error);
         }
@@ -42,7 +43,7 @@ export default function AddCategories() {
 
     const addCategory = async () => {
         try {
-            const sendData = { categories: { menucategory_name } };  // 보낼 데이터를 수정
+            const sendData = { category: { menucategory_name } };  // 보낼 데이터를 수정
             console.log(sendData); // 보낼 데이터 출력
             await axios.post(`${BASE_URL}/manager/manage-category/`, sendData); // 데이터 전송 
         } catch (error) {
@@ -51,7 +52,8 @@ export default function AddCategories() {
         } finally {
             setIsModalOpen(false);
             setMenucategoryName('');
-            await fetchCategories(); 
+            await fetchCategories();
+            
         }
     };
     
@@ -103,8 +105,8 @@ export default function AddCategories() {
                         <h4 className="selected_menu">추가할 카테고리 이름 입력</h4>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <div id="ingName-inner-container">
-                            <input id="ingName-input" type="text" value={menucategory_name} placeholder="카테고리 이름을 입력해 주세요" onChange={handleMenucategoryNameChange} />
+                        <div id="menuName-inner-container">
+                            <input id="menuName-input" type="text" value={menucategory_name} placeholder="카테고리 이름을 입력해 주세요" onChange={handleMenucategoryNameChange} />
                         </div>
                     </div>
                 </Modal.Body>
