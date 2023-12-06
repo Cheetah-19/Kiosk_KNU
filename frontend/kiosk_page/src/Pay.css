@@ -1,3 +1,17 @@
+#pay-header {
+    display: flex;
+    align-items: center;
+
+    height: 80.5px;
+
+    background-color: #FF7A00;
+}
+
+#pay-header div {
+    margin-left: 20px;
+}
+
+
 .pay-container {
     position: absolute;
     display: flex;
@@ -7,7 +21,7 @@
     border-radius: 10px;
     background: white;
     left : 200px;
-    top : 120px;
+    top : 130px;
 }
 
 .pay-inner-container {
@@ -22,11 +36,6 @@
     
     padding: 0 20px;
     box-sizing: border-box;
-}
-
-.menu-item { 
-    border-bottom: 1px solid #000; /* 밑줄 스타일 */
-    padding: 10px 0; /* 위아래 패딩 */
 }
 
 .pay-title {
@@ -107,7 +116,6 @@
 
 #option-name {
     display: flex;
-    align-items: center;
     justify-content: center;
     
     padding: 0 10px 0 10px;

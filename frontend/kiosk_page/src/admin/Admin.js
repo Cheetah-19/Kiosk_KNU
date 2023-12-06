@@ -25,8 +25,10 @@ export default function Admin() {
 
     return(
         <div id = "pay_page">
-            <div id="top_bar_home" onClick={herf_home}></div>
-            <header>KIOSK Admin</header>
+            <div id="pay-header">
+                <div id="top_bar_home" onClick={herf_home}></div>
+                <header>KIOSK Admin</header>
+            </div>
             <div className='rect1'>
               <div className='txt1'>어떤일을 하시겠어요?</div>
               <div className='add-menubtn' onClick={addMenu}>메뉴추가</div>

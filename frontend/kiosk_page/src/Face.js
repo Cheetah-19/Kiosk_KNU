@@ -19,7 +19,9 @@ export default function Face(props) {
     const [photos, setPhotos] = useState([]);
 
     // Add state for remaining photos
-    const [remainingPhotos, setRemainingPhotos] = useState(10); // 10장으로 설정
+    const [remainingPhotos, setRemainingPhotos] = useState(5); // 10장으로 설정
+    
+    let count = 5;
 
     const startVideo = async () => {
         try {
@@ -47,7 +49,7 @@ export default function Face(props) {
 
     // Capture a frame and add it to the photos array
     const captureFrame = async () => {
-        if (remainingPhotos <= 0) return ; // Stop capturing after reaching limit
+        if (count <= 0) return; // Stop capturing after reaching limit
 
         if (videoRef.current && canvasRef.current) {
             const context = canvasRef.current.getContext('2d');
@@ -66,6 +68,7 @@ export default function Face(props) {
 
             // Decrement remaining photos count by one
             setRemainingPhotos(prevCount => prevCount - 1);
+            count -= 1;
         }
 
         console.log("hehehe");
