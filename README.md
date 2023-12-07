@@ -324,9 +324,17 @@ WebOs : [https://www.webosose.org/]
   <img width="789" alt="14" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/6cbb0492-6400-4927-b2b6-de58753b5f09">
 
   3. Build한 내용을 위에 생성판 폴더에 덮어 씌우기.
+     	
+
+	npm run build		
+
+  * 프로젝트를 빌드 하시면 build 파일이 생깁니다.
+  <img width="737" alt="스크린샷 2023-12-06 오후 10 06 55" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/a133af50-dc41-4e2e-8313-7c5688a0622f">
   
+  * build 폴더가 생겼음을 확인 할 수 있습니다.
+  * 파일 내부 내용을 위에서 만든 sampleApp 폴더 내부로 '덮어씌우기' 하시면 됩니다.
+
   4. 패키징
-     - 패키징
      - 아래 코드에서 'sampleApp' 에 해당하는 부분만 원하는 프로젝트 명으로 바꾸시면 됩니다. (sampleApp = 폴더명)
     
 	ares-package ./sampleApp
