@@ -87,13 +87,8 @@ export default function AddCategories() {
     };
     
     function main_back() {
-        navigate('/Admin');
-    }
-
-    function herf_back() {
         navigate('/AddCategories');
     }
-
     
     return (
         <div id = "pay_page">

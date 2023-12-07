@@ -82,12 +82,9 @@ export default function AddIngredients() {
     };
     
     function main_back() {
-        navigate('/Admin');
-    }
-
-    function herf_back() {
         navigate('/AddOptions');
     }
+
 
     return (
         <div id = "pay_page">
