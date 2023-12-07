@@ -86,7 +86,7 @@ export default function AddIngredients() {
     }
 
     function herf_back() {
-        navigate('/AddCategories');
+        navigate('/AddOptions');
     }
 
     return (

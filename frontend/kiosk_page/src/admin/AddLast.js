@@ -84,7 +84,7 @@ export default function AddCategories() {
 
     //뒤로 가는 함수
     function herf_back() {
-        navigate('/Admin');
+        navigate('/AddIngredient');
     }
 
     const handleAddMenu = async () => {
