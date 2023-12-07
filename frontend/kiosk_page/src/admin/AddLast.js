@@ -102,7 +102,7 @@ export default function AddCategories() {
             console.log(`${key}: ${value}`);
         }
         try {
-            const response = await axios.post('서버URL', formData, {
+            const response = await axios.post(`${BASE_URL}/manager/add-menu/`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
     
