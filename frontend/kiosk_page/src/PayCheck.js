@@ -24,14 +24,18 @@ export default function Pay() {
     }
     return (
       <div id = "pay_page">
-        <div id="top_bar_home" onClick={herf_home}></div>
-        <header>Easy KIOSK</header>
+        <div id="pay-header">
+          <div id="top_bar_home" onClick={herf_home}></div>
+          <header>Easy KIOSK</header>
+        </div>
         <div className='rect3'>
             <div className='blink-image'></div>
             <div className='price-txt'>{totalPrice.toLocaleString()}원</div>
             <div className='comp-txt'>결제가 완료되었습니다!</div>
-            <div className='init-button' onClick={goBack}>처음으로</div>
-            <div className='sign-button' onClick={goToSignIn}>사용자 등록</div>
+            <div id='pay-chk-btn-container'>
+              <div className='light-gray-btn' onClick={goBack}>처음으로</div>
+              <div className='light-gray-btn' onClick={goToSignIn}>사용자 등록</div>
+            </div>
             <div className='reco-txt'>메뉴를 추천받을 수 있어요!</div>
             <div className='reco-image'></div>
         </div>

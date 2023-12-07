@@ -19,8 +19,10 @@ export default function AddCategories() {
     
     return (
         <div id = "pay_page">
-            <div id="top_bar_back" onClick={herf_back}></div>
-            <header>KIOSK Admin</header>
+            <div id="pay-header">
+                <div id="top_bar_back" onClick={herf_back}></div>
+                <header>KIOSK Admin</header>
+            </div>
             <div className='rect1'>
               <div className='txt1'>마지막 정보를 입력하세요.</div>
               <div className='rect2'></div>
