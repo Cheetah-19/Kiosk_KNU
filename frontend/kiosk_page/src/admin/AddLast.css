@@ -1,0 +1,103 @@
+.picture-box {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    left: 25px;
+    top: 25px;
+    border-radius: 15px;
+    background-color: #E8E8E8;
+}
+
+.menu-name-txt {
+    position: absolute;
+    top: 25px;
+    left: 400px;
+    font-family: 'Pretendard';
+    font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+
+.menu-price-txt {
+    position: absolute;
+    top: 115px;
+    left: 400px;
+    font-family: 'Pretendard';
+    font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+
+.menu-ex-txt {
+    position: absolute;
+    top: 205px;
+    left: 400px;
+    font-family: 'Pretendard';
+    font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+
+#menu-inner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    font-family: Pretendard-Regular;
+}
+
+#menu-input {
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    width: 370px;
+    height: 50px;
+    border-radius: 10px;
+    border: 2px solid black;
+
+    margin-top: 15px;
+
+    text-align: center;
+    font-size: 20px;
+}
+
+#menu-ex-inner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Pretendard-Regular;
+}
+
+#menu-ex-input {
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    width: 370px;
+    height: 125px;
+    border-radius: 10px;
+    border: 2px solid black;
+
+    margin-top: 15px;
+
+    text-align: center;
+    font-size: 20px;
+
+    resize: none;  /* 사용자가 textarea의 크기를 변경하지 못하게 함 */
+    overflow: auto;  /* 내용이 너무 많아지면 스크롤바가 생김 */
+}
+
+
+
+

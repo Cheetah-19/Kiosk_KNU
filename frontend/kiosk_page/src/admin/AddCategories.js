@@ -22,7 +22,6 @@ export default function AddCategories() {
         try {
             const response = await axios.get(`${BASE_URL}/manager/manage-category/`);
             setCategories(response.data.category);
-            console.log(response.data.category);
         } catch (error) {
             console.error('카테고리를 가져오는데 실패했습니다:', error);
         }
@@ -44,7 +43,6 @@ export default function AddCategories() {
     const addCategory = async () => {
         try {
             const sendData = { category: { menucategory_name } };  // 보낼 데이터를 수정
-            console.log(sendData); // 보낼 데이터 출력
             await axios.post(`${BASE_URL}/manager/manage-category/`, sendData); // 데이터 전송 
         } catch (error) {
             console.error('카테고리 추가에 실패했습니다:', error);

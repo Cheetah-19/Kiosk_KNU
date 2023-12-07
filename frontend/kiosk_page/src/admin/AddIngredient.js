@@ -10,8 +10,12 @@ import "./AddCategories.css";
 export default function AddIngredients() {
     const navigate = useNavigate();
     const location = useLocation();
+
     const selectedCategoryId = location.state.selectedCategoryId;
     const selectedCategoryName = location.state.selectedCategoryName;
+    const selectedOptionIds = location.state.selectedOptionIds;
+    const selectedOptionNames = location.state.selectedOptionNames;
+
     const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,7 +33,6 @@ export default function AddIngredients() {
         try {
             const response = await axios.get(`${BASE_URL}/manager/manage-ingredient/`);
             setIngredients(response.data.ingredient); 
-            console.log(response.data.ingredient);
         } catch (error) {
             console.error('재료를 가져오는데 실패했습니다:', error);
         }
@@ -49,7 +52,6 @@ export default function AddIngredients() {
     const addIngredient = async () => {
         try {
             const sendData = { ingredient: { ingredient_name } };
-            console.log(sendData);
             await axios.post(`${BASE_URL}/manager/manage-ingredient/`, sendData);
         } catch (error) {
             console.error('재료 추가에 실패했습니다:', error);
@@ -64,10 +66,12 @@ export default function AddIngredients() {
         if (selectedIngredients.length !== 0) { 
             navigate('/AddLast', { 
                 state: { 
-                    selectedIngredientIds: selectedIngredients.map(ingredient => ingredient.id), 
-                    selectedIngredientNames: selectedIngredients.map(ingredient => ingredient.menucategory_name),
                     selectedCategoryId: selectedCategoryId,
-                    selectedCategoryName: selectedCategoryName
+                    selectedCategoryName: selectedCategoryName,
+                    selectedOptionIds: selectedOptionIds,
+                    selectedOptionNames: selectedOptionNames,
+                    selectedIngredientIds: selectedIngredients.map(ingredient => ingredient.id), 
+                    selectedIngredientNames: selectedIngredients.map(ingredient => ingredient.name)
                 } 
             });
         }
@@ -90,7 +94,7 @@ export default function AddIngredients() {
             <div id="top_bar_back" onClick={main_back}></div>
             <header>KIOSK Admin</header>
             <div className='rect1'>
-              <div className='txt2'>재료를 선택하세요</div>
+              <div className='txt1'>들어간 재료를 입력하세요</div>
               <div className='rect2'>
                 {ingredients.map((ingredient) => (
                     <div
