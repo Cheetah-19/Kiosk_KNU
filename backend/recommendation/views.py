@@ -54,7 +54,6 @@ class TF_IDF_View(APIView):
         #문자열 -> 정수 변환 후 set 제작
         excluded_ingredients = set(int(item.strip()) for item in exclude_ingredient_list)
 
-
         menus = {}
         for menu in menus_db:
             ingredients = [ingredient.id for ingredient in menu.menu_ingredient.all()]
@@ -63,18 +62,14 @@ class TF_IDF_View(APIView):
                 continue
             ingredients_str = " ".join([ingredient.ingredient_name for ingredient in menu.menu_ingredient.all()])
             menus[menu.menu_name] = ingredients_str
-        
-        print(menus)
 
         # 주문 데이터: {주문번호: {'user': 사용자 ID, 'menus': [주문한 메뉴 리스트]}}
         orders_db = Order.objects.filter(user=user_instance)
-        print(orders_db)
+
         orders = {}
         for order in orders_db:
             ordered_items = Ordered_Item.objects.filter(order=order)
             orders[order.order_num] = {'user': order.user.user_phonenum, 'menus': [item.menu.menu_name for item in ordered_items]}
-
-        print(orders)
 
         # TF-IDF 변환
         vectorizer = TfidfVectorizer()
@@ -89,11 +84,12 @@ class TF_IDF_View(APIView):
         for order in orders.values():
             if order['user'] == user_id:
                 past_orders.append(order['menus'])
-
+        
         past_menus = []
         for order in past_orders:
             for menu in order:
-                past_menus.append(menu)
+                past_menus.append(menu)           # ex) ['연어 샐러드', '연어 샐러드', '싸이버거', '쌀국수', '쌀국수']  로 나오는데, 두 번 나오는 게 더 가중치가 높아진다
+        print(past_menus)
 
         # 과거에 주문한 메뉴와 유사한 메뉴 찾기
         similar_menus = np.zeros(len(menus))
@@ -123,12 +119,12 @@ class TF_IDF_View(APIView):
         # sorted_menus = sorted(list(menus.keys()), key=lambda x: similar_menus[list(menus.keys()).index(x)], reverse=True)
 
         # 과거에 주문한 메뉴는 추천 목록에서 제외
-        recommended_menus = []
-        for menu in sorted_menus:
-            if menu not in past_menus:
-                recommended_menus.append(menu)
+        #  recommended_menus = []
+        #  for menu in sorted_menus:
+        #      if menu not in past_menus:
+        #         recommended_menus.append(menu)
 
-        return Response({'recommended_menus': recommended_menus})
+        return Response({'recommended_menus': sorted_menus})
     
 
 class Word2VecView(APIView):
