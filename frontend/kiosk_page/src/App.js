@@ -15,6 +15,7 @@ import Admin from "./admin/Admin";
 import Delete from "./admin/Delete";
 import AddCategories from "./admin/AddCategories";
 import AddOptions from "./admin/AddOptions";
+import AddIngredients from "./admin/AddIngredient";
 import AddLast from "./admin/AddLast";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/Delete" element={<Delete />} />
         <Route path="/AddCategories" element={<AddCategories />} />
         <Route path="/AddOptions" element={<AddOptions />} />
+        <Route path="/AddIngredient" element={<AddIngredients />} />
         <Route path="/AddLast" element={<AddLast />} />
       </Routes>
   );

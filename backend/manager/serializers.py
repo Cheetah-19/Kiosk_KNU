@@ -1,11 +1,7 @@
 from rest_framework import serializers
 from signup.models import *
 
-class MenuSerializer(serializers.ModelSerializer):
-    class Meta :
-        model = Menu
-        fields = '__all__'
-        
+
 class MenuCategorySerializer(serializers.ModelSerializer):
     class Meta : 
         model = MenuCategory
@@ -20,5 +16,13 @@ class OptionCategorySerializer(serializers.ModelSerializer):
     class Meta :
         model = OptionCategory
         fields = '__all__'
+class IngredientSerializer(serializers.ModelSerializer):
+    class Meta :
+        model = Ingredient
+        fields = '__all__'
 
+class MenuSerializer(serializers.ModelSerializer):
+    class Meta :
+        model = Menu
+        fields = '__all__'
         

@@ -27,7 +27,7 @@ export default function FaceReco() {
         alert("핸드폰 번호는 11글자를 입력해야 합니다.");
         return;
       }
-      navigate('/vegancheck', { state: { inputValue, PhoneNumber, photos } });
+      navigate('/Vegan_Religion_Check', { state: { inputValue, PhoneNumber, photos } });
     };
 
   const goback = () => {

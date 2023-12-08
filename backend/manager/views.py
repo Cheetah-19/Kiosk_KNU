@@ -5,7 +5,7 @@ from rest_framework.request import Request
 from signup.models import *
 from .serializers import *
 from django.http import HttpResponse
-import json
+from rest_framework.parsers import MultiPartParser
 # Create your views here.
 
 
@@ -88,3 +88,20 @@ class manage_ingredient(APIView):
             new_ing.save()
             return HttpResponse(status = 200)
     
+class add_menu(APIView):
+    def post(self,request:Request):
+        #For receiving image from request
+        parser_class = (MultiPartParser,)
+        if request.method == 'POST':
+            data = request.data
+            print(type(data))
+            try:
+                data['menu_pic'] =  request.FILES['menu_pic']
+            except FileExistsError as e:
+                print(e)
+                data['menu_pic'] = None
+        menu_serial = MenuSerializer(data=data) 
+        if menu_serial.is_valid(raise_exception=True) :
+            menu_serial.save()
+            return Response({"message": "메뉴가 저장되었습니다."})
+        return Response({"failure"})
