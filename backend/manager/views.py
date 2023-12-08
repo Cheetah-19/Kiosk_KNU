@@ -1,13 +1,11 @@
 from django.shortcuts import render
-
+from rest_framework import status
 from rest_framework.views import APIView, Response
 from rest_framework.request import Request
 from signup.models import *
 from .serializers import *
 from django.http import HttpResponse
 from rest_framework.parsers import MultiPartParser
-# Create your views here.
-
 
 class delete_menu (APIView):
     def get(self,request:Request):
@@ -37,10 +35,11 @@ class manage_category(APIView):
                 cate_dict['menucategory_name'] =cate.menucategory_name
                 category_list.append(cate_dict)
             
-            return Response({'category':category_list})
+            return Response({'category':category_list}) 
     def post(self,request:Request):
         if request.method == 'POST' :
             data = request.data
+            print(data)
             new_category = data.get('category')
             new_cat = MenuCategory(menucategory_name=new_category['menucategory_name'])
             new_cat.save()
@@ -93,15 +92,24 @@ class add_menu(APIView):
         #For receiving image from request
         parser_class = (MultiPartParser,)
         if request.method == 'POST':
-            data = request.data
-            print(type(data))
+            data = request.data.copy()
+            data._mutable = True
+            json_data = {}
+            json_data['menucategory'] = int(data['menucategory'])
+            json_data['menu_ingredient'] = [ int(i) for i in data['menu_ingredient'].split(',')]
+            json_data['menu_price'] = int(data['menu_price'])
+            json_data['menu_option'] = [int(i) for i in data['menu_option'].split(',')]
+            json_data['menu_name'] = data['menu_name']
+            json_data['menu_introduction'] = data['menu_introduction']
+            print(json_data)
             try:
-                data['menu_pic'] =  request.FILES['menu_pic']
-            except FileExistsError as e:
+                json_data['menu_pic'] =  request.FILES['menu_pic']
+            except Exception as e:
                 print(e)
-                data['menu_pic'] = None
-        menu_serial = MenuSerializer(data=data) 
-        if menu_serial.is_valid(raise_exception=True) :
-            menu_serial.save()
-            return Response({"message": "메뉴가 저장되었습니다."})
-        return Response({"failure"})
+                json_data['menu_pic'] = None
+            menu_serial = MenuSerializer(data=json_data) 
+            print(menu_serial)
+            if menu_serial.is_valid(raise_exception=True) :
+                menu_serial.save()
+                return Response({"message": "메뉴가 저장되었습니다."})
+            return Response(menu_serial.errors, status=status.HTTP_400_BAD_REQUEST)
