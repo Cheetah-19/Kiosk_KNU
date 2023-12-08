@@ -1,12 +1,16 @@
 from .face_extractor import extractor
+import numpy as np
 
-def base_to_vector(face_bases:list) -> list :
-    # front로 받은 base64 리스트를 vector리스트로 변환
-    vector_list = []
-    print("hello")
-    for base in face_bases: #2. 리스트 안의 base64들을 벡터로 변환
-        input_vector = extractor(base) # base64 -> vector (extractor)
-        if input_vector != None:
-            vector_list.append(input_vector)
-    
-    return vector_list
+
+# 프론트에서 받은 base64 리스트를 embedding 리스트로 변환
+def base_to_embedding(face_bases: list) -> list:
+    embedding_list = []
+
+    for base in face_bases:
+        # base64 -> embedding
+        input_embedding = extractor(base)
+
+        if input_embedding is not None:
+            embedding_list.append(input_embedding)
+
+    return np.array(embedding_list)
