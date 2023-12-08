@@ -102,14 +102,3 @@ class FaceLoginView(APIView):
             #     login_user.user_face_info = str(login_user_face_list)
             #     login_user.save()
             return Response({"phone_number":login_user.user_phonenum})
-        
-            
-    
-
-
-
-class TestView(APIView):
-    permission_classes = [permissions.AllowAny]
-
-    def get(self, request):
-        return Response("Swagger 연동 테스트")

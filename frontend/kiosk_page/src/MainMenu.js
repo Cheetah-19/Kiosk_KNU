@@ -8,8 +8,6 @@ import { Modal } from 'react-bootstrap';
 import { BASE_URL } from './constants/Url';
 
 export default function MainMenu() {
-    // const BASE_URL = 'https://kioskknu2023.run.goorm.site';
-    // const BASE_URL = 'http://127.0.0.1:8000';
 
     const navigate = useNavigate();
     const location = useLocation();
