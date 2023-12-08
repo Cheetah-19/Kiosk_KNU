@@ -15,10 +15,10 @@ class LoginView(APIView):
         phone_number = request.data.get('phone_number')
 
         if phone_number:
-            is_phone_number_already_here = User.objects.filter(user_phonenum=phone_number).exists()
-            if is_phone_number_already_here:
+            user = User.objects.filter(user_phonenum=phone_number)
+            if user.exists():
                 # 이 경우에는 로그인 성공임
-                return Response({'message': '로그인 성공.'})
+                return Response({'name': user[0].user_name, 'message': '로그인 성공.'})
             else:
                 # 로그인 실패
                 return Response({'message': '등록된 휴대폰 번호 정보가 없습니다.'}, status = 400)
