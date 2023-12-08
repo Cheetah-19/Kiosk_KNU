@@ -92,10 +92,8 @@ export default function AddCategories() {
     
     return (
         <div id = "pay_page">
-            <div id="pay-header">
-                <div id="top_bar_back" onClick={herf_back}></div>
-                <header>KIOSK Admin</header>
-            </div>
+            <div id="top_bar_back" onClick={main_back}></div>
+            <header>KIOSK Admin</header>
             <div className='rect1'>
               <div className='txt2'>옵션을 선택하세요</div>
               <div className='rect2'>
