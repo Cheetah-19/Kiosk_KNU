@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "../Common.css";
-import "../Home.css"
-import "../MainMenu.css"
+import "../reuse/Common.css";
+import "../reuse/Home.css"
+import "../kiosk/kioskcss/MainMenu.css"
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { BASE_URL } from '../constants/Url';

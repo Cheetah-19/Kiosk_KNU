@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Modal } from 'react-bootstrap';
 import { BASE_URL } from "../constants/Url";
-import "../Home.css";
-import "./Admin.css";
-import "./AddCategories.css";
+import "../reuse/Home.css";
+import "./admincss/Admin.css";
+import "./admincss/AddCategories.css";
 
 export default function AddIngredients() {
     const navigate = useNavigate();
@@ -104,8 +104,10 @@ export default function AddIngredients() {
 
     return (
         <div id = "pay_page">
-            <div id="top_bar_back" onClick={main_back}></div>
-            <header>KIOSK Admin</header>
+            <div id="pay-header">
+                <div id="top_bar_back" onClick={main_back}></div>
+                <header>KIOSK Admin</header>
+            </div>
             <div className='rect1'>
               <div className='txt1'>들어간 재료를 입력하세요</div>
               <div className='rect2'>

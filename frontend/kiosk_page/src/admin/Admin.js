@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import axios from "axios";
 import { BASE_URL } from "../constants/Url";
-import "../Home.css";
-import "../Common.css";
-import "./Admin.css";
+import "../reuse/Home.css";
+import "../reuse/Common.css";
+import "./admincss/Admin.css";
 
 export default function Admin() {
     

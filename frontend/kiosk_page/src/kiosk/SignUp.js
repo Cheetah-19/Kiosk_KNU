@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./Home.css"
-import "./Common.css"
-import "./SignUp.css";
-import "./PayCheck.css";
+import "../reuse/Home.css"
+import "../reuse/Common.css"
+import "./kioskcss/SignUp.css";
+import "./kioskcss/PayCheck.css";
 
 export default function Pay() {
     const navigate = useNavigate();

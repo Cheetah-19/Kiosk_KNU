@@ -1,8 +1,8 @@
 import React , {useEffect} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import "./Home.css"
-import "./Common.css"
-import "./PayCheck.css";
+import "../reuse/Home.css"
+import "../reuse/Common.css"
+import "./kioskcss/PayCheck.css";
 
 export default function Pay() {
   const location = useLocation();

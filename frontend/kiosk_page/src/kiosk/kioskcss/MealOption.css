@@ -53,9 +53,9 @@
 }
 
 #eat-btn:hover img {
-    content: url(./img/hover_store_meal.png);
+    content: url(../../img/hover_store_meal.png);
 }
 
 #takeout-btn:hover img {
-    content: url(./img/hover_takeout.png);
+    content: url(../../img/hover_takeout.png);
 }

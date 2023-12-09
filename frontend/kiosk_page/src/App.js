@@ -2,22 +2,22 @@ import React, { useState } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 
-import MealOption from "./MealOption";
-import StartMenu from "./StartMenu";
-import MainMenu from "./MainMenu";
-import Pay from "./Pay";
-import PayCheck from "./PayCheck";
-import SignUp from "./SignUp";
-import Face from "./Face";
-import LoginCheck from "./LoginCheck";
-import PhoneNum from "./PhoneNum";
+import MealOption from "./kiosk/MealOption";
+import StartMenu from "./login/StartMenu";
+import MainMenu from "./kiosk/MainMenu";
+import Pay from "./kiosk/Pay";
+import PayCheck from "./kiosk/PayCheck";
+import SignUp from "./kiosk/SignUp";
+import Face from "./login/Face";
+import LoginCheck from "./login/LoginCheck";
+import PhoneNum from "./login/PhoneNum";
 import Admin from "./admin/Admin";
 import Delete from "./admin/Delete";
 import AddCategories from "./admin/AddCategories";
 import AddOptions from "./admin/AddOptions";
 import AddIngredients from "./admin/AddIngredient";
 import AddLast from "./admin/AddLast";
-import Alert from './Alert';
+import Alert from './reuse/Alert';
 
 function App() {
   const [alertVisibility, setAlertVisibility] = useState(false);

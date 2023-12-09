@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import "./Home.css"
-import "./Common.css"
-import "./Pay.css";
+import "../reuse/Home.css"
+import "../reuse/Common.css"
+import "./kioskcss/Pay.css";
 
 export default function Pay() {
   const location = useLocation();

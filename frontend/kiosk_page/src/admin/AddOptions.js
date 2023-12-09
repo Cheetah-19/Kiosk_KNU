@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Modal } from 'react-bootstrap';
 import { BASE_URL } from "../constants/Url";
-import "../Home.css";
-import "./Admin.css";
-import "./AddCategories.css";
+import "../reuse/Home.css";
+import "./admincss/Admin.css";
+import "./admincss/AddCategories.css";
 
 export default function AddCategories() {
     

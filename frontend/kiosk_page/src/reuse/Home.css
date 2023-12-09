@@ -53,7 +53,7 @@
 #top_bar_home {
     width:30px; /* Set explicit size */
     height:30px; /* Set explicit size */
-    background:url(img/top_bar_home.png) no-repeat center / cover;
+    background:url(../img/top_bar_home.png) no-repeat center / cover;
 
     margin-left: 7px;
 }
@@ -64,7 +64,7 @@
     left:10px; /* Adjust as needed */
     width:30px; /* Set explicit size */
     height:30px; /* Set explicit size */
-    background:url(img/top_bar_back.png) no-repeat center / cover;
+    background:url(../img/top_bar_back.png) no-repeat center / cover;
 }
 
 /* 메뉴가 출력되는 부분 */
@@ -411,12 +411,12 @@ h5.selected_menu {
 .minus{
     width: 24px;
     height: 24px;
-    background:url(img/minus.png) no-repeat center / cover;
+    background:url(../img/minus.png) no-repeat center / cover;
 }
 .plus{
     width: 24px;
     height: 24px;
-    background:url(img/plus.png) no-repeat center / cover;
+    background:url(../img/plus.png) no-repeat center / cover;
 }
 
 .quantity_section {

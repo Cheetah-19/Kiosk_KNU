@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./StartMenu.css";
-import logo from "./img/logo.png" 
+import "./logincss/StartMenu.css";
+import logo from "../img/logo.png" 
 
 function StartMenu() {
   const navigate = useNavigate();

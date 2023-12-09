@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { BASE_URL } from './constants/Url';
-import "./Face.css";
+import { BASE_URL } from '../constants/Url';
+import "./logincss/Face.css";
 
 export default function Face(props) {
     // const BASE_URL = 'https://kioskknu2023.run.goorm.site';

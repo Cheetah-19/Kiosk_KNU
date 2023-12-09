@@ -1,16 +1,16 @@
 .rect3 {
     position: absolute;
     left: 200px;
-    top: 175px;
+    top: 180px;
 
     width: 880px;
     height: 520px;
     border-radius: 10px;
-    background: white;
+    background: #F3F3F3;
 }
 
 .blink-image {
-    background: url('img/paycomp.png') no-repeat center;
+    background: url('../../img/paycomp.png') no-repeat center;
     position: absolute;
     left: 400px;
     top: 72px;
@@ -18,6 +18,12 @@
     width: 80px;
     height: 80px;
     animation: blink 2s; /*한번만 실행*/
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 .price-txt{
@@ -118,7 +124,7 @@
 }
 
 .reco-image{
-    background: url('img/smile.png') no-repeat center;
+    background: url('../../img/smile.png') no-repeat center;
     position: absolute;
     right: 165px;
     top: 445px;
@@ -129,16 +135,3 @@
     animation-delay: 0s;
 }
 
-#pay-chk-btn-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    position: relative;
-    top: 340px;
-}
-
-#pay-chk-btn-container div {
-    width: 264px;
-    margin: 0px 12px 0px 12px;
-}

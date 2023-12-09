@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { BASE_URL } from './constants/Url';
+import { BASE_URL } from '../constants/Url';
 
 
-import "./Common.css"
-import "./PhoneNum.css"
+import "../reuse/Common.css"
+import "./logincss/PhoneNum.css"
 
 export default function PhoneNum(props) {
     // const BASE_URL = 'https://kioskknu2023.run.goorm.site';
-    const BASE_URL = 'http://127.0.0.1:8000';
+    //const BASE_URL = 'http://127.0.0.1:8000';
 
     const [phone_number, setPhoneNumber] = useState('');
     const navigate = useNavigate();

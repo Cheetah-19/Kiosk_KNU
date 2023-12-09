@@ -1,6 +1,9 @@
 .category-btn {
-    flex-basis: calc(50% - 10px);
-    margin-bottom: 20px;
+    flex-basis: calc(47% - 10px);
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     /*width: 140px;*/
     height: 100px;
     border-radius: 10px;

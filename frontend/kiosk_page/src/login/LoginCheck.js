@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import Camera, { stopVideo } from "./Face";
 import PhoneNum from "./PhoneNum";
 
-import "./Common.css";
-import "./LoginCheck.css";
+import "../reuse/Common.css";
+import "./logincss/LoginCheck.css";
 
-import face from './img/face.png';
-import down from './img/down_arrow.png';
+import face from '../img/face.png';
+import down from '../img/down_arrow.png';
 
 export default function MainMenu({ showAlert }) {
     const [alert, setAlert] = useState(false);

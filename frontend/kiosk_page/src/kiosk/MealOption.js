@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import "./Common.css";
-import "./MealOption.css";
-import eatImage from './img/store_meal.png';
-import takeoutImage from './img/takeout.png';
+import "../reuse/Common.css";
+import "./kioskcss/MealOption.css";
+import eatImage from '../img/store_meal.png';
+import takeoutImage from '../img/takeout.png';
 
 export default function MealOption() {
     const [selected, setSelected] = useState('');
