@@ -10,13 +10,22 @@ import "./AddCategories.css";
 export default function AddIngredients() {
     const navigate = useNavigate();
     const location = useLocation();
-
+    console.log(location.state);
     const selectedCategoryId = location.state.selectedCategoryId;
     const selectedCategoryName = location.state.selectedCategoryName;
     const selectedOptionIds = location.state.selectedOptionIds;
     const selectedOptionNames = location.state.selectedOptionNames;
 
-    const [selectedIngredients, setSelectedIngredients] = useState([]);
+    const [selectedIngredients, setSelectedIngredients] = useState(location.state.selectedIngredientIds === undefined ?
+          []:
+          () => {
+            const lists = [];
+            for (var i = 0 ; i< location.state.selectedIngredientIds.length; i++ ){
+                lists[i] = {id: location.state.selectedIngredientIds[i], name: location.state.selectedIngredientNames[i]} ;
+            }   
+            return lists;
+            }
+          );
     const [ingredients, setIngredients] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [ingredient_name, setIngredientName] = useState('');
@@ -82,7 +91,14 @@ export default function AddIngredients() {
     };
     
     function main_back() {
-        navigate('/AddOptions');
+        navigate('/AddOptions', {
+            state : {
+                selectedCategoryId: selectedCategoryId,
+                selectedCategoryName: selectedCategoryName,
+                selectedOptionIds: selectedOptionIds,
+                selectedOptionNames: selectedOptionNames,
+            }
+        });
     }
 
 

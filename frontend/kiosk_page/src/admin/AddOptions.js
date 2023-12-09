@@ -12,9 +12,20 @@ export default function AddCategories() {
     const navigate = useNavigate();
     const location = useLocation();
     //AddCategories로부터 받아온 정보들.
+    console.log(location.state);
     const selectedCategoryId = location.state.selectedCategoryId;
     const selectedCategoryName = location.state.selectedCategoryName;
-    const [selectedOptions, setSelectedOptions] = useState([]);
+    const [selectedOptions, setSelectedOptions] = useState(location.state.selectedOptionIds === undefined ?
+        [] :
+        () => {
+            const lists = []
+            for (var i = 0 ; i< location.state.selectedOptionIds.length; i++ ){
+                lists[i] = {id: location.state.selectedOptionIds[i], name: location.state.selectedOptionNames[i]} ;
+            }   
+            return lists;
+        }
+        );
+    console.log(selectedOptions);
     const [options, setOptions] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [option_name, setOptionName] = useState('');  // 옵션 이름 상태 변수
@@ -87,7 +98,12 @@ export default function AddCategories() {
     };
     
     function main_back() {
-        navigate('/AddCategories');
+        navigate('/AddCategories',{
+            state: {
+                selectedCategoryId: selectedCategoryId,
+                selectedCategoryName: selectedCategoryName
+            }
+        });
     }
     
     return (
