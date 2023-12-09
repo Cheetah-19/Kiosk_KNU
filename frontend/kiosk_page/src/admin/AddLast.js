@@ -117,6 +117,7 @@ export default function AddCategories() {
     
             if (response.status === 200) {
                 alert('메뉴가 성공적으로 추가되었습니다.');
+                navigate('/Admin');
             } else {
                 alert('메뉴 추가에 실패하였습니다.');
             }
@@ -174,7 +175,7 @@ export default function AddCategories() {
                     </div>
                 </div>
               </div>
-              <div className='prev-btn' onClick={goToPrevPage}>이전으로</div>
+              <div className='prev-btn' onClick={herf_back}>이전으로</div>
               <div className='next-btn' onClick={goToCheck}>입력완료</div>
               <Modal show={isModalOpen} onHide={closeModal}>
                 <Modal.Header closeButton>
