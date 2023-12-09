@@ -7,11 +7,10 @@ import takeoutImage from '../img/takeout.png';
 
 export default function MealOption() {
     const [selected, setSelected] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState(''); // State to store phone number
+    const [phoneNumber, setPhoneNumber] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Extract phone number from location state when component mounts
     React.useEffect(() => {
         setPhoneNumber(location.state?.phone_number || ''); 
     }, []);

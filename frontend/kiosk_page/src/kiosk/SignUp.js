@@ -7,8 +7,6 @@ import "./kioskcss/PayCheck.css";
 
 export default function Pay() {
     const navigate = useNavigate();
-
-    //홈 화면 가는 함수
     function herf_home() {
       navigate('/');
     }

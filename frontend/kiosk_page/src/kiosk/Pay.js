@@ -11,16 +11,12 @@ export default function Pay() {
   const totalPrice = location.state?.totalPrice || 0;
   const option = location.state?.option || '';
 
-  console.log('Cart:', cart);
-
-  //홈 화면 가는 함수
   function herf_home() {
     navigate('/');
   }
 
-  // 이전 페이지로 이동하는 함수
   function goBack() {
-    navigate('/MainMenu'); // '/MainMenu'를 이전 페이지의 경로로 교체하세요.
+    navigate('/MainMenu');
   }
   
   function goToPayCheck() {

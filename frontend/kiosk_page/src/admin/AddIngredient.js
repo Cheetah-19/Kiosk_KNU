@@ -10,7 +10,6 @@ import "./admincss/AddCategories.css";
 export default function AddIngredients() {
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location.state);
     const selectedCategoryId = location.state.selectedCategoryId;
     const selectedCategoryName = location.state.selectedCategoryName;
     const selectedOptionIds = location.state.selectedOptionIds;

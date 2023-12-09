@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Modal } from 'react-bootstrap';
-import axios from "axios";
-import { BASE_URL } from "../constants/Url";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../reuse/Home.css";
 import "../reuse/Common.css";
 import "./admincss/Admin.css";
@@ -10,7 +7,7 @@ import "./admincss/Admin.css";
 export default function Admin() {
     
     const navigate = useNavigate();
-    //홈 화면 가는 함수
+    
     function herf_home() {
         navigate('/');
     }

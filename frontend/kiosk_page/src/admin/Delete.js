@@ -131,11 +131,8 @@ export default function Delete() {
             const menuUrl = phoneNumber ? `${BASE_URL}/menu/${phoneNumber}/` : `${BASE_URL}/menu/`;
             let responseMenus = await axios.get(menuUrl);
             let dataMenus = responseMenus.data;
-            console.log("dataMenus:", dataMenus); // 확인용 로그
-            console.log(menuUrl);
             let categoriesFromServerMenu = dataMenus.categories.map(c => c.menucategory_name);
             let menusFromServerMenu = {};
-            console.log("categoriesFromServerMenu:", categoriesFromServerMenu); // 확인용 로그
 
             //메뉴가 있는 카테고리만 선택
             for (let category of categoriesFromServerMenu) {
@@ -167,8 +164,6 @@ export default function Delete() {
     }
     //서버로부터 정보를 받아온다. Axios 활용.
     useEffect(() => {
-        console.log("fetchMenusAndOptions 실행"); // 확인용 로그
-        //실행
         fetchMenusAndOptions();
     }, []);
 
@@ -184,17 +179,11 @@ export default function Delete() {
             //item.menu.id만 추출해서 배열로 만든다.
             const cartMenuIds = cart.map(item => item.menu.id);
             // 서버로 삭제할 데이터를 전송
-            console.log({ cart: cartMenuIds });
             await axios.delete(`${BASE_URL}/manager/delete-menu/`, { params: { cart: cartMenuIds } })
             .then(response => {
-                console.log(cartMenuIds);
-                console.log(response.data);  // 요청 성공시 alert 하나 해줄 예정.
                 alert("메뉴가 삭제 되었습니다. ");
-                // navigate("/complete", { state: { inputValue, PhoneNumber, photos, selectedVeganItemId, selectedReligion, selectedAllergy } });
-        
               })
               .catch(error => {
-                console.log(cartMenuIds);
                 console.error(error);
                 alert("메뉴 삭제 실패"+error);
               });

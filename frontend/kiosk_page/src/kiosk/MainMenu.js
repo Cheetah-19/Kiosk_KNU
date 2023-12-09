@@ -165,7 +165,6 @@ export default function MainMenu() {
                 <img src={`${BASE_URL}${menu.menu_pic}`} alt={menu.menu_name} />
                 <h2>{menu.menu_name}</h2>
                 <p>{menu.menu_price.toLocaleString()} 원</p>
-                {/* <p>{menu.menu_introduction}</p> */}
             </div>
         );
     }
@@ -230,13 +229,10 @@ export default function MainMenu() {
             const isMultiOptions = allOptions.length > 1;
             return (
                 <div id="menu_div" className={isMultiOptions ? 'multi-options' : ''} key={index}>
-                    {/* top section - placeholder for now */}
                     <div className="cart_item_options">
-                        {/* Add a delete button */}
                         <div className="cart_item_delete" onClick={() => handleDeleteFromCart(index)}>삭제</div>
                     </div>
 
-                    {/* middle section - menu name and options */}
                     <div className="cart_item_name">
                         <h3>{item.menu.menu_name}</h3>
                         {allOptions.map(([optionName, quantity]) => (
@@ -244,7 +240,6 @@ export default function MainMenu() {
                         ))}
                     </div>
 
-                    {/* bottom section - total price for this item */}
                     {item.total &&
                         (<div className="cart_item_price"><p >{item.total.toLocaleString()}원</p></div>)
                     }
@@ -255,21 +250,16 @@ export default function MainMenu() {
 
     //서버로부터 정보를 받아온다. Axios 활용.
     useEffect(() => {
-        console.log("fetchMenusAndOptions 실행"); // 확인용 로그
         async function fetchMenusAndOptions() {
             try {
-                // 서버 URL에 테스트용 주소 넣어줄것.
                 // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
                 //optional chaining 사용
                 phoneNumber = location.state?.phone_number;
                 const menuUrl = phoneNumber ? `${BASE_URL}/menu/${phoneNumber}/` : `${BASE_URL}/menu/`;
                 let responseMenus = await axios.get(menuUrl);
                 let dataMenus = responseMenus.data;
-                console.log("dataMenus:", dataMenus); // 확인용 로그
-                console.log(menuUrl);
                 let categoriesFromServerMenu = dataMenus.categories.map(c => c.menucategory_name);
                 let menusFromServerMenu = {};
-                console.log("categoriesFromServerMenu:", categoriesFromServerMenu); // 확인용 로그
 
                 //메뉴가 있는 카테고리만 선택
                 for (let category of categoriesFromServerMenu) {

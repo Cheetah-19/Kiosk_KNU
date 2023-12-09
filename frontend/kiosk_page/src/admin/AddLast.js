@@ -1,4 +1,3 @@
-//이곳은 메뉴 이미지, 이름, 가격, 설명 적는곳.
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from "react-bootstrap";
@@ -106,10 +105,6 @@ export default function AddCategories() {
         formData.append('menu_price', menuPrice);
         formData.append('menu_introduction', menuExplain);
         
-        // FormData 객체의 내용을 콘솔에 출력
-        for (let [key, value] of formData.entries()) {
-            console.log(`${key}: ${value}`);
-        }
         try {
             const response = await axios.post(`${BASE_URL}/manager/add-menu/`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },

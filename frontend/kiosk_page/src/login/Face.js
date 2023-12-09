@@ -5,8 +5,6 @@ import { BASE_URL } from '../constants/Url';
 import "./logincss/Face.css";
 
 export default function Face(props) {
-    // const BASE_URL = 'https://kioskknu2023.run.goorm.site';
-    // const BASE_URL = 'http://127.0.0.1:8000';
 
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const videoRef = useRef(null);
@@ -32,7 +30,6 @@ export default function Face(props) {
             }
 
             const mediaStream = await navigator.mediaDevices.getUserMedia({ video: { width: 720, height: 720 } });
-            console.log('start', mediaStream);
             if (videoRef.current) {
                 videoRef.current.srcObject = mediaStream;
                 await videoRef.current.play();
@@ -44,7 +41,7 @@ export default function Face(props) {
             }
 
         } catch (error) {
-            console.log("Something went wrong!", error);
+
         }
     };
 
@@ -84,9 +81,7 @@ export default function Face(props) {
                 .then(response => {
                     // 사용자의 얼굴 정보를 DB와 대조하여 회원 여부를 본다.
                     // 이후 DB에 있는 사용자라면 -> phone_number를 보내준다.
-                    console.log(response);
                     const phone_number = response.data.phone_number;
-                    console.log(props)
                     if (!phone_number) {  // phoneNumber가 없다면 -> 얼굴인식 실패.
                         props.showAlert('얼굴인식 실패! 휴대폰 번호로 로그인 해주세요.');
 
@@ -137,10 +132,7 @@ export const stopVideo = () => {
     if (videoElement && videoElement.srcObject) {
         const stream = videoElement.srcObject;
         const tracks = stream.getTracks();
-
-        console.log('end:', stream);
         tracks.forEach(track => track.stop());
-
         videoElement.srcObject = null;
     }
 }
