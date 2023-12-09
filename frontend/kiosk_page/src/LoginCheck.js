@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import Camera from "./Face";
+import Camera, { stopVideo } from "./Face";
 import PhoneNum from "./PhoneNum";
 
 import "./Common.css";
@@ -9,7 +9,7 @@ import "./LoginCheck.css";
 import face from './img/face.png';
 import down from './img/down_arrow.png';
 
-export default function MainMenu() {
+export default function MainMenu({ showAlert }) {
     const [alert, setAlert] = useState(false);
 
     const [gotoPhoneNUm, setGotoPhoneNUm] = useState(false);
@@ -24,10 +24,10 @@ export default function MainMenu() {
             <div id='inner-bg'>
                 {
                     gotoPhoneNUm === true ?
-                        <div id='phoneNum-container' style={{animation: slide ? 'slider-open 0.5s forwards 1':'slider-close 0.5s forwards 1'}}><PhoneNum/></div>
+                        <div id='phoneNum-container' style={{animation: slide ? 'slider-open 0.5s forwards 1':'slider-close 0.5s forwards 1'}}><PhoneNum showAlert={showAlert}/></div>
                         :
                         alert ===  true ?
-                            <div id='camera-container'><Camera setGotoPhoneNUm={setGotoPhoneNUm} setSlide={setSlide}/></div>
+                            <div id='camera-container'><Camera showAlert={showAlert} setGotoPhoneNUm={setGotoPhoneNUm} setSlide={setSlide}/></div>
                             :
                             <div id='face-img-container'>
                                 <img src={face} style={{width: '200px', margin: '0px 0px 40px 0px'}}/>
@@ -39,7 +39,7 @@ export default function MainMenu() {
                 
                 {
                     gotoPhoneNUm === false ?
-                        <div class='gotoPhoneNum-btn' onClick={() => {setAlert(true); setGotoPhoneNUm(true); setSlide(true)}}>
+                        <div class='gotoPhoneNum-btn' onClick={() => {stopVideo(); setAlert(true); setGotoPhoneNUm(true); setSlide(true)}}>
                             휴대폰 번호로 주문하기
                             <img src={down} style={{width: '48px'}}/>
                         </div>

@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useState } from "react";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import MealOption from "./MealOption";
@@ -17,12 +17,23 @@ import AddCategories from "./admin/AddCategories";
 import AddOptions from "./admin/AddOptions";
 import AddIngredients from "./admin/AddIngredient";
 import AddLast from "./admin/AddLast";
+import Alert from './Alert';
 
 function App() {
+  const [alertVisibility, setAlertVisibility] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('This is an alert message.');
+
+  const showAlert = (message) => {
+    setAlertMessage(message);
+    setAlertVisibility(true);
+  };
+
   return (
+    <HashRouter>
+      <Alert message={alertMessage} visibility={alertVisibility} setVisibility={setAlertVisibility} />
       <Routes>
         <Route path="/" element={<StartMenu />} /> {/* Default route */}
-        <Route path="/LoginCheck" element={<LoginCheck />} />
+        <Route path="/LoginCheck" element={<LoginCheck showAlert={showAlert} />} />
         <Route path="/PhoneNum" element={<PhoneNum />} />
         <Route path="/Face" element={<Face />} /> {/* Default route */}
         <Route path="/MealOption" element={<MealOption />} /> {/* Default route */}
@@ -37,6 +48,7 @@ function App() {
         <Route path="/AddIngredient" element={<AddIngredients />} />
         <Route path="/AddLast" element={<AddLast />} />
       </Routes>
+    </HashRouter>
   );
 }
 

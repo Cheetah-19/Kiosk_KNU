@@ -1,12 +1,12 @@
 .rect3 {
     position: absolute;
     left: 200px;
-    top: 180px;
+    top: 175px;
 
     width: 880px;
     height: 520px;
     border-radius: 10px;
-    background: #F3F3F3;
+    background: white;
 }
 
 .blink-image {
@@ -18,12 +18,6 @@
     width: 80px;
     height: 80px;
     animation: blink 2s; /*한번만 실행*/
-}
-
-@keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
 }
 
 .price-txt{
@@ -133,4 +127,18 @@
     height: 22px;
     animation: blink 2s infinite;
     animation-delay: 0s;
+}
+
+#pay-chk-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    top: 340px;
+}
+
+#pay-chk-btn-container div {
+    width: 264px;
+    margin: 0px 12px 0px 12px;
 }
