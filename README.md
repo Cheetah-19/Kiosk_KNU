@@ -352,8 +352,6 @@ WebOs : [https://www.webosose.org/]
 	ares-install —device Rasberry com.domain.app_0.0.1_all.ipk
 
   Success가 되면 성공이며, 어플이 성공적으로 동작할 것입니다.
-  
-  ![16](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/8190f164-fd48-4206-b16b-b4ebbf5b95b2)
-
+  ![18](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/5feb04b8-7d20-4f4c-b350-64afc260aaa6)
 
 # 소스코드 설명
