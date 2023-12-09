@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../reuse/Common.css";
-import "../reuse/Home.css"
-import "../kiosk/kioskcss/MainMenu.css"
+import "../reuse/Home.css";
+import "../kiosk/kioskcss/MainMenu.css";
+import "../admin/admincss/Delete.css";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { BASE_URL } from '../constants/Url';
@@ -197,6 +198,19 @@ export default function Delete() {
         }
     }
 
+    const handleOptionDelete = async (menuId, optionId) => {
+        const data = { menu_id: menuId, option_id: optionId };
+        console.log(data);
+        try {
+            const response = await axios.post(`${BASE_URL}/manager`, data);
+        } catch(error) {
+            console.log('옵션 삭제에 실패했습니다:',error);
+        } finally {
+            closeModal();
+            fetchMenusAndOptions();
+        }
+    };
+
     //메뉴 항목을 렌더링하는 함수
     function MenuItem({ menu, onClick }) {
         return (
@@ -275,7 +289,7 @@ export default function Delete() {
                     {/* top section - placeholder for now */}
                     <div className="cart_item_options">
                         {/* Add a delete button */}
-                        <div className="cart_item_delete" onClick={() => handleDeleteFromCart(index)}>삭제</div>
+                        <div className="cart_item_delete" onClick={() => handleDeleteFromCart(index)}>삭제 취소</div>
                     </div>
 
                     {/* middle section - menu name and options */}
@@ -370,6 +384,7 @@ export default function Delete() {
                                             <div className="option_row">
                                                 <div className="option_name">{option.option_name}</div>
                                                 <div className="quantity_section"></div>
+                                                <div className='opt-delbtn' onClick={() => handleOptionDelete(selectedMenu.id, option.id)}>삭제</div>
                                             </div>
                                         </div>
                                     ))
