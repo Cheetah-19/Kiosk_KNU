@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import "./Home.css"
 import "./Common.css"
@@ -9,12 +9,11 @@ export default function Pay() {
   const navigate = useNavigate();
   const cart = location.state?.cart || [];
   const totalPrice = location.state?.totalPrice || 0;
-
+  
   //홈 화면 가는 함수
   function herf_home() {
     navigate('/');
   }
-
   // 이전 페이지로 이동하는 함수
   function goBack() {
     navigate('/'); // '/MainMenu'를 이전 페이지의 경로로 교체하세요.
@@ -24,6 +23,16 @@ export default function Pay() {
     navigate('/SignUp');
   }
   
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      herf_home();
+    },30000);
+    
+    return () => clearTimeout(timer);
+
+  },[]);
   return (
     <div id = "pay_page">
       <div id="pay-header">
