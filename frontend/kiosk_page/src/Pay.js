@@ -24,6 +24,7 @@ export default function Pay() {
   }
   
   function goToPayCheck() {
+    localStorage.removeItem('cart');
     navigate('/PayCheck', {state: {cart: cart, totalPrice: totalPrice} });
   }
   

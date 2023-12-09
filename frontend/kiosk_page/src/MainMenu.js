@@ -148,7 +148,6 @@ export default function MainMenu() {
             await axios.post(`${BASE_URL}/order/menu/orderpost/`, { cart: cartWithUser });
 
             // 결제 버튼을 누르면 cart 배열 초기화
-            localStorage.removeItem('cart');
             setCart([]);
 
             navigate('/pay', { state: { cart: cartWithUser, totalPrice: totalPrice.toLocaleString(), option } });
