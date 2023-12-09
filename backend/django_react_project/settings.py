@@ -72,9 +72,7 @@ ROOT_URLCONF = "django_react_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            # os.path.join(BASE_DIR, 'frontend', 'build'), # 경로 변경
-        ],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
 

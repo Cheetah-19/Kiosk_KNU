@@ -9,8 +9,12 @@ import "./AddCategories.css";
 
 export default function AddCategories() {
     
+    const location = useLocation();
     const navigate = useNavigate();
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(location.state === null
+        ?
+        null : {id :location.state.selectedCategoryId, menucategory_name:location.state.selectedCategoryName});
+    console.log(selectedCategory);  
     const [categories, setCategories] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [menucategory_name, setMenucategoryName] = useState(''); 

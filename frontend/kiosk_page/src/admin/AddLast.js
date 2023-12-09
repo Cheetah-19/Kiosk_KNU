@@ -84,7 +84,16 @@ export default function AddCategories() {
 
     //뒤로 가는 함수
     function herf_back() {
-        navigate('/AddIngredient');
+        navigate('/AddIngredient', {
+            state : {
+                selectedCategoryId: selectedCategoryId,
+                selectedCategoryName: selectedCategoryName,
+                selectedOptionIds: selectedOptionIds,
+                selectedOptionNames: selectedOptionNames,
+                selectedIngredientIds: selectedIngredientIds, 
+                selectedIngredientNames: selectedIngredientNames
+            }
+        });
     }
 
     const handleAddMenu = async () => {

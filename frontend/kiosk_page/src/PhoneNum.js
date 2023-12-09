@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { BASE_URL } from './constants/Url';
+
 
 import "./Common.css"
 import "./PhoneNum.css"

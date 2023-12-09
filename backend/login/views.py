@@ -1,10 +1,4 @@
-from django.shortcuts import render
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from rest_framework import permissions
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.status import *
 from menu.serializers import *
 
 from rest_framework.views import APIView
@@ -13,103 +7,81 @@ from rest_framework.response import Response
 from face_recognition.face_identification import identification
 from face_recognition.face_methods import *
 
+import numpy as np
+
+
 class LoginView(APIView):
     def post(self, request):
         phone_number = request.data.get('phone_number')
 
         if phone_number:
-            is_phone_number_already_here = User.objects.filter(user_phonenum=phone_number).exists()
-            if is_phone_number_already_here:
+            user = User.objects.filter(user_phonenum=phone_number)
+            if user.exists():
                 # 이 경우에는 로그인 성공임
-                return Response({'message': '로그인 성공.'})
+                return Response({'name': user[0].user_name, 'message': '로그인 성공.'})
             else:
                 # 로그인 실패
                 return Response({'message': '등록된 휴대폰 번호 정보가 없습니다.'}, status = 400)
-            
         else:
             # 전화번호가 입력되지 않은 경우
             return Response({'message': '입력을 확인해 주세요.'}, status=400)
 
+
 class FaceLoginView(APIView):
     '''
     얼굴 인식 로그인 작동 방식
-    1. 프론트 face.js를 통해 n장의 base64파일 POST
-    2. base64 -> vector (extractor)
-    3. user의 모든 face data 불러오기
-    4. user의 모든 facedata와 2에서 생성한 vector의 거리 계산
-    5. 최단 거리인 user id 리턴
+    1. 프론트 Face.js를 통해 5장의 base64 파일 POST
+    2. base64 -> image -> embedding
+    3. 모든 user의 정보 불러오기
+    4. 2번에서의 embedding과 user의 face info 거리 계산
+    5. 거리가 임계값보다 낮고 최단 거리였던 user의 휴대폰 번호를 리턴
     '''
     def post(self,request):
-        
-        #1. 프론트 face.js를 통해 n장의 base64파일 POST (list 형태로 10장 받음)
+        # 1. 프론트 Face.js를 통해 5장의 base64 파일 POST (list)
         if request.method == 'POST':
-            face_bases = []
             try:
                 face_bases = request.data.get('imageData')
             except:
                 return Response('')
-            input_vector_list = base_to_vector(face_bases)
+
+            # 2. base64 -> image -> vector
+            target_embedding_list = base_to_vector(face_bases)
             print("Received face data from front")
-            user_table = User.objects.all() # 3.user의 모든 face data 불러오기
-            candidate_logins = {}
-            for inputs in input_vector_list:
-                login_id = ''
-                min_distance = 1e9
-                mininum_vector = []
-                for user in user_table:
-                    if user.user_face_info == None:
-                        continue
-                    else:
-                        try:
-                            user_face_list = eval(user.user_face_info) #str로 저장되어있는 리스트를 list로 변환 ->[[d1,d2,...,d512],[d1,d2,...,d512],...]
-                            for user_faces in user_face_list:   #db에 있는 유저의 모든 얼굴정보 벡터와 인풋의 벡터 길이 측정
-                                distance = identification(inputs,user_faces) #거리 추출
-                                if distance != None:
-                                    if min_distance > distance:      #input된 벡터와 모든 유저에 있는 거리 최솟값, 유저의 아이디 구하기 
-                                        min_distance = distance
-                                        login_id = user.id
-                                        mininum_vector = user_faces
-                        except Exception as e:
-                            pass
-                if login_id != '':
-                    print("candidate is {}".format(login_id))       
-                #10개의 인풋에 대한 후보 유저를 딕셔너리에 벡터값과 같이 등록
-                #db에 유저 얼굴 벡터에 대한 데이터셋을 추가시켜 얼굴인식 정확도를 높이는데 기여함
-                if candidate_logins.get(login_id) == None:
-                    candidate_logins[login_id] = [mininum_vector]
-                else:
-                    candidate_logins[login_id].append(mininum_vector)
-            #10개의 인풋으로 나온 후보 회원중 가장 많이 나온 회원을 로그인한 회원으로 간주
-            login_candidates = -1
-            candidate = User()
-            for candi in candidate_logins.keys():
-                candi_counts = len(candidate_logins[candi])
-                if login_candidates <= candi_counts:
-                    candidate = User.objects.get(id = candi)
-                    login_candidates = candi_counts
-            login_user = candidate
-            try:
-                print("login is {}".format(login_user.user_name))
-            except Exception as e:
-                print("Error in candidate ",e)
-            #로그인한 회원의 user_face_info에 리스트로서 candidate_logins에 들어간 벡터값들을 추가시킴
-            #db에 유저 얼굴 벡터에 대한 데이터셋을 추가시켜 얼굴인식 정확도를 높이는데 기여함
-            #일단은 주석처리 해놓음 -> 너무 많이 저장될까봐(시간복잡도에 대한 고민을 해 볼 필요가 있어보임)
-            # for vector in candidate_logins[login_user.id]:
-            #     login_user_face = User.objects.get(id=login_user.id).user_face_info
-            #     login_user_face_list = eval(login_user_face)
-            #     login_user_face_list.append(vector)
-            #     login_user.user_face_info = str(login_user_face_list)
-            #     login_user.save()
-            return Response({"phone_number":login_user.user_phonenum})
-        
-            
-    
 
+            # 3. vector-> embedding
+            embedding_array =  np.array(target_embedding_list)
+            # 3. 모든 user의 정보 불러오기
+            user_table = User.objects.all()
 
+            min_dist = 1e9
+            phonenum = None
+            name = None
 
-class TestView(APIView):
-    permission_classes = [permissions.AllowAny]
+            for user in user_table:
+                try:
+                    user_face_list = np.array(eval(user.user_face_info))
 
-    def get(self, request):
-        return Response("Swagger 연동 테스트")
+                    # 4. 2번에서의 벡터와 user의 face info 거리 계산
+                    distance = 1e9
+                    for target in embedding_array:
+                        distance = min(distance, identification(user_face_list, target))
+
+                    print(f"{user.user_name}: {distance}")
+
+                    if distance < min_dist:
+                        min_dist = distance
+
+                        # 거리가 임계값보다 낮을 때만 뽑음
+                        if min_dist < 0.2:
+                            phonenum = user.user_phonenum
+                            name = user.user_name
+                except:
+                    pass
+
+            if phonenum is not None:
+                print(f"\nSuccess\nname: {name}, phonenum: {phonenum}")
+            else:
+                print("\nNone")
+
+            # 5. 거리가 임계값보다 낮고 최단 거리였던 user의 휴대폰 번호를 리턴
+            return Response({"phone_number": phonenum, "name": name})
