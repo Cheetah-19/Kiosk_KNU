@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import Camera from "./Face";
+import Camera, { stopVideo } from "./Face";
 import PhoneNum from "./PhoneNum";
 
 import "./Common.css";
@@ -39,7 +39,7 @@ export default function MainMenu({ showAlert }) {
                 
                 {
                     gotoPhoneNUm === false ?
-                        <div class='gotoPhoneNum-btn' onClick={() => {setAlert(true); setGotoPhoneNUm(true); setSlide(true)}}>
+                        <div class='gotoPhoneNum-btn' onClick={() => {stopVideo(); setAlert(true); setGotoPhoneNUm(true); setSlide(true)}}>
                             휴대폰 번호로 주문하기
                             <img src={down} style={{width: '48px'}}/>
                         </div>

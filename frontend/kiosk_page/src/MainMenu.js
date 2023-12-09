@@ -8,8 +8,8 @@ import { Modal } from 'react-bootstrap';
 import { BASE_URL } from './constants/Url';
 
 export default function MainMenu() {
-     const BASE_URL = 'https://kioskknu2023.run.goorm.site';
-    //const BASE_URL = 'http://127.0.0.1:8000';
+    const BASE_URL = 'https://kioskknu2023.run.goorm.site';
+    // const BASE_URL = 'http://127.0.0.1:8000';
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -150,7 +150,6 @@ export default function MainMenu() {
             await axios.post(`${BASE_URL}/order/menu/orderpost/`, { cart: cartWithUser });
 
             // 결제 버튼을 누르면 cart 배열 초기화
-            localStorage.removeItem('cart');
             setCart([]);
 
             navigate('/pay', { state: { cart: cartWithUser, totalPrice: totalPrice.toLocaleString(), option } });
