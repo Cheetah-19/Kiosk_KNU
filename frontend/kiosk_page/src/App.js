@@ -12,6 +12,7 @@ import Face from "./login/Face";
 import LoginCheck from "./login/LoginCheck";
 import PhoneNum from "./login/PhoneNum";
 import Admin from "./admin/Admin";
+import ManageOption from "./admin/ManageOption";
 import Delete from "./admin/Delete";
 import AddCategories from "./admin/AddCategories";
 import AddOptions from "./admin/AddOptions";
@@ -42,6 +43,7 @@ function App() {
         <Route path="/PayCheck" element={<PayCheck />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Admin" element={<Admin />} />
+        <Route path="/ManageOption" element={<ManageOption />} />
         <Route path="/Delete" element={<Delete />} />
         <Route path="/AddCategories" element={<AddCategories />} />
         <Route path="/AddOptions" element={<AddOptions />} />
