@@ -101,9 +101,10 @@ base64를 embedding으로 변환
 '''
 def extractor(base64):
     # 1. base64 -> image
-    img = functions.loadBase64Img(base64)
+    
 
     try:
+        img = functions.loadBase64Img(base64)
         # 2. image -> face (얼굴 영역 추출)
         face = DeepFace.extract_faces(img_path=img, target_size=target_size, detector_backend='ssd')[0]['facial_area']
         x, y, w, h = face['x'], face['y'], face['w'], face['h']

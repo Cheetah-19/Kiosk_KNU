@@ -44,10 +44,12 @@ class FaceLoginView(APIView):
             except:
                 return Response('')
 
-            # 2. base64 -> image -> embedding
-            target_embedding_list = base_to_embedding(face_bases)
+            # 2. base64 -> image -> vector
+            target_embedding_list = base_to_vector(face_bases)
             print("Received face data from front")
 
+            # 3. vector-> embedding
+            embedding_array =  np.array(target_embedding_list)
             # 3. 모든 user의 정보 불러오기
             user_table = User.objects.all()
 
@@ -61,7 +63,7 @@ class FaceLoginView(APIView):
 
                     # 4. 2번에서의 벡터와 user의 face info 거리 계산
                     distance = 1e9
-                    for target in target_embedding_list:
+                    for target in embedding_array:
                         distance = min(distance, identification(user_face_list, target))
 
                     print(f"{user.user_name}: {distance}")

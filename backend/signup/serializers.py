@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import *
 from rest_framework.response import Response
-from face_recognition.face_methods import base_to_embedding
+from face_recognition.face_methods import base_to_vector
 class UserSerializer(serializers.ModelSerializer):
     
     user_vegetarian = serializers.SlugRelatedField(
@@ -82,7 +82,7 @@ class UserSerializer(serializers.ModelSerializer):
                     allergy = Allergy.objects.get(allergy_name=allergy_name)
                     user.user_allergy.add(allergy)
             if user_face_base_list is not None:
-                face_list = base_to_embedding(user_face_base_list)
+                face_list = base_to_vector(user_face_base_list)
                 print(len(face_list))
                 user.user_face_info = str(face_list)
             user.save()
