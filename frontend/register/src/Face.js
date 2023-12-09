@@ -12,12 +12,21 @@ export default function Face(props) {
     const timerIdRef = useRef(null);
 
     // Add state for remaining photos
-    const [remainingPhotos, setRemainingPhotos] = useState(9); // 10장으로 설정
+    const [remainingPhotos, setRemainingPhotos] = useState(4); // 10장으로 설정
+    let remainingPhotosValue = 5;
 
     const startVideo = async () => {
+        console.log('start video');
         try {
           if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
             throw new Error('Camera not available on this browser');
+          }
+          const timer = ()=>{
+            setTimeout(() => {
+              timerIdRef.current = setInterval(captureFrame, 100,10);
+            }, 2000);
+
+            return () => {clearInterval(timerIdRef.current);}
           }
     
           if (!videoRef.current.srcObject) {
@@ -32,11 +41,12 @@ export default function Face(props) {
             // Already playing - do nothing
           } else {
             await videoRef.current.play();
+            timer();
           }
-    
-          setTimeout(() => {
-            timerIdRef.current = setInterval(captureFrame, 100);
-          }, 2000);
+
+
+          
+          
     
         } catch (error) {
           console.log("Something went wrong!", error);
@@ -44,7 +54,7 @@ export default function Face(props) {
       };
     
       const captureFrame = async () => {
-        if (remainingPhotos <= 0) return;
+        if (remainingPhotosValue <= 0) return;
     
         if (videoRef.current && canvasRef.current) {
           const context = canvasRef.current.getContext('2d');
@@ -59,24 +69,10 @@ export default function Face(props) {
           props.setPhotos(prevPhotos => [...prevPhotos, imgDataUrl]);
     
           setRemainingPhotos(prevCount => prevCount - 1);
+          remainingPhotosValue -= 1;
         }
       };
-    
-      useEffect(() => {
-        const startTimer = () => {
-          timerIdRef.current = setInterval(captureFrame, 100);
-        };
-    
-        const stopTimer = () => {
-          clearInterval(timerIdRef.current);
-        };
-    
-        startTimer();
-    
-        return () => {
-          stopTimer();
-        };
-      }, [props.setPhotos, remainingPhotos]);
+
     
       useEffect(() => {
         startVideo();
