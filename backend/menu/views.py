@@ -36,7 +36,7 @@ class member_MenulistView(APIView): # 회원 메뉴 리스트 출력
                 for menudata in menu_serializer.data:                                       # QuerySet에 대한 직렬화된 데이터를 for문으로 순회
                     menu_ingredient_ids = menudata['menu_ingredient']                       # menu_ingredient 부분을 가져옴 (현재 id 값으로 저장되어 있음 - 리스트)
                     menu_ingredient = set(menu_ingredient_ids)                              # 비교를 위해 set으로 변환하기
-                    if not menu_ingredient & exclude_ingredient_set:                            # 유저가 못 먹는 재료와 겹치는 재료가 없는 경우만 추가 
+                    if not menu_ingredient & exclude_ingredient:                            # 유저가 못 먹는 재료와 겹치는 재료가 없는 경우만 추가 
                         new_menu_data.append(menudata)
                     
                 menulist['{}'.format(category.menucategory_name)] = new_menu_data   #메뉴 카테고리 이름 key, serialized data 를 value로 추가
