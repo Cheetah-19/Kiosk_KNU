@@ -30,6 +30,5 @@ urlpatterns = [
     path('login/', include('login.urls')),
     path('order/',include('order.urls')),
     path('menu/', include('menu.urls')),
-    path('recommendation/', include('recommendation.urls')),
     path('manager/',include('manager.urls')),
 ] +static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

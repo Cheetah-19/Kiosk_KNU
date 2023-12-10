@@ -80,7 +80,7 @@ def get_recommended(user_id):
     for order in past_orders:
         for menu in order:
             past_menus.append(menu)           # ex) ['연어 샐러드', '연어 샐러드', '싸이버거', '쌀국수', '쌀국수']  로 나오는데, 두 번 나오는 게 더 가중치가 높아진다
-    print(past_menus)
+    
 
     # 과거에 주문한 메뉴와 유사한 메뉴 찾기
     similar_menus = np.zeros(len(menus))
@@ -109,7 +109,6 @@ def get_recommended(user_id):
     recommended_menus = []
     for recom in sorted_menus:
         this_menu = Menu.objects.get(menu_name=recom)
-        print(this_menu)
         this_serial = MenuSerializer(this_menu)
         recommended_menus.append(this_serial.data)
     # # 유사도가 높은 순서대로 메뉴 정렬

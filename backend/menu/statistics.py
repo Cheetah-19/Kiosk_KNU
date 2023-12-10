@@ -44,3 +44,6 @@ def get_popular_menus_by_user(user, top_n):
     )
 
     return top_menus_by_user                   # 각 메뉴 이름 - 주문 횟수 담은 Queryset 반환    
+
+    #QuertSet 예시
+    #<QuerySet [{'menu__menu_name': '파송송 라면', 'menu_count': 1}, {'menu__menu_name': '치즈 폭탄 라면', 'menu_count': 1}, {'menu__menu_name': '연어 샐러드', 'menu_count': 1}, {'menu__menu_name': '쌀국수', 'menu_count': 1}, {'menu__menu_name': '불닭 국수', 'menu_count': 1}]>
