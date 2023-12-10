@@ -62,7 +62,7 @@
   width: 150px;
   height: 30px;
   flex-shrink: 0;
-  background: url(img/recommended.png) no-repeat ;
+  background: url(../../img/recommended.png) no-repeat ;
   background-size: 150px 30px;
 }
 .recommended p{

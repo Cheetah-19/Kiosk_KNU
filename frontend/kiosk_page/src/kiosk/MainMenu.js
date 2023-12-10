@@ -158,8 +158,6 @@ export default function MainMenu() {
 
     function Recommended({menu}){
         const str_menu = JSON.stringify({menu}['menu']);
-        console.log(recommended_menu);
-        console.log(str_menu);
         if(recommended_menu.includes(str_menu) === true){
             return(
                 <div className='recommended'>
@@ -271,6 +269,7 @@ export default function MainMenu() {
                 // 로그인시 phone_number를 key로 사용한다. 휴대전화가 없다면? 비회원. 있다면? 회원이다.
                 //optional chaining 사용
                 phoneNumber = location.state?.phone_number;
+                console.log(phoneNumber);
                 const menuUrl = phoneNumber ? `${BASE_URL}/menu/${phoneNumber}/` : `${BASE_URL}/menu/`;
                 let responseMenus = await axios.get(menuUrl);
                 let dataMenus = responseMenus.data;

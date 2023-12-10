@@ -21,10 +21,13 @@ class member_MenulistView(APIView): # 회원 메뉴 리스트 출력
 
         #String 을 Set 으로 변경하는 과정
         # 중괄호 제거 후 쉼표로 분할
-        exclude_ingredient_list = exclude_ingredient_str[1:-1].split(',')
-        #문자열 -> 정수 변환 후 set 제작
-        exclude_ingredient_set = set(int(item.strip()) for item in exclude_ingredient_list)
-
+        
+        if exclude_ingredient_str == "empty":
+           exclude_ingredient = set() 
+        else :
+            exclude_ingredient_list = exclude_ingredient_str[1:-1].split(',')
+            #문자열 -> 정수 변환 후 set 제작
+            exclude_ingredient = set(int(item.strip()) for item in exclude_ingredient_list)
         menulist={}
         menu_category = MenuCategory.objects.all() #메뉴 리스트 전체
         menulist['categories'] = []  #메뉴 카테고리를 저장하기 위한 리스트
@@ -57,7 +60,7 @@ class nonmember_MenulistView(APIView): # 비회원 메뉴 리스트 출력
                 menulist['categories'].append(MenuCategorySerializer(category).data)        #메뉴 카테고리 리스트에 추가()
                 menu_serializer = MenuSerializer(category_menu,many=True)                   #카테고리에 해당하는 메뉴들을 json화 
                 menulist['{}'.format(category.menucategory_name)] = menu_serializer.data
-
+        menulist['recommended'] = []
         return Response(menulist)
 
 

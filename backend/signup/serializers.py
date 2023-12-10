@@ -31,17 +31,13 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['user_name', 'user_phonenum', 'user_vegetarian', 'user_allergy', 'religion']
-        # fields = ['user_name', 'user_phonenum', 'user_vegetarian', 'user_allergy', 'religion', 'user_face_info']
+        fields = ['user_name', 'user_phonenum', 'user_vegetarian', 'user_allergy', 'religion', 'user_face_info']
     def create(self, validated_data):
-
-        #추가해야 할 것들 -> DB로 넣기 전에 데이터가 이미 존재하는지 / 존재하지 않는 새로운 형태인지 판별
-        # print(validated_data)
         username=validated_data.get('user_name')
         userphonenum=validated_data.get('user_phonenum')
-        # user_face_base = validated_data.get('user_face_info')
-        # user_face_base_list = user_face_base.split('||')
-        # print("len : ",len(user_face_base_list))
+        user_face_base = validated_data.get('user_face_info')
+        user_face_base_list = user_face_base.split('||')
+        
         #username 이나 userphonenum 이 null 인 경우
         if username == "" or userphonenum == "":
             raise serializers.ValidationError({'message': '입력값이 없어서 등록이 불가합니다.'})
@@ -64,7 +60,6 @@ class UserSerializer(serializers.ModelSerializer):
             user_name=username,
             user_phonenum=userphonenum,
             )
-            print("hehehehe")
             vegetarian_name = validated_data.get('user_vegetarian')
             religion_type = validated_data.get('religion')
             allergy_names = validated_data.get('user_allergy')
@@ -99,16 +94,21 @@ class UserSerializer(serializers.ModelSerializer):
 
             print(exclude_ingredient)
 
-            # if user_face_base_list is not None:
-            #     # face_list = base_to_vector(user_face_base_list)
-            #     # print(len(face_list))
-            #     # user.user_face_info = str(face_list)
-            #     print("here")
+            if user_face_base_list is not None:
+                face_list = base_to_vector(user_face_base_list)
+                print(len(face_list))
+                user.user_face_info = str(face_list)
+            else:
+                print("no face-info")
 
 
             user.save()
-            preprocessed_data = PreprocessedData.objects.create(
-                user=user,
-                excluded_ingredients=str(exclude_ingredient)  #set 을 string 형태로 바꾸어
-            )
+            if exclude_ingredient.len() == 0 :
+                preprocessed_data = PreprocessedData.objects.create(
+                    user=user,
+                    excluded_ingredients = 'empty'  )#set 을 string 형태로 바꾸어
+            else :
+                preprocessed_data = PreprocessedData.objects.create(
+                    user=user,
+                    excluded_ingredients = str(exclude_ingredient)  )
             return user

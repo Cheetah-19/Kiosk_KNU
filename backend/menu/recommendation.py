@@ -37,9 +37,13 @@ def get_recommended(user_id):
 
     #String 을 Set 으로 변경하는 과정
     # 중괄호 제거 후 쉼표로 분할
-    exclude_ingredient_list = exclude_ingredient_str[1:-1].split(',')
-    #문자열 -> 정수 변환 후 set 제작
-    excluded_ingredients = set(int(item.strip()) for item in exclude_ingredient_list)
+    
+    if exclude_ingredient_str == "empty":
+        excluded_ingredients = set() 
+    else :
+        exclude_ingredient_list = exclude_ingredient_str[1:-1].split(',')
+        #문자열 -> 정수 변환 후 set 제작
+        excluded_ingredients = set(int(item.strip()) for item in exclude_ingredient_list)
 
     menus = {}
     for menu in menus_db:
