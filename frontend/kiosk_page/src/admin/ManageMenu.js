@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { BASE_URL } from '../constants/Url';
 
-export default function Delete() {
+export default function ManageMenu() {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -132,6 +132,7 @@ export default function Delete() {
             const menuUrl = phoneNumber ? `${BASE_URL}/menu/${phoneNumber}/` : `${BASE_URL}/menu/`;
             let responseMenus = await axios.get(menuUrl);
             let dataMenus = responseMenus.data;
+            console.log(dataMenus)
             let categoriesFromServerMenu = dataMenus.categories.map(c => c.menucategory_name);
             let menusFromServerMenu = {};
 
@@ -147,8 +148,9 @@ export default function Delete() {
 
             //카테고리별 그룹 옵션 추출
             let responseOptions = await axios.get(`${BASE_URL}/menu/option/`);
+            
             let dataOptions = responseOptions.data;
-
+            console.log(dataOptions);
             let optionsFromServerOption = {};
 
             for (let category of dataOptions.categories.map(c => c.optioncategory_name)) {
@@ -180,7 +182,7 @@ export default function Delete() {
             //item.menu.id만 추출해서 배열로 만든다.
             const cartMenuIds = cart.map(item => item.menu.id);
             // 서버로 삭제할 데이터를 전송
-            await axios.delete(`${BASE_URL}/manager/delete-menu/`, { params: { cart: cartMenuIds } })
+            await axios.delete(`${BASE_URL}/manager/manage-menu/`, { params: { cart: cartMenuIds } })
             .then(response => {
                 alert("메뉴가 삭제 되었습니다. ");
               })
@@ -202,7 +204,7 @@ export default function Delete() {
         const data = { menu_id: menuId, option_id: optionId };
         console.log(data);
         try {
-            const response = await axios.post(`${BASE_URL}/manager`, data);
+            const response = await axios.post(`${BASE_URL}/manager/manage-menu/`,  data );
         } catch(error) {
             console.log('옵션 삭제에 실패했습니다:',error);
         } finally {

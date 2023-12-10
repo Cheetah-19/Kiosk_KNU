@@ -133,7 +133,14 @@ class user_OrderDetailView(APIView):
     def get(self, request, userphonenum):
         UserGetter = User.objects.get(user_phonenum = userphonenum) 
         UserOrderGetter = Order.objects.filter(user=UserGetter)
+
+        order_number = 1
         for order in UserOrderGetter:
+            print("=========================================")
+            print(str(order_number) + "번째 주문")
+            print(order.order_time)
+            print ("~~~~~~~~~~~~~~~~~~~~~~~~")
+            order_number += 1
             UserOrderedItemGetter = Ordered_Item.objects.filter(order=order)
             menunownnum = 0
             for orderitem in UserOrderedItemGetter:
@@ -145,12 +152,25 @@ class user_OrderDetailView(APIView):
                     print(orderitem.menu)
                     print(orderitem.option)
                     menunownnum = orderitem.menu_num
+        print("")
+        print("가장 많이 주문한 메뉴 top 5")
+        popular_menus = get_popular_menus(5)
+        for menu in popular_menus:
+            print(f"{menu['menu__menu_name']} || 누적 주문 횟수: {menu['menu_count']}")
+
+        print("")
+        print("제한 요소 고려 ver - 가장 많이 주문한 메뉴 top 5")
+        popular_menus_exclue_ver = get_popular_menus_exclude_ver(UserGetter, 5)
+        for menu in popular_menus_exclue_ver:
+            print(f"{menu['menu__menu_name']} || 누적 주문 횟수: {menu['menu_count']}")
+            
+        print("")
+        print(str(UserGetter) + "님이 가장 많이 주문한 메뉴 top 5")
+        user_favorite_menus = get_popular_menus_by_user(UserGetter, 5)
+        for menu in user_favorite_menus:
+            print(f"{menu['menu__menu_name']} || 누적 주문 횟수: {menu['menu_count']}")
 
 
-            print('======================')
 
-
-
-        #가장 많이 팔린 메뉴 
 
         return HttpResponse("OrderDetailView is completed")

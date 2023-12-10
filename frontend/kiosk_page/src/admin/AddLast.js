@@ -110,11 +110,12 @@ export default function AddCategories() {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
     
-            if (response.status === 200) {
+            if (response.status === 201) {
                 alert('메뉴가 성공적으로 추가되었습니다.');
                 navigate('/Admin');
             } else {
                 alert('메뉴 추가에 실패하였습니다.');
+                console.log(response.data);
             }
         } catch (error) {
             console.error('메뉴 추가 에러:', error);

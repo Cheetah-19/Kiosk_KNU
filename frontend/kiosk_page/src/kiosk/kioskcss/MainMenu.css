@@ -54,3 +54,27 @@
 .modal-body {
   padding: 0 10px !important;
 }
+
+.recommended {
+  position: absolute;
+  top:0px;
+  left:0px;
+  width: 150px;
+  height: 30px;
+  flex-shrink: 0;
+  background: url(../../img/recommended.png) no-repeat ;
+  background-size: 150px 30px;
+}
+.recommended p{
+  position: absolute;
+  top : 0px;
+  left: 7px;
+  color: #ffffff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 1000;
+  line-height: normal;
+  align-items: center;
+}

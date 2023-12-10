@@ -24,6 +24,18 @@
     left: 43px;
     top: 90px;
 }
+.rect3 {
+    position: absolute;
+    display: grid;
+    grid-row: 2;
+    grid-column: 2;
+    width: 520px;
+    height: 522px;
+    left : 180px;
+    top : 100px;
+    background: #F3F3F3;
+
+}
 
 .next-btn {
     display: flex;
@@ -87,7 +99,7 @@
 
 .txt1 {
     position: absolute;
-    left: 260px;
+    left: 270px;
     top: 34px;
     color: #000;
     text-align: center;
@@ -117,13 +129,13 @@
     justify-content: center;
 
     position: absolute;
-    width: 280px;
-    height: 286px;
+    width: 250px;
+    height: 256px;
     border-radius: 10px;
     background: #E8E8E8;
 
     left: 0px;
-    top: 197px;
+    top: 0px;
 
     color: #000;
     text-align: center;
@@ -140,13 +152,13 @@
     justify-content: center;
 
     position: absolute;
-    width: 280px;
-    height: 286px;
+    width: 250px;
+    height: 256px;
     border-radius: 10px;
     background: #E8E8E8;
 
-    left: 300px;
-    top: 197px;
+    right: 0px;
+    bottom: 0px;
 
     color: #000;
     text-align: center;
@@ -163,13 +175,13 @@
     justify-content: center;
 
     position: absolute;
-    width: 280px;
-    height: 286px;
+    width: 250px;
+    height: 256px;
     border-radius: 10px;
     background: #E8E8E8;
 
     right: 0;
-    top: 197px;
+    top: 0px;
 
     color: #000;
     text-align: center;
@@ -180,6 +192,28 @@
     line-height: normal;
 }
 
+.manage-catbtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    width: 250px;
+    height: 256px;
+    border-radius: 10px;
+    background: #E8E8E8;
+
+    left : 0px;
+    bottom: 0px;
+
+    color: #000;
+    text-align: center;
+    font-family: 'pretendard-regular';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
 /* 모달 내 메뉴 추가 버튼 css */
 .add_menu_btn{
     display: flex;

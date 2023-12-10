@@ -32,16 +32,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['user_name', 'user_phonenum', 'user_vegetarian', 'user_allergy', 'religion', 'user_face_info']
-
     def create(self, validated_data):
-
-        #추가해야 할 것들 -> DB로 넣기 전에 데이터가 이미 존재하는지 / 존재하지 않는 새로운 형태인지 판별
-        # print(validated_data)
         username=validated_data.get('user_name')
         userphonenum=validated_data.get('user_phonenum')
         user_face_base = validated_data.get('user_face_info')
         user_face_base_list = user_face_base.split('||')
-        print("len : ",len(user_face_base_list))
+        
         #username 이나 userphonenum 이 null 인 경우
         if username == "" or userphonenum == "":
             raise serializers.ValidationError({'message': '입력값이 없어서 등록이 불가합니다.'})
@@ -64,27 +60,55 @@ class UserSerializer(serializers.ModelSerializer):
             user_name=username,
             user_phonenum=userphonenum,
             )
-
             vegetarian_name = validated_data.get('user_vegetarian')
             religion_type = validated_data.get('religion')
             allergy_names = validated_data.get('user_allergy')
-            
+            exclude_ingredient = set()
+
+
             if vegetarian_name is not None:
                 vegetarian = Vegetarian.objects.get(vegetarian_name=vegetarian_name)
                 user.vegetarian_id = vegetarian.id
+
+                UserVegetarianIngredients = vegetarian.vegetarian_ingredient.all()
+                for vegetarian in UserVegetarianIngredients:
+                    exclude_ingredient.add(vegetarian.id)
 
             if religion_type is not None:
                 religion = Religion.objects.get(religion_type=religion_type)
                 user.religion = religion
 
+                UserReligionIngredients = religion.religion_ingredient.all()
+                for ingredient in UserReligionIngredients:
+                    exclude_ingredient.add(ingredient.id)
+
             if allergy_names is not None:
                 for allergy_name in allergy_names:
                     allergy = Allergy.objects.get(allergy_name=allergy_name)
                     user.user_allergy.add(allergy)
+
+                    allergy_ingredients = allergy.allergy_ingredient.all()
+                    for ingredient in allergy_ingredients:
+                        exclude_ingredient.add(ingredient.id)
+
+
+            print(exclude_ingredient)
+
             if user_face_base_list is not None:
                 face_list = base_to_vector(user_face_base_list)
                 print(len(face_list))
                 user.user_face_info = str(face_list)
-            user.save()
+            else:
+                print("no face-info")
 
+
+            user.save()
+            if exclude_ingredient.len() == 0 :
+                preprocessed_data = PreprocessedData.objects.create(
+                    user=user,
+                    excluded_ingredients = 'empty'  )#set 을 string 형태로 바꾸어
+            else :
+                preprocessed_data = PreprocessedData.objects.create(
+                    user=user,
+                    excluded_ingredients = str(exclude_ingredient)  )
             return user

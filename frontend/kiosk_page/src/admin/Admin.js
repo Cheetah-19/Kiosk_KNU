@@ -18,8 +18,11 @@ export default function Admin() {
     function addOpt() {
         navigate('/ManageOption');
     }
+    function addCat(){
+        navigate('/ManageCategory');
+    }
     function delHandle() {
-        navigate('/Delete');
+        navigate('/ManageMenu');
     }
 
     return(
@@ -30,9 +33,14 @@ export default function Admin() {
             </div>
             <div className='rect1'>
               <div className='txt1'>어떤일을 하시겠어요?</div>
-              <div className='add-menubtn' onClick={addMenu}>메뉴추가</div>
-              <div className='manage-optbtn' onClick={addOpt}>메뉴 옵션<br/>추가 및 삭제</div>
-              <div className='del-menubtn' onClick={delHandle}>현재 메뉴 관리</div>
+              <div className='rect3'>
+                <div className='add-menubtn' onClick={addMenu}>메뉴추가</div>
+                <div className='del-menubtn' onClick={delHandle}>현재 메뉴 관리</div>
+                <div className='manage-catbtn' onClick={addCat}>카테고리<br/>추가 및 삭제</div>
+                <div className='manage-optbtn' onClick={addOpt}>메뉴 옵션<br/>추가 및 삭제</div>
+              </div>
+              
+
             </div>
         </div>
     );
