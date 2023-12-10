@@ -1,12 +1,12 @@
 .rect3 {
     position: absolute;
     left: 200px;
-    top: 180px;
+    top: 175px;
 
     width: 880px;
     height: 520px;
     border-radius: 10px;
-    background: #F3F3F3;
+    background: white;
 }
 
 .blink-image {
@@ -135,3 +135,18 @@
     animation-delay: 0s;
 }
 
+
+
+#pay-chk-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    top: 340px;
+}
+
+#pay-chk-btn-container div {
+    width: 264px;
+    margin: 0px 12px 0px 12px;
+}

@@ -17,7 +17,6 @@ export default function ManageOption() {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); //삭제하기 눌렀을때 띄울 모달창
     const [option_name, setOptionName] = useState('');  // 옵션 이름 상태 변수
     const [option_price, setOptionPrice] = useState('');  // 옵션 가격 상태 변수
-
     const selectOption = (option) => {
         if (selectedOptions.find(selected => selected.id === option.id)) {
             setSelectedOptions(selectedOptions.filter(selected => selected.id !== option.id));
@@ -61,7 +60,8 @@ export default function ManageOption() {
     // 옵션 추가 함수
     const addOption = async () => {
         try {
-            const sendData = { option: { option_name, option_price } };  // 보낼 데이터를 수정
+            const sendData = { option: { option_name, option_price} };  // 보낼 데이터를 수정
+            console.log(sendData)
             await axios.post(`${BASE_URL}/manager/manage-option/`, sendData); // 데이터 전송
         } catch (error) {
             console.error('옵션 추가에 실패했습니다:', error);
@@ -78,7 +78,7 @@ export default function ManageOption() {
         const menu_option = selectedOptions.map(option => option.id);
         console.log(menu_option)
         try {
-          const response = await axios.post(`${BASE_URL}/your-endpoint`, { menu_option });
+          const response = await axios.delete(`${BASE_URL}/manager/manage-option/`, { params: {options:menu_option} });
           setSelectedOptions([]);
         } catch (error) {
           console.error('옵션 삭제에 실패했습니다:', error);

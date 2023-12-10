@@ -13,7 +13,8 @@ import LoginCheck from "./login/LoginCheck";
 import PhoneNum from "./login/PhoneNum";
 import Admin from "./admin/Admin";
 import ManageOption from "./admin/ManageOption";
-import Delete from "./admin/Delete";
+import ManageMenu from "./admin/ManageMenu";
+import ManageCategory from "./admin/ManageCategory";
 import AddCategories from "./admin/AddCategories";
 import AddOptions from "./admin/AddOptions";
 import AddIngredients from "./admin/AddIngredient";
@@ -44,11 +45,13 @@ function App() {
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/ManageOption" element={<ManageOption />} />
-        <Route path="/Delete" element={<Delete />} />
+        <Route path="/ManageCategory" element={<ManageCategory />} />
+        <Route path="/ManageMenu" element={<ManageMenu />} />
         <Route path="/AddCategories" element={<AddCategories />} />
         <Route path="/AddOptions" element={<AddOptions />} />
         <Route path="/AddIngredient" element={<AddIngredients />} />
         <Route path="/AddLast" element={<AddLast />} />
+        
       </Routes>
     </HashRouter>
   );
