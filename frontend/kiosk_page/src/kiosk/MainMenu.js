@@ -41,12 +41,12 @@ export default function MainMenu() {
     const [currentPage, setCurrentPage] = useState(1); //현재 페이지를 1페이지로 지정
     const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0); // 현재 선택된 메인 카테고리 index
     const [currentMenuIndex, setCurrentMenuIndex] = useState(null);  // 현재 선택된 메인 메뉴 index
-
+   
     // 카테고리, 메뉴를 빈 배열로 초기화
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(0);
     const [menusByCategory, setMenusByCategory] = useState({});
-
+    const [recommended_menu, setRecommended] = useState([]);
     const itemsPerPage = 3; // 3개씩 보여주기로 설정
     const totalPages = Math.ceil(categories.length / itemsPerPage); // == (전체 카테고리 수/ 한 페이지에 표시할 항목 수) 
 
@@ -156,12 +156,28 @@ export default function MainMenu() {
         }
     }
 
-
+    function Recommended({menu}){
+        const str_menu = JSON.stringify({menu}['menu']);
+        console.log(recommended_menu);
+        console.log(str_menu);
+        if(recommended_menu.includes(str_menu) === true){
+            return(
+                <div className='recommended'>
+                    <p>당신을 위한  추천!</p>
+                </div>
+            )
+        }
+        else{
+            return 
+        }
+    }
 
     //메뉴 항목을 렌더링하는 함수
     function MenuItem({ menu, onClick }) {
         return (
             <div key={menu.id} className="menu-item" onClick={onClick}>
+                
+                <Recommended menu={menu} ></Recommended>
                 <img src={`${BASE_URL}${menu.menu_pic}`} alt={menu.menu_name} />
                 <h2>{menu.menu_name}</h2>
                 <p>{menu.menu_price.toLocaleString()} 원</p>
@@ -280,10 +296,16 @@ export default function MainMenu() {
                 for (let category of dataOptions.categories.map(c => c.optioncategory_name)) {
                     optionsFromServerOption[category] = dataOptions[category];
                 }
-
+                let get_recommended= [];
+                console.log(get_recommended);
+                for (let rec of dataMenus['recommended']) {
+                    get_recommended.push(JSON.stringify(rec));
+                }
                 setCategories(filteredCategories);
                 setMenusByCategory(menusFromServerMenu);
                 setOptionsByCategory(optionsFromServerOption);
+                setRecommended(get_recommended);
+                console.log(recommended_menu);
 
             } catch (error) {
                 console.error('ERROR : 메뉴 데이터를 받아오는데 실패했습니다.', error.message, error.stack, error.response?.status);

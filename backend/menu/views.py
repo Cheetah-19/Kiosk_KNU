@@ -5,6 +5,7 @@ from .serializers import *
 from signup.models import User, Menu, Order, Ordered_Item, PreprocessedData 
 from django.http import HttpResponse
 import json
+from .recommendation import *
 
 class member_MenulistView(APIView): # 회원 메뉴 리스트 출력 
     def get(self, request, userphonenum):
@@ -40,7 +41,8 @@ class member_MenulistView(APIView): # 회원 메뉴 리스트 출력
                         new_menu_data.append(menudata)
                     
                 menulist['{}'.format(category.menucategory_name)] = new_menu_data   #메뉴 카테고리 이름 key, serialized data 를 value로 추가
-    
+        recommended = get_recommended(userphonenum)
+        menulist['recommended'] = recommended
         return Response(menulist)
 
 
