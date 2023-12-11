@@ -28,7 +28,7 @@ export default function Pay() {
     <div id="pay_page">
       <div id="pay-header">
         <div id="top_bar_home" onClick={herf_home}></div>
-        <header>Easy KIOSK</header> 
+        <header>KNU KIOSK</header> 
       </div>
         <div className='pay-container'> 
         <div className='pay-title'>주문목록을 확인해주세요!</div>

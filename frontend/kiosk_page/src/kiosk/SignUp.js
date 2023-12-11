@@ -14,7 +14,7 @@ export default function Pay() {
       <div id = "pay_page">
         <div id="pay-header">
           <div id="top_bar_home" onClick={herf_home}></div>
-          <header>Easy KIOSK</header>
+          <header>KNU KIOSK</header>
         </div>
         <div className='singup-container'>
           <div className='qr-txt'>QR코드를 스캔하여 등록해주세요</div>

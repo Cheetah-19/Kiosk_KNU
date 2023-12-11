@@ -351,7 +351,7 @@ export default function MainMenu() {
                             <div id="top_bar_home" onClick={herf_home}></div>
                         </div>
                         <div className="col-lg-4 center-bar">
-                            <header>Easy KIOSK</header>
+                            <header>KNU KIOSK</header>
                         </div>
                         <div className="col-lg-4 right-bar">
                             {/* 내정보 보는 곳 ? 넣을 지 말지 정해야함. */}

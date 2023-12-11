@@ -1,33 +1,16 @@
 from signup.models import *
 from .serializers import *
 from sklearn.feature_extraction.text import TfidfVectorizer
+
+
+# 사용자의 과거 주문 정보와 메뉴 내의 재료 정보를 바탕으로 사용자에게 메뉴를 추천하는 기능 
+# 사용자가 못 먹는 재료는 추천하지 않음
 def get_recommended(user_id):
 
     # 메뉴와 재료
-    # menus = {
-    #     '불닭 국수': '밀 양파 고추 닭고기 밀가루 계란',
-    #     '싸이버거': '치즈 양파 닭고기 ',
-    #     '불고기버거': '양파 돼지고기 밀 치즈',
-    #     '소고기 샐러드': '토마토 양파 소고기 대두 계란',
-    #     '새우 초밥': '쌀 새우',
-    #     '연어 초밥': '연어 쌀',
-    #     '쌀국수': '쌀 양파 계란',
-    #     '불닭볶음면': '밀 계란 양파',
-    #     '칼국수': '밀 양파',
-    #     '파송송 라면': '밀 파',
-    #     '닭가슴살 샐러드': '닭가슴살 양상추 토마토',
-    #     '양상추 샐러드': '토마토 양파 양상추'
-    # }
-
-    # # 주문 데이터: {주문번호: {'user': 사용자 ID, 'menus': [주문한 메뉴 리스트]}}
-    # orders = {
-    #     '10000080': {'user': '00000000003', 'menus': ['닭가슴살 샐러드']},
-    #     '10000082': {'user': '00000000003', 'menus': ['쌀국수', '불닭볶음면']}
-    # }
-
-    # 메뉴와 재료
     menus_db = Menu.objects.all()
-    user_instance = User.objects.get(user_phonenum = user_id)             #유저 인스턴스 가져오기
+    #유저 인스턴스 가져오기
+    user_instance = User.objects.get(user_phonenum = user_id)             
 
     try:
         user_preprocessed_data = PreprocessedData.objects.get(user=user_instance)
@@ -35,9 +18,9 @@ def get_recommended(user_id):
     except PreprocessedData.DoesNotExist:
         exclude_ingredient_str = ""
 
-    #String 을 Set 으로 변경하는 과정
-    # 중괄호 제거 후 쉼표로 분할
-    
+
+    # String 을 Set 으로 변경하는 과정
+    # 중괄호 제거 후 쉼표로 분할 
     if exclude_ingredient_str == "empty":
         excluded_ingredients = set() 
     else :
