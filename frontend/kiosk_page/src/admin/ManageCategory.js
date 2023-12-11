@@ -106,7 +106,7 @@ export default function ManageCategory() {
                   </div>
                 ))}
               </div>
-              <div className='prev-btn' onClick={openModal}>카테고리추가</div>
+              <div className='prev-btn' onClick={openModal}>카테고리 추가</div>
               <Modal show={isModalOpen} onHide={closeModal}>
                 <Modal.Header closeButton>
                     <div>

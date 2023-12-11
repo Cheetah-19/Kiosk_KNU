@@ -120,7 +120,7 @@ export default function AddIngredients() {
                   </div>
                 ))}
               </div>
-              <div className='prev-btn' onClick={openModal}>재료추가</div>
+              <div className='prev-btn' onClick={openModal}>재료 추가</div>
               <Modal show={isModalOpen} onHide={closeModal}>
                 <Modal.Header closeButton>
                     <div>

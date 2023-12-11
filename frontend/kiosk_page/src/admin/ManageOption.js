@@ -112,7 +112,7 @@ export default function ManageOption() {
                   </div>
                 ))}
               </div>
-              <div className='prev-btn' onClick={openModal}>옵션추가</div>
+              <div className='prev-btn' onClick={openModal}>옵션 추가</div>
               <Modal show={isModalOpen} onHide={closeModal}>
                 <Modal.Header closeButton>
                     <div>
