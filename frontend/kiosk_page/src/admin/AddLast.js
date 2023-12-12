@@ -9,7 +9,7 @@ import "../reuse/Common.css";
 import "./admincss/Admin.css";
 import "./admincss/AddLast.css";
 
-export default function AddCategories() {
+export default function AddLast() {
     
     //alert 관련 함수.
     const [alertVisibility, setAlertVisibility] = React.useState(false);
