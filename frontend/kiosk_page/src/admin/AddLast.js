@@ -3,13 +3,23 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import { BASE_URL } from "../constants/Url";
+import Alert from '../reuse/Alert';
 import "../reuse/Home.css";
 import "../reuse/Common.css";
 import "./admincss/Admin.css";
 import "./admincss/AddLast.css";
 
-export default function AddCategories() {
+export default function AddLast() {
     
+    //alert 관련 함수.
+    const [alertVisibility, setAlertVisibility] = React.useState(false);
+    const [alertMessage, setAlertMessage] = React.useState('');
+
+    const showAlert = (message) => {
+        setAlertMessage(message);
+        setAlertVisibility(true);
+    };
+
     const navigate = useNavigate();
     const location = useLocation();
     const selectedCategoryId = location.state.selectedCategoryId;
@@ -25,7 +35,7 @@ export default function AddCategories() {
     const [menuPrice, setMenuPrice] = useState('');  // 메뉴 가격 상태 변수
     const [menuExplain, setMenuExplain] = useState(''); //메뉴 설명 상태 변수
     const [isModalOpen, setIsModalOpen] = useState(false); //모달 관련 변수
-
+    
     const handleMenuNameChange = (event) => {
         setMenuName(event.target.value);  // 입력 필드의 값으로 메뉴 이름 상태 업데이트
     };
@@ -35,7 +45,7 @@ export default function AddCategories() {
     
         // 값이 정수가 아니거나 0인 경우 무시
         if (!Number.isInteger(Number(value))) {
-            alert("정확한 가격을 입력하세요");
+            showAlert("정확한 가격을 입력하세요");
             return;
         }
     
@@ -49,7 +59,7 @@ export default function AddCategories() {
 
     const goToCheck = () => {
         if (!menuName || !menuPrice || !menuExplain || !image) {
-            alert('모든 필드를 입력하세요');
+            showAlert('모든 필드를 입력하세요');
             return;
         }
         setIsModalOpen(true);
@@ -98,8 +108,8 @@ export default function AddCategories() {
     const handleAddMenu = async () => {
         const formData = new FormData();
         formData.append('menucategory', selectedCategoryId);
-        formData.append('menu_option', selectedOptionIds);
-        formData.append('menu_ingredient', selectedIngredientIds);
+        formData.append('menu_option', selectedOptionIds.length > 0 ? selectedOptionIds : []);
+        formData.append('menu_ingredient', selectedIngredientIds.length);
         formData.append('menu_name', menuName);
         formData.append('menu_pic', imageFile);
         formData.append('menu_price', menuPrice);
@@ -111,19 +121,25 @@ export default function AddCategories() {
             });
     
             if (response.status === 201) {
-                alert('메뉴가 성공적으로 추가되었습니다.');
+                showAlert('메뉴가 성공적으로 추가되었습니다.');
                 navigate('/Admin');
             } else {
-                alert('메뉴 추가에 실패하였습니다.');
+                showAlert('메뉴 추가에 실패했습니다.');
                 console.log(response.data);
             }
         } catch (error) {
+            showAlert('메뉴 추가에 실패했습니다.');
             console.error('메뉴 추가 에러:', error);
         }
     };
     
     return (
         <div id = "pay_page">
+            <Alert
+                message={alertMessage}
+                visibility={alertVisibility}
+                setVisibility={setAlertVisibility}
+            />
             <div id="pay-header">
                 <div id="top_bar_back" onClick={herf_back}></div>
                 <header>KIOSK Admin</header>
@@ -190,7 +206,7 @@ export default function AddCategories() {
                         <h4 className="selected_menu">메뉴옵션</h4>
                     </div>
                     <div>
-                        <h5 className="selected_menu">{selectedOptionNames.join(', ')}</h5>
+                        <h5 className="selected_menu">{selectedOptionNames.length > 0 ? selectedOptionNames.join(', ') : '선택된 옵션 없음'}</h5>
                     </div>
                     <div>
                         <h4 className="selected_menu">메뉴재료</h4>

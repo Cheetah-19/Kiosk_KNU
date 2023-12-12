@@ -33,7 +33,7 @@ export default function Admin() {
             </div>
             <div className='rect1'>
               <div className='txt1'>어떤 일을 하시겠어요?</div>
-              <div className='rect3'>
+              <div className='rect-manager'>
                 <div className='add-menubtn' onClick={addMenu}>메뉴 추가</div>
                 <div className='del-menubtn' onClick={delHandle}>현재 메뉴 관리</div>
                 <div className='manage-catbtn' onClick={addCat}>카테고리<br/>추가 및 삭제</div>

@@ -24,7 +24,7 @@
     left: 43px;
     top: 90px;
 }
-.rect3 {
+.rect-manager {
     position: absolute;
     display: grid;
     grid-row: 2;

@@ -3,18 +3,28 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Modal } from 'react-bootstrap';
 import { BASE_URL } from "../constants/Url";
+import Alert from '../reuse/Alert';
 import "../reuse/Home.css";
 import "./admincss/Admin.css";
 import "./admincss/AddCategories.css";
 
 export default function AddIngredients() {
+
+    //alert 관련 함수.
+    const [alertVisibility, setAlertVisibility] = React.useState(false);
+    const [alertMessage, setAlertMessage] = React.useState('');
+
+    const showAlert = (message) => {
+        setAlertMessage(message);
+        setAlertVisibility(true);
+    };
+
     const navigate = useNavigate();
     const location = useLocation();
     const selectedCategoryId = location.state.selectedCategoryId;
     const selectedCategoryName = location.state.selectedCategoryName;
     const selectedOptionIds = location.state.selectedOptionIds;
     const selectedOptionNames = location.state.selectedOptionNames;
-
     const [selectedIngredients, setSelectedIngredients] = useState(location.state.selectedIngredientIds === undefined ?
           []:
           () => {
@@ -42,6 +52,7 @@ export default function AddIngredients() {
             const response = await axios.get(`${BASE_URL}/manager/manage-ingredient/`);
             setIngredients(response.data.ingredient); 
         } catch (error) {
+            showAlert('재료를 가져오는데 실패했습니다');
             console.error('재료를 가져오는데 실패했습니다:', error);
         }
     };
@@ -63,6 +74,7 @@ export default function AddIngredients() {
             await axios.post(`${BASE_URL}/manager/manage-ingredient/`, sendData);
         } catch (error) {
             console.error('재료 추가에 실패했습니다:', error);
+            showAlert('재료 추가에 실패했습니다');
         } finally {
             setIsModalOpen(false);
             setIngredientName('');
@@ -85,7 +97,7 @@ export default function AddIngredients() {
         }
         else
         {
-            alert('하나 이상의 재료를 선택해주세요!');
+            showAlert('하나 이상의 재료를 선택해주세요!');
         }
     };
     
@@ -103,6 +115,11 @@ export default function AddIngredients() {
 
     return (
         <div id = "pay_page">
+            <Alert
+                message={alertMessage}
+                visibility={alertVisibility}
+                setVisibility={setAlertVisibility}
+            />
             <div id="pay-header">
                 <div id="top_bar_back" onClick={main_back}></div>
                 <header>KIOSK Admin</header>
