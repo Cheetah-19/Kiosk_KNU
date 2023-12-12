@@ -25,7 +25,7 @@ export default function AddCategories() {
     const [menuPrice, setMenuPrice] = useState('');  // 메뉴 가격 상태 변수
     const [menuExplain, setMenuExplain] = useState(''); //메뉴 설명 상태 변수
     const [isModalOpen, setIsModalOpen] = useState(false); //모달 관련 변수
-
+    
     const handleMenuNameChange = (event) => {
         setMenuName(event.target.value);  // 입력 필드의 값으로 메뉴 이름 상태 업데이트
     };
@@ -98,8 +98,8 @@ export default function AddCategories() {
     const handleAddMenu = async () => {
         const formData = new FormData();
         formData.append('menucategory', selectedCategoryId);
-        formData.append('menu_option', selectedOptionIds);
-        formData.append('menu_ingredient', selectedIngredientIds);
+        formData.append('menu_option', selectedOptionIds.length > 0 ? selectedOptionIds : []);
+        formData.append('menu_ingredient', selectedIngredientIds.length);
         formData.append('menu_name', menuName);
         formData.append('menu_pic', imageFile);
         formData.append('menu_price', menuPrice);
@@ -190,7 +190,7 @@ export default function AddCategories() {
                         <h4 className="selected_menu">메뉴옵션</h4>
                     </div>
                     <div>
-                        <h5 className="selected_menu">{selectedOptionNames.join(', ')}</h5>
+                        <h5 className="selected_menu">{selectedOptionNames.length > 0 ? selectedOptionNames.join(', ') : '선택된 옵션 없음'}</h5>
                     </div>
                     <div>
                         <h4 className="selected_menu">메뉴재료</h4>

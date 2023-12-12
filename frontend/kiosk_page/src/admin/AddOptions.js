@@ -78,7 +78,6 @@ export default function AddCategories() {
 
 
     const goToNextPage = () => {
-        if (selectedOptions.length !== 0) { 
             navigate('/AddIngredient', { 
                 state: { 
                     selectedOptionIds: selectedOptions.map(option => option.id), 
@@ -87,11 +86,6 @@ export default function AddCategories() {
                     selectedCategoryName: selectedCategoryName
                 }
             });
-        }
-        else
-        {
-            alert('하나 이상의 옵션을 선택해주세요!');
-        }
     };
     
     function main_back() {

@@ -14,7 +14,6 @@ export default function AddIngredients() {
     const selectedCategoryName = location.state.selectedCategoryName;
     const selectedOptionIds = location.state.selectedOptionIds;
     const selectedOptionNames = location.state.selectedOptionNames;
-
     const [selectedIngredients, setSelectedIngredients] = useState(location.state.selectedIngredientIds === undefined ?
           []:
           () => {
