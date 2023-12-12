@@ -79,7 +79,7 @@ class manage_option(APIView):
         if request.method == 'POST' :
             data = request.data
             new_option = data.get('option')
-            new_opt = Option(option_name= new_option['option_name'], option_price = new_option['option_price'], optioncategory = OptionCategory.objects.get(optioncategory_name = "Something"))
+            new_opt = Option(option_name= new_option['option_name'], option_price = new_option['option_price'], optioncategory = OptionCategory.objects.get(id = 1))
             new_opt.save()
             return Response(OptionSerializer(new_opt).data,status=status.HTTP_201_CREATED)
     def delete(self,request:Request):
@@ -123,7 +123,8 @@ class add_menu(APIView):
             json_data['menucategory'] = int(data['menucategory'])
             json_data['menu_ingredient'] = [ int(i) for i in data['menu_ingredient'].split(',')]
             json_data['menu_price'] = int(data['menu_price'])
-            json_data['menu_option'] = [int(i) for i in data['menu_option'].split(',')]
+            if data['menu_option'] != '' :
+                json_data['menu_option'] = [int(i) for i in data['menu_option'].split(',')]  
             json_data['menu_name'] = data['menu_name']
             json_data['menu_introduction'] = data['menu_introduction']
             

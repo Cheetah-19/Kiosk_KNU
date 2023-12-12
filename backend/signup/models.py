@@ -68,7 +68,7 @@ class Menu(models.Model):
     menu_price = models.PositiveIntegerField()
     menu_introduction = models.TextField(null=True)
     menu_ingredient = models.ManyToManyField(Ingredient)
-    menu_option = models.ManyToManyField(Option)
+    menu_option = models.ManyToManyField(Option,blank=True)
     menucategory = models.ForeignKey(MenuCategory, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):

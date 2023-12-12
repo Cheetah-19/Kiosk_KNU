@@ -103,7 +103,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
             user.save()
-            if exclude_ingredient.len() == 0 :
+            if len(exclude_ingredient) == 0 :
                 preprocessed_data = PreprocessedData.objects.create(
                     user=user,
                     excluded_ingredients = 'empty'  )#set 을 string 형태로 바꾸어
