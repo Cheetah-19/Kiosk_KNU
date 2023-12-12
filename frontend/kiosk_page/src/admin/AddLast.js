@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import { BASE_URL } from "../constants/Url";
+import Alert from '../reuse/Alert';
 import "../reuse/Home.css";
 import "../reuse/Common.css";
 import "./admincss/Admin.css";
@@ -10,6 +11,15 @@ import "./admincss/AddLast.css";
 
 export default function AddCategories() {
     
+    //alert 관련 함수.
+    const [alertVisibility, setAlertVisibility] = React.useState(false);
+    const [alertMessage, setAlertMessage] = React.useState('');
+
+    const showAlert = (message) => {
+        setAlertMessage(message);
+        setAlertVisibility(true);
+    };
+
     const navigate = useNavigate();
     const location = useLocation();
     const selectedCategoryId = location.state.selectedCategoryId;
@@ -35,7 +45,7 @@ export default function AddCategories() {
     
         // 값이 정수가 아니거나 0인 경우 무시
         if (!Number.isInteger(Number(value))) {
-            alert("정확한 가격을 입력하세요");
+            showAlert("정확한 가격을 입력하세요");
             return;
         }
     
@@ -49,7 +59,7 @@ export default function AddCategories() {
 
     const goToCheck = () => {
         if (!menuName || !menuPrice || !menuExplain || !image) {
-            alert('모든 필드를 입력하세요');
+            showAlert('모든 필드를 입력하세요');
             return;
         }
         setIsModalOpen(true);
@@ -111,19 +121,25 @@ export default function AddCategories() {
             });
     
             if (response.status === 201) {
-                alert('메뉴가 성공적으로 추가되었습니다.');
+                showAlert('메뉴가 성공적으로 추가되었습니다.');
                 navigate('/Admin');
             } else {
-                alert('메뉴 추가에 실패하였습니다.');
+                showAlert('메뉴 추가에 실패했습니다.');
                 console.log(response.data);
             }
         } catch (error) {
+            showAlert('메뉴 추가에 실패했습니다.');
             console.error('메뉴 추가 에러:', error);
         }
     };
     
     return (
         <div id = "pay_page">
+            <Alert
+                message={alertMessage}
+                visibility={alertVisibility}
+                setVisibility={setAlertVisibility}
+            />
             <div id="pay-header">
                 <div id="top_bar_back" onClick={herf_back}></div>
                 <header>KIOSK Admin</header>

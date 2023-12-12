@@ -3,12 +3,22 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { BASE_URL } from "../constants/Url";
 import { Modal } from 'react-bootstrap';
+import Alert from '../reuse/Alert';
 import "../reuse/Home.css";
 import "./admincss/Admin.css";
 import "./admincss/AddCategories.css";
 
 export default function AddCategories() {
     
+    //alert 관련 함수.
+    const [alertVisibility, setAlertVisibility] = React.useState(false);
+    const [alertMessage, setAlertMessage] = React.useState('');
+
+    const showAlert = (message) => {
+        setAlertMessage(message);
+        setAlertVisibility(true);
+    };
+
     const location = useLocation();
     const navigate = useNavigate();
     const [selectedCategory, setSelectedCategory] = useState(location.state === null
@@ -49,7 +59,7 @@ export default function AddCategories() {
             await axios.post(`${BASE_URL}/manager/manage-category/`, sendData); // 데이터 전송 
         } catch (error) {
             console.error('카테고리 추가에 실패했습니다:', error);
-            alert("카테고리 추가 실패!");
+            showAlert("카테고리 추가 실패!");
         } finally {
             setIsModalOpen(false);
             setMenucategoryName('');
@@ -69,7 +79,7 @@ export default function AddCategories() {
         }
         else
         {
-            alert('카테고리를 하나 선택해주세요!');
+            showAlert('카테고리를 하나 선택해주세요!');
         }
     };
 
@@ -79,6 +89,11 @@ export default function AddCategories() {
     
     return (
         <div id = "pay_page">
+            <Alert
+                message={alertMessage}
+                visibility={alertVisibility}
+                setVisibility={setAlertVisibility}
+            />
             <div id="pay-header">
                 <div id="top_bar_back" onClick={herf_back}></div>
                 <header>KIOSK Admin</header>
