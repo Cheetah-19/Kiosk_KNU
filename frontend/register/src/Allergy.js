@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-
+import { BASE_URL } from './constants/Url';
 
 import "./Common.css";
 
 
 export default function FaceReco() {
-
-  // const BASE_URL = 'https://kioskknu2023.run.goorm.site';
-  const BASE_URL = 'http://127.0.0.1:8000';
 
   const navigate = useNavigate(); // useNavigate hook to get the navigate function
   const location = useLocation();
