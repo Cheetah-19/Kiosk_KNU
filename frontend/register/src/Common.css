@@ -195,7 +195,7 @@ footer {
   }
 
   .middle_count_text{
-    width: 13%;
+    width: 80px;
     height: 70%;
     flex-shrink: 0;
     border-radius: 20px;

@@ -18,6 +18,8 @@ app_name = 'kiosk_app'
 
 urlpatterns = [
     path('', views.UserPost.as_view()),
+    path('facecheck', views.FaceCheckView.as_view(), name='facecheck'),
+
     #swagger
     path('v1/test/', TestView.as_view(), name='test'),
     # path('', include(router.urls)),
@@ -33,7 +35,5 @@ urlpatterns = [
     # path('index/login/kiosk/',views.kiosk, name = 'member_kiosk'),
     # path('kiosk/<id>/option/',views.show_option,name='option'),
     # path('kiosk/<menu>/option/kiosk',views.choice_complete,name='choice_complete')
-    
-
 ]
 

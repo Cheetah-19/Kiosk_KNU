@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-
+import { BASE_URL } from './constants/Url';
 
 import "./Common.css";
 
 
-export default function FaceReco() {
-
-  // const BASE_URL = 'https://kioskknu2023.run.goorm.site';
-  const BASE_URL = 'http://127.0.0.1:8000';
-
+export default function FaceReco({ showAlert }) {
   const navigate = useNavigate(); // useNavigate hook to get the navigate function
   const location = useLocation();
   const photos = location.state.photos;
@@ -31,7 +27,7 @@ export default function FaceReco() {
   const [selectedAllergy, setSelectedAllergy] = useState([]); // 'None'으로 초기화
 
   const resetPhotos = () => {
-    navigate('/VeganCheck', { state: { inputValue, PhoneNumber, photos } });
+    navigate('/Vegan_Religion_Check', { state: { inputValue, PhoneNumber, photos } });
   };
 
   //알레르기 선택
@@ -55,45 +51,48 @@ export default function FaceReco() {
 
   //서버로 사용자의 입력값을 보내준다. 등록버튼 클릭 시 호출.
   const handleNext = () => {
-    console.log(photos); // photos를 출력
-    console.log(PhoneNumber); // 핸드폰 번호 출력
-    console.log(inputValue);  // 이름 출력
-    console.log(selectedVeganItemId); // 선택된 비건 정보 출력
-    console.log(selectedReligion); // 선택된 종교 정보 출력
-    console.log(selectedAllergy); // 선택된 알레르기 정보 출력
-
-
-
-    // 서버로 데이터 전송
-    const postData = {
-      user_name: inputValue,
-      user_phonenum: PhoneNumber,
-      user_allergy: selectedAllergy,
-      user_face_info : photos.join('||')
-    };
-
-    if (selectedVeganItemId !== 0) {
-      postData.user_vegetarian = selectedVeganItemId;
+    if (photos == undefined || photos.length != 5){
+      showAlert("등록 과정에 문제가 생겼습니다.");
+      navigate("/");
     }
+    else {
+      console.log(photos); // photos를 출력
+      console.log(PhoneNumber); // 핸드폰 번호 출력
+      console.log(inputValue);  // 이름 출력
+      console.log(selectedVeganItemId); // 선택된 비건 정보 출력
+      console.log(selectedReligion); // 선택된 종교 정보 출력
+      console.log(selectedAllergy); // 선택된 알레르기 정보 출력
 
-    if (selectedReligion !== 0) {
-      postData.religion = selectedReligion;
+      // 서버로 데이터 전송
+      const postData = {
+        user_name: inputValue,
+        user_phonenum: PhoneNumber,
+        user_allergy: selectedAllergy,
+        user_face_info : photos.join('||')
+      };
+
+      if (selectedVeganItemId !== 0) {
+        postData.user_vegetarian = selectedVeganItemId;
+      }
+
+      if (selectedReligion !== 0) {
+        postData.religion = selectedReligion;
+      }
+      
+      axios.post(`${BASE_URL}/signup/`, postData)  // '서버 URL' 부분에 테스트할 서버 주소 넣어주면 됨.
+        .then(response => {
+          console.log(postData);
+          console.log(response.data);  // 요청 성공시 alert 하나 해줄 예정.
+          showAlert("사용자 등록이 완료되었습니다");
+          navigate("/complete", { state: { inputValue, PhoneNumber, photos, selectedVeganItemId, selectedReligion, selectedAllergy } });
+
+        })
+        .catch(error => {
+          console.log(postData);
+          console.error("!!" + error);
+          showAlert(error.response.data['message'] + "\n다시 시도해주세요.");
+        });
     }
-    
-    axios.post(`${BASE_URL}/signup/`, postData)  // '서버 URL' 부분에 테스트할 서버 주소 넣어주면 됨.
-      .then(response => {
-        console.log(postData);
-        console.log(response.data);  // 요청 성공시 alert 하나 해줄 예정.
-        alert("사용자 등록이 완료되었습니다");
-        navigate("/complete", { state: { inputValue, PhoneNumber, photos, selectedVeganItemId, selectedReligion, selectedAllergy } });
-
-      })
-      .catch(error => {
-        console.log(postData);
-        console.error(error);
-        alert("사용자 등록이 실패했습니다. 다시 시도해주세요.");
-      });
-
   };
 
 

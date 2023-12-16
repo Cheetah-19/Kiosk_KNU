@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Face from "./Face"; // Face 컴포넌트 import
-
-import PhoneNum from "./PhoneNum";
+import Face, { stopVideo } from "./Face"; // Face 컴포넌트 import
 
 import "./Common.css";
 import "./FaceReco.css";
@@ -13,10 +11,6 @@ import face from './img/face.png';
 export default function FaceReco() {
   const navigate = useNavigate(); // useNavigate hook to get the navigate function
   const [alert, setAlert] = useState(false);
-
-  const [gotoPhoneNUm, setGotoPhoneNUm] = useState(false);
-  const [slide, setSlide] = useState(false);
-
   const [photos, setPhotos] = useState([]); // photos 상태 추가
 
   useEffect(() => {
@@ -46,9 +40,9 @@ export default function FaceReco() {
               <Face setPhotos={setPhotos} />
               :
               <div id='face-img-container'>
-                <img src={face} style={{ width: '30%', margin: '0px 0px 40px 0px' }} />
+                <img src={face} style={{ width: '40%', margin: '0px 0px 40px 0px' }} />
                 <div>
-                  <span id='face-contents'>아이콘을 터치해</span><br />얼굴 정보를 등록해주세요.
+                  <span id='face-contents'>얼굴 정보를</span>등록해주세요.
                 </div>
               </div>
               }
@@ -59,10 +53,14 @@ export default function FaceReco() {
           <div className="right_section">
             <div className="right_section">
               <div id="right_button" onClick={() => {
-                  console.log(photos); // photos를 출력
-                  navigate("/username", { state: { photos } }); // 다음 페이지로 이동
-                }}>
-                <div className="button_text" > 다음으로 </div>
+                  if (photos.length == 5){
+                    console.log(photos); // photos를 출력
+                    
+                    stopVideo();
+                    navigate("/username", { state: { photos } }); // 다음 페이지로 이동
+                  }
+                }} style={photos.length == 5 ? {background: '#FF7A00'}:{background: '#999999'}}>
+                <div className="button_text"> 다음으로 </div>
               </div>
             </div>
           </div>

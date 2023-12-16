@@ -1,9 +1,10 @@
 from rest_framework import serializers
 from .models import *
 from rest_framework.response import Response
-from face_recognition.face_methods import base_to_vector
+from face_recognition.base2vector import base_to_vector
+
+
 class UserSerializer(serializers.ModelSerializer):
-    
     user_vegetarian = serializers.SlugRelatedField(
         many=False,
         queryset=Vegetarian.objects.all(),
@@ -20,7 +21,6 @@ class UserSerializer(serializers.ModelSerializer):
         required=False # allow no allergy   
     )
 
-
     religion = serializers.SlugRelatedField(
         many=False,
         queryset=Religion.objects.all(),
@@ -32,6 +32,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['user_name', 'user_phonenum', 'user_vegetarian', 'user_allergy', 'religion', 'user_face_info']
+
     def create(self, validated_data):
         username=validated_data.get('user_name')
         userphonenum=validated_data.get('user_phonenum')
@@ -57,8 +58,8 @@ class UserSerializer(serializers.ModelSerializer):
         
         else:
             user = User.objects.create(
-            user_name=username,
-            user_phonenum=userphonenum,
+                user_name=username,
+                user_phonenum=userphonenum,
             )
             vegetarian_name = validated_data.get('user_vegetarian')
             religion_type = validated_data.get('religion')
@@ -101,14 +102,15 @@ class UserSerializer(serializers.ModelSerializer):
             else:
                 print("no face-info")
 
-
             user.save()
-            if len(exclude_ingredient) == 0 :
+            if len(exclude_ingredient) == 0:
                 preprocessed_data = PreprocessedData.objects.create(
                     user=user,
-                    excluded_ingredients = 'empty'  )#set 을 string 형태로 바꾸어
+                    excluded_ingredients = 'empty'
+                )#set 을 string 형태로 바꾸어
             else :
                 preprocessed_data = PreprocessedData.objects.create(
                     user=user,
-                    excluded_ingredients = str(exclude_ingredient)  )
+                    excluded_ingredients = str(exclude_ingredient)
+                )
             return user

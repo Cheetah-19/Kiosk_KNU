@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-
-
-
 import "./Common.css";
-
 
 export default function FaceReco() {
   const navigate = useNavigate();
@@ -20,7 +16,6 @@ export default function FaceReco() {
 
 
   const handleNext = () => {
-
       navigate("/Allergy", { state: { inputValue, PhoneNumber, photos, selectedItemId, selectedReligion } });
   };
 
@@ -210,9 +205,6 @@ export default function FaceReco() {
           </div>
           <div className="right_section">
             <div id="right_button" onClick={() => {
-              console.log(photos); // photos를 출력
-              console.log(PhoneNumber);
-              console.log(inputValue);
               console.log(selectedItemId);
               console.log(selectedReligion);
 

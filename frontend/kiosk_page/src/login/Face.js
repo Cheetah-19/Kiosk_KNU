@@ -5,7 +5,6 @@ import { BASE_URL } from '../constants/Url';
 import "./logincss/Face.css";
 
 export default function Face(props) {
-
     const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
@@ -132,6 +131,8 @@ export const stopVideo = () => {
     if (videoElement && videoElement.srcObject) {
         const stream = videoElement.srcObject;
         const tracks = stream.getTracks();
+
+        console.log('end video');
         tracks.forEach(track => track.stop());
         videoElement.srcObject = null;
     }
