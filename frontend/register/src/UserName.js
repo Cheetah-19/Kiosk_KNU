@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+
 import "./Common.css";
 
-export default function FaceReco() {
+export default function FaceReco({ showAlert }) {
   const navigate = useNavigate(); // useNavigate hook to get the navigate function
   const location = useLocation();
   const photos = location.state.photos;
@@ -11,9 +12,9 @@ export default function FaceReco() {
 
   const handleChange = (event) => {
     if (/^\d+$/.test(event.target.value)) {
-      alert('숫자는 입력할 수 없습니다.');
+      showAlert('숫자는 입력할 수 없습니다.');
     } else if (event.target.value.split(' ').join('') !== event.target.value) {
-      alert('공백은 입력할 수 없습니다.');
+      showAlert('공백은 입력할 수 없습니다.');
     } else {
       setInputValue(event.target.value);
     }
@@ -21,7 +22,7 @@ export default function FaceReco() {
 
   const handleNext = () => {
     if (inputValue.trim().length === 0) {
-      alert('숫자 또는 공백을 입력할 수 없습니다.');
+      showAlert('이름을 입력해주세요.');
     } else {
       navigate('/PhoneNum', { state: { inputValue, photos } });
     }
@@ -62,7 +63,8 @@ export default function FaceReco() {
           </div>
           <div className="right_section">
             <div id="right_button" onClick={() => {
-                console.log(photos); // photos를 출력
+                console.log(inputValue);
+                
                 handleNext(); // 다음 페이지로 이동
               }}>
               <div className="button_text" > 다음으로 </div>

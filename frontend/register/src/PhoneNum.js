@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import "./Common.css";
 
-export default function FaceReco() {
+
+export default function FaceReco({ showAlert }) {
   const navigate = useNavigate(); // useNavigate hook to get the navigate function
     const location = useLocation();
     const photos = location.state.photos;
@@ -12,7 +13,7 @@ export default function FaceReco() {
     const handleChange = (event) => {
       // '-'를 입력할 경우
       if (!/^[0-9]*$/.test(event.target.value)) {
-        alert('0~9 이외의 값은 입력할 수 없습니다.');
+        showAlert('0~9 이외의 값은 입력할 수 없습니다.');
       } else {
         setInputValue(event.target.value);
       }
@@ -20,7 +21,7 @@ export default function FaceReco() {
 
     const handleNext = () => {
       if (PhoneNumber.length !== 11) {
-        alert("핸드폰 번호는 11글자를 입력해야 합니다.");
+        showAlert('핸드폰 번호는 11글자를 입력해야 합니다.');
         return;
       }
       navigate('/Vegan_Religion_Check', { state: { inputValue, PhoneNumber, photos } });
@@ -61,9 +62,8 @@ export default function FaceReco() {
           </div>
           <div className="right_section">
             <div id="right_button" onClick={() => {
-                console.log(photos); // photos를 출력
-                console.log(inputValue); // 이름 출력
                 console.log(PhoneNumber); // 번호 출력
+                
                 handleNext(); // 다음 페이지로 이동
               }}>
               <div className="button_text"> 다음으로 </div>

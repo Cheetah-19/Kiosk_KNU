@@ -7,7 +7,6 @@ import "../reuse/Common.css"
 import "./logincss/PhoneNum.css"
 
 export default function PhoneNum(props) {
-
     const [phone_number, setPhoneNumber] = useState('');
     const navigate = useNavigate();
 
