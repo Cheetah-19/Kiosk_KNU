@@ -4,8 +4,8 @@ from menu.serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from face_recognition.face_identification import identification
-from face_recognition.face_methods import *
+from face_recognition.identification import identification
+from face_recognition.base2vector import *
 
 import numpy as np
 
