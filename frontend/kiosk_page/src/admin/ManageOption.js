@@ -4,22 +4,12 @@ import axios from "axios";
 import { Modal } from 'react-bootstrap';
 import { BASE_URL } from "../constants/Url";
 
-import Alert from '../reuse/Alert';
 import "../reuse/Home.css";
 import "./admincss/Admin.css";
 import "./admincss/AddCategories.css";
 import "./admincss/ManageOption.css";
 
-export default function ManageOption() {
-    //alert 관련 함수.
-    const [alertVisibility, setAlertVisibility] = React.useState(false);
-    const [alertMessage, setAlertMessage] = React.useState('');
-
-    const showAlert = (message) => {
-        setAlertMessage(message);
-        setAlertVisibility(true);
-    };
-
+export default function ManageOption({ showAlert }) {
     const navigate = useNavigate();
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [options, setOptions] = useState([]);
@@ -54,7 +44,7 @@ export default function ManageOption() {
     
     const openDeleteModal = () => {
         if (selectedOptions.length === 0) {
-          showAlert('선택된 옵션이 없습니다');
+          showAlert('선택된 옵션이 없습니다.');
         } else {
           setIsDeleteModalOpen(true);
         }
@@ -75,7 +65,9 @@ export default function ManageOption() {
             await axios.post(`${BASE_URL}/manager/manage-option/`, sendData); // 데이터 전송
         } catch (error) {
             console.error('옵션 추가에 실패했습니다:', error);
+            showAlert('옵션 추가를 실패했습니다.')
         } finally {
+            showAlert('옵션을 추가했습니다.')
             setIsModalOpen(false);
             setOptionName('');
             setOptionPrice('');
@@ -92,7 +84,9 @@ export default function ManageOption() {
           setSelectedOptions([]);
         } catch (error) {
           console.error('옵션 삭제에 실패했습니다:', error);
+          showAlert('옵션 삭제를 실패했습니다.');
         } finally {
+            showAlert('옵션이 삭제 되었습니다.');
           setIsDeleteModalOpen(false);
           await fetchOptions();
         }
@@ -105,11 +99,6 @@ export default function ManageOption() {
     
     return (
         <div id = "pay_page">
-            <Alert
-                message={alertMessage}
-                visibility={alertVisibility}
-                setVisibility={setAlertVisibility}
-            />
             <div id="pay-header">
                 <div id="top_bar_back" onClick={main_back}></div>
                 <header>KIOSK Admin</header>

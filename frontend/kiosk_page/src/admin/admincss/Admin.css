@@ -340,17 +340,7 @@
     line-height: normal;
 }
 
-.add-menubtn:hover {
-    background: #FF7A00;
-    color: #FFF;
-}
-
-.del-menubtn:hover {
-    background: #FF7A00;
-    color: #FFF;
-}
-
-.manage-optbtn:hover {
+.add-menubtn:hover, .del-menubtn:hover, .manage-catbtn:hover, .manage-optbtn:hover {
     background: #FF7A00;
     color: #FFF;
 }

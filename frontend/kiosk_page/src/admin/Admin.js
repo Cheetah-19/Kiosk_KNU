@@ -5,7 +5,6 @@ import "../reuse/Common.css";
 import "./admincss/Admin.css";
 
 export default function Admin() {
-    
     const navigate = useNavigate();
     
     function herf_home() {
