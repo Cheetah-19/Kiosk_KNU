@@ -44,13 +44,13 @@ function App() {
         <Route path="/PayCheck" element={<PayCheck />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Admin" element={<Admin />} />
-        <Route path="/ManageOption" element={<ManageOption />} />
-        <Route path="/ManageCategory" element={<ManageCategory />} />
-        <Route path="/ManageMenu" element={<ManageMenu />} />
-        <Route path="/AddCategories" element={<AddCategories />} />
-        <Route path="/AddOptions" element={<AddOptions />} />
-        <Route path="/AddIngredient" element={<AddIngredients />} />
-        <Route path="/AddLast" element={<AddLast />} />
+        <Route path="/ManageOption" element={<ManageOption showAlert={showAlert} />} />
+        <Route path="/ManageCategory" element={<ManageCategory showAlert={showAlert} />} />
+        <Route path="/ManageMenu" element={<ManageMenu showAlert={showAlert} />} />
+        <Route path="/AddCategories" element={<AddCategories showAlert={showAlert} />} />
+        <Route path="/AddOptions" element={<AddOptions showAlert={showAlert} />} />
+        <Route path="/AddIngredient" element={<AddIngredients showAlert={showAlert} />} />
+        <Route path="/AddLast" element={<AddLast showAlert={showAlert} />} />
         
       </Routes>
     </HashRouter>

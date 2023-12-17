@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Alert from '../reuse/Alert';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { BASE_URL } from '../constants/Url';
@@ -9,15 +8,7 @@ import "../reuse/Home.css";
 import "../kiosk/kioskcss/MainMenu.css";
 import "../admin/admincss/Delete.css";
 
-export default function ManageMenu() {
-    //alert 관련 함수.
-    const [alertVisibility, setAlertVisibility] = React.useState(false);
-    const [alertMessage, setAlertMessage] = React.useState('');
-
-    const showAlert = (message) => {
-        setAlertMessage(message);
-        setAlertVisibility(true);
-    };
+export default function ManageMenu({ showAlert }) {
     const navigate = useNavigate();
     const location = useLocation();
     const option = location.state?.option;
@@ -192,11 +183,11 @@ export default function ManageMenu() {
             // 서버로 삭제할 데이터를 전송
             await axios.delete(`${BASE_URL}/manager/manage-menu/`, { params: { cart: cartMenuIds } })
             .then(response => {
-                showAlert("메뉴가 삭제 되었습니다. ");
+                showAlert("메뉴가 삭제 되었습니다.");
               })
               .catch(error => {
                 console.error(error);
-                showAlert("메뉴 삭제 실패"+error);
+                showAlert("메뉴 삭제를 실패했습니다.");
               });
 
             //삭제하기를 누르면 cart 배열 초기화
@@ -215,7 +206,9 @@ export default function ManageMenu() {
             const response = await axios.post(`${BASE_URL}/manager/manage-menu/`,  data );
         } catch(error) {
             console.log('옵션 삭제에 실패했습니다:',error);
+            showAlert('옵션 삭제를 실패했습니다.');
         } finally {
+            showAlert('옵션이 삭제 되었습니다.');
             closeModal();
             fetchMenusAndOptions();
         }
@@ -349,11 +342,6 @@ export default function ManageMenu() {
 
     return (
         <div className="container-fluid">
-            <Alert
-                message={alertMessage}
-                visibility={alertVisibility}
-                setVisibility={setAlertVisibility}
-            />
             <div className="row">
                 <div className = "col-lg-8 main-container">
                     <div className="row top-bar">

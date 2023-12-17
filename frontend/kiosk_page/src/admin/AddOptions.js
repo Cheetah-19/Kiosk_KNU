@@ -7,8 +7,7 @@ import "../reuse/Home.css";
 import "./admincss/Admin.css";
 import "./admincss/AddCategories.css";
 
-export default function AddCategories() {
-    
+export default function AddCategories({ showAlert }) {
     const navigate = useNavigate();
     const location = useLocation();
     const selectedCategoryId = location.state.selectedCategoryId;
@@ -43,6 +42,7 @@ export default function AddCategories() {
             setOptions(response.data.option); 
         } catch (error) {
             console.error('옵션을 가져오는데 실패했습니다:', error);
+            showAlert('옵션을 가져오는데 실패했습니다.');
         }
     };
 
@@ -68,7 +68,9 @@ export default function AddCategories() {
             await axios.post(`${BASE_URL}/manager/manage-option/`, sendData); // 데이터 전송
         } catch (error) {
             console.error('옵션 추가에 실패했습니다:', error);
+            showAlert('옵션 추가를 실패했습니다.');
         } finally {
+            showAlert(option_name + ' 옵션을 추가했습니다.');
             setIsModalOpen(false);
             setOptionName('');
             setOptionPrice('');

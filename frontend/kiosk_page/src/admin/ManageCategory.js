@@ -8,7 +8,7 @@ import "./admincss/Admin.css";
 import "./admincss/AddCategories.css";
 import "./admincss/ManageOption.css";
 
-export default function ManageCategory() {
+export default function ManageCategory({ showAlert }) {
     
     const navigate = useNavigate();
     const [selectedCategory, setSelectedCategory] = useState([]);
@@ -43,7 +43,8 @@ export default function ManageCategory() {
     
     const openDeleteModal = () => {
         if (selectedCategory.length === 0) {
-          alert('선택된 카테고리가 없습니다');
+          //alert('선택된 카테고리가 없습니다');
+          showAlert('선택된 카테고리가 없습니다');
         } else {
           setIsDeleteModalOpen(true);
         }
@@ -76,7 +77,9 @@ export default function ManageCategory() {
           setSelectedCategory([]);
         } catch (error) {
           console.error('옵션 삭제에 실패했습니다:', error);
+          showAlert("카테고리 삭제를 실패했습니다.");
         } finally {
+            showAlert("카테고리가 삭제 되었습니다.");
           setIsDeleteModalOpen(false);
           await fetchCategories();
         }

@@ -3,23 +3,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import { BASE_URL } from "../constants/Url";
-import Alert from '../reuse/Alert';
 import "../reuse/Home.css";
 import "../reuse/Common.css";
 import "./admincss/Admin.css";
 import "./admincss/AddLast.css";
 
-export default function AddLast() {
-    
-    //alert 관련 함수.
-    const [alertVisibility, setAlertVisibility] = React.useState(false);
-    const [alertMessage, setAlertMessage] = React.useState('');
-
-    const showAlert = (message) => {
-        setAlertMessage(message);
-        setAlertVisibility(true);
-    };
-
+export default function AddLast({ showAlert }) {
     const navigate = useNavigate();
     const location = useLocation();
     const selectedCategoryId = location.state.selectedCategoryId;
@@ -45,7 +34,7 @@ export default function AddLast() {
     
         // 값이 정수가 아니거나 0인 경우 무시
         if (!Number.isInteger(Number(value))) {
-            showAlert("정확한 가격을 입력하세요");
+            showAlert("정확한 가격을 입력하세요.");
             return;
         }
     
@@ -59,7 +48,7 @@ export default function AddLast() {
 
     const goToCheck = () => {
         if (!menuName || !menuPrice || !menuExplain || !image) {
-            showAlert('모든 필드를 입력하세요');
+            showAlert('모든 필드를 입력하세요.');
             return;
         }
         setIsModalOpen(true);
@@ -135,11 +124,6 @@ export default function AddLast() {
     
     return (
         <div id = "pay_page">
-            <Alert
-                message={alertMessage}
-                visibility={alertVisibility}
-                setVisibility={setAlertVisibility}
-            />
             <div id="pay-header">
                 <div id="top_bar_back" onClick={herf_back}></div>
                 <header>KIOSK Admin</header>
