@@ -116,6 +116,7 @@ def extractor(base64):
         face = resize_with_padding(face, target_size)
 
         # 3. face -> embedding
+        face = face.astype('float64')
         embedding_img = DeepFace.represent(img_path=face, model_name=model_name, detector_backend='skip')[0]['embedding']
 
         return embedding_img
