@@ -1,7 +1,7 @@
 from signup.models import *
 from .serializers import *
 from sklearn.feature_extraction.text import TfidfVectorizer
-
+from sklearn.metrics.pairwise import cosine_similarity
 
 # 사용자의 과거 주문 정보와 메뉴 내의 재료 정보를 바탕으로 사용자에게 메뉴를 추천하는 기능 
 # 사용자가 못 먹는 재료는 추천하지 않음
