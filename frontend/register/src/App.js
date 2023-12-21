@@ -25,9 +25,9 @@ function App() {
       <HashRouter>
         <Alert message={alertMessage} visibility={alertVisibility} setVisibility={setAlertVisibility} />
         <Routes>
-          <Route path="/" element={<FaceReco />} /> {/* Default route */}
+          <Route path="/" element={<FaceReco showAlert={showAlert} />} /> {/* Default route */}
           <Route path="/Vegan_Religion_Check" element= {<Vegan_Religion_Check />} />
-          <Route path="/phonenum" element = {<PhoneNum showAlert={showAlert}/>} />
+          <Route path="/phonenum" element = {<PhoneNum showAlert={showAlert} />} />
           <Route path="/username" element={<UserName showAlert={showAlert} />} />
           <Route path="/allergy" element={<Allergy showAlert={showAlert} />} />
           <Route path="/Complete" element={<Complete />} />

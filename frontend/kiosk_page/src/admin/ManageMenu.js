@@ -14,20 +14,21 @@ export default function ManageMenu({ showAlert }) {
     const option = location.state?.option;
     let phoneNumber = location.state?.phone_number; // 전역 변수로 phoneNumber 선언
 
-    const [selectedOptions, setSelectedOptions] = React.useState({});
     const [deletedMenus, setDeletedMenus] = useState([]); //삭제희망목록의 메뉴들을 추적하는 상태변수.
     // 모달 상태 변수 및 함수 추가
     const [showModal, setShowModal] = useState(false);
     const closeModal = () => setShowModal(false);
-    const openModal = () => setShowModal(true);
+    const openModal = () => {setShowModal(true);};
+    const [showCheckModal, setshowCheckModal] = useState(false);
+    const closeCheckModal = () => {setshowCheckModal(false)};
+    const openCheckModal = () => {setShowModal(false); setshowCheckModal(true)};
 
     // 선택한 메뉴 상태 변수 추가
     const [selectedMenu, setSelectedMenu] = useState(null);
+    const [selectedOption, setSelectedOption] = useState(null);
+    
     // 선택한 사이드 메뉴들과 그들의 총 가격 계산
-    const total = selectedMenu ? selectedMenu.menu_price + Object.entries(selectedOptions).reduce((sum, [optionName, quantity]) => {
-        const optionPrice = findSelectedOption(optionName).option_price;
-        return sum + (optionPrice * quantity);
-    }, 0) : 0;
+    const total = selectedMenu ? selectedMenu.menu_price : 0;
 
     // 선택된 옵션에 대한 정보를 찾는 함수 추가
     function findSelectedOption(optionName) {
@@ -88,7 +89,7 @@ export default function ManageMenu({ showAlert }) {
         // Create a new order item with the selected menu and options, and total price
         const orderItem = {
             menu: selectedMenu,
-            options: selectedOptions,
+            options: {},
             total: total,
         };
         setDeletedMenus(prevDeletedMenus => [...prevDeletedMenus, orderItem]);
@@ -105,24 +106,7 @@ export default function ManageMenu({ showAlert }) {
         // 닫기 버튼 클릭 시 모달을 닫도록 설정
         closeModal();
     }
-
-    //서브메뉴 수량 계산
-    function handleQuantityChange(optionName, change) {
-        setSelectedOptions(prevState => {
-            const currentQuantity = prevState[optionName] || 0;
-            const newQuantity = Math.max(currentQuantity + change, 0);
-
-            if (newQuantity === 0) {
-                const { [optionName]: removedOption, ...rest } = prevState;
-                return rest;
-            }
-
-            return {
-                ...prevState,
-                [optionName]: newQuantity,
-            };
-        });
-    }
+    
     async function fetchMenusAndOptions() {
         try {
             // 서버 URL에 테스트용 주소 넣어줄것.
@@ -199,8 +183,13 @@ export default function ManageMenu({ showAlert }) {
         }
     }
 
-    const handleOptionDelete = async (menuId, optionId) => {
-        const data = { menu_id: menuId, option_id: optionId };
+    function handleOptionDelete(option) {
+        setSelectedOption(option);
+        openCheckModal();
+    }
+
+    const optionDelete = async() => {
+        const data = { menu_id: selectedMenu.id, option_id: selectedOption.id };
         console.log(data);
         try {
             const response = await axios.post(`${BASE_URL}/manager/manage-menu/`,  data );
@@ -209,7 +198,7 @@ export default function ManageMenu({ showAlert }) {
             showAlert('옵션 삭제를 실패했습니다.');
         } finally {
             showAlert('옵션이 삭제 되었습니다.');
-            closeModal();
+            closeCheckModal();
             fetchMenusAndOptions();
         }
     };
@@ -260,7 +249,6 @@ export default function ManageMenu({ showAlert }) {
 
         const selectedMenu = { ...selectedMenuItem, menu_option: options };
         setSelectedMenu(selectedMenu); // 선택한 메뉴 정보를 상태 변수에 저장
-        setSelectedOptions({}); // 옵션과 수량 초기화
         openModal(); // 모달 열기
     }
 
@@ -387,7 +375,7 @@ export default function ManageMenu({ showAlert }) {
                                             <div className="option_row">
                                                 <div className="option_name">{option.option_name}</div>
                                                 <div className="quantity_section"></div>
-                                                <div className='opt-delbtn' onClick={() => handleOptionDelete(selectedMenu.id, option.id)}>삭제</div>
+                                                <div className='opt-delbtn' onClick={() => handleOptionDelete(option)}>삭제</div>
                                             </div>
                                         </div>
                                     ))
@@ -402,6 +390,26 @@ export default function ManageMenu({ showAlert }) {
 
                             </Modal.Footer>
                         </Modal>
+
+
+                        <Modal show={showCheckModal} onHide={closeCheckModal}>
+                            <Modal.Header closeButton>
+                                {selectedOption && ( // Check if selectedMenu exists
+                                    <div>
+                                        <h3 className="selected_menu">{selectedMenu.menu_name}의</h3>
+                                        <p className="selected_menu">{selectedOption.option_name}</p>
+                                        {/* 추가적인 정보 표시 등 */}
+                                    </div>
+                                )}
+                            </Modal.Header>
+                            <Modal.Footer >
+                                <div className="add_btn" variant="secondary" onClick={optionDelete}>
+                                    <div className="add_btn_text">이 옵션을 삭제할래요.</div>
+                                </div>
+                            </Modal.Footer>
+                        </Modal>
+
+
                         {/* 카테고리에 맞는 메뉴 출력 */}
                         <div className="menu_container">
                             {menusByCategory[categories[currentCategoryIndex]]?.map((menu, index) => (
