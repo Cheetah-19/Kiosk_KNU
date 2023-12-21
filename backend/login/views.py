@@ -64,7 +64,7 @@ class FaceLoginView(APIView):
                     for target in target_embedding_list:
                         distance = min(distance, identification(user_face_list, target))
 
-                    print(f"{user.user_name}: {distance}")
+                    #print(f"{user.user_name}: {distance}")
 
                     if distance < min_dist:
                         min_dist = distance
