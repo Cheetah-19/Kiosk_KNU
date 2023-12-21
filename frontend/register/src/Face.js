@@ -86,6 +86,7 @@ export default function Face(props) {
             .catch(error => {
               console.error(error);
               setIsFace(false);
+              props.showAlert('마스크를 벗고 화면에 얼굴을 맞춰주세요.');
             });
       }
     };

@@ -8,7 +8,7 @@ import "./FaceReco.css";
 
 import face from './img/face.png';
 
-export default function FaceReco() {
+export default function FaceReco({ showAlert }) {
   const navigate = useNavigate(); // useNavigate hook to get the navigate function
   const [alert, setAlert] = useState(false);
   const [photos, setPhotos] = useState([]); // photos 상태 추가
@@ -37,7 +37,7 @@ export default function FaceReco() {
             <div className="middle_camera">
               {
               alert ===  true ?
-              <Face setPhotos={setPhotos} />
+              <Face showAlert={showAlert} setPhotos={setPhotos} />
               :
               <div id='face-img-container'>
                 <img src={face} style={{ width: '40%', margin: '0px 0px 40px 0px' }} />
