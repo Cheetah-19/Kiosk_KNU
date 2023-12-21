@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "rest_framework",
     'drf_yasg',
     'corsheaders', #CORS 관련 추가
+    'face_recognition',
 ]
 
 MIDDLEWARE = [

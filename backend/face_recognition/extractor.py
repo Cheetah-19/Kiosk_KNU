@@ -1,5 +1,5 @@
-from deepface import DeepFace
-from deepface.commons import functions
+from face_recognition.deepface import DeepFace
+from face_recognition.deepface.commons import functions
 import cv2
 import numpy as np
 

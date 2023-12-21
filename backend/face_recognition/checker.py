@@ -1,5 +1,5 @@
-from deepface import DeepFace
-from deepface.commons import functions
+from face_recognition.deepface import DeepFace
+from face_recognition.deepface.commons import functions
 from face_recognition.extractor import homomorphic_filter, resize_with_padding
 from keras.models import load_model
 import numpy as np
