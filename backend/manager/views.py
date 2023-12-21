@@ -4,7 +4,6 @@ from rest_framework.views import APIView, Response
 from rest_framework.request import Request
 from signup.models import *
 from .serializers import *
-from django.http import HttpResponse
 from rest_framework.parsers import MultiPartParser
 
 class manage_menu (APIView):

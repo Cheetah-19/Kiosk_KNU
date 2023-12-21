@@ -2,9 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
-from signup.models import User, Menu, Order, Ordered_Item, PreprocessedData 
-from django.http import HttpResponse
-import json
+from signup.models import User, Menu, PreprocessedData 
 from .recommendation import *
 
 class member_MenulistView(APIView): # 회원 메뉴 리스트 출력 

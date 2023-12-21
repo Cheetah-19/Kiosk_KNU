@@ -1,4 +1,3 @@
-from rest_framework import permissions
 from menu.serializers import *
 
 from rest_framework.views import APIView
