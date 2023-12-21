@@ -5,28 +5,11 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # 사용자의 과거 주문 정보와 메뉴 내의 재료 정보를 바탕으로 사용자에게 메뉴를 추천하는 기능 
 # 사용자가 못 먹는 재료는 추천하지 않음
-def get_recommended(user_id):
-
+def get_recommended(user_id, excluded_ingredients):
     # 메뉴와 재료
     menus_db = Menu.objects.all()
     #유저 인스턴스 가져오기
-    user_instance = User.objects.get(user_phonenum = user_id)             
-
-    try:
-        user_preprocessed_data = PreprocessedData.objects.get(user=user_instance)
-        exclude_ingredient_str = user_preprocessed_data.excluded_ingredients
-    except PreprocessedData.DoesNotExist:
-        exclude_ingredient_str = ""
-
-
-    # String 을 Set 으로 변경하는 과정
-    # 중괄호 제거 후 쉼표로 분할 
-    if exclude_ingredient_str == "empty":
-        excluded_ingredients = set() 
-    else :
-        exclude_ingredient_list = exclude_ingredient_str[1:-1].split(',')
-        #문자열 -> 정수 변환 후 set 제작
-        excluded_ingredients = set(int(item.strip()) for item in exclude_ingredient_list)
+    user_instance = User.objects.get(user_phonenum = user_id)
 
     menus = {}
     for menu in menus_db:

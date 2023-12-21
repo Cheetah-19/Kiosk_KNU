@@ -11,7 +11,7 @@ class member_MenulistView(APIView): # 회원 메뉴 리스트 출력
     def get(self, request, userphonenum):
         #이미 DB에 있는 회원인게 검증되었기 떄문에 검증과정이 필요없다
         UserGetter = User.objects.get(user_phonenum = userphonenum)     #전화번호를 통해 user데이터 불러오기
-        exclude_ingredient = set()                                      #회원 필터링을 위해 제외할 재료를 저장해 둘 set 
+        exclude_ingredients = set()                                      #회원 필터링을 위해 제외할 재료를 저장해 둘 set
 
         try:
             preprocessed_data = PreprocessedData.objects.get(user=UserGetter)
@@ -23,11 +23,11 @@ class member_MenulistView(APIView): # 회원 메뉴 리스트 출력
         # 중괄호 제거 후 쉼표로 분할
         
         if exclude_ingredient_str == "empty":
-           exclude_ingredient = set() 
+           exclude_ingredients = set()
         else :
             exclude_ingredient_list = exclude_ingredient_str[1:-1].split(',')
             #문자열 -> 정수 변환 후 set 제작
-            exclude_ingredient = set(int(item.strip()) for item in exclude_ingredient_list)
+            exclude_ingredients = set(int(item.strip()) for item in exclude_ingredient_list)
         menulist={}
         menu_category = MenuCategory.objects.all() #메뉴 리스트 전체
         menulist['categories'] = []  #메뉴 카테고리를 저장하기 위한 리스트
@@ -40,11 +40,11 @@ class member_MenulistView(APIView): # 회원 메뉴 리스트 출력
                 for menudata in menu_serializer.data:                                       # QuerySet에 대한 직렬화된 데이터를 for문으로 순회
                     menu_ingredient_ids = menudata['menu_ingredient']                       # menu_ingredient 부분을 가져옴 (현재 id 값으로 저장되어 있음 - 리스트)
                     menu_ingredient = set(menu_ingredient_ids)                              # 비교를 위해 set으로 변환하기
-                    if not menu_ingredient & exclude_ingredient:                            # 유저가 못 먹는 재료와 겹치는 재료가 없는 경우만 추가 
+                    if not menu_ingredient & exclude_ingredients:                            # 유저가 못 먹는 재료와 겹치는 재료가 없는 경우만 추가
                         new_menu_data.append(menudata)
                     
                 menulist['{}'.format(category.menucategory_name)] = new_menu_data   #메뉴 카테고리 이름 key, serialized data 를 value로 추가
-        recommended = get_recommended(userphonenum)
+        recommended = get_recommended(userphonenum, exclude_ingredients)
         menulist['recommended'] = recommended
         return Response(menulist)
 

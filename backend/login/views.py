@@ -71,7 +71,7 @@ class FaceLoginView(APIView):
                         min_dist = distance
 
                         # 거리가 임계값보다 낮을 때만 뽑음
-                        if min_dist < 0.18:
+                        if min_dist <= 0.15:
                             phonenum = user.user_phonenum
                             name = user.user_name
                 except:
