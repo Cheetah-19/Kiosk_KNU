@@ -88,7 +88,7 @@ TEMPLATES = [
 
 #경로 추가
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
+    # os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
 ]
 
 WSGI_APPLICATION = "django_react_project.wsgi.application"
