@@ -42,9 +42,8 @@
      - [Functional requirements](#2-1-functional-requirements)
      - [Nonfunctional requirements](#2-2-nonfunctional-requirements)
      - [Use Case Diagram](#2-3-use-case-diagram)
-     - [Class Diagram](#2-4-class-diagram)
-     - [Sequence Diagram](#2-5-sequence-diagram)
-     - [시스템 아키텍처](#2-6-시스템-아키텍처)
+     - [Sequence Diagram](#2-4-sequence-diagram)
+     - [시스템 아키텍처](#2-5-시스템-아키텍처)
    - [과제 추진 일정 및 예산 활용 계획](#과제-추진-일정-및-예산-활용-계획)
    - [기대효과 및 활용방안](#기대효과-및-활용방안)
    - [예상되는 주요 과제성과](#예상되는-주요-과제성과)
@@ -168,12 +167,24 @@
    - URL에 회원의 정보가 드러나지 않게 하여 회원의 전화번호가 유출되지 않게 한다.
 
 # 2-3 Use Case Diagram
-[사진]
-# 2-4 Class Diagram
-[사진]
-# 2-5 Sequence Diagram
-[사진]
-# 2-6 시스템 아키텍처
+![image](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/009bc817-b219-42c8-b98b-a43276d88e74)
+
+# 2-4 Sequence Diagram
+* 회원가입
+* ![image](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/4f50aa8b-d14a-4f5d-80fb-b69c8fbabbdb)
+
+* 로그인
+* ![image](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/dcfa47c4-5148-4a2c-b05b-6c00db2595e6)
+
+* 메뉴 추천 및 필터링
+* ![image](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/1695706a-0e47-42ad-aa0e-565fc1ef630b)
+
+* 메뉴/카테고리/옵션 추가 및 삭제
+* ![image](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/a832bfaf-214b-4f3e-a780-0596674ea7d5)
+
+
+
+# 2-5 시스템 아키텍처
 >* Hardware : Raspberry PI 4 Model B 8GB
 >* OS : WebOS 2-24
 >* 프론트엔드 : React Framework
