@@ -77,9 +77,9 @@ class FaceLoginView(APIView):
                     pass
 
             if phonenum is not None:
-                print(f"Success\nname: {name}, phonenum: {phonenum}")
+                print(f"\nSuccess\nname: {name}, phonenum: {phonenum}")
             else:
-                print("None")
+                print("\nNone")
 
             # 5. 거리가 임계값보다 낮고 최단 거리였던 user의 휴대폰 번호를 리턴
             return Response({"phone_number": phonenum, "name": name})

@@ -1,4 +1,5 @@
-from face_recognition.extractor import extractor
+from .extractor import extractor
+import numpy as np
 
 
 # 프론트에서 받은 base64 리스트를 embedding 리스트로 변환
