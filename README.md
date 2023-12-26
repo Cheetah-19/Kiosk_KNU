@@ -247,38 +247,51 @@ WebOs : [https://www.webosose.org/]
 
 You must have a target device (RPi 4) with webOS OSE. Please refer to the [Building webOS](https://www.webosose.org/docs/guides/setup/building-webos-ose/)
 
+> [!NOTE] 
+> Both Windows and Linux environments are possible, but we recommend Linux environments.
+
 The hardware, Software we used {<br />
-Raspberry pi : Raspberry PI 4 Model B 8GB <br />
+Raspberry Pi : Raspberry Pi 4 Model B 8GB <br />
 OS : webos ose 2-24-0<br />
 Camera : ROYCHE RPC-20F FHD webcam<br />
 Touch display : Raspberry Pi Display 10.1-Inch Touch Screen LCD
 }
 
-## Raspberry pi
-* HardWare : [Raspberry PI 4 Model B 8GB](https://smartstore.naver.com/eleparts/products/4799825062?n_media=11068&n_query=%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B44&n_rank=4&n_ad_group=grp-a001-02-000000007238914&n_ad=nad-a001-02-000000229608972&n_campaign_type=2&n_mall_id=ncp_1nlzbo_01&n_mall_pid=4799825062&n_ad_group_type=2&n_match=3&NaPm=ct%3Dlpihmmrs%7Cci%3D0Au0003H1knzI6qsyfp7%7Ctr%3Dpla%7Chk%3D9ad14e585bbe9eea74201d2e1f1481527ed653e7)
+## Raspberry Pi
+* HardWare : [Raspberry Pi 4 Model B 8GB](https://smartstore.naver.com/eleparts/products/4799825062?n_media=11068&n_query=%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B44&n_rank=4&n_ad_group=grp-a001-02-000000007238914&n_ad=nad-a001-02-000000229608972&n_campaign_type=2&n_mall_id=ncp_1nlzbo_01&n_mall_pid=4799825062&n_ad_group_type=2&n_match=3&NaPm=ct%3Dlpihmmrs%7Cci%3D0Au0003H1knzI6qsyfp7%7Ctr%3Dpla%7Chk%3D9ad14e585bbe9eea74201d2e1f1481527ed653e7)
 
 * OS : [webos ose](https://github.com/webosose/build-webos/releases)
 
-1. Download webos image from [webos ose](https://github.com/webosose/build-webos/releases) 
+1. Download webos image from [webos ose](https://github.com/webosose/build-webos/releases)
+ 
      <img width="899" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/1f147666-4f88-4db0-bac5-4f7d88631648">
-    {{< note >}}
-    We have installed version 2-24-0 as of December 2023.
-    {{< /note >}}
+
+> [!NOTE] 
+> We have installed version 2-24-0 as of December 2023.
 
 
 2. Extracting image files
     * Uncompressed using the [7-zip](https://www.7-zip.org/) program
-    ![1](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/ed374a79-e867-4a87-a388-56b2023ef70f)
+        
+        ![1](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/ed374a79-e867-4a87-a388-56b2023ef70f)
+
     * You can decompress it.
 
         ![2](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/03555465-ac71-4b42-b756-ee4412a94e8d) 
+
     * A folder called webos-ose-2-24-0-raspberrypi4-64.tar is created.
-    ![3](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/f8e1629b-020f-422a-8267-04e1c93c48ce)
+
+        ![3](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/f8e1629b-020f-422a-8267-04e1c93c48ce)
+
     * If you enter the folder, there is a .tar file, and you can proceed with decompressing it.
-    ![4](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/a863fbc4-99cc-4150-bea7-ab89cae26c73) 
-    ![5](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/d80c904e-979f-46ca-8dd1-951add57e53c) 
+
+        ![4](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/a863fbc4-99cc-4150-bea7-ab89cae26c73)
+        ![5](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/d80c904e-979f-46ca-8dd1-951add57e53c) 
+
     * Uncompressed creates a folder called webos-ose-2-24-0-raspberrypi4-64.
-    ![6](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/be9e14e9-4aeb-4eb9-adc4-3fb449fbf6d5) 
+
+        ![6](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/be9e14e9-4aeb-4eb9-adc4-3fb449fbf6d5) 
+        
     * When you enter the folder, you'll find a .mic file, which means the Image file is ready.
 
 
@@ -290,52 +303,73 @@ Touch display : Raspberry Pi Display 10.1-Inch Touch Screen LCD
 4. Image flushing to sd card
     * Image flushing to sd card using program : [Win 32 Disk Imager](https://sourceforge.net/projects/win32diskimager/) 
     * Please select the .mic file obtained above, select the SD card you formatted, and press the Write button.
-    ![8](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/2c0252ba-a718-4e1b-9857-593a12b6f12a)
+
+        ![8](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/2c0252ba-a718-4e1b-9857-593a12b6f12a)
+
     * It's taking some time.
-    ![9](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/2cf967ab-8a65-4c13-8abd-a0cec6607281)
-    * Done! Now when you insert the SD card into the bottom of the raspberry pie and boot it up, WebOs will boot normally!
-        {{< note >}}
-        If you insert the sd card into the sd reader and insert it into USB on its own, it will not boot! Make sure you remove the sd card separately and insert it into the bottom of the raspberry pie!
-        {{< /note >}}
-    ![10](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/5015e33f-8ff7-44e4-8ad6-8976d0befe53)
-    * If Writing Successful appears, you have successfully flushing the image on the sd card.
+
+        ![9](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/2cf967ab-8a65-4c13-8abd-a0cec6607281)
+
+    * Done! Now when you insert the SD card into the bottom of the Raspberry Pi and boot it up, WebOs will boot normally!
+> [!NOTE] 
+  > If you insert the sd card into the sd reader and insert it into USB on its own, it will not boot! Make sure you remove the sd card separately and insert it into the bottom of the Raspberry Pi!
+
+   ![10](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/5015e33f-8ff7-44e4-8ad6-8976d0befe53)
+    
+* If Writing Successful appears, you have successfully flushing the image on the sd card.
 
 ## Touch display
 
 * HardWare : [Raspberry Pi Display 10.1-Inch Touch Screen LCD](https://smartstore.naver.com/mcuboard/products/5006590307?NaPm=ct%3Dlpihmuhk%7Cci%3D2d0b272112d74fa2c41384d2a3b0e4a94ff945f5%7Ctr%3Dsls%7Csn%3D186400%7Chk%3D991293f6377b661f14470419dc8bc00fa26ea908)
 
     ![11](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/3f2edb87-7a3c-4c05-8dd7-0b0c24286da1)
- * If you assemble the components well on the touch display and power the raspberry pie, you can see that the screen is coming out well.
+    
+ * If you assemble the components well on the touch display and power the Raspberry Pi, you can see that the screen is coming out well.
 
 ## Camera
 * HardWare : [ROYCHE RPC-20F FHD webcam](https://prod.danawa.com/info/?pcode=13386197)
 
 * Webos is only available on cameras that support V4L2(Vedio for Linux 2).
 * In version 2.23, the camera didn't work, and in version 2.24, it worked normally.
-* You can use it right away by connecting the camera to the Raspberry Pie usb.
+* You can use it right away by connecting the camera to the Raspberry Pi usb.
 
 
 ## Building a CLI Environment
+> [!NOTE] 
+> if there is something like Korean in the file path, you have to change it to English.
+
+
 1. Install Node.js [Link](https://nodejs.org/en)
     * If the installation is successful, you can check the version by executing the command below.
         
             node -v
 
-2. Install npm and React-scripts
+2. Install npm and React
    	* npm is included in Node.js, so if Node.js is installed successfully, npm is already available.
    	* You can check if the npm is installed well through the command below.
-    * React-scripts are required when you build a project later.
+    * React are required when you build a project later and sign up.
 
-    * qrcode.react is for generating QR code in the future.
 
- 	        npm -v
+            npm -v
 
-            npm install react-scripts 
+            npm install -g create-react-app
 
-            npm install qrcode.react
-        
+3. Git clone our project. [link](https://github.com/Cheetah-19/Kiosk_KNU.git)
+    * Once you have cloned, please run the following command
 
-3. CLI Installation
+    * from Kiosk_KNU/frontend/kiosk_page
+
+            npm install react-scripts
+            npm install axios
+            npm install react-bootstrap bootstrap
+
+    * from Kiosk_KNU/frontend/register
+
+            npm install react-scripts
+            npm install axios
+    
+
+4. CLI Installation
     *  Use the -g option to run the following command on the terminal to install the CLI globally.
 
 	        npm install –g @webosose/ares-cli
@@ -368,7 +402,7 @@ Touch display : Raspberry Pi Display 10.1-Inch Touch Screen LCD
             * (For window cmd) Navigate to the directory where the virtual environment is installed.
 
             * It will be in the directory where you created the virtualenv command.
-            * Run .\'Virtual Environment Name'\Scripts\activate to activate the virtual environment.
+            * Run .\'Virtual Environment Name’\Scripts\activate to activate the virtual environment.
 
 2. The server code was written in Django. Install Django and restframework.
     * If the installation does not work well in the next installation, I recommend turning off and off the terminal.
@@ -382,9 +416,9 @@ Touch display : Raspberry Pi Display 10.1-Inch Touch Screen LCD
             pip install scikit-learn
             pip install deepface
 
-    * Go to the backend folder on the terminal and run python manage.py run server 0.0.0.0:<port number>
+    * Go to the backend folder on the terminal and run python manage.py run server 0.0.0.0:'port number'
 
-            python manage.py runserver 0.0.0.0:<port number>
+            python manage.py runserver 0.0.0.0:'port number'
         * At this time, please enter the port number you want to use
         * If you see the screen below after running, it's a success.
         
@@ -400,7 +434,7 @@ Touch display : Raspberry Pi Display 10.1-Inch Touch Screen LCD
     * Saves the port number port forwarded from 
         * frontend/kiosk_page/src/constant/Url.js
         * frontend/register/src/constant/Url.js 
-        * with the authorized ip (https://www.findip.kr/) in the BASE_URL variable.
+        * with the public IP (https://www.findip.kr/) in the BASE_URL variable.
         ![25](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/1ff4c30c-ef76-4376-99ba-f0ac43d96a00)
         ![26](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/e562a9d9-524e-4985-b159-ee51c19aed8c)
 
@@ -424,7 +458,7 @@ On your local PC, follow these steps:
 
     - Add : Add Mode
     - Name : Please name the device.
-    - IP address : You can write down the IP address of the raspberry pie.
+    - IP address : You can write down the IP address of the Raspberry Pi.
     - Port : I set the port number as 22. (When I used another port, I got a package error.)
     - User : You can set it to root.
     - Description : You can skip it. (skip = Enter)
@@ -457,12 +491,24 @@ On your local PC, follow these steps:
 
 
   3. Overwrite the built content over the folder you created (in this case 'sampleApp').
+> [!NOTE] 
+> You must navigate to the folder you want to build and run it (frontend/kiosk_page in this case)
+	```
+	npm run build
+	```
+  * If you get an error such as Can't resolve 'react-dom', please execute the command below and try again.
+	```
+	npm install
+	```  
+  * If you get an error such as Can't save 'bootstrap/dist/css/bootstrap.css', please execute the following command from the ./Kiosk_KNU location.
+	```
+	npm install react-bootstrap bootstrap
+	```
 
-            npm run build
+    * When you build a project, a build file will be created.
         
-
-        * When you build a project, a build file will be created.
         <img width="737" alt="스크린샷 2023-12-06 오후 10 06 55" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/a133af50-dc41-4e2e-8313-7c5688a0622f">
+
         * You can see that a 'build' folder has been created.
         * You can 'overlay' the contents of the file inside the sampleApp folder created above.
 
@@ -476,7 +522,7 @@ On your local PC, follow these steps:
 
         * If it's Success, it's Success.
         * If you look at the picture above, there is com.domain.app_0.0.1.ipk.
-        * This ipk file is the app you install on Raspberry Pie's webOS.
+        * This ipk file is the app you install on Raspberry Pi's webOS.
 
   5. Installation
         * In the code below, 'Raspberry' is the Devide name set by ssh set above.
@@ -489,33 +535,40 @@ On your local PC, follow these steps:
         ![18](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/5feb04b8-7d20-4f4c-b350-64afc260aaa6)
 
 # How to use
-1. Connect the camera to the raspberry pie.
-2. Connecting Raspberry Pie to the Internet.
+1. Connect the camera to the Raspberry Pi.
+2. Connecting Raspberry Pi to the Internet.
 3. Change your unique server address (Please refer to the Url.js part of Code Implementation)
 4. Run the installed application.
-5. If you come in as a non-member order and proceed with the order, a button to sign up for membership will appear.
-* ![19](https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/7af0fc8f-ffe3-45fa-b765-3cbe1b17db1c)
-6. If you want to log in with your face recognition or mobile phone number, you need to register your information through the membership page.
-7. You need to register your face information, name, mobile phone number, vegan status, religion, and allergy by signing up for membership.
+5. You must go to the frontend/register file and proceed with membership registration using the command below to log in.
 
-    * <img width="30%" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/bad5d665-65c0-41f3-839a-73a2b35dae78">
-    * This page allows you to register your face.
-    * <img width="30%" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/9f5c919f-e630-4d0f-a7f3-45de15f5ada1">
-    * This page allows you to register your name.
-    * <img width="30%" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/f95fc192-a1fc-42a4-a2eb-70603a42dd83">
-    * This page allows you to register your mobile phone number.
-    * <img width="30%" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/53e8d30c-6617-4c80-a175-03cce27cac87">
-    * This page allows you to register whether you are vegan or religious.
-    * <img width="30%" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/7ceba5d5-22c9-4ba9-9908-bc8afc0d9c2c">
-    * This page allows you to register whether you are allergic.
-    * <img width="30%" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/145134a1-5461-4e90-b6a1-969298c50eb9">
-    * This page tells you that your payment has been completed.
+        npm start
+
+6. When the membership registration page is launched, you can register your information to sign up.
+
+> [!NOTE] 
+> The face model is downloaded from the server when you first do face recognition. I recommend you turn the server back on when you see the cmd window and see that the face model has been downloaded from the server.
+> Please note that downloading files before signing up for membership is fast, and the model downloading after signing up for membership is large, so it takes time.
+
+* <img width="30%" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/bad5d665-65c0-41f3-839a-73a2b35dae78">
+* This page allows you to register your face.
+* <img width="30%" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/9f5c919f-e630-4d0f-a7f3-45de15f5ada1">
+* This page allows you to register your name.
+* <img width="30%" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/f95fc192-a1fc-42a4-a2eb-70603a42dd83">
+* This page allows you to register your mobile phone number.
+* <img width="30%" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/53e8d30c-6617-4c80-a175-03cce27cac87">
+* This page allows you to register whether you are vegan or religious.
+* <img width="30%" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/7ceba5d5-22c9-4ba9-9908-bc8afc0d9c2c">
+* This page allows you to register whether you are allergic.
+* When you press the Finish button on the Allergy Check page, the face model is downloaded, which may take time to sign up for the first time. Check the server to see what is downloaded.
+* <img width="30%" alt="image" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/145134a1-5461-4e90-b6a1-969298c50eb9">
+* This page tells you that your payment has been completed.
 
     * If registered, you can log in with your face information and cell phone number.
     
 
-8. Log in with your registered face information or cell phone number.
+7. Log in with your registered face information or cell phone number.
 * If you press the login button above, you will automatically attempt to log in through facial recognition.
+
     <img width="50%" alt="31" src="https://github.com/Cheetah-19/Kiosk_KNU/assets/29055106/96006ef1-7b7f-4ea8-b8b6-716abd60ff44">
 
 * You can log in with your cell phone number by pressing the button below.
@@ -793,22 +846,22 @@ On your local PC, follow these steps:
                         for target in embedding_array:
                             distance = min(distance, identification(user_face_list, target))
 
-                        print(f"{user.user_name}: {distance}")
+                        #print(f"{user.user_name}: {distance}")
 
                         if distance < min_dist:
                             min_dist = distance
 
                             # Pull only when the distance is lower than the threshold.
-                            if min_dist < 0.2:
+                            if min_dist <= 0.15:
                                 phonenum = user.user_phonenum
                                 name = user.user_name
                     except:
                         pass
 
                 if phonenum is not None:
-                    print(f"\nSuccess\nname: {name}, phonenum: {phonenum}")
+                    print(f"Success\nname: {name}, phonenum: {phonenum}")
                 else:
-                    print("\nNone")
+                    print("None")
 
                 # 5. Returns the user's mobile phone number whose distance was below the threshold and the shortest distance
                 return Response({"phone_number": phonenum, "name": name})
